@@ -6,6 +6,23 @@ h1, h2, h3, h4 { font-family: "Inter Tight", "Inter", system-ui, sans-serif; }
 strong, .font-tech { font-family: "Space Grotesk", "Inter", system-ui, sans-serif; }
 * { -webkit-font-smoothing: antialiased; }
 
+/* Smooth content transitions on language change */
+[data-lang-transition] {
+  transition: opacity 0.2s ease;
+}
+
+/* Better focus rings for accessibility */
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* Improved text selection colors */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #fff;
+}
+
 
 .ripple-text {
   position: relative;

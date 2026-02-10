@@ -10,11 +10,13 @@ import {
   CircleDollarSign,
   Laptop,
   LineChart,
+  Menu,
   MessageSquare,
   Shield,
   Sparkles,
   Timer,
   Users,
+  X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -32,6 +34,7 @@ import { useMotionValue, useSpring } from "framer-motion";
 import { useScroll, useTransform } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Mascot } from "@/components/Mascot";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const fadeUp = {
   initial: { opacity: 0, y: 18 },
@@ -57,81 +60,187 @@ const item = {
   },
 } as const;
 
-export default function App() {
+/* ───── Flag SVG components ───── */
+function FlagIT({ className = "" }: { className?: string }) {
   return (
-    <div className="min-h-screen bg-[#0F0F11] text-[#F5F7FA] overflow-x-hidden">
+    <svg viewBox="0 0 640 480" className={className}>
+      <rect width="213.3" height="480" fill="#009246" />
+      <rect x="213.3" width="213.4" height="480" fill="#fff" />
+      <rect x="426.7" width="213.3" height="480" fill="#ce2b37" />
+    </svg>
+  );
+}
+function FlagGB({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 640 480" className={className}>
+      <path fill="#012169" d="M0 0h640v480H0z" />
+      <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0z" />
+      <path fill="#C8102E" d="m424 281 216 159v40L369 281zm-184 20 6 35L54 480H0zM640 0v3L391 191l2-44L590 0zM0 0l239 176h-60L0 42z" />
+      <path fill="#FFF" d="M241 0v480h160V0zM0 160v160h640V160z" />
+      <path fill="#C8102E" d="M0 193v96h640v-96zM273 0v480h96V0z" />
+    </svg>
+  );
+}
+
+/* ───── Sticky header with mobile menu ───── */
+function StickyHeader({
+  t,
+  language,
+  toggleLanguage,
+}: {
+  t: ReturnType<typeof useLanguage>["t"];
+  language: string;
+  toggleLanguage: () => void;
+}) {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const navLinkClass =
+    "relative hover:text-white transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#3B82F6] after:transition-all after:duration-300 hover:after:w-full";
+
+  const navLinks = [
+    { href: "#servizi", label: t.nav.services },
+    { href: "#storia", label: t.nav.path },
+    { href: "#processo", label: t.nav.process },
+    { href: "#innovazione", label: t.nav.innovation },
+    { href: "#faq", label: t.nav.faq },
+  ];
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#0F0F11]/90 backdrop-blur-xl">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-3">
+          <img src="/p4-underline-cyan.png" alt="Arras Industries" className="h-9 w-auto" />
+        </a>
+
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-7 text-sm text-white/60 md:flex">
+          {navLinks.map((link) => (
+            <a key={link.href} className={navLinkClass} href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Actions */}
+        <div className="flex items-center gap-2">
+          {/* Language toggle */}
+          <button
+            onClick={toggleLanguage}
+            className="group relative flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-2.5 py-1.5 text-sm font-medium text-white/80 backdrop-blur transition-all duration-300 hover:border-white/25 hover:bg-white/10 hover:text-white"
+            title={language === "it" ? "Switch to English" : "Passa all'italiano"}
+            aria-label={language === "it" ? "Switch to English" : "Passa all'italiano"}
+          >
+            <span className="inline-block h-4 w-5 overflow-hidden rounded-[2px] transition-transform duration-300 group-hover:scale-110">
+              {language === "it" ? <FlagIT className="h-full w-full" /> : <FlagGB className="h-full w-full" />}
+            </span>
+            <span className="text-xs font-semibold tracking-wide">
+              {language === "it" ? "IT" : "EN"}
+            </span>
+          </button>
+
+          {/* CTA desktop */}
+          <Button
+            variant="outline"
+            onClick={() => scrollToId("servizi")}
+            className="hidden border-white/20 bg-white/5 text-white hover:bg-white/10 sm:inline-flex"
+          >
+            {t.nav.seeServices}
+          </Button>
+          <Button
+            onClick={() => scrollToId("contatto")}
+            className="hidden bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97] sm:inline-flex"
+          >
+            {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
+          </Button>
+
+          {/* Hamburger - mobile only */}
+          <button
+            onClick={() => setMobileOpen((v) => !v)}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/80 md:hidden"
+            aria-label="Menu"
+          >
+            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.nav
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden border-t border-white/[0.06] md:hidden"
+          >
+            <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
+              {navLinks.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="rounded-lg px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                >
+                  {link.label}
+                </a>
+              ))}
+              <div className="mt-2 flex gap-2">
+                <Button
+                  onClick={() => {
+                    scrollToId("contatto");
+                    setMobileOpen(false);
+                  }}
+                  className="flex-1 bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)]"
+                >
+                  {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
+  );
+}
+
+export default function App() {
+  const { t, toggleLanguage, language } = useLanguage();
+
+  return (
+    <div className="min-h-screen bg-[#0F0F11] pt-[60px] text-[#F5F7FA]">
       <BackgroundFX />
       <Mascot pose="point" />
 
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#0F0F11]/80 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-3">
-            <img
-              src="/p4-underline-cyan.png"
-              alt="Logo A Speedline"
-              className="h-10 w-auto"
-            />
-          </div>
-
-          <nav className="hidden items-center gap-6 text-sm text-white/70 md:flex">
-            <a className="hover:text-white" href="#servizi">
-              Servizi
-            </a>
-            <a className="hover:text-white" href="#storia">
-              Percorso
-            </a>
-            <a className="hover:text-white" href="#processo">
-              Processo
-            </a>
-            <a className="hover:text-white" href="#innovazione">
-              Innovazione
-            </a>
-            <a className="hover:text-white" href="#faq">
-              FAQ
-            </a>
-          </nav>
-
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              onClick={() => scrollToId("servizi")}
-              className="hidden border-white/20 bg-white/5 text-white hover:bg-white/10 sm:inline-flex"
-            >
-              Vedi servizi
-            </Button>
-            <Button
-              onClick={() => scrollToId("contatto")}
-              className="bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]"
-            >
-              Parliamone <ArrowRight className="h-4 w-4" />
-            </Button>
-          </div>
-        </div>
-      </header>
+      <StickyHeader
+        t={t}
+        language={language}
+        toggleLanguage={toggleLanguage}
+      />
 
       <main>
         <Hero />
         <ValuesSection />
         <SectionBridge
-          eyebrow="Tre pilastri, un metodo"
-          title="Prima capiamo il problema, poi scegliamo la soluzione."
-          subtitle="Gestionale, sito o web3: scegliamo solo ciò che serve davvero."
+          eyebrow={t.sectionBridge.pillars.eyebrow}
+          title={t.sectionBridge.pillars.title}
+          subtitle={t.sectionBridge.pillars.subtitle}
         />
         <ScrollyStory />
         <SectionBridge
-          eyebrow="Dalla strategia al rilascio"
-          title="Servizi chiari, risultati verificabili."
-          subtitle="Qui sotto trovi cosa facciamo e cosa ricevi."
+          eyebrow={t.sectionBridge.fromStrategy.eyebrow}
+          title={t.sectionBridge.fromStrategy.title}
+          subtitle={t.sectionBridge.fromStrategy.subtitle}
         />
 
         <section className="mx-auto max-w-6xl px-4 py-16">
           <motion.div {...fadeUp} className="flex flex-col gap-3">
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-              Tre aree concrete, tre risultati misurabili.
+              {t.threeAreas.title}
             </h2>
             <p className="max-w-2xl text-white/70">
-              Operazioni interne, presenza digitale e tracciabilità: scegliamo
-              l’area dove serve più impatto, senza sovrastrutture.
+              {t.threeAreas.description}
             </p>
           </motion.div>
 
@@ -141,24 +250,24 @@ export default function App() {
             <TimelineFeature
               side="left"
               icon={<Timer className="h-5 w-5" />}
-              title="Operazioni ordinate"
-              desc="Gestionale e automazioni per ridurre attività manuali e errori."
+              title={t.threeAreas.features[0].title}
+              desc={t.threeAreas.features[0].desc}
               imageSrc="/images/process.jpg"
             />
 
             <TimelineFeature
               side="right"
               icon={<CircleDollarSign className="h-5 w-5" />}
-              title="Presenza digitale utile"
-              desc="Siti web con lead, analytics e form per trasformare visite in contatti."
+              title={t.threeAreas.features[1].title}
+              desc={t.threeAreas.features[1].desc}
               imageSrc="/images/usecase.jpg"
             />
 
             <TimelineFeature
               side="left"
               icon={<Shield className="h-5 w-5" />}
-              title="Tracciabilità quando serve"
-              desc="Audit e notarizzazione solo se portano valore concreto e misurabile."
+              title={t.threeAreas.features[2].title}
+              desc={t.threeAreas.features[2].desc}
               imageSrc="/images/hero.jpg"
             />
           </TimelineSection>
@@ -167,11 +276,10 @@ export default function App() {
         <section id="servizi" className="mx-auto max-w-6xl px-4 pb-20">
           <motion.div {...fadeUp} className="max-w-3xl">
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-              Tre pilastri, consegne chiare.
+              {t.services.title}
             </h2>
             <p className="mt-2 text-white/70">
-              Ogni servizio ha destinatari, deliverable e risultati attesi.
-              Nessuna promessa irrealistica.
+              {t.services.subtitle}
             </p>
           </motion.div>
 
@@ -186,54 +294,30 @@ export default function App() {
               align="left"
               image="/images/hero.jpg"
               icon={<Laptop className="h-5 w-5" />}
-              title="Gestionale & automazioni"
-              subtitle="Per PMI con processi ripetitivi e dati sparsi."
-              points={[
-                "Backoffice, ordini, scorte, dashboard operative.",
-                "Integrazioni con strumenti esistenti (POS, export, email).",
-                "Ruoli, log, backup e audit di base.",
-              ]}
-              outcomes={[
-                "Riduzione attività manuali",
-                "Dati unificati e leggibili",
-                "Processi più stabili",
-              ]}
+              title={t.services.services[0].title}
+              subtitle={t.services.services[0].subtitle}
+              points={t.services.services[0].points}
+              outcomes={t.services.services[0].outcomes}
             />
 
             <ServiceHero
               align="right"
               image="/images/process.jpg"
               icon={<MessageSquare className="h-5 w-5" />}
-              title="Siti web & presenza digitale"
-              subtitle="Per aziende che vogliono contatti reali, non solo vetrina."
-              points={[
-                "Sito vetrina o avanzato con sezioni gestibili.",
-                "Form, lead tracking, analytics di base.",
-                "SEO essenziale e performance ottimizzate.",
-              ]}
-              outcomes={[
-                "Più richieste qualificate",
-                "Presenza coerente e misurabile",
-                "Base tecnica solida",
-              ]}
+              title={t.services.services[1].title}
+              subtitle={t.services.services[1].subtitle}
+              points={t.services.services[1].points}
+              outcomes={t.services.services[1].outcomes}
             />
 
             <ServiceHero
               align="left"
               image="/images/usecase.jpg"
               icon={<Sparkles className="h-5 w-5" />}
-              title="Blockchain / Web3"
-              subtitle="Per chi ha bisogno di tracciabilità o automazioni verificabili."
-              points={[
-                "Tracciabilità e notarizzazione di eventi.",
-                "Identità digitale e auditabilità dei processi.",
-                "Formazione e integrazione con sistemi esistenti.",
-              ]}
-              outcomes={[
-                "Maggiore trasparenza operativa",
-                "Processi verificabili quando serve",
-                "Scelte tecniche motivate",
-              ]}
+              title={t.services.services[2].title}
+              subtitle={t.services.services[2].subtitle}
+              points={t.services.services[2].points}
+              outcomes={t.services.services[2].outcomes}
             />
           </motion.div>
         </section>
@@ -248,39 +332,16 @@ export default function App() {
           <motion.div {...fadeUp} className="grid gap-10 md:grid-cols-2">
             <div>
               <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-                Domande che contano davvero.
+                {t.faq.title}
               </h2>
               <p className="mt-2 text-white/70">
-                Se volete un preventivo “a sentimento”, non siamo la scelta
-                giusta. Se volete chiarezza, sì.
+                {t.faq.subtitle}
               </p>
             </div>
 
             <Accordion
-              items={[
-                {
-                  title: "Quanto costa?",
-                  content:
-                    "Partiamo con una discovery a prezzo fisso, poi passiamo a milestone chiare. Ogni fase ha un output verificabile.",
-                },
-                {
-                  title: "In quanto tempo consegnate?",
-                  content:
-                    "Discovery 1–2 settimane, MVP 2–6 settimane. I tempi dipendono da complessità e disponibilità dei dati.",
-                },
-                {
-                  title: "E se poi serve assistenza?",
-                  content:
-                    "Offriamo manutenzione con monitoraggio o handover completo con documentazione. Scegliete voi.",
-                },
-                {
-                  title: "Quando ha senso usare web3?",
-                  content:
-                    "Solo se serve tracciabilità, notarizzazione o auditabilità. Se non serve, restiamo su stack tradizionali.",
-                },
-              ]}
-            />
-          </motion.div>
+              items={t.faq.items}
+            />          </motion.div>
         </section>
 
         <SupportSection />
@@ -290,24 +351,24 @@ export default function App() {
             <Card className="relative overflow-hidden border-white/10 bg-white/5 backdrop-blur">
               <CardHeader>
                 <CardTitle className="mt-3 text-2xl md:text-3xl">
-                  Valutiamo il caso insieme, senza giri di parole.
+                  {t.contact.title}
                 </CardTitle>
                 <CardDescription className="mt-2 text-white/70">
-                  20 minuti di call. Obiettivo, vincoli e prossimi passi.
+                  {t.contact.subtitle}
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3 md:grid-cols-3">
-                  <InputLike label="Nome" placeholder="Mario Rossi" />
+                  <InputLike label={t.contact.formLabels.name} placeholder={t.contact.formPlaceholders.name} />
                   <InputLike
-                    label="Attività / settore"
-                    placeholder="Ristorante / Studio / Retail / Altro"
+                    label={t.contact.formLabels.activity}
+                    placeholder={t.contact.formPlaceholders.activity}
                   />
-                  <InputLike label="Contatto" placeholder="Email o telefono" />
+                  <InputLike label={t.contact.formLabels.contact} placeholder={t.contact.formPlaceholders.contact} />
                   <div className="md:col-span-3">
                     <InputLike
-                      label="Obiettivo + vincoli"
-                      placeholder="Es: ridurre no-show, budget, tempi, integrazioni..."
+                      label={t.contact.formLabels.objective}
+                      placeholder={t.contact.formPlaceholders.objective}
                       tall
                     />
                   </div>
@@ -315,7 +376,7 @@ export default function App() {
 
                 <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
                   <div className="text-xs text-white/60">
-                    Rispondiamo entro 24–48h lavorative.
+                    {t.contact.responseTime}
                   </div>
                   <div className="flex gap-2">
                     <Button
@@ -323,13 +384,13 @@ export default function App() {
                       onClick={() => scrollToId("servizi")}
                       className="border-white/20 bg-white/5 text-white hover:bg-white/10"
                     >
-                      Vedi servizi
+                      {t.nav.seeServices}
                     </Button>
                     <Button
                       onClick={openWhatsApp}
                       className="bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]"
                     >
-                      Valutiamo il caso <ArrowRight className="h-4 w-4" />
+                      {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>
@@ -340,27 +401,25 @@ export default function App() {
 
             <footer className="mt-10 grid gap-6 text-sm text-white/60 md:grid-cols-[1.2fr_1fr_1fr]">
               <div className="space-y-2">
-                <div className="text-white/80">Arras Industries</div>
+                <div className="text-white/80">{t.footer.company}</div>
                 <div>
-                  Software house per PMI: gestionali, siti web, web3 quando
-                  utile.
-                </div>
+                  {t.footer.description}</div>
                 <div className="text-xs text-white/50">
-                  © {new Date().getFullYear()} — P.IVA (inserire)
+                  {t.footer.copyright.replace("{year}", String(new Date().getFullYear()))}
                 </div>
               </div>
 
               <div className="space-y-2">
-                <div className="text-white/80">Sezioni</div>
+                <div className="text-white/80">{t.footer.sections}</div>
                 <div className="flex flex-col gap-2">
                   <a className="hover:text-white" href="#servizi">
-                    Servizi
+                    {t.nav.services}
                   </a>
                   <a className="hover:text-white" href="#storia">
-                    Percorso
+                    {t.nav.path}
                   </a>
                   <a className="hover:text-white" href="#processo">
-                    Processo
+                    {t.nav.process}
                   </a>
                   <a className="hover:text-white" href="#faq">
                     FAQ
@@ -369,11 +428,11 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <div className="text-white/80">Contatti</div>
+                <div className="text-white/80">{t.footer.contacts}</div>
                 <div className="flex flex-col gap-2">
-                  <span>hello@studio-software.it</span>
-                  <span>+39 333 123 4567</span>
-                  <span>Sede: Italia (remoto)</span>
+                  <span>{t.footer.email}</span>
+                  <span>{t.footer.phone}</span>
+                  <span>{t.footer.location}</span>
                 </div>
               </div>
             </footer>
@@ -385,12 +444,13 @@ export default function App() {
 }
 
 function Hero() {
-  const words = useMemo(() => ["gestionali", "siti web", "web3"], []);
+  const { t, language } = useLanguage();
+  const words = useMemo(() => t.hero.words, [t]);
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setIdx((p) => (p + 1) % words.length), 2200);
-    return () => clearInterval(t);
+    const timer = setInterval(() => setIdx((p) => (p + 1) % words.length), 2200);
+    return () => clearInterval(timer);
   }, [words.length]);
 
   return (
@@ -402,7 +462,7 @@ function Hero() {
           transition={{ duration: 0.7 }}
         >
           <h1 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-7xl">
-            Software per PMI,{" "}
+            {language === "it" ? "Software per PMI," : "Software for SMBs,"}{" "}
             <span className="relative inline-block">
               <motion.span
                 key={words[idx]}
@@ -416,25 +476,23 @@ function Hero() {
               </motion.span>
             </span>
             <br />
-            quando serve, con obiettivi chiari.
+            {language === "it" ? "quando serve, con obiettivi chiari." : "when needed, with clear objectives."}
           </h1>
 
           <p className="mt-4 max-w-xl text-white/80">
-            Sviluppiamo gestionali e automazioni, siti web efficaci e
-            integrazioni web3 quando portano valore reale. Lavoriamo con
-            obiettivi misurabili e consegne chiare.
+            {t.hero.subtitle}
           </p>
 
           <div className="mt-7 flex flex-col gap-2 sm:flex-row">
             <MagneticButton onClick={() => scrollToId("contatto")}>
-              Parliamone <ArrowRight className="h-4 w-4" />
+              {t.hero.requestCall} <ArrowRight className="h-4 w-4" />
             </MagneticButton>
 
             <MagneticButton
               variant="outline"
               onClick={() => scrollToId("servizi")}
             >
-              Vedi servizi
+              {t.nav.seeServices}
             </MagneticButton>
           </div>
         </motion.div>
@@ -492,29 +550,19 @@ function SectionBridge({
 }
 
 function ValuesSection() {
-  const values = [
-    {
-      title: "Gestionale & automazioni",
-      desc: "Backoffice, dashboard e integrazioni per processi ripetitivi.",
-      image: "/images/hero.jpg",
-    },
-    {
-      title: "Siti web",
-      desc: "Siti vetrina o avanzati con lead, analytics e SEO base.",
-      image: "/images/process.jpg",
-    },
-    {
-      title: "Blockchain / Web3",
-      desc: "Sviluppo, integrazione e formazione quando è utile.",
-      image: "/images/usecase.jpg",
-    },
-  ];
+  const { t } = useLanguage();
+  const images = ["/images/hero.jpg", "/images/process.jpg", "/images/usecase.jpg"];
+  const values = t.values.values.map((v, i) => ({
+    title: v.title,
+    desc: v.desc,
+    image: images[i],
+  }));
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16">
       <motion.div {...fadeUp} className="text-center">
         <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
-          I nostri pilastri
+          {t.values.title}
         </h2>
         <div className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#3B82F6] to-transparent" />
       </motion.div>
@@ -645,28 +693,8 @@ function ValueCard({
 }
 
 function InnovationSection() {
-  const slides = [
-    {
-      title: "Tracciabilità eventi",
-      detail:
-        "Registrazione verificabile di passaggi chiave (es. supply chain, ticket, log).",
-    },
-    {
-      title: "Notarizzazione",
-      detail:
-        "Prove temporali e integrità dei documenti quando servono garanzie forti.",
-    },
-    {
-      title: "Identità e accessi",
-      detail:
-        "Ruoli e permessi con log verificabili, senza complicare il lavoro.",
-    },
-    {
-      title: "Automazioni verificabili",
-      detail:
-        "Processi tra parti diverse con regole che si possono controllare.",
-    },
-  ];
+  const { t } = useLanguage();
+  const slides = t.innovation.features.map((f) => ({ title: f.title, detail: f.desc }));
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -715,13 +743,10 @@ function InnovationSection() {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
         <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-indigo-400 to-violet-400">
-          Web3 quando serve, non per moda.
+          {t.innovation.title}
         </h2>
         <p className="mt-3 max-w-2xl text-white/70">
-          Lo usiamo solo se porta vantaggi concreti: tracciabilità,
-          auditabilità, notarizzazione o automazioni verificabili. Altrimenti
-          restiamo su stack tradizionali.
-        </p>
+          {t.innovation.subtitle}</p>
       </motion.div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
@@ -805,14 +830,13 @@ function InnovationSection() {
           </div>
           <div className="relative">
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-              Use case tipici
+              {t.innovation.useCases}
             </div>
             <div className="mt-2 text-2xl font-semibold tracking-tight">
-              Quando i dati devono essere verificabili.
+              {t.innovation.useCasesTitle}
             </div>
             <div className="mt-3 text-sm text-white/70">
-              Audit, tracciabilità e notarizzazione: utili solo quando la
-              verifica esterna è un requisito reale.
+              {t.innovation.useCasesDesc}
             </div>
 
             <div className="relative mt-6 min-h-[160px]">
@@ -826,7 +850,7 @@ function InnovationSection() {
                   className="rounded-[14px] border border-white/10 bg-white/5 p-5"
                 >
                   <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                    Focus
+                    {t.innovation.focus}
                   </div>
                   <div className="mt-2 text-xl font-semibold tracking-tight">
                     {slides[active].title}
@@ -852,7 +876,7 @@ function InnovationSection() {
             <BlockchainScene />
           </div>
           <div className="relative mt-4 text-sm text-white/70">
-            Visualizzazione concettuale di flussi verificabili e auditabili.
+            {t.innovation.conceptual}
           </div>
         </motion.div>
       </div>
@@ -868,21 +892,16 @@ function InnovationSection() {
         <div className="relative grid gap-6 md:grid-cols-[0.7fr_1.3fr] items-center">
           <div className="rounded-[14px] border border-white/10 bg-white/5 p-4">
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-              Pagamenti digitali (opzionali)
+              {t.innovation.digitalPayments}
             </div>
             <div className="mt-2 text-xl font-semibold tracking-tight">
-              Checkout con wallet, quando serve
+              {t.innovation.checkoutTitle}
             </div>
             <p className="mt-2 text-sm text-white/70">
-              Possiamo integrare wallet dove ha senso: clienti internazionali,
-              community tech‑friendly, o tracciabilità del pagamento.
+              {t.innovation.checkoutDesc}
             </p>
             <div className="mt-3 grid gap-2">
-              {[
-                "Accesso a clienti globali, senza barriere valutarie.",
-                "Pagamenti verificabili con ricevute on‑chain.",
-                "Opzione aggiuntiva, non obbligatoria.",
-              ].map((item) => (
+              {t.innovation.benefits.map((item) => (
                 <div
                   key={item}
                   className="flex items-start gap-2 rounded-[10px] border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/75"
@@ -902,7 +921,7 @@ function InnovationSection() {
                 />
               </div>
               <div className="text-sm text-white/70">
-                Wallet esempio: MetaMask
+                Wallet: MetaMask
               </div>
             </div>
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
@@ -922,23 +941,7 @@ function InnovationSection() {
             >
               →
             </motion.div>
-            {[
-              {
-                title: "Utente",
-                desc: "Seleziona crypto e importo",
-                tip: "L’utente sceglie crypto e importo nel checkout.",
-              },
-              {
-                title: "Wallet",
-                desc: "Firma e conferma",
-                tip: "La transazione viene firmata nel wallet.",
-              },
-              {
-                title: "Gestionale",
-                desc: "Riceve esito + riconcilia",
-                tip: "Il gestionale registra e riconcilia l’esito.",
-              },
-            ].map((item, idx) => (
+            {t.innovation.cryptoFlow.steps.map((item, idx) => (
               <motion.div
                 key={item.title}
                 className="group relative h-full rounded-[12px] border border-white/10 bg-white/5 p-4 text-sm text-white/70"
@@ -1252,6 +1255,7 @@ function TrailLine({
 }
 
 function ScrollyStory() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -1260,28 +1264,7 @@ function ScrollyStory() {
   const lineH = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const glowO = useTransform(scrollYProgress, [0, 1], [0, 0.45]);
 
-  const steps = [
-    {
-      title: "1) Discovery breve",
-      desc: "Allineiamo obiettivo, metriche e vincoli reali.",
-      metric: "Output: scope chiaro + metriche + rischi. 1–2 settimane.",
-    },
-    {
-      title: "2) MVP usabile",
-      desc: "Costruiamo la prima release che il team può usare subito.",
-      metric: "Output: release funzionante + feedback. 2–6 settimane.",
-    },
-    {
-      title: "3) Stabilizzazione + handover",
-      desc: "Hardening, ruoli, backup, documentazione e training.",
-      metric: "Output: doc + monitoraggio + manutenzione opzionale.",
-    },
-    {
-      title: "4) Iterazioni mirate",
-      desc: "Miglioramenti basati sui dati, non su opinioni.",
-      metric: "Output: roadmap trimestrale e priorità misurate.",
-    },
-  ];
+  const steps = t.process.phaseSteps;
 
   return (
     <section
@@ -1294,16 +1277,11 @@ function ScrollyStory() {
       >
         <div className="md:sticky md:top-24 md:self-start md:h-fit">
           <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-            Un metodo corto, misurabile, ripetibile.
+            {t.process.title}
           </h2>
           <p className="mt-3 text-white/70">
-            Non partiamo dal “tutto e subito”. Partiamo dal minimo utile e lo
-            rendiamo stabile con numeri e responsabilità chiare.
+            {t.process.subtitle}
           </p>
-          <div className="mt-6 rounded-[14px] border border-white/10 bg-white/5 p-4 text-sm text-white/70">
-            La promessa: consegne chiare, costi e tempi espliciti, iterazioni
-            basate su dati reali.
-          </div>
         </div>
 
         <div className="relative">
@@ -1411,7 +1389,7 @@ function TimelineSection({ children }: { children: React.ReactNode }) {
 }
 
 function HeroImage() {
-  // effetto parallax leggero sul mouse
+  const { t } = useLanguage();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 120, damping: 18 });
@@ -1443,7 +1421,7 @@ function HeroImage() {
 
           <img
             src="/images/image.png"
-            alt="Mockup gestionale"
+            alt={t.hero.imageAlt}
             className="h-[420px] w-full object-cover md:h-[520px]"
           />
 
@@ -1451,8 +1429,7 @@ function HeroImage() {
 
           <div className="absolute bottom-4 left-4 right-4 rounded-[14px] border border-white/15 bg-white/10 p-4 backdrop-blur">
             <div className=" text-sm text-white/70">
-              “Il nostro lavoro finisce quando il vostro team lo usa senza
-              pensarci.”
+              {t.hero.quote2}
             </div>
           </div>
         </Card>
@@ -1600,6 +1577,7 @@ function ServiceHero({
   points: string[];
   outcomes: string[];
 }) {
+  const { t } = useLanguage();
   const isLeft = align === "left";
 
   return (
@@ -1685,7 +1663,7 @@ function ServiceHero({
             ].join(" ")}
           >
             <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-              Risultato
+              {t.services.result}
             </div>
             <div className="mt-2 space-y-2">
               {outcomes.map((o) => (
@@ -1705,6 +1683,7 @@ function ServiceHero({
 }
 
 function ProcessShowcase() {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -1712,43 +1691,20 @@ function ProcessShowcase() {
   });
   const line = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  const steps = [
-    {
-      number: "01",
-      title: "Discovery breve",
-      desc: "Obiettivi, metriche, scope e vincoli. 1–2 settimane.",
-      icon: <Users className="h-5 w-5" />,
-    },
-    {
-      number: "02",
-      title: "MVP",
-      desc: "Release usabile con flussi principali. 2–6 settimane.",
-      icon: <Bolt className="h-5 w-5" />,
-    },
-    {
-      number: "03",
-      title: "Stabilizzazione",
-      desc: "Hardening, ruoli, backup, documentazione e handover.",
-      icon: <BadgeCheck className="h-5 w-5" />,
-    },
-    {
-      number: "04",
-      title: "Iterazioni",
-      desc: "Roadmap basata su dati, non su ipotesi.",
-      icon: <LineChart className="h-5 w-5" />,
-    },
-  ];
+  const icons = [<Users className="h-5 w-5" />, <Bolt className="h-5 w-5" />, <BadgeCheck className="h-5 w-5" />, <LineChart className="h-5 w-5" />];
+    const steps = t.process.steps.map((s: { number: string; title: string; desc: string }, i: number) => ({
+      ...s,
+      icon: icons[i],
+    }));
 
   return (
     <div ref={ref} className="relative">
       <motion.div {...fadeUp} className="max-w-3xl">
         <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-          Metodo semplice. Output chiari. Tempi realistici.
+          {t.process.title}
         </h2>
         <p className="mt-2 text-white/70">
-          Dal discovery alla release: ogni fase ha un output verificabile e
-          condiviso.
-        </p>
+          {t.process.subtitle}</p>
       </motion.div>
 
       <div className="mt-10 rounded-[14px] border border-white/10 bg-[#0C0D10]/80 p-6 backdrop-blur md:p-8">
@@ -2027,6 +1983,7 @@ function InputLike({
 }
 
 function SupportSection() {
+  const { t } = useLanguage();
   const walletAddress = "0x1111111111111111111111111111111111111111";
   const networks = [
     {
@@ -2129,11 +2086,11 @@ function SupportSection() {
           });
           return true;
         } catch {
-          setStatus("Impossibile aggiungere la rete selezionata.");
+          setStatus(t.support.errors.networkAdd);
           return false;
         }
       }
-      setStatus("Cambio rete annullato.");
+      setStatus(t.support.errors.networkSwitch);
       return false;
     }
   };
@@ -2153,16 +2110,16 @@ function SupportSection() {
     const eth = (window as unknown as { ethereum?: { request: Function } })
       .ethereum;
     if (!eth) {
-      setStatus("MetaMask non trovato. Installa l’estensione e riprova.");
+      setStatus(t.support.errors.noMetaMask);
       return;
     }
     if (token !== "ETH") {
-      setStatus("Demo: solo ETH. I token ERC20 verranno aggiunti in seguito.");
+      setStatus(t.support.errors.ethOnly);
       return;
     }
     const wei = parseEther(amount);
     if (!wei || wei <= 0) {
-      setStatus("Inserisci un importo valido.");
+      setStatus(t.support.errors.invalidAmount);
       return;
     }
     setBusy(true);
@@ -2184,9 +2141,9 @@ function SupportSection() {
           },
         ],
       });
-      setStatus("Transazione inviata. Grazie per il supporto.");
+      setStatus(t.support.errors.txSent);
     } catch {
-      setStatus("Transazione annullata o non riuscita.");
+      setStatus(t.support.errors.txFailed);
     } finally {
       setBusy(false);
     }
@@ -2206,12 +2163,10 @@ function SupportSection() {
           <div className="relative mb-8 flex items-center justify-between gap-3">
             <div>
               <h2 className="text-3xl font-semibold tracking-tight md:text-5xl">
-                Supporta l’innovazione
+                {t.support.title}
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-white/70 md:text-base">
-                Sostieni il progetto e aiutaci a costruire strumenti più aperti,
-                veloci e decentralizzati.
-              </p>
+                {t.support.subtitle}</p>
             </div>
           </div>
 
@@ -2267,7 +2222,7 @@ function SupportSection() {
               <div className="mt-6 grid gap-3 md:grid-cols-3">
                 <label className="block">
                   <div className="mb-1 text-xs font-medium text-white/60">
-                    Importo
+                    {t.support.amount}
                   </div>
                   <motion.input
                     whileHover={{ rotate: 1 }}
@@ -2280,7 +2235,7 @@ function SupportSection() {
 
                 <label className="block">
                   <div className="mb-1 text-xs font-medium text-white/60">
-                    Rete
+                    {t.support.network}
                   </div>
                   <motion.select
                     whileHover={{ rotate: -1 }}
@@ -2298,7 +2253,7 @@ function SupportSection() {
 
                 <label className="block">
                   <div className="mb-1 text-xs font-medium text-white/60">
-                    Token
+                    {t.support.token}
                   </div>
                   <motion.select
                     whileHover={{ rotate: 1 }}
@@ -2328,11 +2283,11 @@ function SupportSection() {
                     animate={{ opacity: [0.2, 0.6, 0.2] }}
                     transition={{ duration: 6, repeat: Infinity }}
                   />
-                  <span className="relative">Invia con MetaMask</span>
+                  <span className="relative">{t.support.sendMetaMask}</span>
                 </motion.button>
 
                 <div className="text-xs text-white/50">
-                  Rete selezionata: {selectedNetwork.label}
+                  {t.support.selectedNetwork}: {selectedNetwork.label}
                 </div>
               </div>
 
@@ -2359,14 +2314,13 @@ function SupportSection() {
                 }}
               />
               <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                Trasparenza totale
+                {t.support.transparency}
               </div>
               <div className="mt-3 text-sm text-white/70">
-                Tutte le donazioni sono pubbliche e tracciabili on‑chain.
-              </div>
+                {t.support.transparencyDesc}</div>
 
               <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
-                Wallet di destinazione:
+                {t.support.destinationWallet}
                 <div className="mt-2 break-all text-white/90">
                   {walletAddress}
                 </div>
@@ -2408,18 +2362,26 @@ function scrollToId(id: string) {
 }
 
 function openEmail() {
-  const email = "hello@studio-software.it";
-  const subject = encodeURIComponent("Richiesta consulenza software");
+  const lang = localStorage.getItem("language") || "en";
+  const email = "hello@arrasindustries.com";
+  const subject = encodeURIComponent(
+    lang === "it" ? "Richiesta consulenza software" : "Software consultation request",
+  );
   const body = encodeURIComponent(
-    "Ciao, vorrei una call.\n\nNome:\nAttivita:\nContatto:\nObiettivo:\nVincoli:\n",
+    lang === "it"
+      ? "Ciao, vorrei una call.\n\nNome:\nAttivita:\nContatto:\nObiettivo:\nVincoli:\n"
+      : "Hi, I'd like to schedule a call.\n\nName:\nBusiness:\nContact:\nObjective:\nConstraints:\n",
   );
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
 }
 
 function openWhatsApp() {
-  const phone = "393331234567";
+  const lang = localStorage.getItem("language") || "en";
+  const phone = "393341168370";
   const text = encodeURIComponent(
-    "Ciao! Vorrei informazioni sui vostri servizi.",
+    lang === "it"
+      ? "Ciao! Vorrei informazioni sui vostri servizi."
+      : "Hi! I'd like information about your services.",
   );
   window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
 }
