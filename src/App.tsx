@@ -6,7 +6,6 @@ import {
   ArrowRight,
   BadgeCheck,
   Bolt,
-  Calendar,
   CircleDollarSign,
   Laptop,
   LineChart,
@@ -26,10 +25,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { Accordion } from "@/components/ui/accordion";
-import Marquee from "react-fast-marquee";
 import { useMotionValue, useSpring } from "framer-motion";
 import { useScroll, useTransform } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -126,7 +122,15 @@ function StickyHeader({
         {/* Desktop nav */}
         <nav className="hidden items-center gap-7 text-sm text-white/60 md:flex">
           {navLinks.map((link) => (
-            <a key={link.href} className={navLinkClass} href={link.href}>
+            <a
+              key={link.href}
+              className={navLinkClass}
+              href={link.href}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId(link.href.replace("#", ""));
+              }}
+            >
               {link.label}
             </a>
           ))}
@@ -202,7 +206,12 @@ function StickyHeader({
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const targetId = link.href.replace("#", "");
+                    setMobileOpen(false);
+                    requestAnimationFrame(() => scrollToId(targetId));
+                  }}
                   className="rounded-lg px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
                 >
                   {link.label}
@@ -211,8 +220,8 @@ function StickyHeader({
               <div className="mt-2 flex gap-2">
                 <Button
                   onClick={() => {
-                    scrollToId("contatto");
                     setMobileOpen(false);
+                    requestAnimationFrame(() => scrollToId("contatto"));
                   }}
                   className="flex-1 bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)]"
                 >
@@ -264,7 +273,7 @@ export default function App() {
 
           <TimelineSection>
             {/* linea centrale unica per tutta la timeline */}
-            <div className="pointer-events-none absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-black/10" />
+            <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-black/10 md:block" />
             <TimelineFeature
               side="left"
               icon={<Timer className="h-5 w-5" />}
@@ -417,8 +426,8 @@ export default function App() {
               <div className="pointer-events-none absolute -left-24 -bottom-24 h-56 w-56 rounded-full bg-[#3B82F6]/20 blur-2xl" />
             </Card>
 
-            <footer className="mt-10 grid gap-6 text-sm text-white/60 md:grid-cols-[1.2fr_1fr_1fr]">
-              <div className="space-y-2">
+            <footer className="mt-10 grid grid-cols-2 gap-3 text-sm text-white/60 md:gap-6 md:grid-cols-[1.2fr_1fr_1fr]">
+              <div className="col-span-2 space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:col-span-1 md:rounded-none md:border-0 md:bg-transparent md:p-0">
                 <div className="text-white/80">{t.footer.company}</div>
                 <div>{t.footer.description}</div>
                 <div className="text-xs text-white/50">
@@ -429,30 +438,48 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0">
                 <div className="text-white/80">{t.footer.sections}</div>
-                <div className="flex flex-col gap-2">
-                  <a className="hover:text-white" href="#servizi">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex md:flex-col">
+                  <a
+                    className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
+                    href="#servizi"
+                  >
                     {t.nav.services}
                   </a>
-                  <a className="hover:text-white" href="#storia">
+                  <a
+                    className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
+                    href="#storia"
+                  >
                     {t.nav.path}
                   </a>
-                  <a className="hover:text-white" href="#processo">
+                  <a
+                    className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
+                    href="#processo"
+                  >
                     {t.nav.process}
                   </a>
-                  <a className="hover:text-white" href="#faq">
+                  <a
+                    className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
+                    href="#faq"
+                  >
                     FAQ
                   </a>
                 </div>
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0">
                 <div className="text-white/80">{t.footer.contacts}</div>
                 <div className="flex flex-col gap-2">
-                  <span>{t.footer.email}</span>
-                  <span>{t.footer.phone}</span>
-                  <span>{t.footer.location}</span>
+                  <span className="rounded-[10px] bg-white/5 px-2 py-1.5 md:rounded-none md:bg-transparent md:px-0 md:py-0">
+                    {t.footer.email}
+                  </span>
+                  <span className="rounded-[10px] bg-white/5 px-2 py-1.5 md:rounded-none md:bg-transparent md:px-0 md:py-0">
+                    {t.footer.phone}
+                  </span>
+                  <span className="rounded-[10px] bg-white/5 px-2 py-1.5 md:rounded-none md:bg-transparent md:px-0 md:py-0">
+                    {t.footer.location}
+                  </span>
                 </div>
               </div>
             </footer>
@@ -506,7 +533,7 @@ function Hero() {
 
           <p className="mt-4 max-w-xl text-white/80">{t.hero.subtitle}</p>
 
-          <div className="mt-7 flex flex-col gap-2 sm:flex-row">
+          <div className="mt-7 hidden gap-2 sm:flex sm:flex-row">
             <MagneticButton onClick={() => scrollToId("contatto")}>
               {t.hero.requestCall} <ArrowRight className="h-4 w-4" />
             </MagneticButton>
@@ -992,7 +1019,7 @@ function InnovationSection() {
                   {item.title}
                 </div>
                 <div className="mt-1">{item.desc}</div>
-                <div className="pointer-events-none absolute left-3 right-3 top-full z-10 mt-2 translate-y-2 rounded-[10px] border border-white/10 bg-[#0B0C10] px-3 py-2 text-xs text-white/70 opacity-0 transition duration-200 group-hover:translate-y-0 group-hover:opacity-100">
+                <div className="mt-3 rounded-[10px] border border-white/10 bg-[#0B0C10] px-3 py-2 text-xs text-white/70 md:pointer-events-none md:absolute md:left-3 md:right-3 md:top-full md:z-10 md:mt-2 md:translate-y-2 md:opacity-0 md:transition md:duration-200 md:group-hover:translate-y-0 md:group-hover:opacity-100">
                   {item.tip}
                 </div>
               </motion.div>
@@ -1382,6 +1409,31 @@ function ScrollyCard({
   );
 }
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.innerWidth <= breakpoint;
+  });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const query = window.matchMedia(`(max-width:${breakpoint}px)`);
+    const handler = (event: MediaQueryListEvent) => setIsMobile(event.matches);
+
+    setIsMobile(query.matches);
+
+    if (typeof query.addEventListener === "function") {
+      query.addEventListener("change", handler);
+      return () => query.removeEventListener("change", handler);
+    }
+
+    query.addListener(handler);
+    return () => query.removeListener(handler);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
 function TimelineSection({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
@@ -1394,18 +1446,18 @@ function TimelineSection({ children }: { children: React.ReactNode }) {
   return (
     <div ref={ref} className="relative mt-10">
       {/* linea base */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-white/10" />
+      <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-white/10 md:block" />
 
       {/* linea che si disegna */}
       <motion.div
         style={{ height: lineH }}
-        className="pointer-events-none absolute left-1/2 top-0 w-px -translate-x-1/2 bg-gradient-to-b from-[#3B82F6] via-[#60A5FA] to-[#A78BFA]"
+        className="pointer-events-none absolute left-1/2 top-0 hidden w-px -translate-x-1/2 bg-gradient-to-b from-[#3B82F6] via-[#60A5FA] to-[#A78BFA] md:block"
       />
 
       {/* glow leggero */}
       <motion.div
         style={{ opacity: glowO }}
-        className="pointer-events-none absolute left-1/2 top-0 h-full w-6 -translate-x-1/2 bg-gradient-to-b from-transparent via-[#3B82F6]/25 to-transparent blur-xl"
+        className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-6 -translate-x-1/2 bg-gradient-to-b from-transparent via-[#3B82F6]/25 to-transparent blur-xl md:block"
       />
 
       {children}
@@ -1477,6 +1529,26 @@ function MagneticButton({
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 250, damping: 18 });
   const sy = useSpring(y, { stiffness: 250, damping: 18 });
+  const isMobile = useIsMobile();
+
+  const buttonClass = [
+    "w-full sm:w-auto",
+    variant === "outline"
+      ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
+      : "bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]",
+  ].join(" ");
+
+  if (isMobile) {
+    return (
+      <Button
+        variant={variant === "outline" ? "outline" : "default"}
+        onClick={onClick}
+        className={buttonClass}
+      >
+        {children}
+      </Button>
+    );
+  }
 
   return (
     <motion.div
@@ -1498,87 +1570,10 @@ function MagneticButton({
       <Button
         variant={variant === "outline" ? "outline" : "default"}
         onClick={onClick}
-        className={[
-          "w-full sm:w-auto",
-          variant === "outline"
-            ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
-            : "bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]",
-        ].join(" ")}
+        className={buttonClass}
       >
         {children}
       </Button>
-    </motion.div>
-  );
-}
-
-function Feature({
-  icon,
-  title,
-  desc,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <motion.div {...fadeUp}>
-      <Card className="border-white/10 bg-white/5 backdrop-blur transition will-change-transform hover:-translate-y-1 hover:shadow-[0_20px_60px_-40px_rgba(59,130,246,0.45)]">
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-[12px] border border-white/10 bg-white/5 text-white/80">
-              {icon}
-            </div>
-            <div>
-              <CardTitle>{title}</CardTitle>
-              <CardDescription className="text-white/70">
-                {desc}
-              </CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-      </Card>
-    </motion.div>
-  );
-}
-
-function ServiceCard({
-  icon,
-  title,
-  desc,
-  bullets,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-  bullets: string[];
-}) {
-  return (
-    <motion.div {...fadeUp}>
-      <Card className="h-full border-white/10 bg-white/5 backdrop-blur">
-        <CardHeader>
-          <div className="flex items-center gap-3">
-            <div className="grid h-11 w-11 place-items-center rounded-[12px] border border-white/15 bg-white/5 text-white">
-              {icon}
-            </div>
-            <div>
-              <CardTitle>{title}</CardTitle>
-              <CardDescription className="text-white/70">
-                {desc}
-              </CardDescription>
-            </div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <ul className="space-y-2 text-sm text-white/70">
-            {bullets.map((b) => (
-              <li key={b} className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-white/60" />
-                {b}
-              </li>
-            ))}
-          </ul>
-        </CardContent>
-      </Card>
     </motion.div>
   );
 }
@@ -1713,6 +1708,7 @@ function ProcessShowcase() {
     offset: ["start 0.85", "end 0.2"],
   });
   const line = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const glow = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   const icons = [
     <Users className="h-5 w-5" />,
@@ -1738,13 +1734,18 @@ function ProcessShowcase() {
 
       <div className="mt-10 rounded-[14px] border border-white/10 bg-[#0C0D10]/80 p-6 backdrop-blur md:p-8">
         <div className="relative">
-          <div className="absolute left-0 right-0 top-[36px] h-px bg-white/10" />
+          {/* desktop horizontal timeline */}
+          <div className="absolute left-0 right-0 top-[36px] hidden h-px bg-white/10 md:block" />
           <motion.div
             style={{ width: line }}
-            className="absolute left-0 top-[36px] h-px bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA]"
+            className="absolute left-0 top-[36px] hidden h-px bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA] md:block"
+          />
+          <motion.div
+            style={{ opacity: glow }}
+            className="absolute left-0 top-[32px] hidden h-3 w-full rounded-full bg-[#3B82F6]/10 blur-2xl md:block"
           />
 
-          <div className="grid gap-6 md:grid-cols-4">
+          <div className="hidden gap-6 md:grid md:grid-cols-4">
             {steps.map((step, index) => (
               <ProcessStep
                 key={step.number}
@@ -1753,6 +1754,20 @@ function ProcessShowcase() {
                 progress={scrollYProgress}
               />
             ))}
+          </div>
+
+          <div className="md:hidden">
+            <div className="flex flex-col gap-6">
+              {steps.map((step, index) => (
+                <ProcessStepMobile
+                  key={`${step.number}-mobile`}
+                  step={step}
+                  index={index}
+                  total={steps.length}
+                  progress={scrollYProgress}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -1795,6 +1810,79 @@ function ProcessStep({
   );
 }
 
+function ProcessStepMobile({
+  step,
+  index,
+  total,
+  progress,
+}: {
+  step: { number: string; title: string; desc: string; icon: React.ReactNode };
+  index: number;
+  total: number;
+  progress: ReturnType<typeof useScroll>["scrollYProgress"];
+}) {
+  const start = index * 0.2;
+  const end = start + 0.35;
+  const y = useTransform(progress, [start, start + 0.2, end], [16, 0, -8]);
+  const opacity = useTransform(
+    progress,
+    [start, start + 0.2, end],
+    [0.65, 1, 0.8],
+  );
+
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
+
+  return (
+    <motion.div
+      style={{ opacity, y }}
+      className="grid grid-cols-[3.5rem_1fr] gap-3"
+    >
+      <div className="relative flex items-center justify-center">
+        {!isFirst && !isLast && (
+          <>
+            <div className="absolute left-1/2 -top-3 -bottom-3 w-px -translate-x-1/2 bg-gradient-to-b from-[#3B82F6] via-[#60A5FA] to-[#A78BFA]" />
+            <div className="absolute left-1/2 -top-3 -bottom-3 w-5 -translate-x-1/2 bg-gradient-to-b from-transparent via-[#3B82F6]/25 to-transparent blur-xl" />
+          </>
+        )}
+        {isFirst && !isLast && (
+          <>
+            <div className="absolute left-1/2 top-1/2 -bottom-3 w-px -translate-x-1/2 bg-gradient-to-b from-[#3B82F6] via-[#60A5FA] to-[#A78BFA]" />
+            <div className="absolute left-1/2 top-1/2 -bottom-3 w-5 -translate-x-1/2 bg-gradient-to-b from-transparent via-[#3B82F6]/25 to-transparent blur-xl" />
+          </>
+        )}
+        {!isFirst && isLast && (
+          <>
+            <div className="absolute left-1/2 -top-3 bottom-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-[#3B82F6] via-[#60A5FA] to-[#A78BFA]" />
+            <div className="absolute left-1/2 -top-3 bottom-1/2 w-5 -translate-x-1/2 bg-gradient-to-b from-transparent via-[#3B82F6]/25 to-transparent blur-xl" />
+          </>
+        )}
+        <div className="relative grid h-10 w-10 place-items-center rounded-full border border-white/20 bg-white/5 text-white shadow-[0_0_22px_rgba(59,130,246,0.35)]">
+          <div className="absolute -inset-2 rounded-full bg-[#3B82F6]/20 blur-xl" />
+          <span className="relative font-tech text-sm">{step.number}</span>
+        </div>
+      </div>
+
+      <div className="rounded-[16px] border border-white/10 bg-white/5 p-4 backdrop-blur">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <div className="text-sm font-semibold text-white">
+              {step.title}
+            </div>
+            <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/40">
+              {`Step ${step.number}`}
+            </div>
+          </div>
+          <div className="grid h-9 w-9 place-items-center rounded-[12px] border border-white/10 bg-white/5 text-white/70">
+            {step.icon}
+          </div>
+        </div>
+        <div className="mt-3 text-sm text-white/70">{step.desc}</div>
+      </div>
+    </motion.div>
+  );
+}
+
 function TimelineFeature({
   side,
   icon,
@@ -1809,37 +1897,46 @@ function TimelineFeature({
   imageSrc: string;
 }) {
   const isLeft = side === "left";
+  const isMobile = useIsMobile();
 
   // animazione MOLTO più evidente: parte fuori schermo
-  const fromX = isLeft ? -520 : 520;
+  const fromX = isMobile ? 0 : isLeft ? -520 : 520;
+  const initialMotion = isMobile
+    ? {
+        opacity: 1,
+        x: 0,
+        rotate: 0,
+        filter: "blur(0px)",
+      }
+    : {
+        opacity: 0,
+        x: fromX,
+        rotate: isLeft ? -4 : 4,
+        filter: "blur(2px)",
+      };
+  const inViewMotion = {
+    opacity: 1,
+    x: 0,
+    rotate: 0,
+    filter: "blur(0px)",
+  };
 
   return (
     <div className="relative py-6">
       {/* linea centrale quasi impercettibile */}
-      <div className="pointer-events-none absolute left-1/2 top-0 h-full w-px -translate-x-1/2 bg-white/10" />
+      <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-white/10 md:block" />
 
       {/* pallino sul centro */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/40" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/40 md:block" />
 
       <motion.div
-        whileInView={{
-          opacity: 1,
-          x: 0,
-          rotate: 0,
-          filter: "blur(0px)",
-        }}
-        initial={{
-          opacity: 0,
-          x: fromX,
-          rotate: isLeft ? -4 : 4,
-          filter: "blur(2px)",
-        }}
+        whileInView={inViewMotion}
+        initial={initialMotion}
         viewport={{ once: false, amount: 0.35 }}
         transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }} // lenta e visibile
         className={[
-          "relative",
-          "flex",
-          isLeft ? "justify-start pr-8 md:pr-16" : "justify-end pl-8 md:pl-16",
+          "relative flex w-full justify-center px-2 sm:px-3",
+          isLeft ? "md:justify-start md:pr-16" : "md:justify-end md:pl-16",
         ].join(" ")}
       >
         {/* card non enorme: max width limitato e dimensionata sul contenuto */}
@@ -1854,7 +1951,7 @@ function TimelineFeature({
           }}
           transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
           viewport={{ once: false, amount: 0.5 }}
-          className="w-[min(520px,calc(100%-2rem))]"
+          className="w-full max-w-[520px] md:w-[min(520px,calc(100%-2rem))]"
         >
           <Card
             className={[
@@ -1887,7 +1984,7 @@ function TimelineFeature({
                 src={imageSrc}
                 alt=""
                 className={[
-                  "pointer-events-none absolute right-0 top-0 h-full w-[48%] object-cover",
+                  "pointer-events-none absolute right-0 top-0 hidden h-full w-[48%] object-cover md:block",
                   "opacity-[0.12] saturate-0",
                 ].join(" ")}
               />
@@ -1917,68 +2014,6 @@ function TimelineFeature({
           </Card>
         </motion.div>
       </motion.div>
-    </div>
-  );
-}
-
-function Step({
-  icon,
-  title,
-  desc,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div className="flex gap-3">
-      <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] border border-white/10 bg-white/5 text-white/80">
-        {icon}
-      </div>
-      <div>
-        <div className="font-medium">{title}</div>
-        <div className="text-sm text-white/70">{desc}</div>
-      </div>
-    </div>
-  );
-}
-
-function MiniRow({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="flex items-center justify-between gap-4 rounded-[12px] border border-white/10 bg-white/5 px-4 py-3">
-      <div className="text-sm font-medium">{label}</div>
-      <div className="text-sm text-white/70">{value}</div>
-    </div>
-  );
-}
-
-function Signal({
-  icon,
-  title,
-  desc,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  desc: string;
-}) {
-  return (
-    <div className="flex items-start gap-3 rounded-[12px] border border-white/10 bg-white/5 p-4">
-      <div className="grid h-11 w-11 place-items-center rounded-[12px] border border-white/10 bg-white/5">
-        {icon}
-      </div>
-      <div>
-        <div className="font-medium">{title}</div>
-        <div className="text-sm text-white/70">{desc}</div>
-      </div>
-    </div>
-  );
-}
-
-function Pill({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1">
-      {icon}
-      <span>{text}</span>
     </div>
   );
 }
@@ -2389,23 +2424,15 @@ function BackgroundFX() {
 function scrollToId(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+  const header = document.querySelector("header");
+  const headerHeight = header?.getBoundingClientRect().height ?? 72;
+  const offset = headerHeight + 10;
+  const top = window.scrollY + el.getBoundingClientRect().top - offset;
 
-function openEmail() {
-  const lang = localStorage.getItem("language") || "en";
-  const email = "hello@arrasindustries.com";
-  const subject = encodeURIComponent(
-    lang === "it"
-      ? "Richiesta consulenza software"
-      : "Software consultation request",
-  );
-  const body = encodeURIComponent(
-    lang === "it"
-      ? "Ciao, vorrei una call.\n\nNome:\nAttivita:\nContatto:\nObiettivo:\nVincoli:\n"
-      : "Hi, I'd like to schedule a call.\n\nName:\nBusiness:\nContact:\nObjective:\nConstraints:\n",
-  );
-  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+  window.scrollTo({
+    top: Math.max(0, top),
+    behavior: "smooth",
+  });
 }
 
 function openWhatsApp() {
