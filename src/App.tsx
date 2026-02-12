@@ -1866,9 +1866,7 @@ function ProcessStepMobile({
       <div className="rounded-[16px] border border-white/10 bg-white/5 p-4 backdrop-blur">
         <div className="flex items-start justify-between gap-3">
           <div>
-            <div className="text-sm font-semibold text-white">
-              {step.title}
-            </div>
+            <div className="text-sm font-semibold text-white">{step.title}</div>
             <div className="mt-1 text-xs uppercase tracking-[0.2em] text-white/40">
               {`Step ${step.number}`}
             </div>
@@ -2048,7 +2046,7 @@ function InputLike({
 
 function SupportSection() {
   const { t } = useLanguage();
-  const walletAddress = "0x1111111111111111111111111111111111111111";
+  const walletAddress = "0xFD1FEd5D520dbe14658Fd9953E582642979495bb";
   const networks = [
     {
       label: "Ethereum Mainnet",

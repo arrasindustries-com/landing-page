@@ -15,12 +15,14 @@ export const translations = {
     // Hero Section
     hero: {
       words: ["gestionali", "siti web", "web3"],
-      subtitle: "Gestionali, siti web e soluzioni web3 costruiti sui flussi reali della tua attività. Il tuo team li usa subito, senza formazione infinita. Risultati misurabili, non promesse.",
+      subtitle:
+        "Gestionali, siti web e soluzioni web3 costruiti sui flussi reali della tua attività. Il tuo team li usa subito, senza formazione infinita. Risultati misurabili, non promesse.",
       requestCall: "Richiedi una call",
       discoverInnovation: "Scopri l'innovazione",
       badges: ["prenotazioni", "fidelizzazione", "turni", "dashboard"],
       quote: "Automazioni piccole, margine grande.",
-      quote2: "Il nostro lavoro finisce quando il vostro team lo usa senza pensarci.",
+      quote2:
+        "Il nostro lavoro finisce quando il vostro team lo usa senza pensarci.",
       imageAlt: "Mockup gestionale",
     },
     // Values Section
@@ -47,7 +49,8 @@ export const translations = {
       pillars: {
         eyebrow: "Tre aree, un metodo",
         title: "Prima capiamo il problema, poi scegliamo lo strumento.",
-        subtitle: "Gestionale, sito o web3: costruiamo solo ciò che porta risultati concreti.",
+        subtitle:
+          "Gestionale, sito o web3: costruiamo solo ciò che porta risultati concreti.",
       },
       fromStrategy: {
         eyebrow: "Dalla strategia al rilascio",
@@ -59,7 +62,8 @@ export const translations = {
     impact: {
       badge: "Per realtà piccole, impatto grande",
       title: "Tecnologia che riduce caos e aumenta margine.",
-      description: "Niente 'software su misura' generico: partiamo dai vostri flussi reali, misuriamo il problema, costruiamo una soluzione semplice da usare e facile da mantenere.",
+      description:
+        "Niente 'software su misura' generico: partiamo dai vostri flussi reali, misuriamo il problema, costruiamo una soluzione semplice da usare e facile da mantenere.",
       features: [
         {
           title: "Meno tempo perso",
@@ -78,7 +82,8 @@ export const translations = {
     // Three Areas
     threeAreas: {
       title: "Tre aree concrete, tre risultati misurabili.",
-      description: "Operazioni interne, presenza digitale e tracciabilità: scegliamo l'area dove serve più impatto, senza sovrastrutture.",
+      description:
+        "Operazioni interne, presenza digitale e tracciabilità: scegliamo l'area dove serve più impatto, senza sovrastrutture.",
       features: [
         {
           title: "Operazioni ordinate",
@@ -97,7 +102,8 @@ export const translations = {
     // Services Section
     services: {
       title: "Cosa consegniamo, in concreto.",
-      subtitle: "Ogni servizio ha destinatari, deliverable e risultati attesi. Niente promesse vaghe.",
+      subtitle:
+        "Ogni servizio ha destinatari, deliverable e risultati attesi. Niente promesse vaghe.",
       result: "Risultato",
       services: [
         {
@@ -116,7 +122,8 @@ export const translations = {
         },
         {
           title: "Siti web & presenza digitale",
-          subtitle: "Per aziende che vogliono contatti reali, non solo vetrina.",
+          subtitle:
+            "Per aziende che vogliono contatti reali, non solo vetrina.",
           points: [
             "Sito vetrina o avanzato con sezioni gestibili.",
             "Form, lead tracking, analytics di base.",
@@ -130,7 +137,8 @@ export const translations = {
         },
         {
           title: "Blockchain / Web3",
-          subtitle: "Per chi ha bisogno di tracciabilità o automazioni verificabili.",
+          subtitle:
+            "Per chi ha bisogno di tracciabilità o automazioni verificabili.",
           points: [
             "Tracciabilità e notarizzazione di eventi.",
             "Identità digitale e auditabilità dei processi.",
@@ -147,7 +155,8 @@ export const translations = {
     // Process
     process: {
       title: "Metodo semplice. Output chiari. Tempi realistici.",
-      subtitle: "Dal discovery alla release: ogni fase ha un output verificabile e condiviso.",
+      subtitle:
+        "Dal discovery alla release: ogni fase ha un output verificabile e condiviso.",
       steps: [
         {
           number: "01",
@@ -196,14 +205,18 @@ export const translations = {
     // Innovation Section
     innovation: {
       title: "Web3 quando serve, non per moda.",
-      subtitle: "Lo usiamo solo se porta vantaggi concreti: tracciabilità, auditabilità, notarizzazione o automazioni verificabili. Altrimenti restiamo su stack tradizionali.",
+      subtitle:
+        "Lo usiamo solo se porta vantaggi concreti: tracciabilità, auditabilità, notarizzazione o automazioni verificabili. Altrimenti restiamo su stack tradizionali.",
       useCases: "Use case tipici",
       useCasesTitle: "Quando i dati devono essere verificabili.",
-      useCasesDesc: "Audit, tracciabilità e notarizzazione: utili solo quando la verifica esterna è un requisito reale.",
-      conceptual: "Visualizzazione concettuale di flussi verificabili e auditabili.",
+      useCasesDesc:
+        "Audit, tracciabilità e notarizzazione: utili solo quando la verifica esterna è un requisito reale.",
+      conceptual:
+        "Visualizzazione concettuale di flussi verificabili e auditabili.",
       digitalPayments: "Pagamenti digitali (opzionali)",
       checkoutTitle: "Checkout con wallet, quando serve",
-      checkoutDesc: "Possiamo integrare wallet dove ha senso: clienti internazionali, community tech‑friendly, o tracciabilità del pagamento.",
+      checkoutDesc:
+        "Possiamo integrare wallet dove ha senso: clienti internazionali, community tech‑friendly, o tracciabilità del pagamento.",
       focus: "Focus",
       features: [
         {
@@ -252,30 +265,36 @@ export const translations = {
     // FAQ
     faq: {
       title: "Domande che contano davvero.",
-      subtitle: "Prezzi trasparenti, tempi realistici e risposte oneste. Ecco cosa ci chiedono di più.",
+      subtitle:
+        "Prezzi trasparenti, tempi realistici e risposte oneste. Ecco cosa ci chiedono di più.",
       items: [
         {
           title: "Quanto costa?",
-          content: "Ogni cliente ha le sue esigenze, per questo partiamo da una chiamata gratuita di 20 minuti per capire meglio. Dopo la call, forniamo un preventivo chiaro e dettagliato, con prezzi fissi per ogni fase del progetto.",
+          content:
+            "Ogni cliente ha le sue esigenze, per questo partiamo da una chiamata gratuita di 20 minuti per capire meglio. Dopo la call, forniamo un preventivo chiaro e dettagliato, con prezzi fissi per ogni fase del progetto.",
         },
         {
           title: "In quanto tempo consegnate?",
-          content: "Discovery 1–2 settimane, MVP 2–6 settimane. I tempi dipendono da complessità e disponibilità dei dati.",
+          content:
+            "Discovery 1–2 settimane, MVP 2–6 settimane. I tempi dipendono da complessità e disponibilità dei dati.",
         },
         {
           title: "E se poi serve assistenza?",
-          content: "Offriamo manutenzione con monitoraggio o handover completo con documentazione. Scegliete voi.",
+          content:
+            "Offriamo manutenzione con monitoraggio o handover completo con documentazione. Scegliete voi.",
         },
         {
           title: "Quando ha senso usare web3?",
-          content: "Solo se serve tracciabilità, notarizzazione o auditabilità. Se non serve, restiamo su stack tradizionali.",
+          content:
+            "Solo se serve tracciabilità, notarizzazione o auditabilità. Se non serve, restiamo su stack tradizionali.",
         },
       ],
     },
     // Contact Section
     contact: {
       title: "Vediamo se siamo il partner giusto.",
-      subtitle: "Call gratuita di 20 minuti. Mappiamo il problema, stimiamo l'effort e definiamo i prossimi passi — senza impegno.",
+      subtitle:
+        "Call gratuita di 20 minuti. Mappiamo il problema, stimiamo l'effort e definiamo i prossimi passi.",
       responseTime: "Rispondiamo entro 24–48h lavorative.",
       formLabels: {
         name: "Nome",
@@ -294,25 +313,28 @@ export const translations = {
     // Footer
     footer: {
       company: "Arras Industries",
-      description: "Costruiamo software che riduce il caos e aumenta i margini per le PMI: gestionali, siti web e web3",
+      description:
+        "Costruiamo software che riduce il caos e aumenta i margini per le PMI: gestionali, siti web e web3",
       copyright: "© {year} Arras Industries",
       sections: "Sezioni",
       contacts: "Contatti",
-      email: "hello@arrasindustries.com",
+      email: "meneguzzosilvio@gmail.com",
       phone: "+39 334 116 8370",
       location: "Sede: Italia (remoto)",
     },
     // Support Section
     support: {
       title: "Supporta l'innovazione",
-      subtitle: "Sostieni il progetto e aiutaci a costruire strumenti più aperti, veloci e decentralizzati.",
+      subtitle:
+        "Sostieni il progetto e aiutaci a costruire strumenti più aperti, veloci e decentralizzati.",
       amount: "Importo",
       network: "Rete",
       token: "Token",
       sendMetaMask: "Invia con MetaMask",
       selectedNetwork: "Rete selezionata",
       transparency: "Trasparenza totale",
-      transparencyDesc: "Tutte le donazioni sono pubbliche e tracciabili on‑chain.",
+      transparencyDesc:
+        "Tutte le donazioni sono pubbliche e tracciabili on‑chain.",
       destinationWallet: "Wallet di destinazione:",
       errors: {
         noMetaMask: "MetaMask non trovato. Installa l'estensione e riprova.",
@@ -340,12 +362,14 @@ export const translations = {
     // Hero Section
     hero: {
       words: ["management systems", "websites", "web3"],
-      subtitle: "Management systems, websites, and web3 solutions built around your actual workflows. Your team uses them from day one — no training marathons. Measurable results, not promises.",
+      subtitle:
+        "Management systems, websites, and web3 solutions built around your actual workflows. Your team uses them from day one — no training marathons. Measurable results, not promises.",
       requestCall: "Request a call",
       discoverInnovation: "Discover innovation",
       badges: ["bookings", "loyalty", "shifts", "dashboard"],
       quote: "Small automations, big margins.",
-      quote2: "Our work is done when your team uses it without thinking about it.",
+      quote2:
+        "Our work is done when your team uses it without thinking about it.",
       imageAlt: "Management system mockup",
     },
     // Values Section
@@ -372,7 +396,8 @@ export const translations = {
       pillars: {
         eyebrow: "Three areas, one method",
         title: "First we understand the problem, then we pick the right tool.",
-        subtitle: "Management system, website, or web3: we only build what delivers concrete results.",
+        subtitle:
+          "Management system, website, or web3: we only build what delivers concrete results.",
       },
       fromStrategy: {
         eyebrow: "From strategy to release",
@@ -384,7 +409,8 @@ export const translations = {
     impact: {
       badge: "For small businesses, big impact",
       title: "Technology that reduces chaos and increases margins.",
-      description: "No generic 'custom software': we start from your actual workflows, measure the problem, build a simple-to-use and easy-to-maintain solution.",
+      description:
+        "No generic 'custom software': we start from your actual workflows, measure the problem, build a simple-to-use and easy-to-maintain solution.",
       features: [
         {
           title: "Less wasted time",
@@ -403,7 +429,8 @@ export const translations = {
     // Three Areas
     threeAreas: {
       title: "Three concrete areas, three measurable results.",
-      description: "Internal operations, digital presence, and traceability: we choose the area where impact is most needed, without unnecessary complexity.",
+      description:
+        "Internal operations, digital presence, and traceability: we choose the area where impact is most needed, without unnecessary complexity.",
       features: [
         {
           title: "Organized operations",
@@ -422,7 +449,8 @@ export const translations = {
     // Services Section
     services: {
       title: "What we deliver, concretely.",
-      subtitle: "Each service has target users, deliverables, and expected outcomes. No vague promises.",
+      subtitle:
+        "Each service has target users, deliverables, and expected outcomes. No vague promises.",
       result: "Result",
       services: [
         {
@@ -441,7 +469,8 @@ export const translations = {
         },
         {
           title: "Websites & digital presence",
-          subtitle: "For companies that want real contacts, not just a showpiece.",
+          subtitle:
+            "For companies that want real contacts, not just a showpiece.",
           points: [
             "Showcase or advanced site with manageable sections.",
             "Forms, lead tracking, basic analytics.",
@@ -455,7 +484,8 @@ export const translations = {
         },
         {
           title: "Blockchain / Web3",
-          subtitle: "For those who need traceability or verifiable automations.",
+          subtitle:
+            "For those who need traceability or verifiable automations.",
           points: [
             "Event traceability and notarization.",
             "Digital identity and process auditability.",
@@ -472,7 +502,8 @@ export const translations = {
     // Process
     process: {
       title: "Simple method. Clear outputs. Realistic timelines.",
-      subtitle: "From discovery to release: each phase has a verifiable, shared output.",
+      subtitle:
+        "From discovery to release: each phase has a verifiable, shared output.",
       steps: [
         {
           number: "01",
@@ -521,14 +552,17 @@ export const translations = {
     // Innovation Section
     innovation: {
       title: "Web3 when it makes sense, not for trends.",
-      subtitle: "We use it only if it brings concrete advantages: traceability, auditability, notarization, or verifiable automations. Otherwise, we stick to traditional stacks.",
+      subtitle:
+        "We use it only if it brings concrete advantages: traceability, auditability, notarization, or verifiable automations. Otherwise, we stick to traditional stacks.",
       useCases: "Typical use cases",
       useCasesTitle: "When data must be verifiable.",
-      useCasesDesc: "Audits, traceability, and notarization: useful only when external verification is a real requirement.",
+      useCasesDesc:
+        "Audits, traceability, and notarization: useful only when external verification is a real requirement.",
       conceptual: "Conceptual visualization of verifiable and auditable flows.",
       digitalPayments: "Digital payments (optional)",
       checkoutTitle: "Checkout with wallet, when needed",
-      checkoutDesc: "We can integrate wallets where it makes sense: international clients, tech-friendly communities, or payment traceability.",
+      checkoutDesc:
+        "We can integrate wallets where it makes sense: international clients, tech-friendly communities, or payment traceability.",
       focus: "Focus",
       features: [
         {
@@ -577,30 +611,36 @@ export const translations = {
     // FAQ
     faq: {
       title: "Questions that really matter.",
-      subtitle: "Transparent pricing, realistic timelines, and honest answers. Here's what clients ask most.",
+      subtitle:
+        "Transparent pricing, realistic timelines, and honest answers. Here's what clients ask most.",
       items: [
         {
           title: "How much does it cost?",
-          content: "We start with a fixed-price discovery, then move to clear milestones. Each phase has verifiable output.",
+          content:
+            "We start with a fixed-price discovery, then move to clear milestones. Each phase has verifiable output.",
         },
         {
           title: "How long to deliver?",
-          content: "Discovery 1–2 weeks, MVP 2–6 weeks. Timeline depends on complexity and data availability.",
+          content:
+            "Discovery 1–2 weeks, MVP 2–6 weeks. Timeline depends on complexity and data availability.",
         },
         {
           title: "What if we need support later?",
-          content: "We offer maintenance with monitoring or complete handover with documentation. Your choice.",
+          content:
+            "We offer maintenance with monitoring or complete handover with documentation. Your choice.",
         },
         {
           title: "When does web3 make sense?",
-          content: "Only if you need traceability, notarization, or auditability. If not needed, we stick to traditional stacks.",
+          content:
+            "Only if you need traceability, notarization, or auditability. If not needed, we stick to traditional stacks.",
         },
       ],
     },
     // Contact Section
     contact: {
       title: "Let's see if we're the right fit.",
-      subtitle: "Free 20-minute call. We'll map your problem, estimate effort, and define next steps — no obligation.",
+      subtitle:
+        "Free 20-minute call. We'll map your problem, estimate effort, and define next steps — no obligation.",
       responseTime: "We respond within 24–48 business hours.",
       formLabels: {
         name: "Name",
@@ -619,7 +659,8 @@ export const translations = {
     // Footer
     footer: {
       company: "Arras Industries",
-      description: "We build software that reduces chaos and increases margins for SMBs: management systems, websites, and web3 — only when it adds real value.",
+      description:
+        "We build software that reduces chaos and increases margins for SMBs: management systems, websites, and web3 — only when it adds real value.",
       copyright: "© {year} Arras Industries",
       sections: "Sections",
       contacts: "Contacts",
@@ -630,7 +671,8 @@ export const translations = {
     // Support Section
     support: {
       title: "Support innovation",
-      subtitle: "Support the project and help us build more open, fast, and decentralized tools.",
+      subtitle:
+        "Support the project and help us build more open, fast, and decentralized tools.",
       amount: "Amount",
       network: "Network",
       token: "Token",
