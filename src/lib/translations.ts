@@ -318,7 +318,7 @@ export const translations = {
       copyright: "© {year} Arras Industries",
       sections: "Sezioni",
       contacts: "Contatti",
-      email: "meneguzzosilvio@gmail.com",
+      email: "arras.industries.info@gmail.com",
       phone: "+39 334 116 8370",
       location: "Sede: Italia (remoto)",
     },
@@ -343,7 +343,7 @@ export const translations = {
       transparency: "Trasparenza totale",
       transparencyDesc:
         "Tutte le donazioni sono pubbliche e tracciabili on‑chain.",
-      destinationWallet: "Wallet di destinazione:",
+      destinationWallet: "MetaMask Arras",
       errors: {
         noMetaMask: "MetaMask non trovato. Installa l'estensione e riprova.",
         ethOnly: "Demo: solo ETH. I token ERC20 verranno aggiunti in seguito.",
@@ -675,7 +675,7 @@ export const translations = {
       copyright: "© {year} Arras Industries",
       sections: "Sections",
       contacts: "Contacts",
-      email: "meneguzzosilvio@gmail.com",
+      email: "arras.industries.info@gmail.com",
       phone: "+39 334 116 8370",
       location: "Office: Italy (remote)",
     },
@@ -699,7 +699,7 @@ export const translations = {
         "Donate quickly with PayPal. The entered amount is sent in EUR.",
       transparency: "Total transparency",
       transparencyDesc: "All donations are public and traceable on-chain.",
-      destinationWallet: "Destination wallet:",
+      destinationWallet: "MetaMask Arras",
       errors: {
         noMetaMask: "MetaMask not found. Install the extension and try again.",
         ethOnly: "Demo: ETH only. ERC20 tokens will be added later.",

@@ -7,6 +7,7 @@ import {
   BadgeCheck,
   Bolt,
   CircleDollarSign,
+  Info,
   Laptop,
   LineChart,
   Menu,
@@ -2078,7 +2079,25 @@ function InputLike({
 
 function SupportSection() {
   const { t } = useLanguage();
-  const walletAddress = "0xFD1FEd5D520dbe14658Fd9953E582642979495bb";
+  const walletAddress = "0x8b14a2d2f7f8ffd7152a9b9e9f5ab2dab51e6d3a";
+  const onchainAddresses = [
+    {
+      label: "Ethereum",
+      address: walletAddress,
+    },
+    {
+      label: "Bitcoin",
+      address: "bc1qehupc5fjlz6mgq93duthgal8zvxsj2jsrtt6nk",
+    },
+    {
+      label: "Solana",
+      address: "GBZdJkWQrKZz44DP1TnEcQ26mf7Kh1r5DXGjRjcTtydF",
+    },
+    {
+      label: "Tron",
+      address: "TR5iwtT3LVqMjRaZnt1jAjwEHrpzwfWrKw",
+    },
+  ];
   const paypalDonationBase =
     (import.meta.env.VITE_PAYPAL_DONATION_URL as string | undefined)?.trim() ||
     "https://www.paypal.com/donate/?business=meneguzzosilvio%40gmail.com&currency_code=EUR";
@@ -2154,10 +2173,10 @@ function SupportSection() {
   const [donationMethod, setDonationMethod] = useState<"metamask" | "paypal">(
     "metamask",
   );
+  const [showTransparencyCard, setShowTransparencyCard] = useState(false);
 
   const selectedNetwork =
     networks.find((n) => n.value === network) ?? networks[0];
-
   const ensureNetwork = async () => {
     const eth = (window as unknown as { ethereum?: { request: Function } })
       .ethereum;
@@ -2313,12 +2332,7 @@ function SupportSection() {
             </div>
           </div>
 
-          <div
-            className={[
-              "relative grid gap-6",
-              donationMethod === "metamask" ? "md:grid-cols-[1.2fr_0.8fr]" : "",
-            ].join(" ")}
-          >
+          <div className="relative grid gap-6">
             <div className="pointer-events-none absolute inset-0">
               {particles.map((p, i) => (
                 <motion.span
@@ -2366,6 +2380,7 @@ function SupportSection() {
                     onClick={() => {
                       setDonationMethod("paypal");
                       setStatus(null);
+                      setShowTransparencyCard(false);
                     }}
                     className={[
                       "rounded-[8px] px-3 py-1.5 text-xs font-semibold transition",
@@ -2414,6 +2429,15 @@ function SupportSection() {
                         {t.support.supportedWallets}:{" "}
                         <span className="text-white">MetaMask</span>
                       </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowTransparencyCard(true)}
+                        className="ml-auto inline-flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/15 bg-white/5 text-white/80 transition hover:border-white/30 hover:bg-white/10 hover:text-white"
+                        aria-label={t.support.transparency}
+                        title={t.support.transparency}
+                      >
+                        <Info className="h-4 w-4" />
+                      </button>
                     </div>
 
                     <div className="mt-6 grid gap-3 md:grid-cols-3">
@@ -2480,7 +2504,9 @@ function SupportSection() {
                           animate={{ opacity: [0.2, 0.6, 0.2] }}
                           transition={{ duration: 6, repeat: Infinity }}
                         />
-                        <span className="relative">{t.support.sendMetaMask}</span>
+                        <span className="relative">
+                          {t.support.sendMetaMask}
+                        </span>
                       </motion.button>
 
                       <div className="text-xs text-white/50">
@@ -2560,48 +2586,75 @@ function SupportSection() {
               </AnimatePresence>
             </div>
 
-            {donationMethod === "metamask" && (
-              <motion.div
-                whileHover={{ rotateX: -1.5, rotateY: 1.5 }}
-                transition={{ type: "spring", stiffness: 180, damping: 16 }}
-                className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur md:mt-[52px] md:self-start"
-              >
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
+            <AnimatePresence>
+              {donationMethod === "metamask" && showTransparencyCard && (
                 <motion.div
-                  className="pointer-events-none absolute -left-10 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/20 blur-3xl"
-                  animate={{ scale: [0.95, 1.05, 0.95] }}
-                  transition={{
-                    duration: 6,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                />
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                  {t.support.transparency}
-                </div>
-                <div className="mt-3 text-sm text-white/70">
-                  {t.support.transparencyDesc}
-                </div>
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+                  onClick={() => setShowTransparencyCard(false)}
+                >
+                  <motion.div
+                    initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative w-full max-w-2xl overflow-hidden rounded-[14px] border border-white/15 bg-[#0F0F11] p-6 shadow-[0_20px_80px_rgba(0,0,0,0.55)] backdrop-blur"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
+                    <motion.div
+                      className="pointer-events-none absolute -left-10 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/20 blur-3xl"
+                      animate={{ scale: [0.95, 1.05, 0.95] }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowTransparencyCard(false)}
+                      className="absolute right-4 top-4 z-20 inline-flex h-10 w-10 items-center justify-center rounded-[10px] border border-white/20 bg-white/10 text-white/85 transition hover:border-white/35 hover:bg-white/15 hover:text-white"
+                      aria-label="Close transparency details"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
 
-                <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
-                  {t.support.destinationWallet}
-                  <div className="mt-2 break-all text-white/90">
-                    {walletAddress}
-                  </div>
-                </div>
+                    <div className="relative">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                        {t.support.transparency}
+                      </div>
+                      <div className="mt-3 text-sm text-white/70">
+                        {t.support.transparencyDesc}
+                      </div>
 
-                <motion.div
-                  className="pointer-events-none absolute right-6 top-6 h-16 w-16 rounded-full border border-white/10"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                  className="pointer-events-none absolute right-8 top-8 h-10 w-10 rounded-full border border-white/10"
-                  animate={{ rotate: -360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-                />
-              </motion.div>
-            )}
+                      <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/80">
+                        <div className="text-sm font-semibold tracking-wide text-white">
+                          {t.support.destinationWallet}
+                        </div>
+                        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                          {onchainAddresses.map((entry) => (
+                            <div
+                              key={`${entry.label}-${entry.address}`}
+                              className="rounded-[10px] border border-white/10 bg-[#06070a]/60 px-3 py-2"
+                            >
+                              <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
+                                {entry.label}
+                              </div>
+                              <div className="mt-1 break-all font-mono text-[13px] text-white/90">
+                                {entry.address}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </motion.div>
@@ -2644,8 +2697,8 @@ type ContactRequest = {
 function openWhatsApp(form?: ContactRequest, selectedLanguage?: string) {
   const lang = selectedLanguage || localStorage.getItem("language") || "en";
   const phone = "393341168370";
-  const hasFormData = !!form
-    && Object.values(form).some((value) => value.trim().length > 0);
+  const hasFormData =
+    !!form && Object.values(form).some((value) => value.trim().length > 0);
 
   const message = hasFormData
     ? lang === "it"
