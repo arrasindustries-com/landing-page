@@ -238,6 +238,22 @@ function StickyHeader({
 
 export default function App() {
   const { t, toggleLanguage, language } = useLanguage();
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    activity: "",
+    contact: "",
+    objective: "",
+  });
+
+  const setContactField = (
+    field: "name" | "activity" | "contact" | "objective",
+    value: string,
+  ) => {
+    setContactForm((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
 
   return (
     <div className="min-h-screen bg-[#0F0F11] pt-[60px] text-[#F5F7FA]">
@@ -383,19 +399,27 @@ export default function App() {
                   <InputLike
                     label={t.contact.formLabels.name}
                     placeholder={t.contact.formPlaceholders.name}
+                    value={contactForm.name}
+                    onChange={(value) => setContactField("name", value)}
                   />
                   <InputLike
                     label={t.contact.formLabels.activity}
                     placeholder={t.contact.formPlaceholders.activity}
+                    value={contactForm.activity}
+                    onChange={(value) => setContactField("activity", value)}
                   />
                   <InputLike
                     label={t.contact.formLabels.contact}
                     placeholder={t.contact.formPlaceholders.contact}
+                    value={contactForm.contact}
+                    onChange={(value) => setContactField("contact", value)}
                   />
                   <div className="md:col-span-3">
                     <InputLike
                       label={t.contact.formLabels.objective}
                       placeholder={t.contact.formPlaceholders.objective}
+                      value={contactForm.objective}
+                      onChange={(value) => setContactField("objective", value)}
                       tall
                     />
                   </div>
@@ -414,7 +438,7 @@ export default function App() {
                       {t.nav.seeServices}
                     </Button>
                     <Button
-                      onClick={openWhatsApp}
+                      onClick={() => openWhatsApp(contactForm, language)}
                       className="bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]"
                     >
                       {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
@@ -2019,10 +2043,14 @@ function TimelineFeature({
 function InputLike({
   label,
   placeholder,
+  value,
+  onChange,
   tall,
 }: {
   label: string;
   placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
   tall?: boolean;
 }) {
   return (
@@ -2032,11 +2060,15 @@ function InputLike({
       {tall ? (
         <textarea
           placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
           className="h-24 w-full resize-none rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
         />
       ) : (
         <input
           placeholder={placeholder}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
           className="h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
         />
       )}
@@ -2433,13 +2465,41 @@ function scrollToId(id: string) {
   });
 }
 
-function openWhatsApp() {
-  const lang = localStorage.getItem("language") || "en";
+type ContactRequest = {
+  name: string;
+  activity: string;
+  contact: string;
+  objective: string;
+};
+
+function openWhatsApp(form?: ContactRequest, selectedLanguage?: string) {
+  const lang = selectedLanguage || localStorage.getItem("language") || "en";
   const phone = "393341168370";
-  const text = encodeURIComponent(
-    lang === "it"
+  const hasFormData = !!form
+    && Object.values(form).some((value) => value.trim().length > 0);
+
+  const message = hasFormData
+    ? lang === "it"
+      ? [
+          "Ciao! Vorrei prenotare una call gratuita.",
+          "",
+          `Nome: ${form?.name || "-"}`,
+          `Attivita: ${form?.activity || "-"}`,
+          `Contatto: ${form?.contact || "-"}`,
+          `Obiettivo + vincoli: ${form?.objective || "-"}`,
+        ].join("\n")
+      : [
+          "Hi! I'd like to book a free call.",
+          "",
+          `Name: ${form?.name || "-"}`,
+          `Business: ${form?.activity || "-"}`,
+          `Contact: ${form?.contact || "-"}`,
+          `Objective + constraints: ${form?.objective || "-"}`,
+        ].join("\n")
+    : lang === "it"
       ? "Ciao! Vorrei informazioni sui vostri servizi."
-      : "Hi! I'd like information about your services.",
-  );
+      : "Hi! I'd like information about your services.";
+
+  const text = encodeURIComponent(message);
   window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
 }
