@@ -74,8 +74,14 @@ function FlagGB({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 640 480" className={className}>
       <path fill="#012169" d="M0 0h640v480H0z" />
-      <path fill="#FFF" d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0z" />
-      <path fill="#C8102E" d="m424 281 216 159v40L369 281zm-184 20 6 35L54 480H0zM640 0v3L391 191l2-44L590 0zM0 0l239 176h-60L0 42z" />
+      <path
+        fill="#FFF"
+        d="m75 0 244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0z"
+      />
+      <path
+        fill="#C8102E"
+        d="m424 281 216 159v40L369 281zm-184 20 6 35L54 480H0zM640 0v3L391 191l2-44L590 0zM0 0l239 176h-60L0 42z"
+      />
       <path fill="#FFF" d="M241 0v480h160V0zM0 160v160h640V160z" />
       <path fill="#C8102E" d="M0 193v96h640v-96zM273 0v480h96V0z" />
     </svg>
@@ -110,7 +116,11 @@ function StickyHeader({
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3">
-          <img src="/p4-underline-cyan.png" alt="Arras Industries" className="h-9 w-auto" />
+          <img
+            src="/p4-underline-cyan.png"
+            alt="Arras Industries"
+            className="h-9 w-auto"
+          />
         </a>
 
         {/* Desktop nav */}
@@ -128,11 +138,19 @@ function StickyHeader({
           <button
             onClick={toggleLanguage}
             className="group relative flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-2.5 py-1.5 text-sm font-medium text-white/80 backdrop-blur transition-all duration-300 hover:border-white/25 hover:bg-white/10 hover:text-white"
-            title={language === "it" ? "Switch to English" : "Passa all'italiano"}
-            aria-label={language === "it" ? "Switch to English" : "Passa all'italiano"}
+            title={
+              language === "it" ? "Switch to English" : "Passa all'italiano"
+            }
+            aria-label={
+              language === "it" ? "Switch to English" : "Passa all'italiano"
+            }
           >
             <span className="inline-block h-4 w-5 overflow-hidden rounded-[2px] transition-transform duration-300 group-hover:scale-110">
-              {language === "it" ? <FlagIT className="h-full w-full" /> : <FlagGB className="h-full w-full" />}
+              {language === "it" ? (
+                <FlagIT className="h-full w-full" />
+              ) : (
+                <FlagGB className="h-full w-full" />
+              )}
             </span>
             <span className="text-xs font-semibold tracking-wide">
               {language === "it" ? "IT" : "EN"}
@@ -160,7 +178,11 @@ function StickyHeader({
             className="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-white/80 md:hidden"
             aria-label="Menu"
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </div>
@@ -213,11 +235,7 @@ export default function App() {
       <BackgroundFX />
       <Mascot pose="point" />
 
-      <StickyHeader
-        t={t}
-        language={language}
-        toggleLanguage={toggleLanguage}
-      />
+      <StickyHeader t={t} language={language} toggleLanguage={toggleLanguage} />
 
       <main>
         <Hero />
@@ -252,7 +270,7 @@ export default function App() {
               icon={<Timer className="h-5 w-5" />}
               title={t.threeAreas.features[0].title}
               desc={t.threeAreas.features[0].desc}
-              imageSrc="/images/process.jpg"
+              imageSrc="/images/hero.jpg"
             />
 
             <TimelineFeature
@@ -260,7 +278,7 @@ export default function App() {
               icon={<CircleDollarSign className="h-5 w-5" />}
               title={t.threeAreas.features[1].title}
               desc={t.threeAreas.features[1].desc}
-              imageSrc="/images/usecase.jpg"
+              imageSrc="/images/process.jpg"
             />
 
             <TimelineFeature
@@ -268,7 +286,7 @@ export default function App() {
               icon={<Shield className="h-5 w-5" />}
               title={t.threeAreas.features[2].title}
               desc={t.threeAreas.features[2].desc}
-              imageSrc="/images/hero.jpg"
+              imageSrc="/images/notarization.jpg"
             />
           </TimelineSection>
         </section>
@@ -278,9 +296,7 @@ export default function App() {
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
               {t.services.title}
             </h2>
-            <p className="mt-2 text-white/70">
-              {t.services.subtitle}
-            </p>
+            <p className="mt-2 text-white/70">{t.services.subtitle}</p>
           </motion.div>
 
           <motion.div
@@ -334,14 +350,10 @@ export default function App() {
               <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
                 {t.faq.title}
               </h2>
-              <p className="mt-2 text-white/70">
-                {t.faq.subtitle}
-              </p>
+              <p className="mt-2 text-white/70">{t.faq.subtitle}</p>
             </div>
-
-            <Accordion
-              items={t.faq.items}
-            />          </motion.div>
+            <Accordion items={t.faq.items} />{" "}
+          </motion.div>
         </section>
 
         <SupportSection />
@@ -359,12 +371,18 @@ export default function App() {
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3 md:grid-cols-3">
-                  <InputLike label={t.contact.formLabels.name} placeholder={t.contact.formPlaceholders.name} />
+                  <InputLike
+                    label={t.contact.formLabels.name}
+                    placeholder={t.contact.formPlaceholders.name}
+                  />
                   <InputLike
                     label={t.contact.formLabels.activity}
                     placeholder={t.contact.formPlaceholders.activity}
                   />
-                  <InputLike label={t.contact.formLabels.contact} placeholder={t.contact.formPlaceholders.contact} />
+                  <InputLike
+                    label={t.contact.formLabels.contact}
+                    placeholder={t.contact.formPlaceholders.contact}
+                  />
                   <div className="md:col-span-3">
                     <InputLike
                       label={t.contact.formLabels.objective}
@@ -402,10 +420,12 @@ export default function App() {
             <footer className="mt-10 grid gap-6 text-sm text-white/60 md:grid-cols-[1.2fr_1fr_1fr]">
               <div className="space-y-2">
                 <div className="text-white/80">{t.footer.company}</div>
-                <div>
-                  {t.footer.description}</div>
+                <div>{t.footer.description}</div>
                 <div className="text-xs text-white/50">
-                  {t.footer.copyright.replace("{year}", String(new Date().getFullYear()))}
+                  {t.footer.copyright.replace(
+                    "{year}",
+                    String(new Date().getFullYear()),
+                  )}
                 </div>
               </div>
 
@@ -449,12 +469,15 @@ function Hero() {
   const [idx, setIdx] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => setIdx((p) => (p + 1) % words.length), 2200);
+    const timer = setInterval(
+      () => setIdx((p) => (p + 1) % words.length),
+      2200,
+    );
     return () => clearInterval(timer);
   }, [words.length]);
 
   return (
-    <section className="w-full pt-16 md:pt-20 min-h-[90vh]">
+    <section className="w-full pt-16 md:pt-20 min-h-[70vh] md:min-h-[80vh]">
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 md:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, y: 14 }}
@@ -476,12 +499,12 @@ function Hero() {
               </motion.span>
             </span>
             <br />
-            {language === "it" ? "quando serve, con obiettivi chiari." : "when needed, with clear objectives."}
+            {language === "it"
+              ? "quando serve, con obiettivi chiari."
+              : "when needed, with clear objectives."}
           </h1>
 
-          <p className="mt-4 max-w-xl text-white/80">
-            {t.hero.subtitle}
-          </p>
+          <p className="mt-4 max-w-xl text-white/80">{t.hero.subtitle}</p>
 
           <div className="mt-7 flex flex-col gap-2 sm:flex-row">
             <MagneticButton onClick={() => scrollToId("contatto")}>
@@ -551,7 +574,11 @@ function SectionBridge({
 
 function ValuesSection() {
   const { t } = useLanguage();
-  const images = ["/images/hero.jpg", "/images/process.jpg", "/images/usecase.jpg"];
+  const images = [
+    "/images/hero.jpg",
+    "/images/process.jpg",
+    "/images/usecase.jpg",
+  ];
   const values = t.values.values.map((v, i) => ({
     title: v.title,
     desc: v.desc,
@@ -559,7 +586,7 @@ function ValuesSection() {
   }));
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16">
+    <section className="mx-auto max-w-6xl px-4 pt-4 pb-16 md:pt-8">
       <motion.div {...fadeUp} className="text-center">
         <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
           {t.values.title}
@@ -694,7 +721,10 @@ function ValueCard({
 
 function InnovationSection() {
   const { t } = useLanguage();
-  const slides = t.innovation.features.map((f) => ({ title: f.title, detail: f.desc }));
+  const slides = t.innovation.features.map((f) => ({
+    title: f.title,
+    detail: f.desc,
+  }));
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -745,8 +775,7 @@ function InnovationSection() {
         <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-indigo-400 to-violet-400">
           {t.innovation.title}
         </h2>
-        <p className="mt-3 max-w-2xl text-white/70">
-          {t.innovation.subtitle}</p>
+        <p className="mt-3 max-w-2xl text-white/70">{t.innovation.subtitle}</p>
       </motion.div>
 
       <div className="mt-10 grid gap-6 md:grid-cols-[1.1fr_0.9fr]">
@@ -920,9 +949,7 @@ function InnovationSection() {
                   className="h-full w-full object-cover"
                 />
               </div>
-              <div className="text-sm text-white/70">
-                Wallet: MetaMask
-              </div>
+              <div className="text-sm text-white/70">Wallet: MetaMask</div>
             </div>
             <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/70">
               <span className="h-1.5 w-1.5 rounded-full bg-[#60A5FA]" />
@@ -1279,9 +1306,7 @@ function ScrollyStory() {
           <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
             {t.process.title}
           </h2>
-          <p className="mt-3 text-white/70">
-            {t.process.subtitle}
-          </p>
+          <p className="mt-3 text-white/70">{t.process.subtitle}</p>
         </div>
 
         <div className="relative">
@@ -1428,9 +1453,7 @@ function HeroImage() {
           <div className="absolute inset-0 bg-gradient-to-tr from-[#0F0F11]/40 via-transparent to-transparent" />
 
           <div className="absolute bottom-4 left-4 right-4 rounded-[14px] border border-white/15 bg-white/10 p-4 backdrop-blur">
-            <div className=" text-sm text-white/70">
-              {t.hero.quote2}
-            </div>
+            <div className=" text-sm text-white/70">{t.hero.quote2}</div>
           </div>
         </Card>
       </motion.div>
@@ -1691,11 +1714,18 @@ function ProcessShowcase() {
   });
   const line = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  const icons = [<Users className="h-5 w-5" />, <Bolt className="h-5 w-5" />, <BadgeCheck className="h-5 w-5" />, <LineChart className="h-5 w-5" />];
-    const steps = t.process.steps.map((s: { number: string; title: string; desc: string }, i: number) => ({
+  const icons = [
+    <Users className="h-5 w-5" />,
+    <Bolt className="h-5 w-5" />,
+    <BadgeCheck className="h-5 w-5" />,
+    <LineChart className="h-5 w-5" />,
+  ];
+  const steps = t.process.steps.map(
+    (s: { number: string; title: string; desc: string }, i: number) => ({
       ...s,
       icon: icons[i],
-    }));
+    }),
+  );
 
   return (
     <div ref={ref} className="relative">
@@ -1703,8 +1733,7 @@ function ProcessShowcase() {
         <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
           {t.process.title}
         </h2>
-        <p className="mt-2 text-white/70">
-          {t.process.subtitle}</p>
+        <p className="mt-2 text-white/70">{t.process.subtitle}</p>
       </motion.div>
 
       <div className="mt-10 rounded-[14px] border border-white/10 bg-[#0C0D10]/80 p-6 backdrop-blur md:p-8">
@@ -2166,7 +2195,8 @@ function SupportSection() {
                 {t.support.title}
               </h2>
               <p className="mt-2 max-w-2xl text-sm text-white/70 md:text-base">
-                {t.support.subtitle}</p>
+                {t.support.subtitle}
+              </p>
             </div>
           </div>
 
@@ -2317,7 +2347,8 @@ function SupportSection() {
                 {t.support.transparency}
               </div>
               <div className="mt-3 text-sm text-white/70">
-                {t.support.transparencyDesc}</div>
+                {t.support.transparencyDesc}
+              </div>
 
               <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
                 {t.support.destinationWallet}
@@ -2365,7 +2396,9 @@ function openEmail() {
   const lang = localStorage.getItem("language") || "en";
   const email = "hello@arrasindustries.com";
   const subject = encodeURIComponent(
-    lang === "it" ? "Richiesta consulenza software" : "Software consultation request",
+    lang === "it"
+      ? "Richiesta consulenza software"
+      : "Software consultation request",
   );
   const body = encodeURIComponent(
     lang === "it"
