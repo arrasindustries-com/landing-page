@@ -2564,7 +2564,7 @@ function SupportSection() {
               <motion.div
                 whileHover={{ rotateX: -1.5, rotateY: 1.5 }}
                 transition={{ type: "spring", stiffness: 180, damping: 16 }}
-                className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur"
+                className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur md:mt-[52px] md:self-start"
               >
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
                 <motion.div
