@@ -374,7 +374,7 @@ export const translations = {
     hero: {
       words: ["management systems", "websites", "web3"],
       subtitle:
-        "Management systems, websites, and web3 solutions built around your actual workflows. Your team uses them from day one — no training marathons. Measurable results, not promises.",
+        "Management systems, websites, and web3 solutions built around your actual workflows. Your team uses them from day one. Measurable results, not promises.",
       requestCall: "Request a call",
       discoverInnovation: "Discover innovation",
       badges: ["bookings", "loyalty", "shifts", "dashboard"],
@@ -651,7 +651,7 @@ export const translations = {
     contact: {
       title: "Let's see if we're the right fit.",
       subtitle:
-        "Free 20-minute call. We'll map your problem, estimate effort, and define next steps — no obligation.",
+        "Free 20-minute call. We'll map your problem, estimate effort, and define next steps.",
       responseTime: "We respond within 24–48 business hours.",
       formLabels: {
         name: "Name",
