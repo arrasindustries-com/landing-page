@@ -2079,6 +2079,9 @@ function InputLike({
 function SupportSection() {
   const { t } = useLanguage();
   const walletAddress = "0xFD1FEd5D520dbe14658Fd9953E582642979495bb";
+  const paypalDonationBase =
+    (import.meta.env.VITE_PAYPAL_DONATION_URL as string | undefined)?.trim() ||
+    "https://www.paypal.com/donate/?business=meneguzzosilvio%40gmail.com&currency_code=EUR";
   const networks = [
     {
       label: "Ethereum Mainnet",
@@ -2148,6 +2151,9 @@ function SupportSection() {
   const [network, setNetwork] = useState(networks[0].value);
   const [status, setStatus] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [donationMethod, setDonationMethod] = useState<"metamask" | "paypal">(
+    "metamask",
+  );
 
   const selectedNetwork =
     networks.find((n) => n.value === network) ?? networks[0];
@@ -2200,6 +2206,14 @@ function SupportSection() {
     return wei;
   };
 
+  const normalizeAmount = (value: string) => {
+    const clean = value.replace(",", ".").trim();
+    if (!/^\d+(\.\d+)?$/.test(clean)) return null;
+    const parsed = Number.parseFloat(clean);
+    if (!Number.isFinite(parsed) || parsed <= 0) return null;
+    return parsed.toFixed(2);
+  };
+
   const handleMetaMask = async () => {
     const eth = (window as unknown as { ethereum?: { request: Function } })
       .ethereum;
@@ -2243,6 +2257,40 @@ function SupportSection() {
     }
   };
 
+  const handlePayPal = () => {
+    const normalizedAmount = normalizeAmount(amount);
+    if (!normalizedAmount) {
+      setStatus(t.support.errors.invalidAmount);
+      return;
+    }
+    if (!paypalDonationBase) {
+      setStatus(t.support.errors.paypalConfig);
+      return;
+    }
+
+    let targetUrl = paypalDonationBase;
+    try {
+      if (paypalDonationBase.includes("paypal.me/")) {
+        targetUrl = `${paypalDonationBase.replace(/\/+$/, "")}/${normalizedAmount}`;
+      } else {
+        const url = new URL(paypalDonationBase);
+        if (!url.searchParams.has("amount")) {
+          url.searchParams.set("amount", normalizedAmount);
+        }
+        if (!url.searchParams.has("currency_code")) {
+          url.searchParams.set("currency_code", "EUR");
+        }
+        targetUrl = url.toString();
+      }
+    } catch {
+      setStatus(t.support.errors.paypalConfig);
+      return;
+    }
+
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
+    setStatus(t.support.errors.paypalRedirect);
+  };
+
   return (
     <section
       id="supporto"
@@ -2265,7 +2313,12 @@ function SupportSection() {
             </div>
           </div>
 
-          <div className="relative grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
+          <div
+            className={[
+              "relative grid gap-6",
+              donationMethod === "metamask" ? "md:grid-cols-[1.2fr_0.8fr]" : "",
+            ].join(" ")}
+          >
             <div className="pointer-events-none absolute inset-0">
               {particles.map((p, i) => (
                 <motion.span
@@ -2287,152 +2340,268 @@ function SupportSection() {
               ))}
             </div>
 
-            <motion.div
-              whileHover={{ rotateX: 1.5, rotateY: -1.5 }}
-              transition={{ type: "spring", stiffness: 180, damping: 16 }}
-              className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur"
-            >
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10" />
-              <div className="pointer-events-none absolute -top-10 right-10 h-32 w-32 rounded-full bg-[#3B82F6]/20 blur-2xl" />
-
-              <div className="flex items-center gap-3">
-                <div className="relative grid h-12 w-12 place-items-center rounded-[14px] border border-white/10 bg-white/5">
-                  <motion.div
-                    className="absolute inset-0 rounded-[14px] border border-[#60A5FA]/40"
-                    animate={{ rotate: 360 }}
-                    transition={{
-                      duration: 12,
-                      repeat: Infinity,
-                      ease: "linear",
+            <div className="relative space-y-3">
+              <div className="flex items-center justify-between rounded-[12px] border border-white/10 bg-white/5 px-3 py-2">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                  {t.support.method}
+                </div>
+                <div className="inline-flex rounded-[10px] border border-white/10 bg-[#0F0F11]/70 p-1">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDonationMethod("metamask");
+                      setStatus(null);
                     }}
-                  />
-                  <img src="/metamask.png" alt="MetaMask" className="h-8 w-8" />
-                </div>
-                <div className="text-sm text-white/70">
-                  Supported Wallets:{" "}
-                  <span className="text-white">MetaMask</span>
-                </div>
-              </div>
-
-              <div className="mt-6 grid gap-3 md:grid-cols-3">
-                <label className="block">
-                  <div className="mb-1 text-xs font-medium text-white/60">
-                    {t.support.amount}
-                  </div>
-                  <motion.input
-                    whileHover={{ rotate: 1 }}
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    placeholder="0.05"
-                    className="h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
-                  />
-                </label>
-
-                <label className="block">
-                  <div className="mb-1 text-xs font-medium text-white/60">
-                    {t.support.network}
-                  </div>
-                  <motion.select
-                    whileHover={{ rotate: -1 }}
-                    value={network}
-                    onChange={(e) => setNetwork(e.target.value)}
-                    className="support-select h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-2 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
+                    className={[
+                      "rounded-[8px] px-3 py-1.5 text-xs font-semibold transition",
+                      donationMethod === "metamask"
+                        ? "bg-[#3B82F6] text-white"
+                        : "text-white/70 hover:text-white",
+                    ].join(" ")}
                   >
-                    {networks.map((n) => (
-                      <option key={n.value} value={n.value}>
-                        {n.label}
-                      </option>
-                    ))}
-                  </motion.select>
-                </label>
-
-                <label className="block">
-                  <div className="mb-1 text-xs font-medium text-white/60">
-                    {t.support.token}
-                  </div>
-                  <motion.select
-                    whileHover={{ rotate: 1 }}
-                    value={token}
-                    onChange={(e) => setToken(e.target.value)}
-                    className="support-select h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-2 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
+                    {t.support.metaMaskMode}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setDonationMethod("paypal");
+                      setStatus(null);
+                    }}
+                    className={[
+                      "rounded-[8px] px-3 py-1.5 text-xs font-semibold transition",
+                      donationMethod === "paypal"
+                        ? "bg-[#3B82F6] text-white"
+                        : "text-white/70 hover:text-white",
+                    ].join(" ")}
                   >
-                    {tokens.map((t) => (
-                      <option key={t.value} value={t.value}>
-                        {t.label}
-                      </option>
-                    ))}
-                  </motion.select>
-                </label>
-              </div>
-
-              <div className="relative mt-5 flex flex-wrap items-center gap-3">
-                <motion.button
-                  onClick={handleMetaMask}
-                  disabled={busy}
-                  className="relative inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#3B82F6] px-5 py-3 text-sm font-semibold text-white shadow-[0_0_24px_rgba(59,130,246,0.35)] transition"
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <motion.span
-                    className="absolute inset-0 rounded-[12px] bg-[#60A5FA]/30 blur-xl"
-                    animate={{ opacity: [0.2, 0.6, 0.2] }}
-                    transition={{ duration: 6, repeat: Infinity }}
-                  />
-                  <span className="relative">{t.support.sendMetaMask}</span>
-                </motion.button>
-
-                <div className="text-xs text-white/50">
-                  {t.support.selectedNetwork}: {selectedNetwork.label}
+                    {t.support.payPalMode}
+                  </button>
                 </div>
               </div>
 
-              {status && (
-                <div className="mt-3 rounded-[12px] border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70">
-                  {status}
+              <AnimatePresence mode="wait" initial={false}>
+                {donationMethod === "metamask" ? (
+                  <motion.div
+                    key="metamask-card"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ rotateX: 1.5, rotateY: -1.5 }}
+                    className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur"
+                  >
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10" />
+                    <div className="pointer-events-none absolute -top-10 right-10 h-32 w-32 rounded-full bg-[#3B82F6]/20 blur-2xl" />
+
+                    <div className="flex items-center gap-3">
+                      <div className="relative grid h-12 w-12 place-items-center rounded-[14px] border border-white/10 bg-white/5">
+                        <motion.div
+                          className="absolute inset-0 rounded-[14px] border border-[#60A5FA]/40"
+                          animate={{ rotate: 360 }}
+                          transition={{
+                            duration: 12,
+                            repeat: Infinity,
+                            ease: "linear",
+                          }}
+                        />
+                        <img
+                          src="/metamask.png"
+                          alt="MetaMask"
+                          className="h-8 w-8"
+                        />
+                      </div>
+                      <div className="text-sm text-white/70">
+                        {t.support.supportedWallets}:{" "}
+                        <span className="text-white">MetaMask</span>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 grid gap-3 md:grid-cols-3">
+                      <label className="block">
+                        <div className="mb-1 text-xs font-medium text-white/60">
+                          {t.support.amount}
+                        </div>
+                        <motion.input
+                          whileHover={{ rotate: 1 }}
+                          value={amount}
+                          onChange={(e) => setAmount(e.target.value)}
+                          placeholder="0.05"
+                          className="h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
+                        />
+                      </label>
+
+                      <label className="block">
+                        <div className="mb-1 text-xs font-medium text-white/60">
+                          {t.support.network}
+                        </div>
+                        <motion.select
+                          whileHover={{ rotate: -1 }}
+                          value={network}
+                          onChange={(e) => setNetwork(e.target.value)}
+                          className="support-select h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-2 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
+                        >
+                          {networks.map((n) => (
+                            <option key={n.value} value={n.value}>
+                              {n.label}
+                            </option>
+                          ))}
+                        </motion.select>
+                      </label>
+
+                      <label className="block">
+                        <div className="mb-1 text-xs font-medium text-white/60">
+                          {t.support.token}
+                        </div>
+                        <motion.select
+                          whileHover={{ rotate: 1 }}
+                          value={token}
+                          onChange={(e) => setToken(e.target.value)}
+                          className="support-select h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-2 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
+                        >
+                          {tokens.map((t) => (
+                            <option key={t.value} value={t.value}>
+                              {t.label}
+                            </option>
+                          ))}
+                        </motion.select>
+                      </label>
+                    </div>
+
+                    <div className="relative mt-5 flex flex-wrap items-center gap-3">
+                      <motion.button
+                        onClick={handleMetaMask}
+                        disabled={busy}
+                        className="relative inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#3B82F6] px-5 py-3 text-sm font-semibold text-white shadow-[0_0_24px_rgba(59,130,246,0.35)] transition"
+                        whileHover={{ scale: 1.04 }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        <motion.span
+                          className="absolute inset-0 rounded-[12px] bg-[#60A5FA]/30 blur-xl"
+                          animate={{ opacity: [0.2, 0.6, 0.2] }}
+                          transition={{ duration: 6, repeat: Infinity }}
+                        />
+                        <span className="relative">{t.support.sendMetaMask}</span>
+                      </motion.button>
+
+                      <div className="text-xs text-white/50">
+                        {t.support.selectedNetwork}: {selectedNetwork.label}
+                      </div>
+                    </div>
+
+                    {status && (
+                      <div className="mt-3 rounded-[12px] border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70">
+                        {status}
+                      </div>
+                    )}
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="paypal-card"
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
+                    whileHover={{ rotateX: 1.5, rotateY: -1.5 }}
+                    className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur"
+                  >
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-white/5 to-white/10" />
+                    <div className="pointer-events-none absolute -top-10 right-10 h-32 w-32 rounded-full bg-[#3B82F6]/20 blur-2xl" />
+
+                    <div className="flex items-center gap-3">
+                      <div className="grid h-12 w-12 place-items-center rounded-[14px] border border-white/10 bg-white/5 text-[#60A5FA]">
+                        <CircleDollarSign className="h-7 w-7" />
+                      </div>
+                      <div>
+                        <div className="text-base font-semibold text-white">
+                          {t.support.sendPayPal}
+                        </div>
+                        <div className="text-sm text-white/70">
+                          {t.support.paypalDesc}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-6 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+                      <label className="block">
+                        <div className="mb-1 text-xs font-medium text-white/60">
+                          {t.support.amount}
+                        </div>
+                        <motion.input
+                          whileHover={{ rotate: 1 }}
+                          value={amount}
+                          onChange={(e) => setAmount(e.target.value)}
+                          placeholder="10.00"
+                          className="h-11 w-full rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20"
+                        />
+                      </label>
+
+                      <motion.button
+                        onClick={handlePayPal}
+                        className="inline-flex h-11 items-center justify-center gap-2 rounded-[12px] border border-white/20 bg-white/5 px-5 text-sm font-semibold text-white transition hover:border-white/35 hover:bg-white/10"
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        <CircleDollarSign className="h-4 w-4" />
+                        <span>{t.support.sendPayPal}</span>
+                      </motion.button>
+                    </div>
+
+                    <div className="mt-3 text-xs text-white/50">
+                      {t.support.paypalCurrency}
+                    </div>
+
+                    {status && (
+                      <div className="mt-3 rounded-[12px] border border-white/10 bg-white/5 px-3 py-2 text-xs text-white/70">
+                        {status}
+                      </div>
+                    )}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {donationMethod === "metamask" && (
+              <motion.div
+                whileHover={{ rotateX: -1.5, rotateY: 1.5 }}
+                transition={{ type: "spring", stiffness: 180, damping: 16 }}
+                className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur"
+              >
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
+                <motion.div
+                  className="pointer-events-none absolute -left-10 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/20 blur-3xl"
+                  animate={{ scale: [0.95, 1.05, 0.95] }}
+                  transition={{
+                    duration: 6,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                  {t.support.transparency}
                 </div>
-              )}
-            </motion.div>
-
-            <motion.div
-              whileHover={{ rotateX: -1.5, rotateY: 1.5 }}
-              transition={{ type: "spring", stiffness: 180, damping: 16 }}
-              className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur"
-            >
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
-              <motion.div
-                className="pointer-events-none absolute -left-10 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/20 blur-3xl"
-                animate={{ scale: [0.95, 1.05, 0.95] }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                {t.support.transparency}
-              </div>
-              <div className="mt-3 text-sm text-white/70">
-                {t.support.transparencyDesc}
-              </div>
-
-              <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
-                {t.support.destinationWallet}
-                <div className="mt-2 break-all text-white/90">
-                  {walletAddress}
+                <div className="mt-3 text-sm text-white/70">
+                  {t.support.transparencyDesc}
                 </div>
-              </div>
 
-              <motion.div
-                className="pointer-events-none absolute right-6 top-6 h-16 w-16 rounded-full border border-white/10"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.div
-                className="pointer-events-none absolute right-8 top-8 h-10 w-10 rounded-full border border-white/10"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-              />
-            </motion.div>
+                <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80">
+                  {t.support.destinationWallet}
+                  <div className="mt-2 break-all text-white/90">
+                    {walletAddress}
+                  </div>
+                </div>
+
+                <motion.div
+                  className="pointer-events-none absolute right-6 top-6 h-16 w-16 rounded-full border border-white/10"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+                />
+                <motion.div
+                  className="pointer-events-none absolute right-8 top-8 h-10 w-10 rounded-full border border-white/10"
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                />
+              </motion.div>
+            )}
           </div>
         </div>
       </motion.div>
