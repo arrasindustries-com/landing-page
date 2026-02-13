@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { createPortal } from "react-dom";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import * as THREE from "three";
@@ -496,13 +497,13 @@ export default function App() {
               <div className="space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0">
                 <div className="text-white/80">{t.footer.contacts}</div>
                 <div className="flex flex-col gap-2">
-                  <span className="rounded-[10px] bg-white/5 px-2 py-1.5 md:rounded-none md:bg-transparent md:px-0 md:py-0">
+                  <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
                     {t.footer.email}
                   </span>
-                  <span className="rounded-[10px] bg-white/5 px-2 py-1.5 md:rounded-none md:bg-transparent md:px-0 md:py-0">
+                  <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
                     {t.footer.phone}
                   </span>
-                  <span className="rounded-[10px] bg-white/5 px-2 py-1.5 md:rounded-none md:bg-transparent md:px-0 md:py-0">
+                  <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
                     {t.footer.location}
                   </span>
                 </div>
@@ -536,24 +537,27 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-7xl">
-            {language === "it" ? "Software per PMI," : "Software for SMBs,"}{" "}
-            <span className="relative inline-block">
-              <motion.span
-                key={words[idx]}
-                initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
-                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
-                transition={{ duration: 0.45 }}
-                className="inline-block rounded-[12px] bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA] px-3 py-1 text-white shadow-[0_0_30px_rgba(59,130,246,0.45)]"
-              >
-                {words[idx]}
-              </motion.span>
+          <h1 className="mt-5 min-h-[3.45em] text-4xl font-semibold tracking-[-0.02em] md:min-h-[3.15em] md:text-7xl">
+            {language === "it" ? "Software per PMI," : "Software for SMBs,"}
+            <span className="relative mt-0.5 block align-top md:mt-0 md:ml-1 md:inline-block">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={words[idx]}
+                  initial={{ opacity: 0, y: 10, filter: "blur(6px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
+                  transition={{ duration: 0.45 }}
+                  className="inline-block rounded-[12px] bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA] px-3 py-1 leading-tight text-white shadow-[0_0_30px_rgba(59,130,246,0.45)]"
+                >
+                  {words[idx]}
+                </motion.span>
+              </AnimatePresence>
             </span>
-            <br />
-            {language === "it"
-              ? "quando serve, con obiettivi chiari."
-              : "when needed, with clear objectives."}
+            <span className="block leading-tight">
+              {language === "it"
+                ? "quando serve, con obiettivi chiari."
+                : "when needed, with clear objectives."}
+            </span>
           </h1>
 
           <p className="mt-4 max-w-xl text-white/80">{t.hero.subtitle}</p>
@@ -2586,75 +2590,78 @@ function SupportSection() {
               </AnimatePresence>
             </div>
 
-            <AnimatePresence>
-              {donationMethod === "metamask" && showTransparencyCard && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="fixed inset-0 z-[70] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-                  onClick={() => setShowTransparencyCard(false)}
-                >
+            {createPortal(
+              <AnimatePresence>
+                {donationMethod === "metamask" && showTransparencyCard && (
                   <motion.div
-                    initial={{ opacity: 0, y: 12, scale: 0.98 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.98 }}
-                    transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative w-full max-w-2xl overflow-hidden rounded-[14px] border border-white/15 bg-[#0F0F11] p-6 shadow-[0_20px_80px_rgba(0,0,0,0.55)] backdrop-blur"
-                    onClick={(e) => e.stopPropagation()}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+                    onClick={() => setShowTransparencyCard(false)}
                   >
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
                     <motion.div
-                      className="pointer-events-none absolute -left-10 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/20 blur-3xl"
-                      animate={{ scale: [0.95, 1.05, 0.95] }}
-                      transition={{
-                        duration: 6,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowTransparencyCard(false)}
-                      className="absolute right-4 top-4 z-20 inline-flex h-10 w-10 items-center justify-center rounded-[10px] border border-white/20 bg-white/10 text-white/85 transition hover:border-white/35 hover:bg-white/15 hover:text-white"
-                      aria-label="Close transparency details"
+                      initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.98 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="relative w-full max-w-2xl overflow-hidden rounded-[14px] border border-white/15 bg-[#0F0F11] p-6 shadow-[0_20px_80px_rgba(0,0,0,0.55)] backdrop-blur"
+                      onClick={(e) => e.stopPropagation()}
                     >
-                      <X className="h-4 w-4" />
-                    </button>
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-white/10" />
+                      <motion.div
+                        className="pointer-events-none absolute -left-10 -top-12 h-40 w-40 rounded-full bg-[#7C3AED]/20 blur-3xl"
+                        animate={{ scale: [0.95, 1.05, 0.95] }}
+                        transition={{
+                          duration: 6,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowTransparencyCard(false)}
+                        className="absolute right-4 top-4 z-20 inline-flex h-10 w-10 items-center justify-center rounded-[10px] border border-white/20 bg-white/10 text-white/85 transition hover:border-white/35 hover:bg-white/15 hover:text-white"
+                        aria-label="Close transparency details"
+                      >
+                        <X className="h-4 w-4" />
+                      </button>
 
-                    <div className="relative">
-                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-                        {t.support.transparency}
-                      </div>
-                      <div className="mt-3 text-sm text-white/70">
-                        {t.support.transparencyDesc}
-                      </div>
+                      <div className="relative">
+                        <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                          {t.support.transparency}
+                        </div>
+                        <div className="mt-3 text-sm text-white/70">
+                          {t.support.transparencyDesc}
+                        </div>
 
-                      <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/80">
-                        <div className="text-sm font-semibold tracking-wide text-white">
-                          {t.support.destinationWallet}
-                        </div>
-                        <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                          {onchainAddresses.map((entry) => (
-                            <div
-                              key={`${entry.label}-${entry.address}`}
-                              className="rounded-[10px] border border-white/10 bg-[#06070a]/60 px-3 py-2"
-                            >
-                              <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
-                                {entry.label}
+                        <div className="mt-6 rounded-[12px] border border-white/10 bg-white/5 px-4 py-4 text-sm text-white/80">
+                          <div className="text-sm font-semibold tracking-wide text-white">
+                            {t.support.destinationWallet}
+                          </div>
+                          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                            {onchainAddresses.map((entry) => (
+                              <div
+                                key={`${entry.label}-${entry.address}`}
+                                className="rounded-[10px] border border-white/10 bg-[#06070a]/60 px-3 py-2"
+                              >
+                                <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-white/60">
+                                  {entry.label}
+                                </div>
+                                <div className="mt-1 break-all font-mono text-[13px] text-white/90">
+                                  {entry.address}
+                                </div>
                               </div>
-                              <div className="mt-1 break-all font-mono text-[13px] text-white/90">
-                                {entry.address}
-                              </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                )}
+              </AnimatePresence>,
+              document.body,
+            )}
           </div>
         </div>
       </motion.div>
