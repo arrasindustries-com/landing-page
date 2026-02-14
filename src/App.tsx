@@ -60,8 +60,15 @@ export default function App() {
   };
 
   useEffect(() => {
-    const baseUrl = window.location.origin;
-    const canonicalUrl = `${baseUrl}/`;
+    const configuredSiteUrl =
+      (import.meta.env.VITE_SITE_URL as string | undefined)?.trim() ||
+      "https://arrasindustries.com";
+    const siteOrigin = configuredSiteUrl.replace(/\/+$/, "");
+    const canonicalUrl = `${siteOrigin}/`;
+    const currentHost = window.location.hostname.toLowerCase();
+    const canonicalHost = new URL(canonicalUrl).hostname.toLowerCase();
+    const isPreviewHost =
+      currentHost.endsWith(".vercel.app") && currentHost !== canonicalHost;
     const isItalian = language === "it";
     const title = isItalian
       ? "Arras Industries | Software gestionali, siti web, web3"
@@ -90,6 +97,14 @@ export default function App() {
     );
     setMeta("meta[name='twitter:title']", title);
     setMeta("meta[name='twitter:description']", description);
+    setMeta(
+      "meta[name='robots']",
+      isPreviewHost
+        ? "noindex,nofollow,noarchive,max-image-preview:none"
+        : "index,follow,max-image-preview:large",
+    );
+    setMeta("meta[property='og:image']", `${siteOrigin}/images/hero.jpg`);
+    setMeta("meta[name='twitter:image']", `${siteOrigin}/images/hero.jpg`);
 
     const canonical = document.querySelector(
       "link[rel='canonical']",
@@ -106,17 +121,17 @@ export default function App() {
           "@id": `${canonicalUrl}#organization`,
           name: "Arras Industries",
           url: canonicalUrl,
-          logo: `${baseUrl}/favicon-1-arc-reactor-512px.png`,
+          logo: `${siteOrigin}/favicon-1-arc-reactor-512px.png`,
           email: "arras.industries.info@gmail.com",
           telephone: "+39 334 116 8370",
-          sameAs: [],
+          // sameAs: ["https://linkedin.com/company/..."],
         },
         {
           "@type": "WebSite",
           "@id": `${canonicalUrl}#website`,
           url: canonicalUrl,
           name: "Arras Industries",
-          inLanguage: isItalian ? "it" : "en",
+          inLanguage: isItalian ? "it-IT" : "en-US",
         },
         {
           "@type": "ProfessionalService",
@@ -136,6 +151,18 @@ export default function App() {
               ],
           areaServed: "IT",
         },
+        {
+          "@type": "FAQPage",
+          "@id": `${canonicalUrl}#faq`,
+          mainEntity: t.faq.items.map((faq) => ({
+            "@type": "Question",
+            name: faq.title,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.content,
+            },
+          })),
+        },
       ],
     };
 
@@ -149,7 +176,7 @@ export default function App() {
       document.head.appendChild(script);
     }
     script.text = JSON.stringify(schema);
-  }, [language]);
+  }, [language, t.faq.items]);
 
   return (
     <div className="min-h-screen bg-[#0F0F11] pt-[60px] text-[#F5F7FA]">

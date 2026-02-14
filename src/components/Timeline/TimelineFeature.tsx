@@ -101,7 +101,7 @@ export function TimelineFeature({
               {/* ghost image, molto poco invasiva */}
               <img
                 src={imageSrc}
-                alt=""
+                alt={title}
                 loading="lazy"
                 decoding="async"
                 className={[

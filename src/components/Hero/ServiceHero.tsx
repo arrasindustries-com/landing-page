@@ -1,7 +1,11 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { fadeUp, item } from "@/types/types";
 import { motion } from "framer-motion";
+import { useMemo, useState } from "react";
+import { ArrowRight } from "lucide-react";
 import { Card } from "../Card/Card";
+import { scrollToId } from "@/lib/utils";
+import { Button } from "../Button/Button";
 
 export function ServiceHero({
   align,
@@ -20,8 +24,40 @@ export function ServiceHero({
   points: string[];
   outcomes: string[];
 }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const isLeft = align === "left";
+  const [panel, setPanel] = useState<"outcomes" | "plan">("outcomes");
+  const copy = useMemo(
+    () =>
+      language === "it"
+        ? {
+            outcomes: "Risultati",
+            nextSteps: "Prossimi passi",
+            actionTitle: "Come partire",
+            actionSubtitle:
+              "Call breve, priorita condivise e rilascio del primo risultato.",
+            steps: [
+              "Call iniziale di 20 minuti",
+              "Mappatura rapida del flusso",
+              "Roadmap MVP con tempi realistici",
+            ],
+            cta: "Parliamone",
+          }
+        : {
+            outcomes: "Outcomes",
+            nextSteps: "Next steps",
+            actionTitle: "How to start",
+            actionSubtitle:
+              "Short call, shared priorities, and first measurable release.",
+            steps: [
+              "20-minute kickoff call",
+              "Quick workflow mapping",
+              "MVP roadmap with realistic timeline",
+            ],
+            cta: "Let's talk",
+          },
+    [language],
+  );
 
   return (
     <motion.div
@@ -53,7 +89,7 @@ export function ServiceHero({
         <div className="absolute inset-0">
           <img
             src={image}
-            alt=""
+            alt={title}
             loading="lazy"
             decoding="async"
             className={[
@@ -107,19 +143,75 @@ export function ServiceHero({
               "backdrop-blur",
             ].join(" ")}
           >
-            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
-              {t.services.result}
-            </div>
-            <div className="mt-2 space-y-2">
-              {outcomes.map((o) => (
-                <div
-                  key={o}
-                  className="rounded-[12px] border border-white/10 bg-white/5 px-3 py-2"
+            <div className="flex items-center justify-between gap-2">
+              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                {t.services.result}
+              </div>
+              <div className="inline-flex rounded-[10px] border border-white/10 bg-[#0F0F11]/70 p-1">
+                <button
+                  type="button"
+                  onClick={() => setPanel("outcomes")}
+                  className={[
+                    "rounded-[8px] px-2.5 py-1 text-[11px] font-semibold transition",
+                    panel === "outcomes"
+                      ? "bg-[#3B82F6] text-white"
+                      : "text-white/70 hover:text-white",
+                  ].join(" ")}
                 >
-                  {o}
-                </div>
-              ))}
+                  {copy.outcomes}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPanel("plan")}
+                  className={[
+                    "rounded-[8px] px-2.5 py-1 text-[11px] font-semibold transition",
+                    panel === "plan"
+                      ? "bg-[#3B82F6] text-white"
+                      : "text-white/70 hover:text-white",
+                  ].join(" ")}
+                >
+                  {copy.nextSteps}
+                </button>
+              </div>
             </div>
+
+            {panel === "outcomes" ? (
+              <div className="mt-2 space-y-2">
+                {outcomes.map((o) => (
+                  <div
+                    key={o}
+                    className="rounded-[12px] border border-white/10 bg-white/5 px-3 py-2"
+                  >
+                    {o}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-2 space-y-3">
+                <div className="rounded-[12px] border border-white/10 bg-white/5 px-3 py-2">
+                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
+                    {copy.actionTitle}
+                  </div>
+                  <div className="mt-1">{copy.actionSubtitle}</div>
+                </div>
+                <ul className="space-y-2">
+                  {copy.steps.map((step) => (
+                    <li
+                      key={step}
+                      className="rounded-[12px] border border-white/10 bg-white/5 px-3 py-2"
+                    >
+                      {step}
+                    </li>
+                  ))}
+                </ul>
+                <Button
+                  onClick={() => scrollToId("contatto")}
+                  className="w-full bg-[#3B82F6] text-white hover:bg-[#60A5FA]"
+                >
+                  {copy.cta} <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </Card>
