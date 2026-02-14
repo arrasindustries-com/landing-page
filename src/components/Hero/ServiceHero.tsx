@@ -54,6 +54,8 @@ export function ServiceHero({
           <img
             src={image}
             alt=""
+            loading="lazy"
+            decoding="async"
             className={[
               "h-full w-full object-cover",
               "opacity-45 saturate-[1.05] grayscale-[10%]",

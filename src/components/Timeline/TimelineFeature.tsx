@@ -102,6 +102,8 @@ export function TimelineFeature({
               <img
                 src={imageSrc}
                 alt=""
+                loading="lazy"
+                decoding="async"
                 className={[
                   "pointer-events-none absolute right-0 top-0 hidden h-full w-[48%] object-cover md:block",
                   "opacity-[0.12] saturate-0",

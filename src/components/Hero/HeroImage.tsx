@@ -36,6 +36,9 @@ export function HeroImage() {
           <img
             src="/images/image.png"
             alt={t.hero.imageAlt}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="h-[420px] w-full object-cover md:h-[520px]"
           />
 

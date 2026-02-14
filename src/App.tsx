@@ -17,7 +17,7 @@ import {
   CardTitle,
 } from "@/components/Card/Card";
 import { Accordion } from "@/components/Accordion";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mascot } from "@/components/Mascot";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { grid, fadeUp, type ContactRequest } from "@/types/types";
@@ -58,6 +58,98 @@ export default function App() {
       [field]: value,
     }));
   };
+
+  useEffect(() => {
+    const baseUrl = window.location.origin;
+    const canonicalUrl = `${baseUrl}/`;
+    const isItalian = language === "it";
+    const title = isItalian
+      ? "Arras Industries | Software gestionali, siti web, web3"
+      : "Arras Industries | Software, Websites, Web3";
+    const description = isItalian
+      ? "Arras Industries realizza software gestionali, siti web performanti e soluzioni web3 per PMI con obiettivi chiari e risultati misurabili."
+      : "Arras Industries builds management software, high-performance websites, and web3 solutions for SMBs with clear goals and measurable outcomes.";
+
+    document.title = title;
+    document.documentElement.lang = isItalian ? "it" : "en";
+
+    const setMeta = (selector: string, content: string) => {
+      const el = document.querySelector(selector) as HTMLMetaElement | null;
+      if (el) {
+        el.content = content;
+      }
+    };
+
+    setMeta('meta[name="description"]', description);
+    setMeta("meta[property='og:title']", title);
+    setMeta("meta[property='og:description']", description);
+    setMeta("meta[property='og:url']", canonicalUrl);
+    setMeta(
+      "meta[property='og:locale']",
+      isItalian ? "it_IT" : "en_US",
+    );
+    setMeta("meta[name='twitter:title']", title);
+    setMeta("meta[name='twitter:description']", description);
+
+    const canonical = document.querySelector(
+      "link[rel='canonical']",
+    ) as HTMLLinkElement | null;
+    if (canonical) {
+      canonical.href = canonicalUrl;
+    }
+
+    const schema = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${canonicalUrl}#organization`,
+          name: "Arras Industries",
+          url: canonicalUrl,
+          logo: `${baseUrl}/favicon-1-arc-reactor-512px.png`,
+          email: "arras.industries.info@gmail.com",
+          telephone: "+39 334 116 8370",
+          sameAs: [],
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${canonicalUrl}#website`,
+          url: canonicalUrl,
+          name: "Arras Industries",
+          inLanguage: isItalian ? "it" : "en",
+        },
+        {
+          "@type": "ProfessionalService",
+          "@id": `${canonicalUrl}#service`,
+          name: "Arras Industries",
+          url: canonicalUrl,
+          serviceType: isItalian
+            ? [
+                "Sviluppo software gestionale",
+                "Sviluppo siti web",
+                "Integrazioni web3",
+              ]
+            : [
+                "Management software development",
+                "Website development",
+                "Web3 integrations",
+              ],
+          areaServed: "IT",
+        },
+      ],
+    };
+
+    let script = document.getElementById(
+      "ld-json-arras",
+    ) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement("script");
+      script.id = "ld-json-arras";
+      script.type = "application/ld+json";
+      document.head.appendChild(script);
+    }
+    script.text = JSON.stringify(schema);
+  }, [language]);
 
   return (
     <div className="min-h-screen bg-[#0F0F11] pt-[60px] text-[#F5F7FA]">
@@ -368,5 +460,5 @@ function openWhatsApp(form?: ContactRequest, selectedLanguage?: string) {
       : "Hi! I'd like information about your services.";
 
   const text = encodeURIComponent(message);
-  window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+  window.open(`https://wa.me/${phone}?text=${text}`, "_blank", "noopener,noreferrer");
 }
