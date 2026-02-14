@@ -69,7 +69,9 @@ export function ValueCard({
       <div className="absolute inset-0">
         <img
           src={value.image}
-          alt=""
+          alt={value.title}
+          loading="lazy"
+          decoding="async"
           className="h-full w-full object-cover grayscale opacity-50"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F11] via-[#0F0F11]/70 to-transparent" />

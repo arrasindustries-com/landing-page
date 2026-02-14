@@ -1,4 +1,5 @@
 @import "tailwindcss";
+html { color-scheme: dark; }
 html { scroll-behavior: smooth; overflow-x: hidden; }
 html { scroll-padding-top: 90px; }
 body { font-family: "Inter", system-ui, sans-serif; letter-spacing: -0.01em; overflow-x: hidden; }

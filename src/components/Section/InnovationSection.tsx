@@ -230,6 +230,8 @@ export function InnovationSection() {
                 <img
                   src="/metamask.png"
                   alt="MetaMask"
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover"
                 />
               </div>
