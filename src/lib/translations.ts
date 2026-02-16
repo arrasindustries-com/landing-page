@@ -5,6 +5,7 @@ export const translations = {
     // Navigation and Header
     nav: {
       services: "Servizi",
+      about: "Chi siamo",
       path: "Percorso",
       process: "Processo",
       innovation: "Innovazione",
@@ -363,6 +364,7 @@ export const translations = {
     // Navigation and Header
     nav: {
       services: "Services",
+      about: "About us",
       path: "Path",
       process: "Process",
       innovation: "Innovation",

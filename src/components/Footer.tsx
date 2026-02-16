@@ -23,11 +23,19 @@ export function Footer() {
               String(new Date().getFullYear()),
             )}
           </div>
+          <div>
+            <Link to="/about" className="text-xs text-white/50 transition-colors hover:text-white/80">
+              {t.nav.about}
+            </Link>
+          </div>
         </div>
 
         <div className={columnClass}>
           <div className="text-white/80">{t.footer.sections}</div>
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex md:flex-col">
+            <Link to="/about" className={linkClass}>
+              {t.nav.about}
+            </Link>
             <Link to="/#servizi" className={linkClass}>
               {t.nav.services}
             </Link>

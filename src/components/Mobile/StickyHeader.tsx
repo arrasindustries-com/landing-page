@@ -68,6 +68,9 @@ export function StickyHeader({
               {link.label}
             </a>
           ))}
+          <Link to="/about" className={navLinkClass}>
+            {t.nav.about}
+          </Link>
         </nav>
 
         {/* Actions */}
@@ -150,6 +153,13 @@ export function StickyHeader({
                   {link.label}
                 </a>
               ))}
+              <Link
+                to="/about"
+                onClick={() => setMobileOpen(false)}
+                className="rounded-lg px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+              >
+                {t.nav.about}
+              </Link>
               <div className="mt-2 flex gap-2">
                 <Button
                   onClick={() => {

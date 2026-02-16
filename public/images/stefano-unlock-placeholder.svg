@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 900" role="img" aria-labelledby="title desc">
+  <title id="title">Stefano Leto profile placeholder</title>
+  <desc id="desc">Locked profile style image with black silhouette and question mark</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1d24"/>
+      <stop offset="100%" stop-color="#0b0d11"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="900" height="900" fill="url(#bg)"/>
+  <rect width="900" height="900" fill="url(#halo)"/>
+
+  <circle cx="450" cy="300" r="140" fill="#050607"/>
+  <path d="M180 760c20-150 130-250 270-250s250 100 270 250" fill="#050607"/>
+
+  <circle cx="665" cy="215" r="78" fill="#facc15"/>
+  <text x="665" y="245" fill="#111827" font-family="Arial, sans-serif" font-size="120" font-weight="700" text-anchor="middle">?</text>
+
+  <text x="450" y="845" fill="#9ca3af" font-family="Arial, sans-serif" font-size="34" text-anchor="middle" letter-spacing="2">
+    PROFILE UNLOCKING SOON
+  </text>
+</svg>

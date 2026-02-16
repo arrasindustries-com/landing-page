@@ -44,6 +44,16 @@ const pages = [
     ogImage: `${SITE}/images/hero.jpg`,
   },
   {
+    path: "/about",
+    lang: "it",
+    title: "Chi siamo | Arras Industries",
+    description:
+      "Team Arras Industries: profili, competenze e percorso tecnico in software, cybersecurity, blockchain e sviluppo web.",
+    keywords:
+      "chi siamo arras industries, silvio meneguzzo, phd computer science blockchain dlt, founder arras industries, team sviluppo software, competenze cybersecurity, sviluppatori web e gestionali",
+    ogImage: `${SITE}/images/silvio.jpeg`,
+  },
+  {
     path: "/gestionali",
     lang: "it",
     title: "Software Gestionale su Misura per PMI | Arras Industries",
