@@ -109,6 +109,7 @@ export function BlockchainNetwork() {
     camera.lookAt(to.x * 0.2, to.y * 0.2, to.z * 0.2);
     const targetRoll =
       pointer.x * 0.06 + Math.sin(clock.getElapsedTime() * 0.4) * 0.02;
+    // eslint-disable-next-line react-hooks/immutability
     camera.rotation.z = THREE.MathUtils.lerp(
       camera.rotation.z,
       targetRoll,

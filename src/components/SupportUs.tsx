@@ -5,6 +5,10 @@ import { CircleDollarSign, Info, X } from "lucide-react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
+type Eip1193Provider = {
+  request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
+};
+
 export function SupportSection() {
   const { t } = useLanguage();
   const walletAddress = "0x8b14a2d2f7f8ffd7152a9b9e9f5ab2dab51e6d3a";
@@ -106,7 +110,7 @@ export function SupportSection() {
   const selectedNetwork =
     networks.find((n) => n.value === network) ?? networks[0];
   const ensureNetwork = async () => {
-    const eth = (window as unknown as { ethereum?: { request: Function } })
+    const eth = (window as unknown as { ethereum?: Eip1193Provider })
       .ethereum;
     if (!eth) return false;
     try {
@@ -162,7 +166,7 @@ export function SupportSection() {
   };
 
   const handleMetaMask = async () => {
-    const eth = (window as unknown as { ethereum?: { request: Function } })
+    const eth = (window as unknown as { ethereum?: Eip1193Provider })
       .ethereum;
     if (!eth) {
       setStatus(t.support.errors.noMetaMask);
@@ -181,9 +185,9 @@ export function SupportSection() {
     try {
       const ok = await ensureNetwork();
       if (!ok) return;
-      const accounts: string[] = await eth.request({
+      const accounts = (await eth.request({
         method: "eth_requestAccounts",
-      });
+      })) as string[];
       const from = accounts[0];
       if (!from) throw new Error("No account");
       await eth.request({

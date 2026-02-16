@@ -3,6 +3,7 @@ import { fadeUp, item } from "@/types/types";
 import { motion } from "framer-motion";
 import { useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Card } from "../Card/Card";
 import { scrollToId } from "@/lib/utils";
 import { Button } from "../Button/Button";
@@ -15,6 +16,7 @@ export function ServiceHero({
   subtitle,
   points,
   outcomes,
+  detailLink,
 }: {
   align: "left" | "right";
   image: string;
@@ -23,6 +25,7 @@ export function ServiceHero({
   subtitle: string;
   points: string[];
   outcomes: string[];
+  detailLink?: string;
 }) {
   const { t, language } = useLanguage();
   const isLeft = align === "left";
@@ -135,6 +138,15 @@ export function ServiceHero({
                 </li>
               ))}
             </ul>
+            {detailLink && (
+              <Link
+                to={detailLink}
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[#3B82F6] transition-colors hover:text-[#60A5FA]"
+              >
+                {language === "it" ? "Scopri di piu" : "Learn more"}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            )}
           </div>
 
           <div
