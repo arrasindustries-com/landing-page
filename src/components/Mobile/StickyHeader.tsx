@@ -1,6 +1,7 @@
 import type { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToId } from "@/lib/utils";
 import { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { FlagGB, FlagIT } from "../Flag";
 import { Button } from "../Button/Button";
 import { ArrowRight, Menu, X } from "lucide-react";
@@ -16,6 +17,18 @@ export function StickyHeader({
   toggleLanguage: () => void;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
+  const handleNavClick = (hash: string) => {
+    const id = hash.replace("#", "");
+    if (isHome) {
+      scrollToId(id);
+    } else {
+      navigate("/" + hash);
+    }
+  };
 
   const navLinkClass =
     "relative hover:text-white transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#3B82F6] after:transition-all after:duration-300 hover:after:w-full";
@@ -32,13 +45,13 @@ export function StickyHeader({
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-white/[0.06] bg-[#0F0F11]/90 backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3">
+        <Link to="/" className="flex items-center gap-3">
           <img
             src="/p4-underline-cyan.png"
             alt="Arras Industries"
             className="h-9 w-auto"
           />
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-7 text-sm text-white/60 md:flex">
@@ -49,7 +62,7 @@ export function StickyHeader({
               href={link.href}
               onClick={(e) => {
                 e.preventDefault();
-                scrollToId(link.href.replace("#", ""));
+                handleNavClick(link.href);
               }}
             >
               {link.label}
@@ -85,13 +98,13 @@ export function StickyHeader({
           {/* CTA desktop */}
           <Button
             variant="outline"
-            onClick={() => scrollToId("servizi")}
+            onClick={() => handleNavClick("#servizi")}
             className="hidden border-white/20 bg-white/5 text-white hover:bg-white/10 sm:inline-flex"
           >
             {t.nav.seeServices}
           </Button>
           <Button
-            onClick={() => scrollToId("contatto")}
+            onClick={() => handleNavClick("#contatto")}
             className="hidden bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97] sm:inline-flex"
           >
             {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
@@ -129,9 +142,8 @@ export function StickyHeader({
                   href={link.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    const targetId = link.href.replace("#", "");
                     setMobileOpen(false);
-                    requestAnimationFrame(() => scrollToId(targetId));
+                    requestAnimationFrame(() => handleNavClick(link.href));
                   }}
                   className="rounded-lg px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
                 >
@@ -142,7 +154,7 @@ export function StickyHeader({
                 <Button
                   onClick={() => {
                     setMobileOpen(false);
-                    requestAnimationFrame(() => scrollToId("contatto"));
+                    requestAnimationFrame(() => handleNavClick("#contatto"));
                   }}
                   className="flex-1 bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)]"
                 >

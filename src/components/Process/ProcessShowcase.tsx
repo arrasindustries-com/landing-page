@@ -2,10 +2,18 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { fadeUp } from "@/types/types";
 import { motion, useTransform } from "framer-motion";
 import { BadgeCheck, Bolt, LineChart, Users } from "lucide-react";
+import type { ReactNode } from "react";
 import { useMemo, useState } from "react";
 import { ProcessStep } from "./ProcessStep";
 import { ProcessStepMobile } from "../Mobile/ProcessStep";
 import { useElementScrollProgressEl } from "@/lib/useElementScrollProgress";
+
+type ProcessStepData = {
+  number: string;
+  title: string;
+  desc: string;
+  icon: ReactNode;
+};
 
 export function ProcessShowcase() {
   const { t } = useLanguage();
@@ -29,10 +37,10 @@ export function ProcessShowcase() {
 
   const steps = useMemo(() => {
     const safeIcon = (i: number) => icons[i] ?? <Bolt className="h-5 w-5" />;
-    return (t.process.steps ?? []).slice(0, 4).map((s: any, i: number) => ({
+    return (t.process.steps ?? []).slice(0, 4).map((s, i: number) => ({
       ...s,
       icon: safeIcon(i),
-    }));
+    })) as ProcessStepData[];
   }, [t.process.steps, icons]);
 
   return (
@@ -73,7 +81,7 @@ export function ProcessShowcase() {
           />
 
           <div className="hidden gap-6 md:grid md:grid-cols-4">
-            {steps.map((step: any, index: number) => (
+            {steps.map((step, index: number) => (
               <ProcessStep
                 key={step.number}
                 step={step}
@@ -85,7 +93,7 @@ export function ProcessShowcase() {
 
           <div className="md:hidden">
             <div className="flex flex-col gap-6">
-              {steps.map((step: any, index: number) => (
+              {steps.map((step, index: number) => (
                 <ProcessStepMobile
                   key={`${step.number}-mobile`}
                   step={step}
