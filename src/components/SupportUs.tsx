@@ -366,8 +366,13 @@ export function SupportSection() {
       return;
     }
 
-    window.open(targetUrl, "_blank", "noopener,noreferrer");
+    const win = window.open(targetUrl, "_blank", "noopener,noreferrer");
+    if (!win) {
+      setStatus(t.support.errors.paypalBlocked);
+      return;
+    }
     setStatus(t.support.errors.paypalRedirect);
+    setTimeout(() => setStatus(null), 4000);
   };
 
   return (

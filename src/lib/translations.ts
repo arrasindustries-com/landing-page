@@ -354,7 +354,8 @@ export const translations = {
         networkSwitch: "Cambio rete annullato.",
         paypalConfig:
           "Link PayPal non configurato. Imposta VITE_PAYPAL_DONATION_URL.",
-        paypalRedirect: "Reindirizzamento a PayPal in corso...",
+        paypalRedirect: "PayPal aperto in una nuova scheda. Completa il pagamento li.",
+        paypalBlocked: "Popup bloccato dal browser. Consenti i popup per questo sito e riprova.",
       },
       tagline: "Domande? Contiamo su WhatsApp o email.",
     },
@@ -710,7 +711,8 @@ export const translations = {
         networkSwitch: "Network switch cancelled.",
         paypalConfig:
           "PayPal link is not configured. Set VITE_PAYPAL_DONATION_URL.",
-        paypalRedirect: "Redirecting to PayPal...",
+        paypalRedirect: "PayPal opened in a new tab. Complete the payment there.",
+        paypalBlocked: "Popup blocked by the browser. Allow popups for this site and try again.",
       },
       tagline: "Questions? We're available on WhatsApp or email.",
     },
