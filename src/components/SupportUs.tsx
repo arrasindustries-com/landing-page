@@ -130,7 +130,7 @@ function PremiumSelect({
 export function SupportSection() {
   const { t } = useLanguage();
   const { theme } = useTheme();
-  const walletAddress = "0x8b14a2d2f7f8ffd7152a9b9e9f5ab2dab51e6d3a";
+  const walletAddress = "0x8B14a2d2F7f8FFD7152A9b9e9F5Ab2DAB51e6D3a";
   const onchainAddresses = [
     {
       label: "Ethereum",
@@ -284,10 +284,19 @@ export function SupportSection() {
     return parsed.toFixed(2);
   };
 
+  const isMobile = () =>
+    /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
   const handleMetaMask = async () => {
     const eth = (window as unknown as { ethereum?: Eip1193Provider })
       .ethereum;
     if (!eth) {
+      if (isMobile()) {
+        // Deep-link into MetaMask's in-app browser
+        const dappUrl = window.location.href.replace(/^https?:\/\//, "");
+        window.location.href = `https://metamask.app.link/dapp/${dappUrl}`;
+        return;
+      }
       setStatus(t.support.errors.noMetaMask);
       return;
     }
