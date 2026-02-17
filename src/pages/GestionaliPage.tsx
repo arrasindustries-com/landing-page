@@ -61,9 +61,9 @@ export default function GestionaliPage() {
       ],
     },
     theme: {
-      accent: "#3B82F6",
-      accentLight: "#60A5FA",
-      accentGlow: "rgba(59,130,246,0.35)",
+      accent: "#7A6648",
+      accentLight: "#9A8566",
+      accentGlow: "rgba(122,102,72,0.32)",
     },
     hero: {
       icon: <Laptop className="h-4 w-4" />,

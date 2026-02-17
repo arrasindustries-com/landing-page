@@ -61,9 +61,9 @@ export default function Web3Page() {
       ],
     },
     theme: {
-      accent: "#8B5CF6",
-      accentLight: "#A78BFA",
-      accentGlow: "rgba(139,92,246,0.35)",
+      accent: "#705D45",
+      accentLight: "#8E795F",
+      accentGlow: "rgba(112,93,69,0.32)",
     },
     hero: {
       icon: <Sparkles className="h-4 w-4" />,

@@ -14,7 +14,7 @@ export function ValueCard({
       className={`group relative overflow-hidden rounded-[14px] backdrop-blur ${
         theme === "dark"
           ? "border border-white/10 bg-white/5"
-          : "border border-[#bfd2ee] bg-gradient-to-br from-[#edf4ff] via-[#f8fbff] to-[#eaf3ff] shadow-[0_22px_56px_-30px_rgba(59,130,246,0.35)]"
+          : "border border-[var(--border)] bg-gradient-to-br from-[#f7f1e8] via-[#fffaf2] to-[#efe4d4] shadow-[0_22px_56px_-34px_rgba(54,43,28,0.2)]"
       }`}
       variants={{
         hidden: { opacity: 0, y: -720, scale: 0.9, rotate: -4 },
@@ -88,7 +88,7 @@ export function ValueCard({
           className={`absolute inset-0 ${
             theme === "dark"
               ? "bg-gradient-to-t from-[#0F0F11] via-[#0F0F11]/70 to-transparent"
-              : "bg-gradient-to-t from-[#dfeeff]/98 via-[#e9f3ff]/86 to-[#edf4ff]/58"
+              : "bg-gradient-to-t from-[#eee1cd]/92 via-[#f6ecdd]/76 to-[#f7f1e8]/48"
           }`}
         />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.12),transparent_50%)]" />
@@ -102,7 +102,7 @@ export function ValueCard({
         className={`pointer-events-none absolute left-0 top-0 h-full w-[2px] ${
           theme === "dark"
             ? "bg-gradient-to-b from-transparent via-white/40 to-transparent"
-            : "bg-gradient-to-b from-transparent via-[#3B82F6]/50 to-transparent"
+            : "bg-gradient-to-b from-transparent via-[var(--accent)]/45 to-transparent"
         }`}
       />
 
@@ -115,13 +115,13 @@ export function ValueCard({
         </div>
         <div
           className={`relative mt-2 text-sm ripple-text ${
-            theme === "dark" ? "text-white/70" : "text-[#24344f]/80"
+            theme === "dark" ? "text-white/70" : "text-[var(--muted)]"
           }`}
           data-text={value.desc}
         >
           {value.desc}
         </div>
-        <div className="mt-6 h-px w-10 bg-gradient-to-r from-[#3B82F6] to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
+        <div className="mt-6 h-px w-10 bg-gradient-to-r from-[var(--accent)] to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
       </div>
 
       <div className="absolute inset-0 transition duration-300 group-hover:-translate-y-1" />

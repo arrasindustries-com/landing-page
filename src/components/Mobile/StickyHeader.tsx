@@ -51,8 +51,8 @@ export function StickyHeader({
     <header
       className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl ${
         theme === "dark"
-          ? "border-b border-white/[0.06] bg-[#0F0F11]/90"
-          : "border-b border-black/10 bg-[#F5F7FA]/90"
+          ? "border-b border-white/[0.06] bg-[#0F0F11]/88"
+          : "border-b border-[#d6cbb8] bg-[#f4efe6]/92"
       }`}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -139,7 +139,7 @@ export function StickyHeader({
           {/* CTA desktop */}
           <Button
             onClick={() => handleNavClick("#contatto")}
-            className="hidden bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97] sm:inline-flex"
+            className="hidden bg-[var(--accent)] text-white shadow-[0_12px_28px_-18px_rgba(47,94,168,0.45)] hover:scale-[1.02] hover:bg-[var(--accent-strong)] active:scale-[0.98] sm:inline-flex"
           >
             {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
           </Button>
@@ -197,7 +197,11 @@ export function StickyHeader({
               <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                className={`rounded-lg px-3 py-2.5 text-sm transition-colors ${
+                  theme === "dark"
+                    ? "text-white/70 hover:bg-white/5 hover:text-white"
+                    : "text-[#0F0F11]/70 hover:bg-black/[0.05] hover:text-[#0F0F11]"
+                }`}
               >
                 {t.nav.about}
               </Link>
@@ -207,7 +211,7 @@ export function StickyHeader({
                     setMobileOpen(false);
                     requestAnimationFrame(() => handleNavClick("#contatto"));
                   }}
-                  className="flex-1 bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)]"
+                  className="flex-1 bg-[var(--accent)] text-white shadow-[0_12px_28px_-18px_rgba(47,94,168,0.45)]"
                 >
                   {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
                 </Button>

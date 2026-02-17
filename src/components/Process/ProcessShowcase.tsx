@@ -53,7 +53,7 @@ export function ProcessShowcase() {
         </h2>
         <p
           className={`mt-2 ${
-            theme === "dark" ? "text-white/70" : "text-[#1f2c44]/75"
+            theme === "dark" ? "text-white/70" : "text-[var(--muted)]"
           }`}
         >
           {t.process.subtitle}
@@ -64,21 +64,20 @@ export function ProcessShowcase() {
         className={`relative mt-10 rounded-[14px] p-6 backdrop-blur md:p-8 ${
           theme === "dark"
             ? "border border-white/10 bg-[#0C0D10]/80"
-            : "border border-[#b8ceef] bg-gradient-to-br from-[#e5f0ff] via-[#f4f9ff] to-[#e2eeff] shadow-[0_28px_70px_-34px_rgba(59,130,246,0.45)]"
+            : "border border-[var(--border)] bg-[var(--surface)] shadow-[0_20px_48px_-30px_rgba(35,49,73,0.24)]"
         }`}
       >
         {theme === "light" ? (
           <>
-            <div className="pointer-events-none absolute -top-16 -left-10 h-48 w-48 rounded-full bg-[#60A5FA]/20 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 right-0 h-56 w-56 rounded-full bg-[#7C3AED]/14 blur-3xl" />
-            <div className="pointer-events-none absolute inset-0 rounded-[14px] bg-[radial-gradient(circle_at_15%_20%,rgba(59,130,246,0.2),transparent_46%),radial-gradient(circle_at_85%_78%,rgba(167,139,250,0.2),transparent_44%)]" />
+            <div className="pointer-events-none absolute -top-16 -left-10 h-48 w-48 rounded-full bg-[#5c78a8]/18 blur-3xl" />
+            <div className="pointer-events-none absolute inset-0 rounded-[14px] bg-[radial-gradient(circle_at_15%_20%,rgba(47,94,168,0.14),transparent_46%),radial-gradient(circle_at_85%_78%,rgba(126,113,90,0.12),transparent_44%)]" />
           </>
         ) : null}
         <div className="relative">
           {/* desktop horizontal timeline */}
           <div
             className={`absolute left-0 right-0 top-[36px] hidden h-px md:block ${
-              theme === "dark" ? "bg-white/10" : "bg-[#95b6ea]/55"
+              theme === "dark" ? "bg-white/10" : "bg-[var(--line)]"
             }`}
           />
 
@@ -87,10 +86,9 @@ export function ProcessShowcase() {
             style={{
               scaleX: progress,
               transformOrigin: "left",
-              backgroundImage:
-                "linear-gradient(90deg, #3B82F6, #60A5FA, #A78BFA)",
+              backgroundImage: "linear-gradient(90deg, var(--accent), #8e7859, var(--accent-soft))",
             }}
-            className="absolute left-0 right-0 top-[36px] hidden h-[3px] md:block"
+            className="absolute left-0 right-0 top-[36px] z-20 hidden h-[3px] md:block"
           />
 
           {/* glow che cresce insieme alla line */}
@@ -99,10 +97,9 @@ export function ProcessShowcase() {
               scaleX: progress,
               transformOrigin: "left",
               opacity: glowO,
-              backgroundImage:
-                "linear-gradient(90deg, rgba(59,130,246,0), rgba(59,130,246,0.25), rgba(167,139,250,0))",
+              backgroundImage: "linear-gradient(90deg, rgba(122,102,72,0), rgba(122,102,72,0.24), rgba(164,143,114,0))",
             }}
-            className="absolute left-0 right-0 top-[30px] hidden h-5 blur-2xl md:block"
+            className="absolute left-0 right-0 top-[30px] z-10 hidden h-5 blur-2xl md:block"
           />
 
           <div className="hidden gap-6 md:grid md:grid-cols-4">

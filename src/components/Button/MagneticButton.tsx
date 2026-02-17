@@ -20,8 +20,8 @@ export function MagneticButton({
   const buttonClass = [
     "w-full sm:w-auto",
     variant === "outline"
-      ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
-      : "bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]",
+      ? "border-[var(--border)] bg-[var(--surface)] text-[var(--text)] hover:bg-[var(--surface-strong)]"
+      : "bg-[var(--accent)] text-white shadow-[0_12px_28px_-18px_rgba(47,94,168,0.45)] hover:scale-[1.02] hover:bg-[var(--accent-strong)] active:scale-[0.98]",
   ].join(" ");
 
   if (isMobile) {

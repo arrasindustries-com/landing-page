@@ -61,9 +61,9 @@ export default function SitiWebPage() {
       ],
     },
     theme: {
-      accent: "#10B981",
-      accentLight: "#34D399",
-      accentGlow: "rgba(16,185,129,0.35)",
+      accent: "#8A7351",
+      accentLight: "#A58E6E",
+      accentGlow: "rgba(138,115,81,0.32)",
     },
     hero: {
       icon: <MessageSquare className="h-4 w-4" />,

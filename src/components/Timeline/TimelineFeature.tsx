@@ -50,7 +50,7 @@ export function TimelineFeature({
       {/* pallino sul centro */}
       <div
         className={`pointer-events-none absolute left-1/2 top-1/2 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full md:block ${
-          theme === "dark" ? "bg-white/40" : "bg-[#4b7fca]/50"
+          theme === "dark" ? "bg-white/40" : "bg-[var(--accent)]/45"
         }`}
       />
 
@@ -83,7 +83,7 @@ export function TimelineFeature({
               "relative overflow-hidden",
               theme === "dark"
                 ? "border-white/10 bg-white/5 backdrop-blur"
-                : "border-[#bfd2ee] bg-gradient-to-br from-[#edf4ff] via-[#f7faff] to-[#eaf3ff] shadow-[0_18px_50px_-24px_rgba(59,130,246,0.33)]",
+                : "border-[var(--border)] bg-gradient-to-br from-[#f7f1e8] via-[#fffaf2] to-[#efe4d4] shadow-[0_18px_50px_-30px_rgba(54,43,28,0.24)]",
               "transition-transform duration-300 will-change-transform hover:-translate-y-1",
             ].join(" ")}
           >
@@ -92,7 +92,7 @@ export function TimelineFeature({
               className={`pointer-events-none absolute inset-0 ${
                 theme === "dark"
                   ? "bg-gradient-to-br from-transparent via-transparent to-white/10"
-                  : "bg-gradient-to-br from-white/20 via-transparent to-[#dbeafe]/70"
+                  : "bg-gradient-to-br from-white/20 via-transparent to-[#e8dcc9]/70"
               }`}
             />
 
@@ -102,11 +102,11 @@ export function TimelineFeature({
               whileInView={{ opacity: 0.7, scale: 1.05 }}
               transition={{ duration: 1.2, ease: "easeOut" }}
               viewport={{ once: false, amount: 0.5 }}
-              className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[#3B82F6]/25 blur-3xl"
+              className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[var(--accent)]/20 blur-3xl"
             />
 
             {/* subtle shine */}
-            <div className="pointer-events-none absolute -left-24 -top-24 h-48 w-48 rounded-full bg-[#60A5FA]/25 blur-2xl opacity-40" />
+            <div className="pointer-events-none absolute -left-24 -top-24 h-48 w-48 rounded-full bg-[var(--accent-soft)]/24 blur-2xl opacity-40" />
 
             {/* noise */}
             <div className="pointer-events-none absolute inset-0 opacity-[0.08] mix-blend-multiply [background-image:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22120%22 height=%22120%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%222%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22120%22 height=%22120%22 filter=%22url(%23n)%22 opacity=%220.25%22/%3E%3C/svg%3E')]" />
@@ -129,7 +129,7 @@ export function TimelineFeature({
                 className={`pointer-events-none absolute inset-0 ${
                   theme === "dark"
                     ? "bg-gradient-to-r from-[#0F0F11] via-[#0F0F11]/85 to-transparent"
-                    : "bg-gradient-to-r from-[#eaf3ff] via-[#eaf3ff]/88 to-transparent"
+                    : "bg-gradient-to-r from-[#f7f1e8] via-[#f7f1e8]/90 to-transparent"
                 }`}
               />
 
@@ -143,7 +143,7 @@ export function TimelineFeature({
                     className={`grid h-10 w-10 shrink-0 place-items-center rounded-[12px] ${
                       theme === "dark"
                         ? "border border-white/10 bg-white/5"
-                        : "border border-[#b8cdf0] bg-white/75 text-[#1b4ea3]"
+                        : "border border-[var(--border)] bg-[var(--surface-strong)] text-[var(--accent)]"
                     }`}
                   >
                     {icon}
@@ -155,7 +155,7 @@ export function TimelineFeature({
                     </div>
                     <div
                       className={`mt-1 text-sm ${
-                        theme === "dark" ? "text-white/70" : "text-[#273a58]/75"
+                        theme === "dark" ? "text-white/70" : "text-[var(--muted)]"
                       }`}
                     >
                       {desc}

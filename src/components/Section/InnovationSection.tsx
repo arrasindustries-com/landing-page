@@ -44,9 +44,9 @@ export function InnovationSection() {
           ))}
           <defs>
             <linearGradient id="meshGradient">
-              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0" />
-              <stop offset="50%" stopColor="#60A5FA" stopOpacity="0.7" />
-              <stop offset="100%" stopColor="#7C3AED" stopOpacity="0" />
+              <stop offset="0%" stopColor="#7A6648" stopOpacity="0" />
+              <stop offset="50%" stopColor="#9A8566" stopOpacity="0.7" />
+              <stop offset="100%" stopColor="#A48F72" stopOpacity="0" />
             </linearGradient>
           </defs>
         </svg>
@@ -58,7 +58,7 @@ export function InnovationSection() {
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
       >
-        <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-indigo-400 to-violet-400">
+        <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-[var(--accent)] via-[#8e7859] to-[var(--accent-soft)]">
           {t.innovation.title}
         </h2>
         <p className="mt-3 max-w-2xl text-white/70">{t.innovation.subtitle}</p>
@@ -87,8 +87,8 @@ export function InnovationSection() {
                   x2="100%"
                   y2="100%"
                 >
-                  <stop offset="0%" stopColor="#60A5FA" />
-                  <stop offset="100%" stopColor="#7C3AED" />
+                  <stop offset="0%" stopColor="#9A8566" />
+                  <stop offset="100%" stopColor="#A48F72" />
                 </linearGradient>
               </defs>
               <rect
@@ -123,7 +123,7 @@ export function InnovationSection() {
                 y1="50"
                 x2="120"
                 y2="60"
-                stroke="#60A5FA"
+                stroke="#9A8566"
                 strokeWidth="3"
                 opacity="0.6"
               />
@@ -132,7 +132,7 @@ export function InnovationSection() {
                 y1="90"
                 x2="70"
                 y2="130"
-                stroke="#7C3AED"
+                stroke="#A48F72"
                 strokeWidth="3"
                 opacity="0.6"
               />
@@ -141,7 +141,7 @@ export function InnovationSection() {
                 y1="105"
                 x2="110"
                 y2="135"
-                stroke="#60A5FA"
+                stroke="#9A8566"
                 strokeWidth="3"
                 opacity="0.6"
               />
@@ -275,7 +275,7 @@ export function InnovationSection() {
                       : "border border-[#cfdbef] bg-gradient-to-r from-[#eef5ff]/92 to-[#f1ecff]/92 text-[#1f314d]/82"
                   }`}
                 >
-                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[#60A5FA]" />
+                  <span className="mt-1 h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                   <span>{item}</span>
                 </div>
               ))}
@@ -318,7 +318,7 @@ export function InnovationSection() {
                   : "border border-[#cfdbef] bg-gradient-to-r from-[#edf5ff]/92 to-[#f1ecff]/92 text-[#1f314d]/82"
               }`}
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-[#60A5FA]" />
+              <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
               Crypto ready
             </div>
           </div>
@@ -377,7 +377,7 @@ export function InnovationSection() {
                 <div
                   className={`mt-3 rounded-[10px] px-3 py-2 text-xs shadow-[0_10px_24px_-16px_rgba(59,130,246,0.28)] md:pointer-events-none md:absolute md:left-3 md:right-3 md:top-full md:z-10 md:mt-2 md:translate-y-2 md:opacity-0 md:transition md:duration-200 md:group-hover:translate-y-0 md:group-hover:opacity-100 ${
                     theme === "dark"
-                      ? "border border-[#3B82F6]/40 bg-[#102a52] text-[#F5F7FA]"
+                      ? "border border-[var(--accent)]/40 bg-[#3e3223] text-[#F5F7FA]"
                       : "border border-[#cfdbef] bg-gradient-to-r from-[#edf5ff] to-[#f1ecff] text-[#1f314d]"
                   }`}
                 >

@@ -5,9 +5,9 @@ const THEME_STORAGE_KEY = "arras-theme";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === "undefined") return "dark";
+    if (typeof window === "undefined") return "light";
     const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY);
-    return savedTheme === "light" || savedTheme === "dark" ? savedTheme : "dark";
+    return savedTheme === "light" || savedTheme === "dark" ? savedTheme : "light";
   });
 
   useEffect(() => {

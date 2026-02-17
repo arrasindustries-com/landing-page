@@ -179,13 +179,13 @@ export default function AboutPage() {
           transition={{ duration: 0.45 }}
           className="max-w-3xl"
         >
-          <p className="text-sm uppercase tracking-[0.16em] text-white/60">
+          <p className="text-sm uppercase tracking-[0.16em] text-[var(--muted)]">
             {isIt ? "Chi siamo" : "About us"}
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
             {isIt ? "Le persone dietro Arras Industries" : "The people behind Arras Industries"}
           </h1>
-          <p className="mt-4 text-white/70">
+          <p className="mt-4 text-[var(--muted)]">
             {isIt
               ? "Arras Industries progetta e sviluppa software con un approccio operativo: gestionali, siti web e integrazioni web3 quando richieste dal contesto."
               : "Arras Industries designs and develops software with an operational approach: management systems, websites, and web3 integrations when the context requires them."}
@@ -199,7 +199,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.08 * index }}
-              className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur"
+              className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] backdrop-blur"
             >
               <img
                 src={member.image}
@@ -210,10 +210,10 @@ export default function AboutPage() {
               />
               <div className="space-y-3 p-5">
                 <div>
-                  <h2 className="text-xl font-semibold text-white">{member.name}</h2>
-                  <p className="text-sm text-[#93C5FD]">{member.role}</p>
+                  <h2 className="text-xl font-semibold text-[var(--text)]">{member.name}</h2>
+                  <p className="text-sm text-[#49638a]">{member.role}</p>
                 </div>
-                <p className="text-sm leading-relaxed text-white/75">
+                <p className="text-sm leading-relaxed text-[var(--muted)]">
                   {member.description}
                 </p>
               </div>

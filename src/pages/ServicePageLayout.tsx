@@ -98,11 +98,11 @@ export default function ServicePageLayout({
             className={`absolute inset-0 ${
               theme === "dark"
                 ? "bg-gradient-to-b from-[#0F0F11]/60 via-[#0F0F11]/80 to-[#0F0F11]"
-                : "bg-gradient-to-b from-[#ffffff]/25 via-[#f7fbff]/72 to-[#F5F7FA]"
+                : "bg-gradient-to-b from-[#fffdf8]/35 via-[#f8f2e8]/72 to-[#f4efe6]"
             }`}
           />
           {theme === "light" ? (
-            <div className="absolute inset-0 bg-gradient-to-r from-[#F5F7FA] via-transparent to-[#F5F7FA]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#f4efe6] via-transparent to-[#f4efe6]" />
           ) : null}
           {/* Accent-colored ambient glow */}
           <div
@@ -116,7 +116,7 @@ export default function ServicePageLayout({
             className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] ${
               theme === "dark"
                 ? "border bg-white/5"
-                : "border bg-white/80 shadow-[0_8px_18px_-14px_rgba(59,130,246,0.45)]"
+                : "border bg-[var(--surface-strong)] shadow-[0_10px_20px_-16px_rgba(35,49,73,0.26)]"
             }`}
             style={{
               borderColor: `${accent}40`,
@@ -131,7 +131,7 @@ export default function ServicePageLayout({
           </h1>
           <p
             className={`mt-4 text-lg md:text-xl ${
-              theme === "dark" ? "text-white/70" : "text-[#1f314d]/76"
+              theme === "dark" ? "text-white/70" : "text-[var(--muted)]"
             }`}
           >
             {content.hero.subtitle}
@@ -139,10 +139,10 @@ export default function ServicePageLayout({
           <div className="mt-8">
             <Link to="/#contatto">
               <Button
-                className="text-white hover:scale-[1.04] active:scale-[0.97]"
+                className="text-white hover:scale-[1.02] active:scale-[0.98]"
                 style={{
                   background: accent,
-                  boxShadow: `0 0 28px ${accentGlow}`,
+                  boxShadow: `0 12px 26px -16px ${accentGlow}`,
                 }}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.background = accentLight)
@@ -171,7 +171,7 @@ export default function ServicePageLayout({
                 <h2 className="mb-4 text-2xl font-semibold tracking-tight md:text-3xl">
                   {section.heading}
                 </h2>
-                <div className="space-y-4 leading-relaxed text-white/70">
+                <div className={`space-y-4 leading-relaxed ${theme === "dark" ? "text-white/70" : "text-[var(--muted)]"}`}>
                   {section.body.split("\n\n").map((paragraph, j) => (
                     <p key={j}>{paragraph}</p>
                   ))}
@@ -192,7 +192,11 @@ export default function ServicePageLayout({
             {content.useCases.items.map((uc) => (
               <div
                 key={uc.title}
-                className="group rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20"
+                className={`group rounded-[14px] border p-6 backdrop-blur transition-all duration-300 ${
+                  theme === "dark"
+                    ? "border-white/10 bg-white/5 hover:border-white/20"
+                    : "border-[var(--border)] bg-[var(--surface)] hover:border-[#8aa0bf]"
+                }`}
                 style={
                   {
                     "--uc-glow": accentGlow,
@@ -210,7 +214,7 @@ export default function ServicePageLayout({
                 <h3 className="text-lg font-semibold tracking-tight">
                   {uc.title}
                 </h3>
-                <p className="mt-2 text-sm text-white/70">{uc.description}</p>
+                <p className={`mt-2 text-sm ${theme === "dark" ? "text-white/70" : "text-[var(--muted)]"}`}>{uc.description}</p>
               </div>
             ))}
           </div>
@@ -227,7 +231,11 @@ export default function ServicePageLayout({
             {content.process.steps.map((step) => (
               <div
                 key={step.number}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
+                className={`rounded-2xl border p-5 backdrop-blur ${
+                  theme === "dark"
+                    ? "border-white/10 bg-white/5"
+                    : "border-[var(--border)] bg-[var(--surface)]"
+                }`}
               >
                 <div
                   className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg text-lg font-bold"
@@ -239,7 +247,7 @@ export default function ServicePageLayout({
                   {step.number}
                 </div>
                 <div className="font-semibold">{step.title}</div>
-                <p className="mt-1 text-sm text-white/70">{step.desc}</p>
+                <p className={`mt-1 text-sm ${theme === "dark" ? "text-white/70" : "text-[var(--muted)]"}`}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -253,7 +261,7 @@ export default function ServicePageLayout({
             <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
               {content.faq.title}
             </h2>
-            <p className="mt-2 text-white/70">{content.faq.subtitle}</p>
+            <p className={`mt-2 ${theme === "dark" ? "text-white/70" : "text-[var(--muted)]"}`}>{content.faq.subtitle}</p>
           </div>
           <Accordion items={content.faq.items} accentColor={accent} />
         </motion.div>
@@ -262,18 +270,24 @@ export default function ServicePageLayout({
       {/* CTA */}
       <section className="mx-auto max-w-6xl px-4 pb-24">
         <motion.div {...fadeUp}>
-          <Card className="relative overflow-hidden border-white/10 bg-white/5 p-8 text-center backdrop-blur">
+          <Card
+            className={`relative overflow-hidden p-8 text-center backdrop-blur ${
+              theme === "dark"
+                ? "border-white/10 bg-white/5"
+                : "border-[var(--border)] bg-[var(--surface)]"
+            }`}
+          >
             <h2 className="text-2xl font-semibold md:text-3xl">
               {content.cta.title}
             </h2>
-            <p className="mt-2 text-white/70">{content.cta.subtitle}</p>
+            <p className={`mt-2 ${theme === "dark" ? "text-white/70" : "text-[var(--muted)]"}`}>{content.cta.subtitle}</p>
             <div className="mt-6">
               <Link to="/#contatto">
                 <Button
-                  className="text-white hover:scale-[1.04] active:scale-[0.97]"
+                  className="text-white hover:scale-[1.02] active:scale-[0.98]"
                   style={{
                     background: accent,
-                    boxShadow: `0 0 28px ${accentGlow}`,
+                    boxShadow: `0 12px 26px -16px ${accentGlow}`,
                   }}
                   onMouseEnter={(e) =>
                     (e.currentTarget.style.background = accentLight)
@@ -286,7 +300,7 @@ export default function ServicePageLayout({
                 </Button>
               </Link>
             </div>
-            <div className="mt-4 text-xs text-white/50">
+            <div className={`mt-4 text-xs ${theme === "dark" ? "text-white/50" : "text-[#66707a]"}`}>
               {language === "it"
                 ? "Call gratuita di 20 minuti, senza impegno."
                 : "Free 20-minute call, no commitment."}

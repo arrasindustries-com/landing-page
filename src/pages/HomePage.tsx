@@ -31,6 +31,7 @@ import { SupportSection } from "@/components/SupportUs";
 import { InputLike } from "@/components/Input/InputLike";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { useTheme } from "@/contexts/useTheme";
+import { Footer } from "@/components/Footer";
 
 export default function HomePage() {
   const { t, language } = useLanguage();
@@ -169,7 +170,7 @@ export default function HomePage() {
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
               {t.threeAreas.title}
             </h2>
-            <p className="max-w-2xl text-white/70">
+            <p className="max-w-2xl text-[var(--muted)]">
               {t.threeAreas.description}
             </p>
           </motion.div>
@@ -207,7 +208,7 @@ export default function HomePage() {
           <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
             {t.services.title}
           </h2>
-          <p className="mt-2 text-white/70">{t.services.subtitle}</p>
+          <p className="mt-2 text-[var(--muted)]">{t.services.subtitle}</p>
         </motion.div>
 
         <motion.div
@@ -262,7 +263,7 @@ export default function HomePage() {
             <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
               {t.faq.title}
             </h2>
-            <p className="mt-2 text-white/70">{t.faq.subtitle}</p>
+            <p className="mt-2 text-[var(--muted)]">{t.faq.subtitle}</p>
           </div>
           <Accordion items={t.faq.items} />{" "}
         </motion.div>
@@ -276,21 +277,21 @@ export default function HomePage() {
             className={`relative overflow-hidden backdrop-blur ${
               theme === "dark"
                 ? "border-white/10 bg-white/5"
-                : "border-[#b8ceef] bg-gradient-to-br from-[#e7f1ff] via-[#f5f9ff] to-[#e4efff] shadow-[0_28px_70px_-36px_rgba(59,130,246,0.45)]"
+                : "border-[var(--border)] bg-[var(--surface)] shadow-[0_22px_52px_-32px_rgba(35,49,73,0.24)]"
             }`}
           >
             {theme === "light" ? (
               <>
-                <div className="pointer-events-none absolute -top-20 -right-12 h-56 w-56 rounded-full bg-[#3B82F6]/22 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-16 left-12 h-48 w-48 rounded-full bg-[#7C3AED]/16 blur-3xl" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_15%,rgba(96,165,250,0.24),transparent_50%),radial-gradient(circle_at_82%_80%,rgba(124,58,237,0.2),transparent_45%)]" />
+                <div className="pointer-events-none absolute -top-20 -right-12 h-56 w-56 rounded-full bg-[#5f7ba8]/16 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-16 left-12 h-48 w-48 rounded-full bg-[#8a7c62]/14 blur-3xl" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_15%,rgba(47,94,168,0.14),transparent_50%),radial-gradient(circle_at_82%_80%,rgba(138,124,98,0.13),transparent_45%)]" />
               </>
             ) : null}
             <CardHeader>
               <CardTitle className="mt-3 text-2xl md:text-3xl">
                 {t.contact.title}
               </CardTitle>
-              <CardDescription className="mt-2 text-white/70">
+              <CardDescription className="mt-2 text-[var(--muted)]">
                 {t.contact.subtitle}
               </CardDescription>
             </CardHeader>
@@ -326,20 +327,20 @@ export default function HomePage() {
               </div>
 
               <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div className="text-xs text-white/60">
+                <div className="text-xs text-[var(--muted)]">
                   {t.contact.responseTime}
                 </div>
                 <div className="flex gap-2">
                   <Button
                     variant="outline"
                     onClick={() => scrollToId("servizi")}
-                    className="border-white/20 bg-white/5 text-white hover:-translate-y-[1px] hover:border-white/35 hover:bg-white/15 hover:shadow-[0_12px_28px_-20px_rgba(59,130,246,0.45)] active:translate-y-0 active:scale-[0.98]"
+                    className="hover:-translate-y-[1px] hover:shadow-[0_12px_24px_-18px_rgba(47,94,168,0.35)] active:translate-y-0 active:scale-[0.98]"
                   >
                     {t.nav.services}
                   </Button>
                   <Button
                     onClick={() => openWhatsApp(contactForm, language)}
-                    className="bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]"
+                    className="bg-[var(--accent)] text-white shadow-[0_12px_28px_-18px_rgba(47,94,168,0.45)] hover:scale-[1.02] hover:bg-[var(--accent-strong)] active:scale-[0.98]"
                   >
                     {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
                   </Button>
@@ -347,66 +348,12 @@ export default function HomePage() {
               </div>
             </CardContent>
 
-            <div className="pointer-events-none absolute -left-24 -bottom-24 h-56 w-56 rounded-full bg-[#3B82F6]/20 blur-2xl" />
+            <div className="pointer-events-none absolute -left-24 -bottom-24 h-56 w-56 rounded-full bg-[#5f7ba8]/14 blur-2xl" />
           </Card>
 
-          <footer className="mt-10 grid grid-cols-2 gap-3 text-sm text-white/60 md:gap-6 md:grid-cols-[1.2fr_1fr_1fr]">
-            <div className="col-span-2 space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:col-span-1 md:rounded-none md:border-0 md:bg-transparent md:p-0">
-              <div className="text-white/80">{t.footer.company}</div>
-              <div>{t.footer.description}</div>
-              <div className="text-xs text-white/50">
-                {t.footer.copyright.replace(
-                  "{year}",
-                  String(new Date().getFullYear()),
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0">
-              <div className="text-white/80">{t.footer.sections}</div>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex md:flex-col">
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#servizi"
-                >
-                  {t.nav.services}
-                </a>
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#storia"
-                >
-                  {t.nav.path}
-                </a>
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#processo"
-                >
-                  {t.nav.process}
-                </a>
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#faq"
-                >
-                  FAQ
-                </a>
-              </div>
-            </div>
-
-            <div className="space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0">
-              <div className="text-white/80">{t.footer.contacts}</div>
-              <div className="flex flex-col gap-2">
-                <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
-                  {t.footer.email}
-                </span>
-                <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
-                  {t.footer.phone}
-                </span>
-                <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
-                  {t.footer.location}
-                </span>
-              </div>
-            </div>
-          </footer>
+          <div className="mt-12">
+            <Footer />
+          </div>
         </motion.div>
       </section>
     </>

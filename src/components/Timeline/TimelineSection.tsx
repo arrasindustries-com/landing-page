@@ -31,7 +31,7 @@ export function TimelineSection({
         style={{ scaleY: activeProgress, transformOrigin: "top" }}
         className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-[2px] -translate-x-1/2 md:block"
       >
-        <div className="h-full w-full bg-gradient-to-b from-[#60A5FA] via-[#3B82F6] to-[#A78BFA]" />
+        <div className="h-full w-full bg-gradient-to-b from-[var(--accent-soft)] via-[var(--accent)] to-[#6c5940]" />
       </motion.div>
 
       {/* glow leggero */}
@@ -43,7 +43,7 @@ export function TimelineSection({
         }}
         className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-8 -translate-x-1/2 md:block"
       >
-        <div className="h-full w-full bg-gradient-to-b from-transparent via-[#60A5FA]/30 to-transparent blur-xl" />
+        <div className="h-full w-full bg-gradient-to-b from-transparent via-[var(--accent)]/30 to-transparent blur-xl" />
       </motion.div>
 
       {children}

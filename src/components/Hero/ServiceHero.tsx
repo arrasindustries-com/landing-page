@@ -74,10 +74,10 @@ export function ServiceHero({
       transition={{ duration: 0.3 }}
     >
       <Card
-        className={`relative overflow-hidden backdrop-blur transition hover:shadow-[0_30px_80px_-50px_rgba(59,130,246,0.6)] ${
+        className={`relative overflow-hidden backdrop-blur transition hover:shadow-[0_26px_56px_-38px_rgba(35,49,73,0.30)] ${
           theme === "dark"
             ? "border-white/10 bg-[#101115]/90"
-            : "border-[#b9cfef] bg-gradient-to-br from-[#eaf3ff] via-[#f8fbff] to-[#e7f1ff] shadow-[0_24px_64px_-30px_rgba(59,130,246,0.35)]"
+            : "border-[var(--border)] bg-gradient-to-br from-[#faf6ef] via-[#fffdf8] to-[#f5efe3] shadow-[0_24px_54px_-36px_rgba(35,49,73,0.24)]"
         }`}
       >
         <motion.div
@@ -86,19 +86,8 @@ export function ServiceHero({
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.4, ease: "easeOut" }}
         >
-          <div className="absolute -left-24 top-8 h-40 w-40 rounded-full bg-[#60A5FA]/20 blur-3xl" />
-          <div className="absolute -right-24 bottom-0 h-40 w-40 rounded-full bg-[#7C3AED]/20 blur-3xl" />
+          <div className="absolute -left-24 top-8 h-40 w-40 rounded-full bg-[#6e8bb9]/12 blur-3xl" />
         </motion.div>
-        <motion.div
-          className="pointer-events-none absolute -inset-y-6 -left-1/3 w-1/3 rotate-12 bg-gradient-to-r from-transparent via-white/15 to-transparent blur-xl"
-          animate={{ x: ["-80%", "260%"] }}
-          transition={{
-            duration: 2.2,
-            ease: [0.16, 1, 0.3, 1],
-            repeat: Infinity,
-            repeatDelay: 3.5,
-          }}
-        />
         <div className="absolute inset-0">
           <img
             src={image}

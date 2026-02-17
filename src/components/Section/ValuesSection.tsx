@@ -34,7 +34,7 @@ export function ValuesSection() {
         <h2 className="mt-4 text-3xl font-semibold tracking-tight md:text-5xl">
           {t.values.title}
         </h2>
-        <div className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[#3B82F6] to-transparent" />
+        <div className="mx-auto mt-3 h-px w-24 bg-gradient-to-r from-transparent via-[var(--accent)] to-transparent" />
       </motion.div>
 
       <motion.div

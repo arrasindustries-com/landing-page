@@ -37,7 +37,7 @@ export function Hero() {
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
                   transition={{ duration: 0.45 }}
-                  className="hero-rotating-word inline-block rounded-[12px] bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA] px-3 py-1 leading-tight shadow-[0_0_30px_rgba(59,130,246,0.45)]"
+                  className="hero-rotating-word inline-block rounded-[12px] bg-gradient-to-r from-[var(--accent)] via-[#8e7859] to-[var(--accent-soft)] px-3 py-1 leading-tight shadow-[0_14px_28px_-20px_rgba(122,102,72,0.42)]"
                 >
                   {words[idx]}
                 </motion.span>
@@ -50,7 +50,7 @@ export function Hero() {
             </span>
           </h1>
 
-          <p className="mt-4 max-w-xl text-white/80">{t.hero.subtitle}</p>
+          <p className="mt-4 max-w-xl text-[var(--muted)]">{t.hero.subtitle}</p>
 
           <div className="mt-7 hidden gap-2 sm:flex sm:flex-row">
             <MagneticButton onClick={() => scrollToId("contatto")}>
