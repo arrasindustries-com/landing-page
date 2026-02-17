@@ -138,17 +138,6 @@ export function StickyHeader({
 
           {/* CTA desktop */}
           <Button
-            variant="outline"
-            onClick={() => handleNavClick("#servizi")}
-            className={`hidden sm:inline-flex ${
-              theme === "dark"
-                ? "border-white/20 bg-white/5 text-white hover:bg-white/10"
-                : "border-black/20 bg-black/[0.04] text-[#0F0F11] hover:bg-black/[0.08]"
-            }`}
-          >
-            {t.nav.seeServices}
-          </Button>
-          <Button
             onClick={() => handleNavClick("#contatto")}
             className="hidden bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97] sm:inline-flex"
           >

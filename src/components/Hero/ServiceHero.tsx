@@ -22,7 +22,7 @@ export function ServiceHero({
 }: {
   align: "left" | "right";
   image: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   title: string;
   subtitle: string;
   points: string[];
@@ -165,17 +165,19 @@ export function ServiceHero({
         >
           <div className={isLeft ? "" : "md:order-2"}>
             <div className="flex items-center gap-3">
-              <motion.div
-                className={`grid h-11 w-11 place-items-center rounded-[12px] shadow-[0_0_20px_rgba(59,130,246,0.25)] ${
-                  theme === "dark"
-                    ? "border border-white/15 bg-white/5 text-white"
-                    : "border border-[#b8cdf0] bg-white/75 text-[#1b4ea3]"
-                }`}
-                whileHover={{ rotate: 6, scale: 1.06 }}
-                transition={{ type: "spring", stiffness: 220, damping: 16 }}
-              >
-                {icon}
-              </motion.div>
+              {icon ? (
+                <motion.div
+                  className={`grid h-11 w-11 place-items-center rounded-[12px] shadow-[0_0_20px_rgba(59,130,246,0.25)] ${
+                    theme === "dark"
+                      ? "border border-white/15 bg-white/5 text-white"
+                      : "border border-[#b8cdf0] bg-white/75 text-[#1b4ea3]"
+                  }`}
+                  whileHover={{ rotate: 6, scale: 1.06 }}
+                  transition={{ type: "spring", stiffness: 220, damping: 16 }}
+                >
+                  {icon}
+                </motion.div>
+              ) : null}
               <div>
                 <div
                   className={`text-xs font-semibold uppercase tracking-[0.2em] ${

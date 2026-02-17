@@ -10,7 +10,6 @@ export const translations = {
       process: "Processo",
       innovation: "Innovazione",
       faq: "FAQ",
-      seeServices: "Vedi servizi",
       letsTalk: "Parliamone",
     },
     // Hero Section
@@ -369,7 +368,6 @@ export const translations = {
       process: "Process",
       innovation: "Innovation",
       faq: "FAQ",
-      seeServices: "See services",
       letsTalk: "Let's talk",
     },
     // Hero Section

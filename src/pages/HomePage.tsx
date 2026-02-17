@@ -2,10 +2,7 @@ import { motion, useScroll } from "framer-motion";
 import {
   ArrowRight,
   CircleDollarSign,
-  Laptop,
-  MessageSquare,
   Shield,
-  Sparkles,
   Timer,
 } from "lucide-react";
 import { Button } from "@/components/Button/Button";
@@ -223,7 +220,6 @@ export default function HomePage() {
           <ServiceHero
             align="left"
             image="/images/hero.jpg"
-            icon={<Laptop className="h-5 w-5" />}
             title={t.services.services[0].title}
             subtitle={t.services.services[0].subtitle}
             points={t.services.services[0].points}
@@ -234,7 +230,6 @@ export default function HomePage() {
           <ServiceHero
             align="right"
             image="/images/process.jpg"
-            icon={<MessageSquare className="h-5 w-5" />}
             title={t.services.services[1].title}
             subtitle={t.services.services[1].subtitle}
             points={t.services.services[1].points}
@@ -246,7 +241,6 @@ export default function HomePage() {
           <ServiceHero
             align="left"
             image="/images/usecase.jpg"
-            icon={<Sparkles className="h-5 w-5" />}
             title={t.services.services[2].title}
             subtitle={t.services.services[2].subtitle}
             points={t.services.services[2].points}
@@ -341,7 +335,7 @@ export default function HomePage() {
                     onClick={() => scrollToId("servizi")}
                     className="border-white/20 bg-white/5 text-white hover:-translate-y-[1px] hover:border-white/35 hover:bg-white/15 hover:shadow-[0_12px_28px_-20px_rgba(59,130,246,0.45)] active:translate-y-0 active:scale-[0.98]"
                   >
-                    {t.nav.seeServices}
+                    {t.nav.services}
                   </Button>
                   <Button
                     onClick={() => openWhatsApp(contactForm, language)}

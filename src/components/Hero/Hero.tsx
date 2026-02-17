@@ -61,7 +61,7 @@ export function Hero() {
               variant="outline"
               onClick={() => scrollToId("servizi")}
             >
-              {t.nav.seeServices}
+              {t.nav.services}
             </MagneticButton>
           </div>
         </motion.div>
