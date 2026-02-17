@@ -1,10 +1,14 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { fadeUp } from "@/types/types";
-import { motion } from "framer-motion";
+import { motion, useAnimationControls, useInView } from "framer-motion";
+import { useEffect, useRef } from "react";
 import { ValueCard } from "../Card/ValueCard";
 
 export function ValuesSection() {
   const { t } = useLanguage();
+  const gridRef = useRef<HTMLDivElement | null>(null);
+  const controls = useAnimationControls();
+  const inView = useInView(gridRef, { amount: 0.35 });
   const images = [
     "/images/hero.jpg",
     "/images/process.jpg",
@@ -16,6 +20,14 @@ export function ValuesSection() {
     image: images[i],
   }));
 
+  useEffect(() => {
+    if (inView) {
+      void controls.start("show");
+      return;
+    }
+    controls.set("hidden");
+  }, [inView, controls]);
+
   return (
     <section className="mx-auto max-w-6xl px-4 pt-4 pb-16 md:pt-8">
       <motion.div {...fadeUp} className="text-center">
@@ -26,10 +38,10 @@ export function ValuesSection() {
       </motion.div>
 
       <motion.div
+        ref={gridRef}
         className="mt-10 grid gap-4 md:grid-cols-3"
         initial="hidden"
-        whileInView="show"
-        viewport={{ once: false, amount: 0.35 }}
+        animate={controls}
         variants={{
           hidden: {},
           show: {

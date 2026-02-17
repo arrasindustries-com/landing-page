@@ -33,9 +33,11 @@ import { InnovationSection } from "@/components/Section/InnovationSection";
 import { SupportSection } from "@/components/SupportUs";
 import { InputLike } from "@/components/Input/InputLike";
 import { usePageSeo } from "@/hooks/usePageSeo";
+import { useTheme } from "@/contexts/useTheme";
 
 export default function HomePage() {
   const { t, language } = useLanguage();
+  const { theme } = useTheme();
   const threeAreasRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress: threeAreasProgress } = useScroll({
     target: threeAreasRef,
@@ -238,6 +240,7 @@ export default function HomePage() {
             points={t.services.services[1].points}
             outcomes={t.services.services[1].outcomes}
             detailLink="/siti-web"
+            blurImageToRight
           />
 
           <ServiceHero
@@ -275,7 +278,20 @@ export default function HomePage() {
 
       <section id="contatto" className="mx-auto max-w-6xl px-4 pb-24">
         <motion.div {...fadeUp}>
-          <Card className="relative overflow-hidden border-white/10 bg-white/5 backdrop-blur">
+          <Card
+            className={`relative overflow-hidden backdrop-blur ${
+              theme === "dark"
+                ? "border-white/10 bg-white/5"
+                : "border-[#b8ceef] bg-gradient-to-br from-[#e7f1ff] via-[#f5f9ff] to-[#e4efff] shadow-[0_28px_70px_-36px_rgba(59,130,246,0.45)]"
+            }`}
+          >
+            {theme === "light" ? (
+              <>
+                <div className="pointer-events-none absolute -top-20 -right-12 h-56 w-56 rounded-full bg-[#3B82F6]/22 blur-3xl" />
+                <div className="pointer-events-none absolute -bottom-16 left-12 h-48 w-48 rounded-full bg-[#7C3AED]/16 blur-3xl" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_15%,rgba(96,165,250,0.24),transparent_50%),radial-gradient(circle_at_82%_80%,rgba(124,58,237,0.2),transparent_45%)]" />
+              </>
+            ) : null}
             <CardHeader>
               <CardTitle className="mt-3 text-2xl md:text-3xl">
                 {t.contact.title}
@@ -323,7 +339,7 @@ export default function HomePage() {
                   <Button
                     variant="outline"
                     onClick={() => scrollToId("servizi")}
-                    className="border-white/20 bg-white/5 text-white hover:bg-white/10"
+                    className="border-white/20 bg-white/5 text-white hover:-translate-y-[1px] hover:border-white/35 hover:bg-white/15 hover:shadow-[0_12px_28px_-20px_rgba(59,130,246,0.45)] active:translate-y-0 active:scale-[0.98]"
                   >
                     {t.nav.seeServices}
                   </Button>

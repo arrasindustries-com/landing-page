@@ -8,6 +8,7 @@ import { Button } from "@/components/Button/Button";
 import { Card } from "@/components/Card/Card";
 import { fadeUp } from "@/types/types";
 import { Footer } from "@/components/Footer";
+import { useTheme } from "@/contexts/useTheme";
 
 export interface ServiceTheme {
   accent: string;
@@ -52,6 +53,7 @@ export default function ServicePageLayout({
   content: ServicePageContent;
 }) {
   const { language } = useLanguage();
+  const { theme } = useTheme();
   const { accent, accentLight, accentGlow } = content.theme;
 
   const seoWithFaq: PageSeoConfig = {
@@ -86,9 +88,22 @@ export default function ServicePageLayout({
             loading="eager"
             fetchPriority="high"
             decoding="async"
-            className="h-full w-full object-cover opacity-20 saturate-[0.3]"
+            className={`h-full w-full object-cover ${
+              theme === "dark"
+                ? "opacity-20 saturate-[0.3]"
+                : "opacity-36 saturate-[0.78] brightness-[1.32]"
+            }`}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0F0F11]/60 via-[#0F0F11]/80 to-[#0F0F11]" />
+          <div
+            className={`absolute inset-0 ${
+              theme === "dark"
+                ? "bg-gradient-to-b from-[#0F0F11]/60 via-[#0F0F11]/80 to-[#0F0F11]"
+                : "bg-gradient-to-b from-[#ffffff]/25 via-[#f7fbff]/72 to-[#F5F7FA]"
+            }`}
+          />
+          {theme === "light" ? (
+            <div className="absolute inset-0 bg-gradient-to-r from-[#F5F7FA] via-transparent to-[#F5F7FA]" />
+          ) : null}
           {/* Accent-colored ambient glow */}
           <div
             className="absolute -top-32 -left-32 h-[400px] w-[400px] rounded-full opacity-[0.12] blur-[120px]"
@@ -98,7 +113,11 @@ export default function ServicePageLayout({
 
         <motion.div {...fadeUp} className="relative z-10 max-w-3xl py-12">
           <div
-            className="mb-4 inline-flex items-center gap-2 rounded-full border bg-white/5 px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em]"
+            className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] ${
+              theme === "dark"
+                ? "border bg-white/5"
+                : "border bg-white/80 shadow-[0_8px_18px_-14px_rgba(59,130,246,0.45)]"
+            }`}
             style={{
               borderColor: `${accent}40`,
               color: accentLight,
@@ -110,7 +129,11 @@ export default function ServicePageLayout({
           <h1 className="text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
             {content.hero.title}
           </h1>
-          <p className="mt-4 text-lg text-white/70 md:text-xl">
+          <p
+            className={`mt-4 text-lg md:text-xl ${
+              theme === "dark" ? "text-white/70" : "text-[#1f314d]/76"
+            }`}
+          >
             {content.hero.subtitle}
           </p>
           <div className="mt-8">

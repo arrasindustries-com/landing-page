@@ -37,7 +37,7 @@ export function Hero() {
                   animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
                   exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
                   transition={{ duration: 0.45 }}
-                  className="inline-block rounded-[12px] bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA] px-3 py-1 leading-tight text-white shadow-[0_0_30px_rgba(59,130,246,0.45)]"
+                  className="hero-rotating-word inline-block rounded-[12px] bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA] px-3 py-1 leading-tight shadow-[0_0_30px_rgba(59,130,246,0.45)]"
                 >
                   {words[idx]}
                 </motion.span>

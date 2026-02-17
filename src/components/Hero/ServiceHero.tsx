@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Card } from "../Card/Card";
 import { scrollToId } from "@/lib/utils";
 import { Button } from "../Button/Button";
+import { useTheme } from "@/contexts/useTheme";
 
 export function ServiceHero({
   align,
@@ -17,6 +18,7 @@ export function ServiceHero({
   points,
   outcomes,
   detailLink,
+  blurImageToRight = false,
 }: {
   align: "left" | "right";
   image: string;
@@ -26,8 +28,10 @@ export function ServiceHero({
   points: string[];
   outcomes: string[];
   detailLink?: string;
+  blurImageToRight?: boolean;
 }) {
   const { t, language } = useLanguage();
+  const { theme } = useTheme();
   const isLeft = align === "left";
   const [panel, setPanel] = useState<"outcomes" | "plan">("outcomes");
   const copy = useMemo(
@@ -69,7 +73,13 @@ export function ServiceHero({
       whileHover={{ y: -4 }}
       transition={{ duration: 0.3 }}
     >
-      <Card className="relative overflow-hidden border-white/10 bg-[#101115]/90 backdrop-blur transition hover:shadow-[0_30px_80px_-50px_rgba(59,130,246,0.6)]">
+      <Card
+        className={`relative overflow-hidden backdrop-blur transition hover:shadow-[0_30px_80px_-50px_rgba(59,130,246,0.6)] ${
+          theme === "dark"
+            ? "border-white/10 bg-[#101115]/90"
+            : "border-[#b9cfef] bg-gradient-to-br from-[#eaf3ff] via-[#f8fbff] to-[#e7f1ff] shadow-[0_24px_64px_-30px_rgba(59,130,246,0.35)]"
+        }`}
+      >
         <motion.div
           className="pointer-events-none absolute inset-0"
           initial={{ opacity: 0 }}
@@ -97,11 +107,53 @@ export function ServiceHero({
             decoding="async"
             className={[
               "h-full w-full object-cover",
-              "opacity-45 saturate-[1.05] grayscale-[10%]",
+              theme === "dark"
+                ? "opacity-45 saturate-[1.05] grayscale-[10%]"
+                : "opacity-62 saturate-[1.08] contrast-105",
             ].join(" ")}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0F0F11] via-[#0F0F11]/85 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+          {blurImageToRight ? (
+            <img
+              src={image}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+              className={[
+                "pointer-events-none absolute inset-0 h-full w-full object-cover blur-md",
+                theme === "dark" ? "opacity-35" : "opacity-42",
+                "[mask-image:linear-gradient(to_right,transparent_36%,black_78%)]",
+                "[-webkit-mask-image:linear-gradient(to_right,transparent_36%,black_78%)]",
+              ].join(" ")}
+            />
+          ) : null}
+          <div
+            className={`absolute inset-0 ${
+              theme === "dark"
+                ? isLeft
+                  ? "bg-gradient-to-r from-[#0F0F11] via-[#0F0F11]/85 to-transparent"
+                  : "bg-gradient-to-l from-[#0F0F11] via-[#0F0F11]/88 to-transparent"
+                : isLeft
+                  ? "bg-gradient-to-r from-[#eaf3ff] via-[#eaf3ff]/82 to-transparent"
+                  : "bg-gradient-to-l from-[#eaf3ff] via-[#eaf3ff]/90 to-transparent"
+            }`}
+          />
+          {blurImageToRight ? (
+            <div
+              className={`absolute inset-0 ${
+                theme === "dark"
+                  ? "bg-gradient-to-l from-[#0F0F11]/92 via-[#0F0F11]/72 to-transparent"
+                  : "bg-gradient-to-l from-[#eaf3ff]/96 via-[#eaf3ff]/78 to-transparent"
+              }`}
+            />
+          ) : null}
+          <div
+            className={`absolute inset-0 ${
+              theme === "dark"
+                ? "bg-gradient-to-t from-black/40 via-transparent to-transparent"
+                : "bg-gradient-to-t from-[#dce9ff]/45 via-transparent to-transparent"
+            }`}
+          />
         </div>
 
         <div
@@ -114,14 +166,22 @@ export function ServiceHero({
           <div className={isLeft ? "" : "md:order-2"}>
             <div className="flex items-center gap-3">
               <motion.div
-                className="grid h-11 w-11 place-items-center rounded-[12px] border border-white/15 bg-white/5 text-white shadow-[0_0_20px_rgba(59,130,246,0.25)]"
+                className={`grid h-11 w-11 place-items-center rounded-[12px] shadow-[0_0_20px_rgba(59,130,246,0.25)] ${
+                  theme === "dark"
+                    ? "border border-white/15 bg-white/5 text-white"
+                    : "border border-[#b8cdf0] bg-white/75 text-[#1b4ea3]"
+                }`}
                 whileHover={{ rotate: 6, scale: 1.06 }}
                 transition={{ type: "spring", stiffness: 220, damping: 16 }}
               >
                 {icon}
               </motion.div>
               <div>
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+                <div
+                  className={`text-xs font-semibold uppercase tracking-[0.2em] ${
+                    theme === "dark" ? "text-white/60" : "text-[#1f3f73]/75"
+                  }`}
+                >
                   {title}
                 </div>
                 <div className="mt-1 text-2xl font-semibold tracking-tight md:text-3xl">
@@ -130,10 +190,18 @@ export function ServiceHero({
               </div>
             </div>
 
-            <ul className="mt-5 space-y-2 text-sm text-white/75">
+            <ul
+              className={`mt-5 space-y-2 text-sm ${
+                theme === "dark" ? "text-white/75" : "text-[#223652]/80"
+              }`}
+            >
               {points.map((p) => (
                 <li key={p} className="flex items-start gap-2">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-white/60" />
+                  <span
+                    className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
+                      theme === "dark" ? "bg-white/60" : "bg-[#3B82F6]/75"
+                    }`}
+                  />
                   <span>{p}</span>
                 </li>
               ))}
@@ -151,15 +219,27 @@ export function ServiceHero({
 
           <div
             className={[
-              "rounded-[14px] border border-white/10 bg-white/5 p-4 text-sm text-white/70",
+              theme === "dark"
+                ? "rounded-[14px] border border-white/10 bg-white/5 p-4 text-sm text-white/70"
+                : "rounded-[14px] border border-[#bfd2ee] bg-white/70 p-4 text-sm text-[#24344f]/78",
               "backdrop-blur",
             ].join(" ")}
           >
             <div className="flex items-center justify-between gap-2">
-              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+              <div
+                className={`text-xs font-semibold uppercase tracking-[0.2em] ${
+                  theme === "dark" ? "text-white/60" : "text-[#1f3f73]/75"
+                }`}
+              >
                 {t.services.result}
               </div>
-              <div className="inline-flex rounded-[10px] border border-white/10 bg-[#0F0F11]/70 p-1">
+              <div
+                className={`inline-flex rounded-[10px] p-1 ${
+                  theme === "dark"
+                    ? "border border-white/10 bg-[#0F0F11]/70"
+                    : "border border-[#b6cdef] bg-white/75"
+                }`}
+              >
                 <button
                   type="button"
                   onClick={() => setPanel("outcomes")}
@@ -167,7 +247,9 @@ export function ServiceHero({
                     "rounded-[8px] px-2.5 py-1 text-[11px] font-semibold transition",
                     panel === "outcomes"
                       ? "bg-[#3B82F6] text-white"
-                      : "text-white/70 hover:text-white",
+                      : theme === "dark"
+                        ? "text-white/70 hover:text-white"
+                        : "text-[#2d3d58]/75 hover:text-[#0F0F11]",
                   ].join(" ")}
                 >
                   {copy.outcomes}
@@ -179,7 +261,9 @@ export function ServiceHero({
                     "rounded-[8px] px-2.5 py-1 text-[11px] font-semibold transition",
                     panel === "plan"
                       ? "bg-[#3B82F6] text-white"
-                      : "text-white/70 hover:text-white",
+                      : theme === "dark"
+                        ? "text-white/70 hover:text-white"
+                        : "text-[#2d3d58]/75 hover:text-[#0F0F11]",
                   ].join(" ")}
                 >
                   {copy.nextSteps}
@@ -192,7 +276,11 @@ export function ServiceHero({
                 {outcomes.map((o) => (
                   <div
                     key={o}
-                    className="rounded-[12px] border border-white/10 bg-white/5 px-3 py-2"
+                    className={`rounded-[12px] px-3 py-2 ${
+                      theme === "dark"
+                        ? "border border-white/10 bg-white/5"
+                        : "border border-[#bfd2ee] bg-white/70"
+                    }`}
                   >
                     {o}
                   </div>
@@ -200,8 +288,18 @@ export function ServiceHero({
               </div>
             ) : (
               <div className="mt-2 space-y-3">
-                <div className="rounded-[12px] border border-white/10 bg-white/5 px-3 py-2">
-                  <div className="text-xs font-semibold uppercase tracking-[0.18em] text-white/60">
+                <div
+                  className={`rounded-[12px] px-3 py-2 ${
+                    theme === "dark"
+                      ? "border border-white/10 bg-white/5"
+                      : "border border-[#bfd2ee] bg-white/70"
+                  }`}
+                >
+                  <div
+                    className={`text-xs font-semibold uppercase tracking-[0.18em] ${
+                      theme === "dark" ? "text-white/60" : "text-[#1f3f73]/75"
+                    }`}
+                  >
                     {copy.actionTitle}
                   </div>
                   <div className="mt-1">{copy.actionSubtitle}</div>
@@ -210,7 +308,11 @@ export function ServiceHero({
                   {copy.steps.map((step) => (
                     <li
                       key={step}
-                      className="rounded-[12px] border border-white/10 bg-white/5 px-3 py-2"
+                      className={`rounded-[12px] px-3 py-2 ${
+                        theme === "dark"
+                          ? "border border-white/10 bg-white/5"
+                          : "border border-[#bfd2ee] bg-white/70"
+                      }`}
                     >
                       {step}
                     </li>

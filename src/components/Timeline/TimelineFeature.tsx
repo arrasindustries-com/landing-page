@@ -1,6 +1,7 @@
 import { useIsMobile } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Card } from "../Card/Card";
+import { useTheme } from "@/contexts/useTheme";
 
 export function TimelineFeature({
   side,
@@ -15,6 +16,7 @@ export function TimelineFeature({
   desc: string;
   imageSrc: string;
 }) {
+  const { theme } = useTheme();
   const isLeft = side === "left";
   const isMobile = useIsMobile();
 
@@ -46,7 +48,11 @@ export function TimelineFeature({
       <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-px -translate-x-1/2 bg-white/10 md:block" />*/}
 
       {/* pallino sul centro */}
-      <div className="pointer-events-none absolute left-1/2 top-1/2 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/40 md:block" />
+      <div
+        className={`pointer-events-none absolute left-1/2 top-1/2 hidden h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full md:block ${
+          theme === "dark" ? "bg-white/40" : "bg-[#4b7fca]/50"
+        }`}
+      />
 
       <motion.div
         whileInView={inViewMotion}
@@ -75,12 +81,20 @@ export function TimelineFeature({
           <Card
             className={[
               "relative overflow-hidden",
-              "border-white/10 bg-white/5 backdrop-blur",
+              theme === "dark"
+                ? "border-white/10 bg-white/5 backdrop-blur"
+                : "border-[#bfd2ee] bg-gradient-to-br from-[#edf4ff] via-[#f7faff] to-[#eaf3ff] shadow-[0_18px_50px_-24px_rgba(59,130,246,0.33)]",
               "transition-transform duration-300 will-change-transform hover:-translate-y-1",
             ].join(" ")}
           >
             {/* soft gradient */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-white/10" />
+            <div
+              className={`pointer-events-none absolute inset-0 ${
+                theme === "dark"
+                  ? "bg-gradient-to-br from-transparent via-transparent to-white/10"
+                  : "bg-gradient-to-br from-white/20 via-transparent to-[#dbeafe]/70"
+              }`}
+            />
 
             {/* glow pulse */}
             <motion.div
@@ -106,10 +120,18 @@ export function TimelineFeature({
                 decoding="async"
                 className={[
                   "pointer-events-none absolute right-0 top-0 hidden h-full w-[48%] object-cover md:block",
-                  "opacity-[0.12] saturate-0",
+                  theme === "dark"
+                    ? "opacity-[0.12] saturate-0"
+                    : "opacity-[0.34] saturate-[1.05] contrast-105",
                 ].join(" ")}
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-[#0F0F11] via-[#0F0F11]/85 to-transparent" />
+              <div
+                className={`pointer-events-none absolute inset-0 ${
+                  theme === "dark"
+                    ? "bg-gradient-to-r from-[#0F0F11] via-[#0F0F11]/85 to-transparent"
+                    : "bg-gradient-to-r from-[#eaf3ff] via-[#eaf3ff]/88 to-transparent"
+                }`}
+              />
 
               <div className="relative p-5">
                 <div className="flex items-start gap-3">
@@ -118,7 +140,11 @@ export function TimelineFeature({
                     whileInView={{ scale: [0.9, 1.15, 1], opacity: 1 }}
                     transition={{ duration: 1.0, ease: "easeOut" }}
                     viewport={{ once: true, amount: 0.4 }}
-                    className="grid h-10 w-10 shrink-0 place-items-center rounded-[12px] border border-white/10 bg-white/5"
+                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-[12px] ${
+                      theme === "dark"
+                        ? "border border-white/10 bg-white/5"
+                        : "border border-[#b8cdf0] bg-white/75 text-[#1b4ea3]"
+                    }`}
                   >
                     {icon}
                   </motion.div>
@@ -127,7 +153,13 @@ export function TimelineFeature({
                     <div className="text-base font-semibold tracking-tight">
                       {title}
                     </div>
-                    <div className="mt-1 text-sm text-white/70">{desc}</div>
+                    <div
+                      className={`mt-1 text-sm ${
+                        theme === "dark" ? "text-white/70" : "text-[#273a58]/75"
+                      }`}
+                    >
+                      {desc}
+                    </div>
                   </div>
                 </div>
               </div>
