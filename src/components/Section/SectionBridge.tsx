@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { useTheme } from "@/contexts/useTheme";
 
 export function SectionBridge({
   eyebrow,
@@ -10,6 +11,7 @@ export function SectionBridge({
   title: string;
   subtitle: string;
 }) {
+  const { theme } = useTheme();
   const ref = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -20,22 +22,42 @@ export function SectionBridge({
 
   return (
     <section ref={ref} className="mx-auto max-w-6xl px-4 py-10">
-      <div className="relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur md:p-8">
+      <div
+        className={`relative overflow-hidden rounded-[14px] p-6 backdrop-blur md:p-8 ${
+          theme === "dark"
+            ? "border border-white/10 bg-white/5"
+            : "border border-[#c8d8f4] bg-gradient-to-r from-[#eaf3ff] via-[#f8fbff] to-[#eef4ff] shadow-[0_18px_44px_-24px_rgba(59,130,246,0.35)]"
+        }`}
+      >
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.25),_transparent_55%)]" />
         <div className="relative grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+            <div
+              className={`text-xs font-semibold uppercase tracking-[0.2em] ${
+                theme === "dark" ? "text-white/60" : "text-[#1f3f73]/75"
+              }`}
+            >
               {eyebrow}
             </div>
             <div className="mt-2 text-2xl font-semibold tracking-tight md:text-3xl">
               {title}
             </div>
-            <div className="mt-2 max-w-2xl text-sm text-white/70">
+            <div
+              className={`mt-2 max-w-2xl text-sm ${
+                theme === "dark" ? "text-white/70" : "text-[#21324d]/75"
+              }`}
+            >
               {subtitle}
             </div>
           </div>
 
-          <div className="relative h-10 w-full overflow-hidden rounded-full border border-white/10 bg-white/5 md:w-[220px]">
+          <div
+            className={`relative h-10 w-full overflow-hidden rounded-full md:w-[220px] ${
+              theme === "dark"
+                ? "border border-white/10 bg-white/5"
+                : "border border-[#bfd3f2] bg-white/70"
+            }`}
+          >
             <motion.div
               style={{ width: line, opacity: glow }}
               className="h-full rounded-full bg-gradient-to-r from-[#3B82F6] via-[#60A5FA] to-[#A78BFA]"

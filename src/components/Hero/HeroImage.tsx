@@ -1,9 +1,11 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/useTheme";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { Card } from "../Card/Card";
 
 export function HeroImage() {
   const { t } = useLanguage();
+  const { theme } = useTheme();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 120, damping: 18 });
@@ -44,8 +46,20 @@ export function HeroImage() {
 
           <div className="absolute inset-0 bg-gradient-to-tr from-[#0F0F11]/40 via-transparent to-transparent" />
 
-          <div className="absolute bottom-4 left-4 right-4 rounded-[14px] border border-white/15 bg-white/10 p-4 backdrop-blur">
-            <div className=" text-sm text-white/70">{t.hero.quote2}</div>
+          <div
+            className={`absolute bottom-4 left-4 right-4 rounded-[14px] p-4 backdrop-blur ${
+              theme === "dark"
+                ? "border border-white/15 bg-white/10"
+                : "border border-[#c9daf3] bg-white/86 shadow-[0_12px_28px_-18px_rgba(59,130,246,0.35)]"
+            }`}
+          >
+            <div
+              className={`text-sm ${
+                theme === "dark" ? "text-white/70" : "text-[#24344f]/80"
+              }`}
+            >
+              {t.hero.quote2}
+            </div>
           </div>
         </Card>
       </motion.div>

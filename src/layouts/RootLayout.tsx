@@ -1,12 +1,14 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useTheme } from "@/contexts/useTheme";
 import { Mascot } from "@/components/Mascot";
 import { StickyHeader } from "@/components/Mobile/StickyHeader";
 import { scrollToId } from "@/lib/utils";
 
 export function RootLayout() {
   const { t, language, toggleLanguage } = useLanguage();
+  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
 
   useEffect(() => {
@@ -19,10 +21,22 @@ export function RootLayout() {
   }, [location.pathname, location.hash]);
 
   return (
-    <div className="min-h-screen bg-[#0F0F11] pt-[60px] text-[#F5F7FA]">
-      <BackgroundFX />
+    <div
+      className={`min-h-screen pt-[60px] ${
+        theme === "dark"
+          ? "bg-[#0F0F11] text-[#F5F7FA]"
+          : "bg-[#F5F7FA] text-[#0F0F11]"
+      }`}
+    >
+      {theme === "dark" ? <BackgroundFX /> : null}
       <Mascot pose="point" />
-      <StickyHeader t={t} language={language} toggleLanguage={toggleLanguage} />
+      <StickyHeader
+        t={t}
+        language={language}
+        toggleLanguage={toggleLanguage}
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
       <main>
         <Outlet />
       </main>

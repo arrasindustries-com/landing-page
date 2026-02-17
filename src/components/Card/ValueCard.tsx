@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useTheme } from "@/contexts/useTheme";
 
 export function ValueCard({
   value,
@@ -7,9 +8,14 @@ export function ValueCard({
   value: { title: string; desc: string; image: string };
   index: number;
 }) {
+  const { theme } = useTheme();
   return (
     <motion.div
-      className="group relative overflow-hidden rounded-[14px] border border-white/10 bg-white/5 backdrop-blur"
+      className={`group relative overflow-hidden rounded-[14px] backdrop-blur ${
+        theme === "dark"
+          ? "border border-white/10 bg-white/5"
+          : "border border-[#bfd2ee] bg-gradient-to-br from-[#edf4ff] via-[#f8fbff] to-[#eaf3ff] shadow-[0_22px_56px_-30px_rgba(59,130,246,0.35)]"
+      }`}
       variants={{
         hidden: { opacity: 0, y: -720, scale: 0.9, rotate: -4 },
         show: {
@@ -72,9 +78,19 @@ export function ValueCard({
           alt={value.title}
           loading="lazy"
           decoding="async"
-          className="h-full w-full object-cover grayscale opacity-50"
+          className={`h-full w-full object-cover ${
+            theme === "dark"
+              ? "grayscale opacity-50"
+              : "opacity-45 saturate-[1.02] contrast-105"
+          }`}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0F0F11] via-[#0F0F11]/70 to-transparent" />
+        <div
+          className={`absolute inset-0 ${
+            theme === "dark"
+              ? "bg-gradient-to-t from-[#0F0F11] via-[#0F0F11]/70 to-transparent"
+              : "bg-gradient-to-t from-[#dfeeff]/98 via-[#e9f3ff]/86 to-[#edf4ff]/58"
+          }`}
+        />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.12),transparent_50%)]" />
       </div>
 
@@ -83,18 +99,24 @@ export function ValueCard({
         whileInView={{ x: "120%" }}
         transition={{ duration: 1.4, ease: "easeOut" }}
         viewport={{ once: true, amount: 0.6 }}
-        className="pointer-events-none absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-transparent via-white/40 to-transparent"
+        className={`pointer-events-none absolute left-0 top-0 h-full w-[2px] ${
+          theme === "dark"
+            ? "bg-gradient-to-b from-transparent via-white/40 to-transparent"
+            : "bg-gradient-to-b from-transparent via-[#3B82F6]/50 to-transparent"
+        }`}
       />
 
       <div className="relative p-6">
         <div
-          className="text-lg font-semibold ripple-text"
+          className="relative text-lg font-semibold ripple-text"
           data-text={value.title}
         >
           {value.title}
         </div>
         <div
-          className="mt-2 text-sm text-white/70 ripple-text"
+          className={`relative mt-2 text-sm ripple-text ${
+            theme === "dark" ? "text-white/70" : "text-[#24344f]/80"
+          }`}
           data-text={value.desc}
         >
           {value.desc}
