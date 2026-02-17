@@ -3,7 +3,6 @@ import { useTheme } from "@/contexts/useTheme";
 
 export function ValueCard({
   value,
-  index,
 }: {
   value: { title: string; desc: string; image: string };
   index: number;
@@ -17,44 +16,13 @@ export function ValueCard({
           : "border border-[#bfd2ee] bg-gradient-to-br from-[#edf4ff] via-[#f8fbff] to-[#eaf3ff] shadow-[0_22px_56px_-30px_rgba(59,130,246,0.35)]"
       }`}
       variants={{
-        hidden: { opacity: 0, y: -720, scale: 0.9, rotate: -4 },
+        hidden: { opacity: 0, y: 32 },
         show: {
           opacity: 1,
           y: 0,
-          scale: 1,
-          rotate: 0,
-          scaleX: [1, 1.16, 1],
-          scaleY: [1, 0.78, 1],
-          borderRadius: [
-            "14px",
-            "44px 26px 42px 28px / 30px 44px 24px 36px",
-            "14px",
-          ],
           transition: {
-            y: {
-              type: "spring",
-              stiffness: 220,
-              damping: 12,
-              bounce: 0.7,
-            },
-            rotate: { type: "spring", stiffness: 180, damping: 12 },
-            opacity: { duration: 0.35 },
-            scale: { type: "spring", stiffness: 200, damping: 12 },
-            scaleX: {
-              delay: 0.25 + index * 0.32,
-              duration: 1.1,
-              ease: [0.16, 1, 0.3, 1],
-            },
-            scaleY: {
-              delay: 0.25 + index * 0.32,
-              duration: 1.1,
-              ease: [0.16, 1, 0.3, 1],
-            },
-            borderRadius: {
-              delay: 0.25 + index * 0.32,
-              duration: 1.2,
-              ease: [0.16, 1, 0.3, 1],
-            },
+            duration: 0.5,
+            ease: [0.25, 0.1, 0.25, 1],
           },
         },
       }}
@@ -94,18 +62,6 @@ export function ValueCard({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.12),transparent_50%)]" />
       </div>
 
-      <motion.div
-        initial={{ x: "-100%" }}
-        whileInView={{ x: "120%" }}
-        transition={{ duration: 1.4, ease: "easeOut" }}
-        viewport={{ once: true, amount: 0.6 }}
-        className={`pointer-events-none absolute left-0 top-0 h-full w-[2px] ${
-          theme === "dark"
-            ? "bg-gradient-to-b from-transparent via-white/40 to-transparent"
-            : "bg-gradient-to-b from-transparent via-[#3B82F6]/50 to-transparent"
-        }`}
-      />
-
       <div className="relative p-6">
         <div
           className="relative text-lg font-semibold ripple-text"
@@ -123,8 +79,6 @@ export function ValueCard({
         </div>
         <div className="mt-6 h-px w-10 bg-gradient-to-r from-[#3B82F6] to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
       </div>
-
-      <div className="absolute inset-0 transition duration-300 group-hover:-translate-y-1" />
     </motion.div>
   );
 }
