@@ -27,10 +27,10 @@ export default function AboutPage() {
           image: "/images/silvio.jpeg",
           imagePosition: "center 22%",
           description:
-            "Ha un PhD in Computer Science nel Programma Nazionale su Blockchain e DLT, una laurea magistrale in ICT - Ingegneria delle Telecomunicazioni e una laurea triennale in Informatica. Si occupa di strategia prodotto, architettura tecnica e priorita di sviluppo.",
+            "Ha un PhD in Computer Science nel Programma Nazionale su Blockchain e DLT, una laurea magistrale in ICT - Ingegneria delle Telecomunicazioni e una laurea triennale in Informatica. Si occupa di strategia prodotto, architettura tecnica e priorità di sviluppo.",
         },
         {
-          name: "Alessandro",
+          name: "Alessandro Mozzato",
           role: "Cybersecurity Engineer",
           image: "/images/AlessandroFoto.png",
           imagePosition: "center 18%",
@@ -40,10 +40,10 @@ export default function AboutPage() {
         {
           name: "Stefano Leto",
           role: "Software Engineer",
-          image: "/images/stefano-unlock-placeholder.svg",
-          imagePosition: "center",
+          image: "/images/ste.jpeg",
+          imagePosition: "center 18%",
           description:
-            "Contribuisce all'implementazione delle funzionalita applicative, alle integrazioni tecniche tra moduli e alla manutenzione evolutiva del codice.",
+            "Laureato in Ingegneria Informatica e specializzato con laurea magistrale in Cybersecurity. Contribuisce all'implementazione di applicazioni web sia lato back end sia lato front end, alle integrazioni tecniche tra moduli compresa l'infrastuttura blockchain per migrazione web3 e alla manutenzione evolutiva del codice.",
         },
       ]
     : [
@@ -56,7 +56,7 @@ export default function AboutPage() {
             "He holds a PhD in Computer Science in the Italian National Program on Blockchain and DLT, an MSc in ICT - Telecommunications Engineering, and a BSc in Computer Science. He works on product strategy, technical architecture, and development priorities.",
         },
         {
-          name: "Alessandro",
+          name: "Alessandro Mozzato",
           role: "Cybersecurity Engineer",
           image: "/images/AlessandroFoto.png",
           imagePosition: "center 18%",
@@ -66,10 +66,10 @@ export default function AboutPage() {
         {
           name: "Stefano Leto",
           role: "Software Engineer",
-          image: "/images/stefano-unlock-placeholder.svg",
-          imagePosition: "center",
+          image: "/images/ste.jpeg",
+          imagePosition: "center 18%",
           description:
-            "He contributes to application feature implementation, technical integration between modules, and continuous codebase maintenance.",
+            "He holds a BSc in Computer Engineering and an MSc in Cybersecurity. He contributes to web application feature implementation back and front end side, technical integrations between modules, including blockchain infrastructure for web3 migration, and continuous codebase maintenance.",
         },
       ];
 
@@ -183,7 +183,9 @@ export default function AboutPage() {
             {isIt ? "Chi siamo" : "About us"}
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
-            {isIt ? "Le persone dietro Arras Industries" : "The people behind Arras Industries"}
+            {isIt
+              ? "Le persone dietro Arras Industries"
+              : "The people behind Arras Industries"}
           </h1>
           <p className="mt-4 text-white/70">
             {isIt
@@ -210,7 +212,9 @@ export default function AboutPage() {
               />
               <div className="space-y-3 p-5">
                 <div>
-                  <h2 className="text-xl font-semibold text-white">{member.name}</h2>
+                  <h2 className="text-xl font-semibold text-white">
+                    {member.name}
+                  </h2>
                   <p className="text-sm text-[#93C5FD]">{member.role}</p>
                 </div>
                 <p className="text-sm leading-relaxed text-white/75">
