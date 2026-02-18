@@ -40,8 +40,8 @@ export function StickyHeader({
       : "relative hover:text-[#0F0F11] transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#2563EB] after:transition-all after:duration-300 hover:after:w-full";
 
   const navLinks = [
-    { href: "#servizi", label: t.nav.services },
     { href: "#storia", label: t.nav.path },
+    { href: "#servizi", label: t.nav.services },
     { href: "#processo", label: t.nav.process },
     { href: "#innovazione", label: t.nav.innovation },
     { href: "#faq", label: t.nav.faq },
@@ -59,7 +59,11 @@ export function StickyHeader({
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3">
           <img
-            src={theme === "dark" ? "/p4-underline-cyan.png" : "/p4-underline-black.png"}
+            src={
+              theme === "dark"
+                ? "/p4-underline-cyan.png"
+                : "/p4-underline-black.png"
+            }
             alt="Arras Industries"
             className="h-9 w-auto"
           />
@@ -99,8 +103,12 @@ export function StickyHeader({
                 ? "border border-white/15 bg-white/5 text-white/80 hover:border-white/25 hover:bg-white/10 hover:text-white"
                 : "border border-black/15 bg-black/[0.04] text-[#0F0F11]/80 hover:border-black/25 hover:bg-black/[0.08] hover:text-[#0F0F11]"
             }`}
-            title={theme === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"}
-            aria-label={theme === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"}
+            title={
+              theme === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"
+            }
+            aria-label={
+              theme === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"
+            }
           >
             {theme === "dark" ? (
               <Sun className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
@@ -172,7 +180,9 @@ export function StickyHeader({
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className={`overflow-hidden md:hidden ${
-              theme === "dark" ? "border-t border-white/[0.06]" : "border-t border-black/10"
+              theme === "dark"
+                ? "border-t border-white/[0.06]"
+                : "border-t border-black/10"
             }`}
           >
             <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">

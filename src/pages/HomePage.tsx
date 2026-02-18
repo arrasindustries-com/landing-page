@@ -1,10 +1,5 @@
 import { motion, useScroll } from "framer-motion";
-import {
-  ArrowRight,
-  CircleDollarSign,
-  Shield,
-  Timer,
-} from "lucide-react";
+import { ArrowRight, CircleDollarSign, Shield, Timer } from "lucide-react";
 import { Button } from "@/components/Button/Button";
 import {
   Card,
@@ -367,15 +362,15 @@ export default function HomePage() {
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex md:flex-col">
                 <a
                   className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#servizi"
-                >
-                  {t.nav.services}
-                </a>
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
                   href="#storia"
                 >
                   {t.nav.path}
+                </a>
+                <a
+                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
+                  href="#servizi"
+                >
+                  {t.nav.services}
                 </a>
                 <a
                   className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
