@@ -16,11 +16,11 @@ export const translations = {
     hero: {
       words: ["gestionali", "siti web", "web3"],
       subtitle:
-        "Gestionali, siti web e soluzioni web3 costruiti sui flussi reali della tua attività. Il tuo team li usa subito, senza formazione infinita. Risultati misurabili, non promesse.",
+        "Gestionali, siti web e soluzioni web3 progettati su obiettivi di business chiari: meno costi operativi, piu lead qualificati, processi piu affidabili. Delivery rapida, KPI tracciati, risultati misurabili.",
       requestCall: "Richiedi una call",
       discoverInnovation: "Scopri l'innovazione",
       badges: ["prenotazioni", "fidelizzazione", "turni", "dashboard"],
-      quote: "Automazioni piccole, margine grande.",
+      quote: "Tecnologia utile: meno attrito operativo, piu crescita.",
       quote2:
         "Il nostro lavoro finisce quando il vostro team lo usa senza pensarci.",
       imageAlt: "Mockup gestionale",
@@ -28,19 +28,19 @@ export const translations = {
     // Values Section
     values: {
       title: "Cosa costruiamo",
-      subtitle: "Cosa facciamo",
+      subtitle: "Soluzioni con impatto misurabile",
       values: [
         {
           title: "Gestionali su misura",
-          desc: "Backoffice, ordini, turni, scorte: software costruito sui flussi reali della tua attività, pronto da usare dal giorno uno.",
+          desc: "Backoffice, ordini, turni e scorte in un unico flusso: meno errori, piu controllo e decisioni basate su dati.",
         },
         {
           title: "Siti web & presenza digitale",
-          desc: "Siti che portano contatti reali: form, analytics, SEO, lead tracking. Non vetrine statiche.",
+          desc: "Siti orientati alla conversione: performance, SEO tecnica, analytics e funnel per trasformare traffico in opportunita commerciali.",
         },
         {
           title: "Web3 & blockchain",
-          desc: "Integrazione e formazione su tracciabilità, notarizzazione, identità digitale e pagamenti crypto.",
+          desc: "Integriamo web3 solo dove crea vantaggio reale: tracciabilita, notarizzazione, identita digitale e pagamenti verificabili.",
         },
       ],
     },
@@ -48,14 +48,15 @@ export const translations = {
     sectionBridge: {
       pillars: {
         eyebrow: "Tre aree, un metodo",
-        title: "Prima capiamo il problema, poi scegliamo lo strumento.",
+        title: "Prima misuriamo impatto e rischi, poi scriviamo codice.",
         subtitle:
-          "Gestionale, sito o web3: costruiamo solo ciò che porta risultati concreti.",
+          "Gestionale, sito o web3: scegliamo lo stack con il miglior rapporto tra ROI, tempi e complessita.",
       },
       fromStrategy: {
         eyebrow: "Dalla strategia al rilascio",
-        title: "Servizi chiari, risultati verificabili.",
-        subtitle: "Qui sotto trovi cosa facciamo e cosa ricevi.",
+        title: "Strategia, delivery e metriche allineate.",
+        subtitle:
+          "Qui sotto trovi servizi, output e risultati attesi per ogni area.",
       },
     },
     // Impact Section
@@ -86,24 +87,24 @@ export const translations = {
         "Operazioni interne, presenza digitale e tracciabilità: scegliamo l'area dove serve più impatto, senza sovrastrutture.",
       features: [
         {
-          title: "Operazioni ordinate",
-          desc: "Gestionale e automazioni per ridurre attività manuali e errori.",
+          title: "Efficienza operativa",
+          desc: "Gestionale e automazioni per ridurre costi, errori e tempi di lavoro.",
         },
         {
-          title: "Presenza digitale utile",
-          desc: "Siti web con lead, analytics e form per trasformare visite in contatti.",
+          title: "Acquisizione digitale",
+          desc: "Siti e funnel che trasformano visite in lead qualificati e trattative.",
         },
         {
-          title: "Tracciabilità quando serve",
-          desc: "Audit e notarizzazione solo se portano valore concreto e misurabile.",
+          title: "Fiducia e verifica",
+          desc: "Audit e notarizzazione quando servono compliance, trasparenza o prova esterna.",
         },
       ],
     },
     // Services Section
     services: {
-      title: "Cosa consegniamo, in concreto.",
+      title: "Cosa consegniamo e come crea valore.",
       subtitle:
-        "Ogni servizio ha destinatari, deliverable e risultati attesi. Niente promesse vaghe.",
+        "Ogni servizio include scope, milestone, KPI e criteri di accettazione. Nessuna area grigia.",
       result: "Risultato",
       services: [
         {
@@ -123,50 +124,50 @@ export const translations = {
         {
           title: "Siti web & presenza digitale",
           subtitle:
-            "Per aziende che vogliono contatti reali, non solo vetrina.",
+            "Per aziende che vogliono una pipeline commerciale digitale e misurabile.",
           points: [
-            "Sito vetrina o avanzato con sezioni gestibili.",
-            "Form, lead tracking, analytics di base.",
-            "SEO essenziale e performance ottimizzate.",
+            "Sito vetrina o piattaforma avanzata con CMS e sezioni gestibili.",
+            "Form, tracciamento eventi, analytics e attribution di base.",
+            "SEO tecnica, performance e UX orientata alla conversione.",
           ],
           outcomes: [
-            "Più contatti in entrata, meno ricerca a freddo",
-            "ROI misurabile sulla presenza digitale",
-            "Un sito che lavora per te 24/7",
+            "Piu lead qualificati e costo acquisizione piu sostenibile",
+            "ROI misurabile su traffico e campagne",
+            "Canale digitale che supporta vendite e brand",
           ],
         },
         {
           title: "Blockchain / Web3",
           subtitle:
-            "Per chi ha bisogno di tracciabilità o automazioni verificabili.",
+            "Per organizzazioni che richiedono verificabilita o settlement digitale.",
           points: [
-            "Tracciabilità e notarizzazione di eventi.",
-            "Identità digitale e auditabilità dei processi.",
+            "Tracciabilita eventi e notarizzazione di evidenze critiche.",
+            "Identita digitale, auditabilita processi e accessi firmati.",
             "Formazione e integrazione con sistemi esistenti.",
           ],
           outcomes: [
-            "Maggiore trasparenza operativa",
-            "Processi verificabili quando serve",
-            "Scelte tecniche motivate",
+            "Maggiore trasparenza verso partner e stakeholder",
+            "Riduzione del rischio operativo su processi sensibili",
+            "Adozione web3 solo quando il vantaggio e concreto",
           ],
         },
       ],
     },
     // Process
     process: {
-      title: "Metodo semplice. Output chiari. Tempi realistici.",
+      title: "Metodo operativo, output chiari, governance semplice.",
       subtitle:
-        "Dal discovery alla release: ogni fase ha un output verificabile e condiviso.",
+        "Ogni fase ha obiettivi, deliverable e decision gate condivisi.",
       steps: [
         {
           number: "01",
           title: "Discovery breve",
-          desc: "Obiettivi, metriche, scope e vincoli. 1–2 settimane.",
+          desc: "Obiettivi, KPI, scope e vincoli. Decisioni veloci in 1-2 settimane.",
         },
         {
           number: "02",
           title: "MVP",
-          desc: "Release usabile con flussi principali. 2–6 settimane.",
+          desc: "Prima release usabile sui flussi core. 2-6 settimane.",
         },
         {
           number: "03",
@@ -182,18 +183,18 @@ export const translations = {
       phaseSteps: [
         {
           title: "1) Discovery breve",
-          desc: "Allineiamo obiettivo, metriche e vincoli reali.",
-          metric: "Output: documento, scope, timeline, team.",
+          desc: "Allineiamo obiettivo economico, KPI e vincoli reali.",
+          metric: "Output: scope, timeline, rischi e criterio di successo.",
         },
         {
           title: "2) MVP usabile",
           desc: "Costruiamo la prima release che il team può usare subito.",
-          metric: "Output: release, training veloce, feedback.",
+          metric: "Output: release, training veloce, feedback strutturato.",
         },
         {
           title: "3) Stabilizzazione + handover",
-          desc: "Hardening, ruoli, backup, documentazione e training.",
-          metric: "Output: doc + monitoraggio + manutenzione opzionale.",
+          desc: "Hardening, ruoli, backup, documentazione e training operativo.",
+          metric: "Output: documentazione, monitoraggio e ownership condivisa.",
         },
         {
           title: "4) Iterazioni mirate",
@@ -204,19 +205,19 @@ export const translations = {
     },
     // Innovation Section
     innovation: {
-      title: "Web3 quando serve, non per moda.",
+      title: "Web3 quando migliora il business, non per hype.",
       subtitle:
-        "Lo usiamo solo se porta vantaggi concreti: tracciabilità, auditabilità, notarizzazione o automazioni verificabili. Altrimenti restiamo su stack tradizionali.",
+        "Lo usiamo solo se porta vantaggi concreti su governance, tracciabilita, auditabilita, notarizzazione o automazioni verificabili. Altrimenti restiamo su stack tradizionali.",
       useCases: "Use case tipici",
-      useCasesTitle: "Quando i dati devono essere verificabili.",
+      useCasesTitle: "Quando serve prova tecnica dei dati.",
       useCasesDesc:
-        "Audit, tracciabilità e notarizzazione: utili solo quando la verifica esterna è un requisito reale.",
+        "Audit, tracciabilita, notarizzazione e settlement: attiviamo web3 solo con un requisito reale.",
       conceptual:
         "Visualizzazione concettuale di flussi verificabili e auditabili.",
       digitalPayments: "Pagamenti digitali (opzionali)",
       checkoutTitle: "Checkout con wallet, quando serve",
       checkoutDesc:
-        "Possiamo integrare wallet dove ha senso: clienti internazionali, community tech‑friendly, o tracciabilità del pagamento.",
+        "Integriamo wallet quando migliorano conversione internazionale, velocita di incasso o tracciabilita del pagamento.",
       focus: "Focus",
       features: [
         {
@@ -257,21 +258,21 @@ export const translations = {
         ],
       },
       benefits: [
-        "Accesso a clienti globali, senza barriere valutarie.",
-        "Pagamenti verificabili con ricevute on-chain.",
-        "Opzione aggiuntiva, non obbligatoria.",
+        "Accesso a clienti globali con opzioni di pagamento aggiuntive.",
+        "Transazioni verificabili con ricevute on-chain.",
+        "Scelta pragmatica: web3 solo dove aumenta valore e controllo.",
       ],
     },
     // FAQ
     faq: {
       title: "Domande che contano davvero.",
       subtitle:
-        "Prezzi trasparenti, tempi realistici e risposte oneste. Ecco cosa ci chiedono di più.",
+        "Budget, rischio e tempi: risposte chiare per decidere in modo informato.",
       items: [
         {
           title: "Quanto costa?",
           content:
-            "Ogni cliente ha le sue esigenze, per questo partiamo da una chiamata gratuita di 20 minuti per capire meglio. Dopo la call, forniamo un preventivo chiaro e dettagliato, con prezzi fissi per ogni fase del progetto.",
+            "Partiamo da una discovery a prezzo fisso. Poi proponiamo milestone con budget, scope e output verificabili, cosi il rischio economico resta sotto controllo.",
         },
         {
           title: "In quanto tempo consegnate?",
@@ -281,7 +282,7 @@ export const translations = {
         {
           title: "E se poi serve assistenza?",
           content:
-            "Offriamo manutenzione con monitoraggio o handover completo con documentazione. Scegliete voi.",
+            "Offriamo manutenzione con monitoraggio o handover completo con documentazione e training. Scegliete voi il livello di autonomia.",
         },
         {
           title: "Quando ha senso usare web3?",
@@ -292,9 +293,9 @@ export const translations = {
     },
     // Contact Section
     contact: {
-      title: "Vediamo se siamo il partner giusto.",
+      title: "Valutiamo fit, impatto e priorita in una call.",
       subtitle:
-        "Call gratuita di 20 minuti. Mappiamo il problema, stimiamo l'effort e definiamo i prossimi passi.",
+        "20 minuti gratuiti: capiamo obiettivi, vincoli e ROI atteso. Se non c'e fit, lo diciamo subito.",
       responseTime: "Rispondiamo entro 24–48h lavorative.",
       formLabels: {
         name: "Nome",
@@ -314,7 +315,7 @@ export const translations = {
     footer: {
       company: "Arras Industries",
       description:
-        "Costruiamo software che riduce il caos e aumenta i margini per le PMI: gestionali, siti web e web3",
+        "Costruiamo gestionali, siti web e soluzioni web3 con impatto misurabile su efficienza, acquisizione e controllo operativo.",
       copyright: "© {year} Arras Industries",
       sections: "Sezioni",
       contacts: "Contatti",
@@ -354,8 +355,10 @@ export const translations = {
         networkSwitch: "Cambio rete annullato.",
         paypalConfig:
           "Link PayPal non configurato. Imposta VITE_PAYPAL_DONATION_URL.",
-        paypalRedirect: "PayPal aperto in una nuova scheda. Completa il pagamento li.",
-        paypalBlocked: "Popup bloccato dal browser. Consenti i popup per questo sito e riprova.",
+        paypalRedirect:
+          "PayPal aperto in una nuova scheda. Completa il pagamento li.",
+        paypalBlocked:
+          "Popup bloccato dal browser. Consenti i popup per questo sito e riprova.",
       },
       tagline: "Domande? Contiamo su WhatsApp o email.",
     },
@@ -375,11 +378,11 @@ export const translations = {
     hero: {
       words: ["management systems", "websites", "web3"],
       subtitle:
-        "Management systems, websites, and web3 solutions built around your actual workflows. Your team uses them from day one. Measurable results, not promises.",
+        "Management systems, websites, and web3 solutions designed around clear business outcomes: lower operating costs, more qualified leads, and more reliable processes. Fast delivery, tracked KPIs, measurable results.",
       requestCall: "Request a call",
       discoverInnovation: "Discover innovation",
       badges: ["bookings", "loyalty", "shifts", "dashboard"],
-      quote: "Small automations, big margins.",
+      quote: "Useful technology: less operational friction, more growth.",
       quote2:
         "Our work is done when your team uses it without thinking about it.",
       imageAlt: "Management system mockup",
@@ -387,19 +390,19 @@ export const translations = {
     // Values Section
     values: {
       title: "What we build",
-      subtitle: "What we do",
+      subtitle: "Solutions with measurable impact",
       values: [
         {
           title: "Custom management systems",
-          desc: "Backoffice, orders, shifts, inventory: software built around your actual workflows, ready to use from day one.",
+          desc: "Backoffice, orders, shifts, and inventory in one workflow: fewer errors, more control, and data-driven decisions.",
         },
         {
           title: "Websites & digital presence",
-          desc: "Sites that generate real contacts: forms, analytics, SEO, lead tracking. Not static showcases.",
+          desc: "Conversion-oriented websites: performance, technical SEO, analytics, and funnels that turn traffic into real opportunities.",
         },
         {
           title: "Web3 & blockchain",
-          desc: "Integration and training on traceability, notarization, digital identity, and crypto payments.",
+          desc: "We integrate web3 only where it creates real advantage: traceability, notarization, digital identity, and verifiable payments.",
         },
       ],
     },
@@ -407,14 +410,15 @@ export const translations = {
     sectionBridge: {
       pillars: {
         eyebrow: "Three areas, one method",
-        title: "First we understand the problem, then we pick the right tool.",
+        title: "First we measure impact and risk, then we write code.",
         subtitle:
-          "Management system, website, or web3: we only build what delivers concrete results.",
+          "Management system, website, or web3: we choose the stack with the best ROI-time-complexity ratio.",
       },
       fromStrategy: {
         eyebrow: "From strategy to release",
-        title: "Clear services, verifiable results.",
-        subtitle: "Below you'll find what we do and what you get.",
+        title: "Strategy, delivery, and metrics aligned.",
+        subtitle:
+          "Below you will find services, outputs, and expected results for each area.",
       },
     },
     // Impact Section
@@ -445,22 +449,22 @@ export const translations = {
         "Internal operations, digital presence, and traceability: we choose the area where impact is most needed, without unnecessary complexity.",
       features: [
         {
-          title: "Organized operations",
-          desc: "Management system and automations to reduce manual work and errors.",
+          title: "Operational efficiency",
+          desc: "Management systems and automations to cut costs, errors, and response times.",
         },
         {
-          title: "Useful digital presence",
-          desc: "Websites with leads, analytics, and forms to turn visits into contacts.",
+          title: "Digital acquisition",
+          desc: "Websites and funnels that turn visits into qualified leads and opportunities.",
         },
         {
-          title: "Traceability when needed",
-          desc: "Audits and notarization only if they bring concrete, measurable value.",
+          title: "Trust and verification",
+          desc: "Audits and notarization when compliance, transparency, or external proof is required.",
         },
       ],
     },
     // Services Section
     services: {
-      title: "What we deliver, concretely.",
+      title: "What we deliver and how it creates value.",
       subtitle:
         "Each service has target users, deliverables, and expected outcomes. No vague promises.",
       result: "Result",
@@ -482,50 +486,50 @@ export const translations = {
         {
           title: "Websites & digital presence",
           subtitle:
-            "For companies that want real contacts, not just a showpiece.",
+            "For companies that need a measurable digital sales pipeline.",
           points: [
-            "Showcase or advanced site with manageable sections.",
-            "Forms, lead tracking, basic analytics.",
-            "Essential SEO and optimized performance.",
+            "Showcase website or advanced platform with manageable sections.",
+            "Forms, event tracking, analytics, and basic attribution.",
+            "Technical SEO, performance, and conversion-oriented UX.",
           ],
           outcomes: [
-            "More inbound leads, less cold outreach",
-            "Measurable ROI on your digital presence",
-            "A site that works for you 24/7",
+            "More qualified inbound leads and healthier acquisition costs",
+            "Measurable ROI across traffic and campaigns",
+            "A digital channel that supports sales and brand",
           ],
         },
         {
           title: "Blockchain / Web3",
           subtitle:
-            "For those who need traceability or verifiable automations.",
+            "For organizations that require verifiability or digital settlement.",
           points: [
-            "Event traceability and notarization.",
-            "Digital identity and process auditability.",
+            "Event traceability and notarization of critical evidence.",
+            "Digital identity, process auditability, and signed access flows.",
             "Training and integration with existing systems.",
           ],
           outcomes: [
-            "Greater operational transparency",
-            "Verifiable processes when needed",
-            "Motivated technical choices",
+            "Greater transparency for partners and stakeholders",
+            "Lower operational risk on sensitive processes",
+            "Web3 adoption only when the business case is concrete",
           ],
         },
       ],
     },
     // Process
     process: {
-      title: "Simple method. Clear outputs. Realistic timelines.",
+      title: "Operational method, clear outputs, simple governance.",
       subtitle:
-        "From discovery to release: each phase has a verifiable, shared output.",
+        "Each phase has shared goals, deliverables, and decision gates.",
       steps: [
         {
           number: "01",
           title: "Short discovery",
-          desc: "Objectives, metrics, scope, and constraints. 1–2 weeks.",
+          desc: "Objectives, KPIs, scope, and constraints. Fast decisions in 1-2 weeks.",
         },
         {
           number: "02",
           title: "MVP",
-          desc: "Usable release with main flows. 2–6 weeks.",
+          desc: "First usable release on core flows. 2-6 weeks.",
         },
         {
           number: "03",
@@ -541,18 +545,18 @@ export const translations = {
       phaseSteps: [
         {
           title: "1) Short discovery",
-          desc: "We align on objective, metrics, and real constraints.",
-          metric: "Output: document, scope, timeline, team.",
+          desc: "We align on business objective, KPIs, and real constraints.",
+          metric: "Output: scope, timeline, risks, and success criteria.",
         },
         {
           title: "2) Usable MVP",
           desc: "We build the first release your team can use right away.",
-          metric: "Output: release, quick training, feedback.",
+          metric: "Output: release, quick training, structured feedback.",
         },
         {
           title: "3) Stabilization + handover",
-          desc: "Hardening, roles, backups, documentation, and training.",
-          metric: "Output: documentation + monitoring + optional maintenance.",
+          desc: "Hardening, roles, backups, documentation, and operational training.",
+          metric: "Output: documentation, monitoring, and shared ownership.",
         },
         {
           title: "4) Targeted iterations",
@@ -563,18 +567,18 @@ export const translations = {
     },
     // Innovation Section
     innovation: {
-      title: "Web3 when it makes sense, not for trends.",
+      title: "Web3 when it improves the business, not for hype.",
       subtitle:
-        "We use it only if it brings concrete advantages: traceability, auditability, notarization, or verifiable automations. Otherwise, we stick to traditional stacks.",
+        "We use it only if it brings concrete advantages for governance, traceability, auditability, notarization, or verifiable automations. Otherwise, we stick to traditional stacks.",
       useCases: "Typical use cases",
-      useCasesTitle: "When data must be verifiable.",
+      useCasesTitle: "When technical proof of data is required.",
       useCasesDesc:
-        "Audits, traceability, and notarization: useful only when external verification is a real requirement.",
+        "Audits, traceability, notarization, and settlement: we activate web3 only with a real requirement.",
       conceptual: "Conceptual visualization of verifiable and auditable flows.",
       digitalPayments: "Digital payments (optional)",
       checkoutTitle: "Checkout with wallet, when needed",
       checkoutDesc:
-        "We can integrate wallets where it makes sense: international clients, tech-friendly communities, or payment traceability.",
+        "We integrate wallets when they improve international conversion, settlement speed, or payment traceability.",
       focus: "Focus",
       features: [
         {
@@ -615,21 +619,21 @@ export const translations = {
         ],
       },
       benefits: [
-        "Access to global customers, without currency barriers.",
-        "Verifiable payments with on-chain receipts.",
-        "Optional add-on, not mandatory.",
+        "Access to global customers with additional payment options.",
+        "Verifiable transactions with on-chain receipts.",
+        "Pragmatic choice: web3 only where it increases value and control.",
       ],
     },
     // FAQ
     faq: {
       title: "Questions that really matter.",
       subtitle:
-        "Transparent pricing, realistic timelines, and honest answers. Here's what clients ask most.",
+        "Budget, risk, and timelines: clear answers for informed decisions.",
       items: [
         {
           title: "How much does it cost?",
           content:
-            "We start with a fixed-price discovery, then move to clear milestones. Each phase has verifiable output.",
+            "We start with a fixed-price discovery. Then we propose milestones with budget, scope, and verifiable outputs, so financial risk stays controlled.",
         },
         {
           title: "How long to deliver?",
@@ -639,7 +643,7 @@ export const translations = {
         {
           title: "What if we need support later?",
           content:
-            "We offer maintenance with monitoring or complete handover with documentation. Your choice.",
+            "We offer maintenance with monitoring, or full handover with documentation and training. You choose your autonomy level.",
         },
         {
           title: "When does web3 make sense?",
@@ -650,9 +654,9 @@ export const translations = {
     },
     // Contact Section
     contact: {
-      title: "Let's see if we're the right fit.",
+      title: "Let's evaluate fit, impact, and priorities in one call.",
       subtitle:
-        "Free 20-minute call. We'll map your problem, estimate effort, and define next steps.",
+        "Free 20-minute call: we align on goals, constraints, and expected ROI. If there is no fit, we say it clearly.",
       responseTime: "We respond within 24–48 business hours.",
       formLabels: {
         name: "Name",
@@ -672,7 +676,7 @@ export const translations = {
     footer: {
       company: "Arras Industries",
       description:
-        "We build software that reduces chaos and increases margins for SMBs: management systems, websites, and web3 — only when it adds real value.",
+        "We build management systems, websites, and web3 solutions with measurable impact on efficiency, acquisition, and operational control.",
       copyright: "© {year} Arras Industries",
       sections: "Sections",
       contacts: "Contacts",
@@ -711,8 +715,10 @@ export const translations = {
         networkSwitch: "Network switch cancelled.",
         paypalConfig:
           "PayPal link is not configured. Set VITE_PAYPAL_DONATION_URL.",
-        paypalRedirect: "PayPal opened in a new tab. Complete the payment there.",
-        paypalBlocked: "Popup blocked by the browser. Allow popups for this site and try again.",
+        paypalRedirect:
+          "PayPal opened in a new tab. Complete the payment there.",
+        paypalBlocked:
+          "Popup blocked by the browser. Allow popups for this site and try again.",
       },
       tagline: "Questions? We're available on WhatsApp or email.",
     },
