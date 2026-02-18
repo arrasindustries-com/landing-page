@@ -5,7 +5,6 @@ export function ValueCard({
   value,
 }: {
   value: { title: string; desc: string; image: string };
-  index: number;
 }) {
   const { theme } = useTheme();
   return (

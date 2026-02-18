@@ -38,7 +38,7 @@ export function ValuesSection() {
         }}
       >
         {values.map((value, index) => (
-          <ValueCard key={value.title} value={value} index={index} />
+          <ValueCard key={index} value={value} />
         ))}
       </motion.div>
     </section>
