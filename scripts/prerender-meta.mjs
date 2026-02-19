@@ -44,6 +44,7 @@ const pages = [
     path: "/",
     lang: "it",
     title: "Arras Industries | Software gestionali, siti web e web3",
+    h1: "Software gestionali, siti web e web3 per PMI",
     description:
       "Arras Industries realizza software gestionali, siti web performanti e soluzioni web3 per PMI con obiettivi chiari, KPI tracciati e risultati misurabili.",
     keywords:
@@ -54,6 +55,7 @@ const pages = [
     path: "/about",
     lang: "it",
     title: "Chi siamo | Arras Industries",
+    h1: "Chi siamo",
     description:
       "Team Arras Industries: profili, competenze e percorso tecnico in software, cybersecurity, blockchain e sviluppo web.",
     keywords:
@@ -64,6 +66,7 @@ const pages = [
     path: "/gestionali",
     lang: "it",
     title: "Software Gestionale su Misura per PMI | Arras Industries",
+    h1: "Software gestionale su misura per PMI",
     description:
       "Sviluppiamo software gestionali personalizzati per PMI italiane: backoffice, ordini, turni, scorte e dashboard operative. Risultati misurabili in 2-6 settimane.",
     keywords:
@@ -74,6 +77,7 @@ const pages = [
     path: "/siti-web",
     lang: "it",
     title: "Creazione Siti Web per Aziende e PMI | Arras Industries",
+    h1: "Creazione siti web per aziende e PMI",
     description:
       "Creiamo siti web professionali per aziende e PMI italiane: SEO, lead generation, analytics e performance ottimizzate. Siti che portano contatti reali.",
     keywords:
@@ -84,6 +88,7 @@ const pages = [
     path: "/web3",
     lang: "it",
     title: "Soluzioni Blockchain e Web3 per Aziende | Arras Industries",
+    h1: "Soluzioni blockchain e web3 per aziende",
     description:
       "Integriamo blockchain e web3 nelle aziende italiane: tracciabilità di filiera, notarizzazione documenti, identità digitale e automazioni verificabili.",
     keywords:
@@ -116,6 +121,13 @@ function replaceLink(html, rel, attr, newValue) {
   return html.replace(re, `$1${newValue}$2`);
 }
 
+function escapeHtml(value) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;");
+}
+
 function upsertJsonLd(html, jsonText) {
   const scriptTag = `<script id="ld-json-arras-static" type="application/ld+json">${jsonText}</script>`;
   const re =
@@ -139,6 +151,10 @@ for (const page of pages) {
 
   // <title>
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${page.title}</title>`);
+  html = html.replace(
+    /(<h1 id="seo-fallback-h1" class="seo-fallback">)[\s\S]*?(<\/h1>)/,
+    `$1${escapeHtml(page.h1)}$2`
+  );
 
   // Standard meta
   html = replaceMeta(html, 'name="robots"', ROBOTS_CONTENT);

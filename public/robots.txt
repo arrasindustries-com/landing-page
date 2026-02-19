@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+Host: arrasindustries.com
 Sitemap: https://arrasindustries.com/sitemap.xml
