@@ -49,6 +49,7 @@ export function usePageSeo(config: PageSeoConfig) {
     setMeta("meta[property='og:title']", title);
     setMeta("meta[property='og:description']", description);
     setMeta("meta[property='og:url']", canonicalUrl);
+    setMeta("meta[property='og:site_name']", "Arras Industries");
     setMeta(
       "meta[property='og:locale']",
       isItalian ? "it_IT" : "en_US",

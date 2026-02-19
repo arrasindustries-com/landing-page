@@ -349,10 +349,21 @@ export function SupportSection() {
 
     let targetUrl = paypalDonationBase;
     try {
-      if (paypalDonationBase.includes("paypal.me/")) {
-        targetUrl = `${paypalDonationBase.replace(/\/+$/, "")}/${normalizedAmount}`;
+      const url = new URL(paypalDonationBase);
+      const hostname = url.hostname.toLowerCase();
+      const isPayPalHost =
+        hostname === "paypal.com" ||
+        hostname.endsWith(".paypal.com") ||
+        hostname === "paypal.me" ||
+        hostname.endsWith(".paypal.me");
+      if (!isPayPalHost) {
+        setStatus(t.support.errors.paypalConfig);
+        return;
+      }
+
+      if (hostname === "paypal.me" || hostname.endsWith(".paypal.me")) {
+        targetUrl = `${url.toString().replace(/\/+$/, "")}/${normalizedAmount}`;
       } else {
-        const url = new URL(paypalDonationBase);
         if (!url.searchParams.has("amount")) {
           url.searchParams.set("amount", normalizedAmount);
         }

@@ -21,7 +21,7 @@ export default function NotFoundPage() {
       </h1>
       <p className="mx-auto mt-3 max-w-2xl text-white/70">
         {isIt
-          ? "L'URL richiesto non esiste oppure e stato spostato."
+          ? "L'URL richiesto non esiste oppure è stato spostato."
           : "The requested URL does not exist or has been moved."}
       </p>
       <div className="mt-7">

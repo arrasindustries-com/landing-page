@@ -308,7 +308,7 @@ export function InnovationSection() {
                   theme === "dark" ? "text-white/70" : "text-[#1f314d]/82"
                 }`}
               >
-                Wallet: MetaMask
+                {t.innovation.wallet}
               </div>
             </div>
             <div
@@ -319,7 +319,7 @@ export function InnovationSection() {
               }`}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-[#60A5FA]" />
-              Crypto ready
+              {t.innovation.cryptoReady}
             </div>
           </div>
 
@@ -364,7 +364,7 @@ export function InnovationSection() {
                     theme === "dark" ? "text-white/60" : "text-[#4a6387]"
                   }`}
                 >
-                  Step {idx + 1}
+                  {t.innovation.step} {idx + 1}
                 </div>
                 <div
                   className={`mt-2 text-base font-semibold ${

@@ -42,7 +42,7 @@ export function ServiceHero({
             nextSteps: "Prossimi passi",
             actionTitle: "Come partire",
             actionSubtitle:
-              "Call breve, priorita condivise e rilascio del primo risultato.",
+              "Call breve, priorità condivise e rilascio del primo risultato.",
             steps: [
               "Call iniziale di 20 minuti",
               "Mappatura rapida del flusso",
@@ -213,7 +213,7 @@ export function ServiceHero({
                 to={detailLink}
                 className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-[#3B82F6] transition-colors hover:text-[#60A5FA]"
               >
-                {language === "it" ? "Scopri di piu" : "Learn more"}
+                {language === "it" ? "Scopri di più" : "Learn more"}
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             )}

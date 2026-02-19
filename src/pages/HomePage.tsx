@@ -26,6 +26,7 @@ import { SupportSection } from "@/components/SupportUs";
 import { InputLike } from "@/components/Input/InputLike";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { useTheme } from "@/contexts/useTheme";
+import { Footer } from "@/components/Footer";
 
 export default function HomePage() {
   const { t, language } = useLanguage();
@@ -60,35 +61,31 @@ export default function HomePage() {
   const isItalian = language === "it";
 
   usePageSeo({
-    titleIt: "Arras Industries | Software gestionali, siti web, web3",
-    titleEn: "Arras Industries | Software, Websites, Web3",
+    titleIt: "Arras Industries | Software gestionali, siti web e web3",
+    titleEn: "Arras Industries | Management Software, Websites, Web3",
     descriptionIt:
-      "Arras Industries realizza software gestionali, siti web performanti e soluzioni web3 per PMI con obiettivi chiari e risultati misurabili.",
+      "Arras Industries realizza software gestionali, siti web performanti e soluzioni web3 per PMI con obiettivi chiari, KPI tracciati e risultati misurabili.",
     descriptionEn:
-      "Arras Industries builds management software, high-performance websites, and web3 solutions for SMBs with clear goals and measurable outcomes.",
+      "Arras Industries builds management software, high-performance websites, and web3 solutions for SMBs with clear goals, tracked KPIs, and measurable outcomes.",
     keywordsIt: [
-      "software gestionale",
-      "gestionale PMI",
-      "sviluppo siti web",
-      "web developer Italia",
-      "azienda IT specializzata",
-      "soluzioni blockchain",
-      "integrazione web3",
-      "software su misura",
-      "sviluppo applicazioni aziendali",
-      "consulenza IT aziende",
+      "software gestionale su misura",
+      "sviluppo software per PMI",
+      "sviluppo siti web aziendali",
+      "seo tecnico siti web",
+      "automazione processi aziendali",
+      "integrazioni blockchain e web3",
+      "sviluppo applicazioni web business",
+      "consulenza software Italia",
     ],
     keywordsEn: [
       "custom management software",
       "SMB software development",
-      "website development company",
-      "web developer agency",
-      "specialized IT company",
-      "blockchain solutions",
-      "web3 integration services",
-      "custom software development",
-      "business software developer",
-      "IT consulting for companies",
+      "business website development",
+      "technical SEO services",
+      "business process automation software",
+      "blockchain and web3 integration",
+      "custom web application development",
+      "IT consulting for SMBs",
     ],
     path: "/",
     jsonLd: [
@@ -345,63 +342,9 @@ export default function HomePage() {
             <div className="pointer-events-none absolute -left-24 -bottom-24 h-56 w-56 rounded-full bg-[#3B82F6]/20 blur-2xl" />
           </Card>
 
-          <footer className="mt-10 grid grid-cols-2 gap-3 text-sm text-white/60 md:gap-6 md:grid-cols-[1.2fr_1fr_1fr]">
-            <div className="col-span-2 space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:col-span-1 md:rounded-none md:border-0 md:bg-transparent md:p-0">
-              <div className="text-white/80">{t.footer.company}</div>
-              <div>{t.footer.description}</div>
-              <div className="text-xs text-white/50">
-                {t.footer.copyright.replace(
-                  "{year}",
-                  String(new Date().getFullYear()),
-                )}
-              </div>
-            </div>
-
-            <div className="space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0">
-              <div className="text-white/80">{t.footer.sections}</div>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex md:flex-col">
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#storia"
-                >
-                  {t.nav.path}
-                </a>
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#servizi"
-                >
-                  {t.nav.services}
-                </a>
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#processo"
-                >
-                  {t.nav.process}
-                </a>
-                <a
-                  className="rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0"
-                  href="#faq"
-                >
-                  FAQ
-                </a>
-              </div>
-            </div>
-
-            <div className="space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0">
-              <div className="text-white/80">{t.footer.contacts}</div>
-              <div className="flex flex-col gap-2">
-                <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
-                  {t.footer.email}
-                </span>
-                <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
-                  {t.footer.phone}
-                </span>
-                <span className="break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0">
-                  {t.footer.location}
-                </span>
-              </div>
-            </div>
-          </footer>
+          <div className="mt-10">
+            <Footer />
+          </div>
         </motion.div>
       </section>
     </>

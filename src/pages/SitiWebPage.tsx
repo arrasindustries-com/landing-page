@@ -19,22 +19,22 @@ export default function SitiWebPage() {
       descriptionEn:
         "We create professional websites for businesses and SMBs: SEO, lead generation, analytics, and optimized performance. Sites that bring real contacts.",
       keywordsIt: [
-        "creazione siti web",
+        "realizzazione siti web aziendali",
         "sviluppo siti web aziendali",
-        "web designer per aziende",
-        "agenzia sviluppo web",
-        "seo tecnico sito web",
+        "agenzia web per PMI",
+        "seo tecnico per siti web",
         "sviluppatore web Italia",
-        "azienda IT sviluppo web",
+        "ottimizzazione conversioni sito",
+        "lead generation sito aziendale",
       ],
       keywordsEn: [
-        "website development company",
-        "business website design",
-        "web development agency",
-        "technical seo website",
-        "web developer for businesses",
-        "SMB website development",
-        "specialized IT web company",
+        "business website development",
+        "website design for SMBs",
+        "technical SEO for websites",
+        "conversion-focused web design",
+        "lead generation website",
+        "web development agency for businesses",
+        "performance optimized websites",
       ],
       path: "/siti-web",
       ogImagePath: "/images/process.jpg",
@@ -88,7 +88,7 @@ export default function SitiWebPage() {
           },
           {
             heading: "Come misuriamo il risultato",
-            body: "Le metriche principali sono traffico organico utile, tasso di conversione, volume di richieste e qualita dei lead.\n\nIl confronto viene fatto tra situazione pre-rilascio e post-rilascio, con finestre temporali comparabili. In questo modo la valutazione non e basata su impressioni ma su dati tracciati.",
+            body: "Le metriche principali sono traffico organico utile, tasso di conversione, volume di richieste e qualità dei lead.\n\nIl confronto viene fatto tra situazione pre-rilascio e post-rilascio, con finestre temporali comparabili. In questo modo la valutazione non è basata su impressioni ma su dati tracciati.",
           },
         ]
       : [
@@ -106,11 +106,11 @@ export default function SitiWebPage() {
           },
         ],
     useCases: {
-      title: isIt ? "Per chi e pensato" : "Who it's for",
+      title: isIt ? "Per chi è pensato" : "Who it's for",
       items: isIt
         ? [
             {
-              title: "Attivita locali",
+              title: "Attività locali",
               description:
                 "Ristoranti, negozi, studi: un sito che genera prenotazioni e contatti dalla ricerca locale.",
             },
@@ -132,7 +132,7 @@ export default function SitiWebPage() {
             {
               title: "E-commerce leggero",
               description:
-                "Catalogo prodotti, carrello e pagamenti integrati per vendite online senza complessita.",
+                "Catalogo prodotti, carrello e pagamenti integrati per vendite online senza complessità.",
             },
             {
               title: "Associazioni e no-profit",
@@ -226,34 +226,34 @@ export default function SitiWebPage() {
         ? "Domande frequenti sui siti web"
         : "Website FAQ",
       subtitle: isIt
-        ? "Le risposte alle domande piu comuni."
+        ? "Le risposte alle domande più comuni."
         : "Answers to the most common questions.",
       items: isIt
         ? [
             {
               title: "Quanto costa un sito web professionale?",
               content:
-                "Dipende dagli obiettivi e dalla complessita. Forniamo un preventivo dettagliato dopo una call gratuita. Prezzi fissi per ogni fase, nessuna sorpresa.",
+                "Dipende dagli obiettivi e dalla complessità. Forniamo un preventivo dettagliato dopo una call gratuita. Prezzi fissi per ogni fase, nessuna sorpresa.",
             },
             {
-              title: "Il sito sara ottimizzato per Google?",
+              title: "Il sito sarà ottimizzato per Google?",
               content:
-                "Si. Ogni sito include SEO tecnico e on-page: struttura semantica, meta tag, sitemap, velocita di caricamento e contenuti ottimizzati per le keyword del tuo settore.",
+                "Sì. Ogni sito include SEO tecnico e on-page: struttura semantica, meta tag, sitemap, velocità di caricamento e contenuti ottimizzati per le keyword del tuo settore.",
             },
             {
               title: "Posso aggiornare i contenuti da solo?",
               content:
-                "Si. Costruiamo siti con sezioni gestibili. Ti forniamo formazione e documentazione per aggiornare testi, immagini e contenuti in autonomia.",
+                "Sì. Costruiamo siti con sezioni gestibili. Ti forniamo formazione e documentazione per aggiornare testi, immagini e contenuti in autonomia.",
             },
             {
               title: "Quanto tempo serve per il lancio?",
               content:
-                "Un sito professionale e pronto in 3-5 settimane: 1 settimana di analisi, 2-4 di design e sviluppo. Tempi piu brevi per siti vetrina semplici.",
+                "Un sito professionale è pronto in 3-5 settimane: 1 settimana di analisi, 2-4 di design e sviluppo. Tempi più brevi per siti vetrina semplici.",
             },
             {
               title: "Include anche hosting e dominio?",
               content:
-                "Vi guidiamo nella scelta e configurazione. L'hosting e il dominio restano di vostra proprieta, senza vincoli con noi.",
+                "Vi guidiamo nella scelta e configurazione. Hosting e dominio restano di vostra proprietà, senza vincoli con noi.",
             },
           ]
         : [

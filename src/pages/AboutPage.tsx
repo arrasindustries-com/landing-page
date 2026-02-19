@@ -23,11 +23,11 @@ export default function AboutPage() {
     ? [
         {
           name: "Silvio Meneguzzo",
-          role: "Software Architect",
+          role: "Software Architect · Tech Lead",
           image: "/images/silvio.jpeg",
           imagePosition: "center 22%",
           description:
-            "Ha un PhD in Computer Science nel Programma Nazionale su Blockchain e DLT, una laurea magistrale in ICT - Ingegneria delle Telecomunicazioni e una laurea triennale in Informatica. Si occupa di strategia prodotto, architettura tecnica e priorità di sviluppo.",
+            "Ha un PhD in Computer Science nel Programma Nazionale su Blockchain e DLT, una laurea magistrale in ICT - Ingegneria delle Telecomunicazioni e una laurea triennale in Informatica. Guida la direzione tecnica come Tech Lead, con responsabilità su strategia prodotto, architettura tecnica e priorità di sviluppo.",
         },
         {
           name: "Alessandro Mozzato",
@@ -43,17 +43,17 @@ export default function AboutPage() {
           image: "/images/ste.jpeg",
           imagePosition: "center 18%",
           description:
-            "Laureato in Ingegneria Informatica e specializzato con laurea magistrale in Cybersecurity. Contribuisce all'implementazione di applicazioni web sia lato back end sia lato front end, alle integrazioni tecniche tra moduli compresa l'infrastuttura blockchain per migrazione web3 e alla manutenzione evolutiva del codice.",
+            "Laureato in Ingegneria Informatica e specializzato con laurea magistrale in Cybersecurity. Contribuisce allo sviluppo di applicazioni web lato back end e front end, alle integrazioni tra moduli (inclusa l'infrastruttura blockchain per progetti web3) e alla manutenzione evolutiva del codice.",
         },
       ]
     : [
         {
           name: "Silvio Meneguzzo",
-          role: "Software Architect",
+          role: "Software Architect · Tech Lead",
           image: "/images/silvio.jpeg",
           imagePosition: "center 22%",
           description:
-            "He holds a PhD in Computer Science in the Italian National Program on Blockchain and DLT, an MSc in ICT - Telecommunications Engineering, and a BSc in Computer Science. He works on product strategy, technical architecture, and development priorities.",
+            "He holds a PhD in Computer Science in the Italian National Program on Blockchain and DLT, an MSc in ICT - Telecommunications Engineering, and a BSc in Computer Science. He leads technical direction as Tech Lead, with responsibility for product strategy, technical architecture, and development priorities.",
         },
         {
           name: "Alessandro Mozzato",
@@ -69,7 +69,7 @@ export default function AboutPage() {
           image: "/images/ste.jpeg",
           imagePosition: "center 18%",
           description:
-            "He holds a BSc in Computer Engineering and an MSc in Cybersecurity. He contributes to web application feature implementation back and front end side, technical integrations between modules, including blockchain infrastructure for web3 migration, and continuous codebase maintenance.",
+            "He holds a BSc in Computer Engineering and an MSc in Cybersecurity. He contributes to back-end and front-end web application development, cross-module integrations (including blockchain infrastructure for web3 projects), and ongoing codebase maintenance.",
         },
       ];
 
@@ -81,24 +81,22 @@ export default function AboutPage() {
     descriptionEn:
       "Meet the Arras Industries team: expertise in management software, website development, cybersecurity, and web3 integrations.",
     keywordsIt: [
-      "chi siamo arras industries",
+      "team arras industries",
       "silvio meneguzzo",
-      "phd computer science blockchain dlt",
-      "founder arras industries",
-      "team sviluppo software",
-      "azienda IT specializzata",
-      "competenze cybersecurity",
-      "sviluppatori web e gestionali",
+      "silvio meneguzzo blockchain dlt",
+      "società sviluppo software Italia",
+      "software architect italy",
+      "team cybersecurity e sviluppo web",
+      "sviluppo gestionali e siti web",
     ],
     keywordsEn: [
-      "about arras industries",
+      "arras industries team",
       "silvio meneguzzo",
-      "phd computer science blockchain dlt",
-      "arras industries founder",
-      "software development team",
-      "specialized IT company team",
-      "cybersecurity expertise",
-      "web and management software developers",
+      "silvio meneguzzo blockchain dlt",
+      "software development company italy",
+      "software architect italy",
+      "cybersecurity and web development team",
+      "custom software experts italy",
     ],
     path: "/about",
     ogImagePath: "/images/silvio.jpeg",
@@ -123,7 +121,7 @@ export default function AboutPage() {
           {
             "@type": "Person",
             name: "Silvio Meneguzzo",
-            jobTitle: "Founder & Software Architect",
+            jobTitle: "Founder, Software Architect, Tech Lead & Senior Developer",
             alumniOf: [
               {
                 "@type": "EducationalOrganization",
@@ -147,7 +145,7 @@ export default function AboutPage() {
           },
           {
             "@type": "Person",
-            name: "Alessandro",
+            name: "Alessandro Mozzato",
             jobTitle: "Cybersecurity Engineer",
             knowsAbout: [
               "Application security",

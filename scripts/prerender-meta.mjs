@@ -6,8 +6,8 @@
  * content, which looks like duplicate content to Bing.
  *
  * This script copies dist/index.html once per route and patches <title>,
- * description, keywords, canonical, OG, Twitter and lang attributes so each
- * URL has unique, correct meta tags *before* JavaScript executes.
+ * description, keywords, canonical, OG, Twitter, lang, and JSON-LD so each
+ * URL has unique, correct SEO metadata *before* JavaScript executes.
  *
  * Vercel serves static files before applying rewrites, so
  * dist/gestionali/index.html is served when Bingbot visits /gestionali.
@@ -25,6 +25,13 @@ const IS_PREVIEW = process.env.VERCEL_ENV === "preview";
 const ROBOTS_CONTENT = IS_PREVIEW
   ? "noindex,nofollow,noarchive,max-image-preview:none"
   : "index,follow,max-image-preview:large";
+const SITE_NAVIGATION = [
+  { name: "Home", url: `${SITE}/` },
+  { name: "Gestionali", url: `${SITE}/gestionali` },
+  { name: "Siti web", url: `${SITE}/siti-web` },
+  { name: "Web3", url: `${SITE}/web3` },
+  { name: "Chi siamo", url: `${SITE}/about` },
+];
 
 const base = readFileSync(join(DIST, "index.html"), "utf-8");
 
@@ -36,11 +43,11 @@ const pages = [
   {
     path: "/",
     lang: "it",
-    title: "Arras Industries | Software gestionali, siti web, web3",
+    title: "Arras Industries | Software gestionali, siti web e web3",
     description:
-      "Arras Industries realizza software gestionali, siti web performanti e soluzioni web3 per PMI con obiettivi chiari e risultati misurabili.",
+      "Arras Industries realizza software gestionali, siti web performanti e soluzioni web3 per PMI con obiettivi chiari, KPI tracciati e risultati misurabili.",
     keywords:
-      "software gestionale, gestionale PMI, sviluppo siti web, web developer Italia, azienda IT specializzata, soluzioni blockchain, integrazione web3, software su misura",
+      "software gestionale su misura, sviluppo software per PMI, sviluppo siti web aziendali, seo tecnico siti web, automazione processi aziendali, integrazioni blockchain e web3, sviluppo applicazioni web business, consulenza software Italia",
     ogImage: `${SITE}/images/hero.jpg`,
   },
   {
@@ -50,7 +57,7 @@ const pages = [
     description:
       "Team Arras Industries: profili, competenze e percorso tecnico in software, cybersecurity, blockchain e sviluppo web.",
     keywords:
-      "chi siamo arras industries, silvio meneguzzo, phd computer science blockchain dlt, founder arras industries, team sviluppo software, competenze cybersecurity, sviluppatori web e gestionali",
+      "team arras industries, silvio meneguzzo, silvio meneguzzo blockchain dlt, società sviluppo software Italia, software architect italy, team cybersecurity e sviluppo web, sviluppo gestionali e siti web",
     ogImage: `${SITE}/images/silvio.jpeg`,
   },
   {
@@ -60,7 +67,7 @@ const pages = [
     description:
       "Sviluppiamo software gestionali personalizzati per PMI italiane: backoffice, ordini, turni, scorte e dashboard operative. Risultati misurabili in 2-6 settimane.",
     keywords:
-      "software gestionale su misura, gestionale PMI, sviluppo gestionale aziendale, software ordini e magazzino, gestione turni personale, developer software gestionale, azienda IT gestionale",
+      "software gestionale su misura, gestionale per PMI, software ordini e magazzino, gestione turni personale, automazione processi aziendali, sviluppo software aziendale",
     ogImage: `${SITE}/images/hero.jpg`,
   },
   {
@@ -70,7 +77,7 @@ const pages = [
     description:
       "Creiamo siti web professionali per aziende e PMI italiane: SEO, lead generation, analytics e performance ottimizzate. Siti che portano contatti reali.",
     keywords:
-      "creazione siti web, sviluppo siti web aziendali, web designer per aziende, agenzia sviluppo web, seo tecnico sito web, sviluppatore web Italia, azienda IT sviluppo web",
+      "realizzazione siti web aziendali, sviluppo siti web aziendali, agenzia web per PMI, seo tecnico per siti web, sviluppatore web Italia, ottimizzazione conversioni sito, lead generation sito aziendale",
     ogImage: `${SITE}/images/process.jpg`,
   },
   {
@@ -78,9 +85,9 @@ const pages = [
     lang: "it",
     title: "Soluzioni Blockchain e Web3 per Aziende | Arras Industries",
     description:
-      "Integriamo blockchain e web3 nelle aziende italiane: tracciabilita supply chain, notarizzazione documenti, identita digitale e automazioni verificabili.",
+      "Integriamo blockchain e web3 nelle aziende italiane: tracciabilità di filiera, notarizzazione documenti, identità digitale e automazioni verificabili.",
     keywords:
-      "blockchain per aziende, web3 per imprese, tracciabilita blockchain, notarizzazione blockchain, integrazione wallet aziendale, sviluppatore blockchain Italia, azienda IT web3",
+      "soluzioni blockchain per aziende, integrazioni web3 per imprese, tracciabilità blockchain, notarizzazione documentale blockchain, identità digitale decentralizzata, smart contract per processi aziendali, integrazione wallet aziendale",
     ogImage: `${SITE}/images/usecase.jpg`,
   },
 ];
@@ -107,6 +114,14 @@ function replaceLink(html, rel, attr, newValue) {
     `(<link[\\s\\S]*?rel="${rel}"[\\s\\S]*?${attr}=")[^"]*(")`
   );
   return html.replace(re, `$1${newValue}$2`);
+}
+
+function upsertJsonLd(html, jsonText) {
+  const scriptTag = `<script id="ld-json-arras-static" type="application/ld+json">${jsonText}</script>`;
+  const re =
+    /<script id="ld-json-arras-static" type="application\/ld\+json">[\s\S]*?<\/script>/;
+  if (re.test(html)) return html.replace(re, scriptTag);
+  return html.replace("</head>", `    ${scriptTag}\n  </head>`);
 }
 
 // ---------------------------------------------------------------------------
@@ -139,11 +154,75 @@ for (const page of pages) {
   html = replaceMeta(html, 'property="og:url"', canonical);
   html = replaceMeta(html, 'property="og:image"', page.ogImage);
   html = replaceMeta(html, 'property="og:locale"', "it_IT");
+  html = replaceMeta(html, 'property="og:locale:alternate"', "en_US");
 
   // Twitter
   html = replaceMeta(html, 'name="twitter:title"', page.title);
   html = replaceMeta(html, 'name="twitter:description"', page.description);
   html = replaceMeta(html, 'name="twitter:image"', page.ogImage);
+
+  const pageLabel = page.title.split("|")[0].trim();
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${SITE}/#organization`,
+        name: "Arras Industries",
+        url: `${SITE}/`,
+        logo: `${SITE}/favicon-1-arc-reactor-512px.png`,
+        email: "arras.industries.info@gmail.com",
+        telephone: "+39 334 116 8370",
+      },
+      {
+        "@type": "WebSite",
+        "@id": `${SITE}/#website`,
+        url: `${SITE}/`,
+        name: "Arras Industries",
+        inLanguage: "it-IT",
+      },
+      {
+        "@type": "SiteNavigationElement",
+        "@id": `${SITE}/#site-navigation`,
+        name: SITE_NAVIGATION.map((item) => item.name),
+        url: SITE_NAVIGATION.map((item) => item.url),
+      },
+      ...(page.path === "/"
+        ? []
+        : [
+            {
+              "@type": "BreadcrumbList",
+              "@id": `${canonical}#breadcrumb`,
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: `${SITE}/`,
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: pageLabel,
+                  item: canonical,
+                },
+              ],
+            },
+          ]),
+      {
+        "@type": "WebPage",
+        "@id": `${canonical}#webpage`,
+        url: canonical,
+        name: page.title,
+        description: page.description,
+        inLanguage: "it-IT",
+        isPartOf: {
+          "@id": `${SITE}/#website`,
+        },
+      },
+    ],
+  };
+  html = upsertJsonLd(html, JSON.stringify(structuredData));
 
   // Write file
   if (page.path === "/") {

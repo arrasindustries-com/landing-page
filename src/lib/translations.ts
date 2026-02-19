@@ -16,11 +16,8 @@ export const translations = {
     hero: {
       words: ["gestionali", "siti web", "web3"],
       subtitle:
-        "Gestionali, siti web e soluzioni web3 progettati su obiettivi di business chiari: meno costi operativi, piu lead qualificati, processi piu affidabili. Delivery rapida, KPI tracciati, risultati misurabili.",
+        "Gestionali, siti web e soluzioni web3 progettati su obiettivi di business chiari: meno costi operativi, più lead qualificati e processi più affidabili. Consegna rapida, KPI tracciati, risultati misurabili.",
       requestCall: "Richiedi una call",
-      discoverInnovation: "Scopri l'innovazione",
-      badges: ["prenotazioni", "fidelizzazione", "turni", "dashboard"],
-      quote: "Tecnologia utile: meno attrito operativo, piu crescita.",
       quote2:
         "Il nostro lavoro finisce quando il vostro team lo usa senza pensarci.",
       imageAlt: "Mockup gestionale",
@@ -32,15 +29,15 @@ export const translations = {
       values: [
         {
           title: "Gestionali su misura",
-          desc: "Backoffice, ordini, turni e scorte in un unico flusso: meno errori, piu controllo e decisioni basate su dati.",
+          desc: "Backoffice, ordini, turni e scorte in un unico flusso: meno errori, più controllo e decisioni basate su dati.",
         },
         {
           title: "Siti web & presenza digitale",
-          desc: "Siti orientati alla conversione: performance, SEO tecnica, analytics e funnel per trasformare traffico in opportunita commerciali.",
+          desc: "Siti orientati alla conversione: performance, SEO tecnica, analytics e funnel per trasformare traffico in opportunità commerciali.",
         },
         {
           title: "Web3 & blockchain",
-          desc: "Integriamo web3 solo dove crea vantaggio reale: tracciabilita, notarizzazione, identita digitale e pagamenti verificabili.",
+          desc: "Integriamo web3 solo dove crea vantaggio reale: tracciabilità, notarizzazione, identità digitale e pagamenti verificabili.",
         },
       ],
     },
@@ -50,7 +47,7 @@ export const translations = {
         eyebrow: "Tre aree, un metodo",
         title: "Prima misuriamo impatto e rischi, poi scriviamo codice.",
         subtitle:
-          "Gestionale, sito o web3: scegliamo lo stack con il miglior rapporto tra ROI, tempi e complessita.",
+          "Gestionale, sito o web3: scegliamo lo stack con il miglior rapporto tra ROI, tempi e complessità.",
       },
       fromStrategy: {
         eyebrow: "Dalla strategia al rilascio",
@@ -58,27 +55,6 @@ export const translations = {
         subtitle:
           "Qui sotto trovi servizi, output e risultati attesi per ogni area.",
       },
-    },
-    // Impact Section
-    impact: {
-      badge: "Per realtà piccole, impatto grande",
-      title: "Tecnologia che riduce caos e aumenta margine.",
-      description:
-        "Niente 'software su misura' generico: partiamo dai vostri flussi reali, misuriamo il problema, costruiamo una soluzione semplice da usare e facile da mantenere.",
-      features: [
-        {
-          title: "Meno tempo perso",
-          desc: "Automazioni e dashboard per eliminare attività ripetitive e fogli sparsi.",
-        },
-        {
-          title: "Più entrate",
-          desc: "Upsell, fidelizzazione e canali digitali per aumentare scontrino e ritorno cliente.",
-        },
-        {
-          title: "Controllo e sicurezza",
-          desc: "Accessi, ruoli, audit e backup: soluzioni solide, non prototipi fragili.",
-        },
-      ],
     },
     // Three Areas
     threeAreas: {
@@ -131,7 +107,7 @@ export const translations = {
             "SEO tecnica, performance e UX orientata alla conversione.",
           ],
           outcomes: [
-            "Piu lead qualificati e costo acquisizione piu sostenibile",
+            "Più lead qualificati e costo acquisizione più sostenibile",
             "ROI misurabile su traffico e campagne",
             "Canale digitale che supporta vendite e brand",
           ],
@@ -139,16 +115,16 @@ export const translations = {
         {
           title: "Blockchain / Web3",
           subtitle:
-            "Per organizzazioni che richiedono verificabilita o settlement digitale.",
+            "Per organizzazioni che richiedono verificabilità o settlement digitale.",
           points: [
-            "Tracciabilita eventi e notarizzazione di evidenze critiche.",
-            "Identita digitale, auditabilita processi e accessi firmati.",
+            "Tracciabilità eventi e notarizzazione di evidenze critiche.",
+            "Identità digitale, auditabilità processi e accessi firmati.",
             "Formazione e integrazione con sistemi esistenti.",
           ],
           outcomes: [
             "Maggiore trasparenza verso partner e stakeholder",
             "Riduzione del rischio operativo su processi sensibili",
-            "Adozione web3 solo quando il vantaggio e concreto",
+            "Adozione web3 solo quando il vantaggio è concreto",
           ],
         },
       ],
@@ -207,17 +183,20 @@ export const translations = {
     innovation: {
       title: "Web3 quando migliora il business, non per hype.",
       subtitle:
-        "Lo usiamo solo se porta vantaggi concreti su governance, tracciabilita, auditabilita, notarizzazione o automazioni verificabili. Altrimenti restiamo su stack tradizionali.",
+        "Lo usiamo solo se porta vantaggi concreti su governance, tracciabilità, auditabilità, notarizzazione o automazioni verificabili. Altrimenti restiamo su stack tradizionali.",
       useCases: "Use case tipici",
       useCasesTitle: "Quando serve prova tecnica dei dati.",
       useCasesDesc:
-        "Audit, tracciabilita, notarizzazione e settlement: attiviamo web3 solo con un requisito reale.",
+        "Audit, tracciabilità, notarizzazione e settlement: attiviamo web3 solo con un requisito reale.",
       conceptual:
         "Visualizzazione concettuale di flussi verificabili e auditabili.",
       digitalPayments: "Pagamenti digitali (opzionali)",
       checkoutTitle: "Checkout con wallet, quando serve",
       checkoutDesc:
-        "Integriamo wallet quando migliorano conversione internazionale, velocita di incasso o tracciabilita del pagamento.",
+        "Integriamo wallet quando migliorano conversione internazionale, velocità di incasso o tracciabilità del pagamento.",
+      wallet: "Wallet: MetaMask",
+      cryptoReady: "Pronto per pagamenti crypto",
+      step: "Fase",
       focus: "Focus",
       features: [
         {
@@ -226,7 +205,7 @@ export const translations = {
         },
         {
           title: "Notarizzazione",
-          desc: "Quando la data e l'ora devono essere indiscutibili.",
+          desc: "Quando data e ora devono essere indiscutibili.",
         },
         {
           title: "Identità e accessi",
@@ -272,7 +251,7 @@ export const translations = {
         {
           title: "Quanto costa?",
           content:
-            "Partiamo da una discovery a prezzo fisso. Poi proponiamo milestone con budget, scope e output verificabili, cosi il rischio economico resta sotto controllo.",
+            "Partiamo da una discovery a prezzo fisso. Poi proponiamo milestone con budget, scope e output verificabili, così il rischio economico resta sotto controllo.",
         },
         {
           title: "In quanto tempo consegnate?",
@@ -293,9 +272,9 @@ export const translations = {
     },
     // Contact Section
     contact: {
-      title: "Valutiamo fit, impatto e priorita in una call.",
+      title: "Valutiamo allineamento, impatto e priorità in una call.",
       subtitle:
-        "20 minuti gratuiti: capiamo obiettivi, vincoli e ROI atteso. Se non c'e fit, lo diciamo subito.",
+        "20 minuti gratuiti: capiamo obiettivi, vincoli e ROI atteso. Se non c'è allineamento, lo diciamo subito.",
       responseTime: "Rispondiamo entro 24–48h lavorative.",
       formLabels: {
         name: "Nome",
@@ -356,11 +335,10 @@ export const translations = {
         paypalConfig:
           "Link PayPal non configurato. Imposta VITE_PAYPAL_DONATION_URL.",
         paypalRedirect:
-          "PayPal aperto in una nuova scheda. Completa il pagamento li.",
+          "PayPal aperto in una nuova scheda. Completa il pagamento lì.",
         paypalBlocked:
           "Popup bloccato dal browser. Consenti i popup per questo sito e riprova.",
       },
-      tagline: "Domande? Contiamo su WhatsApp o email.",
     },
   },
   en: {
@@ -380,9 +358,6 @@ export const translations = {
       subtitle:
         "Management systems, websites, and web3 solutions designed around clear business outcomes: lower operating costs, more qualified leads, and more reliable processes. Fast delivery, tracked KPIs, measurable results.",
       requestCall: "Request a call",
-      discoverInnovation: "Discover innovation",
-      badges: ["bookings", "loyalty", "shifts", "dashboard"],
-      quote: "Useful technology: less operational friction, more growth.",
       quote2:
         "Our work is done when your team uses it without thinking about it.",
       imageAlt: "Management system mockup",
@@ -420,27 +395,6 @@ export const translations = {
         subtitle:
           "Below you will find services, outputs, and expected results for each area.",
       },
-    },
-    // Impact Section
-    impact: {
-      badge: "For small businesses, big impact",
-      title: "Technology that reduces chaos and increases margins.",
-      description:
-        "No generic 'custom software': we start from your actual workflows, measure the problem, build a simple-to-use and easy-to-maintain solution.",
-      features: [
-        {
-          title: "Less wasted time",
-          desc: "Automations and dashboards to eliminate repetitive tasks and scattered spreadsheets.",
-        },
-        {
-          title: "More revenue",
-          desc: "Upselling, loyalty, and digital channels to increase average transaction and customer return.",
-        },
-        {
-          title: "Control and security",
-          desc: "Access, roles, audits, and backups: solid solutions, not fragile prototypes.",
-        },
-      ],
     },
     // Three Areas
     threeAreas: {
@@ -579,6 +533,9 @@ export const translations = {
       checkoutTitle: "Checkout with wallet, when needed",
       checkoutDesc:
         "We integrate wallets when they improve international conversion, settlement speed, or payment traceability.",
+      wallet: "Wallet: MetaMask",
+      cryptoReady: "Crypto-ready",
+      step: "Step",
       focus: "Focus",
       features: [
         {
@@ -720,7 +677,6 @@ export const translations = {
         paypalBlocked:
           "Popup blocked by the browser. Allow popups for this site and try again.",
       },
-      tagline: "Questions? We're available on WhatsApp or email.",
     },
   },
 };

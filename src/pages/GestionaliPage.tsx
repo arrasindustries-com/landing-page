@@ -20,21 +20,20 @@ export default function GestionaliPage() {
         "We build custom management software for SMBs: backoffice, orders, shifts, inventory, and operational dashboards. Measurable results in 2-6 weeks.",
       keywordsIt: [
         "software gestionale su misura",
-        "gestionale PMI",
-        "sviluppo gestionale aziendale",
+        "gestionale per PMI",
         "software ordini e magazzino",
         "gestione turni personale",
-        "developer software gestionale",
-        "azienda IT gestionale",
+        "automazione processi aziendali",
+        "sviluppo software aziendale",
       ],
       keywordsEn: [
         "custom management software",
-        "SMB management system",
-        "business operations software",
-        "inventory and order software",
+        "SMB management software",
+        "operations workflow software",
+        "inventory and order management software",
         "staff scheduling software",
-        "management software developer",
-        "IT company for SMB software",
+        "business software automation",
+        "management software development agency",
       ],
       path: "/gestionali",
       ogImagePath: "/images/hero.jpg",
@@ -80,15 +79,15 @@ export default function GestionaliPage() {
       ? [
           {
             heading: "Quando serve un gestionale su misura",
-            body: "Un gestionale su misura ha senso quando il team lavora con fogli separati, doppio inserimento dati o procedure manuali non standardizzate. In questi casi il costo non e solo tecnico: aumenta il tempo operativo e cala la qualita del dato.\n\nLa fase iniziale e di analisi: mappa dei flussi attuali, ruoli coinvolti, eccezioni operative e sistemi gia presenti. Il risultato e uno scope chiaro, con priorita e dipendenze.\n\nL'obiettivo non e aggiungere funzioni, ma ridurre passaggi inutili. Ogni modulo viene introdotto solo se migliora un processo misurabile.",
+            body: "Un gestionale su misura ha senso quando il team lavora con fogli separati, doppio inserimento dati o procedure manuali non standardizzate. In questi casi il costo non è solo tecnico: aumenta il tempo operativo e cala la qualità del dato.\n\nLa fase iniziale è di analisi: mappa dei flussi attuali, ruoli coinvolti, eccezioni operative e sistemi già presenti. Il risultato è uno scope chiaro, con priorità e dipendenze.\n\nL'obiettivo non è aggiungere funzioni, ma ridurre passaggi inutili. Ogni modulo viene introdotto solo se migliora un processo misurabile.",
           },
           {
             heading: "Cosa viene implementato",
-            body: "Il nucleo tipico include backoffice ordini, magazzino, turni e report operativi. Le integrazioni coprono strumenti esistenti come POS, canali email, export e calendari.\n\nSono inclusi ruoli e permessi, log eventi e backup. La consegna prevede ambiente di produzione, documentazione essenziale e passaggio operativo al team.\n\nIl rilascio e incrementale: prima versione utilizzabile, poi iterazioni su dati reali di utilizzo. Questo riduce il rischio di sviluppare funzionalita non usate.",
+            body: "Il nucleo tipico include backoffice ordini, magazzino, turni e report operativi. Le integrazioni coprono strumenti esistenti come POS, canali email, export e calendari.\n\nSono inclusi ruoli e permessi, log eventi e backup. La consegna prevede ambiente di produzione, documentazione essenziale e passaggio operativo al team.\n\nIl rilascio è incrementale: prima versione utilizzabile, poi iterazioni su dati reali di utilizzo. Questo riduce il rischio di sviluppare funzionalità non usate.",
           },
           {
             heading: "Come si misura il risultato",
-            body: "Le metriche principali sono ore manuali risparmiate, errori di inserimento ridotti, tempi medi di gestione e puntualita operativa. Questi indicatori vengono definiti prima del rilascio.\n\nDopo l'avvio, il monitoraggio mostra quali flussi migliorano e quali richiedono correzioni. In questo modo ogni iterazione e legata a un obiettivo operativo, non a una preferenza estetica.",
+            body: "Le metriche principali sono ore manuali risparmiate, errori di inserimento ridotti, tempi medi di gestione e puntualità operativa. Questi indicatori vengono definiti prima del rilascio.\n\nDopo l'avvio, il monitoraggio mostra quali flussi migliorano e quali richiedono correzioni. In questo modo ogni iterazione è legata a un obiettivo operativo, non a una preferenza estetica.",
           },
         ]
       : [
@@ -106,7 +105,7 @@ export default function GestionaliPage() {
           },
         ],
     useCases: {
-      title: isIt ? "Per chi e pensato" : "Who it's for",
+      title: isIt ? "Per chi è pensato" : "Who it's for",
       items: isIt
         ? [
             {
@@ -132,7 +131,7 @@ export default function GestionaliPage() {
             {
               title: "Artigiani e produttori",
               description:
-                "Gestione commesse, preventivi, stato avanzamento lavori e contabilita semplificata.",
+                "Gestione commesse, preventivi, stato avanzamento lavori e contabilità semplificata.",
             },
             {
               title: "Servizi e consulenza",
@@ -195,7 +194,7 @@ export default function GestionaliPage() {
             {
               number: "04",
               title: "Iterazioni",
-              desc: "Miglioramenti basati sui dati reali di utilizzo. Roadmap condivisa e priorita misurate.",
+              desc: "Miglioramenti basati sui dati reali di utilizzo. Roadmap condivisa e priorità misurate.",
             },
           ]
         : [
@@ -226,34 +225,34 @@ export default function GestionaliPage() {
         ? "Domande frequenti sui gestionali"
         : "Management software FAQ",
       subtitle: isIt
-        ? "Le risposte alle domande piu comuni."
+        ? "Le risposte alle domande più comuni."
         : "Answers to the most common questions.",
       items: isIt
         ? [
             {
               title: "Quanto costa un gestionale su misura?",
               content:
-                "Dipende dalla complessita. Partiamo da una call gratuita per capire le esigenze, poi forniamo un preventivo dettagliato con prezzo fisso per ogni fase. Nessuna sorpresa.",
+                "Dipende dalla complessità. Partiamo da una call gratuita per capire le esigenze, poi forniamo un preventivo dettagliato con prezzo fisso per ogni fase. Nessuna sorpresa.",
             },
             {
               title: "Posso integrarlo con il mio POS / ERP attuale?",
               content:
-                "Si. Progettiamo il gestionale per integrarsi con gli strumenti esistenti: POS, sistemi di fatturazione, email, calendari e qualsiasi servizio con API disponibile.",
+                "Sì. Progettiamo il gestionale per integrarsi con gli strumenti esistenti: POS, sistemi di fatturazione, email, calendari e qualsiasi servizio con API disponibile.",
             },
             {
               title: "Quanto tempo serve per avere il gestionale funzionante?",
               content:
-                "Il primo MVP usabile e pronto in 2-6 settimane, a seconda della complessita. Il team inizia a usarlo subito, e iteriamo sulle basi dei dati reali.",
+                "Il primo MVP usabile è pronto in 2-6 settimane, a seconda della complessità. Il team inizia a usarlo subito e iteriamo sulla base dei dati reali.",
             },
             {
               title: "Chi gestisce la manutenzione?",
               content:
-                "Offriamo manutenzione continuativa con monitoraggio, oppure handover completo con documentazione e formazione. La scelta e vostra.",
+                "Offriamo manutenzione continuativa con monitoraggio, oppure handover completo con documentazione e formazione. La scelta è vostra.",
             },
             {
               title: "Funziona anche da mobile?",
               content:
-                "Si. Tutti i nostri gestionali sono responsive e funzionano su qualsiasi dispositivo: desktop, tablet e smartphone.",
+                "Sì. Tutti i nostri gestionali sono responsive e funzionano su qualsiasi dispositivo: desktop, tablet e smartphone.",
             },
           ]
         : [
@@ -289,7 +288,7 @@ export default function GestionaliPage() {
         ? "Valutiamo il tuo caso operativo"
         : "Assess your operational case",
       subtitle: isIt
-        ? "Call di 20 minuti per analizzare flussi, vincoli tecnici, integrazioni e priorita di rilascio."
+        ? "Call di 20 minuti per analizzare flussi, vincoli tecnici, integrazioni e priorità di rilascio."
         : "A 20-minute call to review workflows, technical constraints, integrations, and release priorities.",
       buttonText: isIt ? "Prenota una call gratuita" : "Book a free call",
     },

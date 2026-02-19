@@ -46,6 +46,10 @@ export function StickyHeader({
     { href: "#innovazione", label: t.nav.innovation },
     { href: "#faq", label: t.nav.faq },
   ];
+  const toLightThemeLabel =
+    language === "it" ? "Passa al tema chiaro" : "Switch to light theme";
+  const toDarkThemeLabel =
+    language === "it" ? "Passa al tema scuro" : "Switch to dark theme";
 
   return (
     <header
@@ -103,12 +107,8 @@ export function StickyHeader({
                 ? "border border-white/15 bg-white/5 text-white/80 hover:border-white/25 hover:bg-white/10 hover:text-white"
                 : "border border-black/15 bg-black/[0.04] text-[#0F0F11]/80 hover:border-black/25 hover:bg-black/[0.08] hover:text-[#0F0F11]"
             }`}
-            title={
-              theme === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"
-            }
-            aria-label={
-              theme === "dark" ? "Passa al tema chiaro" : "Passa al tema scuro"
-            }
+            title={theme === "dark" ? toLightThemeLabel : toDarkThemeLabel}
+            aria-label={theme === "dark" ? toLightThemeLabel : toDarkThemeLabel}
           >
             {theme === "dark" ? (
               <Sun className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
@@ -207,7 +207,11 @@ export function StickyHeader({
               <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/5 hover:text-white"
+                className={`rounded-lg px-3 py-2.5 text-sm transition-colors ${
+                  theme === "dark"
+                    ? "text-white/70 hover:bg-white/5 hover:text-white"
+                    : "text-[#0F0F11]/70 hover:bg-black/[0.05] hover:text-[#0F0F11]"
+                }`}
               >
                 {t.nav.about}
               </Link>

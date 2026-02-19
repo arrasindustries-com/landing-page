@@ -59,7 +59,7 @@ export function openWhatsApp(form?: ContactRequest, selectedLanguage?: string) {
             : "Ciao! Vorrei prenotare una call gratuita.",
           "",
           `Nome: ${form?.name || "-"}`,
-          `Attivita: ${form?.activity || "-"}`,
+          `Attività: ${form?.activity || "-"}`,
           `Contatto: ${form?.contact || "-"}`,
           ...(userMessage && userMessage.length > 0
             ? []

@@ -13,15 +13,39 @@ const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined
 );
 
+function detectInitialLanguage(): Language {
+  if (typeof window === "undefined") return "it";
+
+  const saved = window.localStorage.getItem("language");
+  if (saved === "it" || saved === "en") return saved;
+
+  const browserLanguages = [
+    window.navigator.language,
+    ...(window.navigator.languages ?? []),
+  ]
+    .filter(Boolean)
+    .map((value) => value.toLowerCase());
+  const hasItalianLanguage = browserLanguages.some((value) =>
+    value.startsWith("it"),
+  );
+  if (hasItalianLanguage) return "it";
+
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone ?? "";
+  const italianTimezones = new Set([
+    "Europe/Rome",
+    "Europe/San_Marino",
+    "Europe/Vatican",
+  ]);
+  if (italianTimezones.has(timezone)) return "it";
+
+  const region = window.navigator.language.split("-")[1]?.toUpperCase();
+  if (region === "IT") return "it";
+
+  return "en";
+}
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguage] = useState<Language>(() => {
-    // Try to get language from localStorage
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("language") as Language | null;
-      return saved || "en";
-    }
-    return "en";
-  });
+  const [language, setLanguage] = useState<Language>(detectInitialLanguage);
 
   // Save language preference to localStorage
   useEffect(() => {

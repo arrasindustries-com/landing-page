@@ -14,7 +14,7 @@ const POSE_SRC: Record<Pose, string> = {
   think: "/mascot/think.png",
   think2: "/mascot/think2.png",
   point: "/mascot/point.png",
-  point2: "/mascot/point2.png", // NB: il tuo file si chiama "poin2.png"
+  point2: "/mascot/point2.png",
   celebrate: "/mascot/celebrate.png",
 };
 

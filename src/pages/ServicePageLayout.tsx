@@ -55,6 +55,11 @@ export default function ServicePageLayout({
   const { language } = useLanguage();
   const { theme } = useTheme();
   const { accent, accentLight, accentGlow } = content.theme;
+  const siteOrigin = (
+    (import.meta.env.VITE_SITE_URL as string | undefined)?.trim() ||
+    "https://arrasindustries.com"
+  ).replace(/\/+$/, "");
+  const canonicalUrl = `${siteOrigin}${content.seo.path}`;
 
   const seoWithFaq: PageSeoConfig = {
     ...content.seo,
@@ -62,7 +67,7 @@ export default function ServicePageLayout({
       ...content.seo.jsonLd,
       {
         "@type": "FAQPage",
-        "@id": `https://arrasindustries.com${content.seo.path}#faq`,
+        "@id": `${canonicalUrl}#faq`,
         mainEntity: content.faq.items.map((item) => ({
           "@type": "Question",
           name: item.title,

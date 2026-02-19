@@ -15,26 +15,26 @@ export default function Web3Page() {
       titleEn:
         "Blockchain & Web3 Solutions for Business | Arras Industries",
       descriptionIt:
-        "Integriamo blockchain e web3 nelle aziende italiane: tracciabilita supply chain, notarizzazione documenti, identita digitale e automazioni verificabili.",
+        "Integriamo blockchain e web3 nelle aziende italiane: tracciabilità di filiera, notarizzazione documenti, identità digitale e automazioni verificabili.",
       descriptionEn:
         "We integrate blockchain and web3 into businesses: supply chain traceability, document notarization, digital identity, and verifiable automations.",
       keywordsIt: [
-        "blockchain per aziende",
-        "web3 per imprese",
-        "tracciabilita blockchain",
-        "notarizzazione blockchain",
+        "soluzioni blockchain per aziende",
+        "integrazioni web3 per imprese",
+        "tracciabilità blockchain",
+        "notarizzazione documentale blockchain",
+        "identità digitale decentralizzata",
+        "smart contract per processi aziendali",
         "integrazione wallet aziendale",
-        "sviluppatore blockchain Italia",
-        "azienda IT web3",
       ],
       keywordsEn: [
-        "blockchain solutions for business",
-        "web3 solutions for companies",
-        "blockchain traceability",
-        "document notarization blockchain",
-        "wallet integration services",
-        "blockchain developer company",
-        "specialized IT web3 company",
+        "blockchain solutions for businesses",
+        "web3 integration services",
+        "blockchain traceability systems",
+        "document notarization on blockchain",
+        "digital identity solutions",
+        "smart contract development for business",
+        "wallet integration for platforms",
       ],
       path: "/web3",
       ogImagePath: "/images/usecase.jpg",
@@ -46,7 +46,7 @@ export default function Web3Page() {
             ? "Soluzioni Blockchain e Web3"
             : "Blockchain & Web3 Solutions",
           description: isIt
-            ? "Integrazione blockchain e web3 per aziende: tracciabilita, notarizzazione e automazioni verificabili."
+            ? "Integrazione blockchain e web3 per aziende: tracciabilità, notarizzazione e automazioni verificabili."
             : "Blockchain and web3 integration for businesses: traceability, notarization, and verifiable automations.",
           provider: {
             "@type": "Organization",
@@ -72,7 +72,7 @@ export default function Web3Page() {
         ? "Blockchain quando serve, non per moda"
         : "Blockchain when it matters, not for trends",
       subtitle: isIt
-        ? "Blockchain e web3 vengono adottati solo con requisiti chiari: verificabilita dei dati, tracciabilita condivisa o automazioni con regole non modificabili."
+        ? "Blockchain e web3 vengono adottati solo con requisiti chiari: verificabilità dei dati, tracciabilità condivisa o automazioni con regole non modificabili."
         : "Blockchain and web3 are used only when requirements are explicit: data verifiability, shared traceability, or automations with non-editable rules.",
       image: "/images/usecase.jpg",
     },
@@ -80,11 +80,11 @@ export default function Web3Page() {
       ? [
           {
             heading: "Quando la blockchain ha senso per la tua azienda",
-            body: "La blockchain non sostituisce ogni sistema dati. E utile quando serve una prova verificabile da terzi e non alterabile nel tempo.\n\nI casi tipici sono: tracciabilita di filiera, notarizzazione documentale con timestamp, audit trail per conformita, regole automatiche eseguite via smart contract.\n\nSe i requisiti non richiedono queste proprieta, la soluzione resta su architettura tradizionale. La scelta tecnica viene fatta su vincoli reali, non su trend.",
+            body: "La blockchain non sostituisce ogni sistema dati. È utile quando serve una prova verificabile da terzi e non alterabile nel tempo.\n\nI casi tipici sono: tracciabilità di filiera, notarizzazione documentale con timestamp, audit trail per conformità, regole automatiche eseguite via smart contract.\n\nSe i requisiti non richiedono queste proprietà, la soluzione resta su architettura tradizionale. La scelta tecnica viene fatta su vincoli reali, non su trend.",
           },
           {
             heading: "I nostri servizi blockchain e web3",
-            body: "I servizi coprono tracciabilita eventi, notarizzazione, identita digitale e controllo accessi, oltre a integrazioni wallet quando richieste da un caso operativo.\n\nOgni implementazione include modello dati, scelta rete, costi transazionali attesi, politiche di sicurezza e integrazione con sistemi esistenti.\n\nLa parte formativa e orientata al team interno: cosa viene registrato, cosa resta off-chain, come leggere evidenze e come gestire eccezioni operative.",
+            body: "I servizi coprono tracciabilità eventi, notarizzazione, identità digitale e controllo accessi, oltre a integrazioni wallet quando richieste da un caso operativo.\n\nOgni implementazione include modello dati, scelta rete, costi transazionali attesi, politiche di sicurezza e integrazione con sistemi esistenti.\n\nLa parte formativa è orientata al team interno: cosa viene registrato, cosa resta off-chain, come leggere evidenze e come gestire eccezioni operative.",
           },
           {
             heading: "Criteri di valutazione e output",
@@ -110,7 +110,7 @@ export default function Web3Page() {
       items: isIt
         ? [
             {
-              title: "Tracciabilita agroalimentare",
+              title: "Tracciabilità agroalimentare",
               description:
                 "Dal campo alla tavola: ogni passaggio registrato e verificabile dal consumatore finale.",
             },
@@ -122,17 +122,17 @@ export default function Web3Page() {
             {
               title: "Supply chain manifatturiera",
               description:
-                "Tracciamento componenti, certificazioni di origine e conformita lungo tutta la catena.",
+                "Tracciamento componenti, certificazioni di origine e conformità lungo tutta la catena.",
             },
             {
-              title: "Audit e conformita",
+              title: "Audit e conformità",
               description:
                 "Trail immutabile per audit regolamentari, compliance e verifiche esterne.",
             },
             {
-              title: "Identita digitale",
+              title: "Identità digitale",
               description:
-                "Sistemi di accesso verificabili dove ogni azione e attribuibile e dimostrabile.",
+                "Sistemi di accesso verificabili dove ogni azione è attribuibile e dimostrabile.",
             },
             {
               title: "Pagamenti internazionali",
@@ -180,7 +180,7 @@ export default function Web3Page() {
             {
               number: "01",
               title: "Valutazione",
-              desc: "Verifichiamo se la blockchain e la scelta giusta per il tuo caso. Se no, proponiamo alternative. 1 settimana.",
+              desc: "Verifichiamo se la blockchain è la scelta giusta per il tuo caso. Se no, proponiamo alternative. 1 settimana.",
             },
             {
               number: "02",
@@ -233,7 +233,7 @@ export default function Web3Page() {
             {
               title: "Serve davvero la blockchain per la mia azienda?",
               content:
-                "Forse no. La blockchain ha senso solo per tracciabilita, notarizzazione o auditabilita. Se il problema si risolve con un database tradizionale, lo diciamo subito.",
+                "Forse no. La blockchain ha senso solo per tracciabilità, notarizzazione o auditabilità. Se il problema si risolve con un database tradizionale, lo diciamo subito.",
             },
             {
               title: "Quanto costa integrare la blockchain?",
@@ -243,17 +243,17 @@ export default function Web3Page() {
             {
               title: "Quale blockchain usate?",
               content:
-                "Scegliamo la chain piu adatta al caso: Ethereum per massima sicurezza, Polygon o Arbitrum per costi ridotti, chain private per dati sensibili. La scelta e motivata, non ideologica.",
+                "Scegliamo la chain più adatta al caso: Ethereum per massima sicurezza, Polygon o Arbitrum per costi ridotti, chain private per dati sensibili. La scelta è motivata, non ideologica.",
             },
             {
               title: "I miei clienti devono avere un wallet crypto?",
               content:
-                "Non necessariamente. Possiamo astrarre la complessita blockchain dietro interfacce familiari. I tuoi clienti usano il sistema senza sapere che c'e una blockchain sotto.",
+                "Non necessariamente. Possiamo astrarre la complessità blockchain dietro interfacce familiari. I tuoi clienti usano il sistema senza sapere che c'è una blockchain sotto.",
             },
             {
-              title: "E sicuro?",
+              title: "È sicuro?",
               content:
-                "La blockchain e intrinsecamente sicura per design. Ma come qualsiasi tecnologia, richiede implementazione corretta. Seguiamo best practice di sicurezza e facciamo audit del codice.",
+                "La blockchain è intrinsecamente sicura per design. Ma come qualsiasi tecnologia, richiede implementazione corretta. Seguiamo best practice di sicurezza e facciamo audit del codice.",
             },
           ]
         : [
@@ -289,7 +289,7 @@ export default function Web3Page() {
         ? "Verifica preliminare del caso d'uso"
         : "Preliminary use-case assessment",
       subtitle: isIt
-        ? "Call di 20 minuti per valutare requisiti, vincoli normativi, costi operativi e fattibilita."
+        ? "Call di 20 minuti per valutare requisiti, vincoli normativi, costi operativi e fattibilità."
         : "20-minute call to review requirements, compliance constraints, operational costs, and feasibility.",
       buttonText: isIt ? "Prenota una call gratuita" : "Book a free call",
     },
