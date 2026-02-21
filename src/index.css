@@ -84,6 +84,16 @@ html[data-theme="dark"] select.support-select option {
   color: #f5f7fa;
 }
 
+/* SEO fallback heading for crawlers without JS rendering */
+.seo-fallback {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
 .ripple-text::after {
   content: attr(data-text);
   position: absolute;
