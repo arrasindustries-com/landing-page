@@ -1,14 +1,14 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "has": [
         {
           "type": "host",
           "value": "www.arrasindustries.com"
         }
       ],
-      "destination": "https://arrasindustries.com/:path*",
+      "destination": "https://arrasindustries.com/$1",
       "permanent": true
     }
   ],
