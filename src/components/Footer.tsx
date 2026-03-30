@@ -1,62 +1,68 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-const linkClass =
-  "rounded-[10px] bg-white/5 px-2 py-1.5 transition-colors hover:bg-white/10 hover:text-white md:rounded-none md:bg-transparent md:px-0 md:py-0";
-const contactClass =
-  "break-words rounded-[10px] bg-white/5 px-2 py-1.5 [overflow-wrap:anywhere] md:rounded-none md:bg-transparent md:px-0 md:py-0";
-const columnClass =
-  "space-y-2 rounded-[14px] border border-white/10 bg-white/[0.03] p-4 md:rounded-none md:border-0 md:bg-transparent md:p-0";
-
 export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="mx-auto max-w-6xl px-4 pb-12">
-      <div className="grid grid-cols-2 gap-3 text-sm text-white/60 md:gap-6 md:grid-cols-[1.2fr_1fr_1fr]">
-        <div className={`col-span-2 md:col-span-1 ${columnClass}`}>
-          <div className="text-white/80">{t.footer.company}</div>
-          <div>{t.footer.description}</div>
-          <div className="text-xs text-white/50">
-            {t.footer.copyright.replace(
-              "{year}",
-              String(new Date().getFullYear()),
-            )}
+    <footer className="mx-auto max-w-7xl px-4 pb-14 pt-6">
+      <div className="rounded-[32px] border border-[var(--border)] bg-[var(--surface)] px-6 py-8 shadow-[var(--shadow)] md:px-8">
+        <div className="grid gap-8 md:grid-cols-[1.3fr_0.9fr_0.9fr]">
+          <div className="space-y-3">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              {t.footer.company}
+            </div>
+            <p className="max-w-md text-sm leading-6 text-[var(--text-muted)]">
+              {t.footer.description}
+            </p>
+            <div className="text-xs text-[var(--text-soft)]">
+              {t.footer.copyright.replace(
+                "{year}",
+                String(new Date().getFullYear()),
+              )}
+            </div>
+            <div>
+              <Link
+                to="/about"
+                className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]"
+              >
+              {t.nav.about}
+              </Link>
+            </div>
           </div>
+
           <div>
-            <Link to="/about" className="text-xs text-white/50 transition-colors hover:text-white/80">
+            <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              {t.footer.sections}
+            </div>
+            <div className="grid grid-cols-1 gap-2 text-sm text-[var(--text-muted)]">
+              <Link to="/about" className="transition-colors hover:text-[var(--text)]">
               {t.nav.about}
-            </Link>
-          </div>
-        </div>
-
-        <div className={columnClass}>
-          <div className="text-white/80">{t.footer.sections}</div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:flex md:flex-col">
-            <Link to="/about" className={linkClass}>
-              {t.nav.about}
-            </Link>
-            <Link to="/#servizi" className={linkClass}>
+              </Link>
+              <Link to="/#servizi" className="transition-colors hover:text-[var(--text)]">
               {t.nav.services}
-            </Link>
-            <Link to="/#storia" className={linkClass}>
+              </Link>
+              <Link to="/#storia" className="transition-colors hover:text-[var(--text)]">
               {t.nav.path}
-            </Link>
-            <Link to="/#processo" className={linkClass}>
+              </Link>
+              <Link to="/#processo" className="transition-colors hover:text-[var(--text)]">
               {t.nav.process}
-            </Link>
-            <Link to="/#faq" className={linkClass}>
+              </Link>
+              <Link to="/#faq" className="transition-colors hover:text-[var(--text)]">
               FAQ
-            </Link>
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <div className={columnClass}>
-          <div className="text-white/80">{t.footer.contacts}</div>
-          <div className="flex flex-col gap-2">
-            <span className={contactClass}>{t.footer.email}</span>
-            <span className={contactClass}>{t.footer.phone}</span>
-            <span className={contactClass}>{t.footer.location}</span>
+          <div>
+            <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              {t.footer.contacts}
+            </div>
+            <div className="flex flex-col gap-2 text-sm text-[var(--text-muted)]">
+              <span className="break-words [overflow-wrap:anywhere]">{t.footer.email}</span>
+              <span>{t.footer.phone}</span>
+              <span>{t.footer.location}</span>
+            </div>
           </div>
         </div>
       </div>

@@ -2,13 +2,18 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { usePageSeo, type PageSeoConfig } from "@/hooks/usePageSeo";
 import { Accordion } from "@/components/Accordion";
 import { Button } from "@/components/Button/Button";
-import { Card } from "@/components/Card/Card";
-import { fadeUp } from "@/types/types";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
-import { useTheme } from "@/contexts/useTheme";
+import { usePageSeo, type PageSeoConfig } from "@/hooks/usePageSeo";
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.2 },
+  transition: { duration: 0.55 },
+};
 
 export interface ServiceTheme {
   accent: string;
@@ -53,8 +58,6 @@ export default function ServicePageLayout({
   content: ServicePageContent;
 }) {
   const { language } = useLanguage();
-  const { theme } = useTheme();
-  const { accent, accentLight, accentGlow } = content.theme;
   const siteOrigin = (
     (import.meta.env.VITE_SITE_URL as string | undefined)?.trim() ||
     "https://arrasindustries.com"
@@ -84,222 +87,190 @@ export default function ServicePageLayout({
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative mx-auto max-w-6xl px-4 pt-16 pb-20">
-        <div className="absolute inset-0 overflow-hidden rounded-3xl">
-          <img
-            src={content.hero.image}
-            alt={content.hero.title}
-            loading="eager"
-            fetchPriority="high"
-            decoding="async"
-            className={`h-full w-full object-cover ${
-              theme === "dark"
-                ? "opacity-20 saturate-[0.3]"
-                : "opacity-36 saturate-[0.78] brightness-[1.32]"
-            }`}
-          />
-          <div
-            className={`absolute inset-0 ${
-              theme === "dark"
-                ? "bg-gradient-to-b from-[#0F0F11]/60 via-[#0F0F11]/80 to-[#0F0F11]"
-                : "bg-gradient-to-b from-[#ffffff]/25 via-[#f7fbff]/72 to-[#F5F7FA]"
-            }`}
-          />
-          {theme === "light" ? (
-            <div className="absolute inset-0 bg-gradient-to-r from-[#F5F7FA] via-transparent to-[#F5F7FA]" />
-          ) : null}
-          {/* Accent-colored ambient glow */}
-          <div
-            className="absolute -top-32 -left-32 h-[400px] w-[400px] rounded-full opacity-[0.12] blur-[120px]"
-            style={{ background: accent }}
-          />
-        </div>
-
-        <motion.div {...fadeUp} className="relative z-10 max-w-3xl py-12">
-          <div
-            className={`mb-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] ${
-              theme === "dark"
-                ? "border bg-white/5"
-                : "border bg-white/80 shadow-[0_8px_18px_-14px_rgba(59,130,246,0.45)]"
-            }`}
-            style={{
-              borderColor: `${accent}40`,
-              color: accentLight,
-            }}
-          >
-            {content.hero.icon}
-            {content.hero.eyebrow}
-          </div>
-          <h1 className="text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
-            {content.hero.title}
-          </h1>
-          <p
-            className={`mt-4 text-lg md:text-xl ${
-              theme === "dark" ? "text-white/70" : "text-[#1f314d]/76"
-            }`}
-          >
-            {content.hero.subtitle}
-          </p>
-          <div className="mt-8">
-            <Link to="/#contatto">
-              <Button
-                className="text-white hover:scale-[1.04] active:scale-[0.97]"
-                style={{
-                  background: accent,
-                  boxShadow: `0 0 28px ${accentGlow}`,
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.background = accentLight)
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.background = accent)
-                }
-              >
-                {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Long-form content sections */}
-      <article className="mx-auto max-w-4xl px-4 pb-16">
-        {content.sections.map((section, i) => (
-          <motion.div key={i} {...fadeUp} className="mb-12">
-            <div className="flex items-start gap-4">
-              <div
-                className="mt-2 hidden h-8 w-[3px] shrink-0 rounded-full md:block"
-                style={{ background: accent }}
-              />
-              <div>
-                <h2 className="mb-4 text-2xl font-semibold tracking-tight md:text-3xl">
-                  {section.heading}
-                </h2>
-                <div className="space-y-4 leading-relaxed text-white/70">
-                  {section.body.split("\n\n").map((paragraph, j) => (
-                    <p key={j}>{paragraph}</p>
-                  ))}
-                </div>
-              </div>
+      <section className="mx-auto max-w-7xl px-4 pb-20 pt-10 md:pb-24 md:pt-16">
+        <div className="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
+          <motion.div {...reveal} className="max-w-3xl">
+            <div
+              className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em]"
+              style={{
+                borderColor: `${content.theme.accent}33`,
+                color: content.theme.accent,
+                backgroundColor: `${content.theme.accent}12`,
+              }}
+            >
+              {content.hero.icon}
+              {content.hero.eyebrow}
             </div>
-          </motion.div>
-        ))}
-      </article>
+            <h1 className="mt-5 text-5xl leading-[0.96] md:text-7xl">
+              {content.hero.title}
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-muted)]">
+              {content.hero.subtitle}
+            </p>
 
-      {/* Use Cases */}
-      <section className="mx-auto max-w-6xl px-4 pb-20">
-        <motion.div {...fadeUp}>
-          <h2 className="mb-8 text-2xl font-semibold tracking-tight md:text-3xl">
-            {content.useCases.title}
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {content.useCases.items.map((uc) => (
-              <div
-                key={uc.title}
-                className="group rounded-[14px] border border-white/10 bg-white/5 p-6 backdrop-blur transition-all duration-300 hover:border-white/20"
-                style={
-                  {
-                    "--uc-glow": accentGlow,
-                  } as React.CSSProperties
-                }
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 20px 50px -20px ${accentGlow}`;
-                  e.currentTarget.style.borderColor = `${accent}50`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = "none";
-                  e.currentTarget.style.borderColor = "";
-                }}
-              >
-                <h3 className="text-lg font-semibold tracking-tight">
-                  {uc.title}
-                </h3>
-                <p className="mt-2 text-sm text-white/70">{uc.description}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Process */}
-      <section className="mx-auto max-w-6xl px-4 pb-20">
-        <motion.div {...fadeUp}>
-          <h2 className="mb-8 text-2xl font-semibold tracking-tight md:text-3xl">
-            {content.process.title}
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {content.process.steps.map((step) => (
-              <div
-                key={step.number}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur"
-              >
-                <div
-                  className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-lg text-lg font-bold"
-                  style={{
-                    background: `${accent}18`,
-                    color: accentLight,
-                  }}
-                >
-                  {step.number}
-                </div>
-                <div className="font-semibold">{step.title}</div>
-                <p className="mt-1 text-sm text-white/70">{step.desc}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      {/* FAQ */}
-      <section className="mx-auto max-w-6xl px-4 pb-16">
-        <motion.div {...fadeUp} className="grid gap-10 md:grid-cols-2">
-          <div>
-            <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-              {content.faq.title}
-            </h2>
-            <p className="mt-2 text-white/70">{content.faq.subtitle}</p>
-          </div>
-          <Accordion items={content.faq.items} accentColor={accent} />
-        </motion.div>
-      </section>
-
-      {/* CTA */}
-      <section className="mx-auto max-w-6xl px-4 pb-24">
-        <motion.div {...fadeUp}>
-          <Card className="relative overflow-hidden border-white/10 bg-white/5 p-8 text-center backdrop-blur">
-            <h2 className="text-2xl font-semibold md:text-3xl">
-              {content.cta.title}
-            </h2>
-            <p className="mt-2 text-white/70">{content.cta.subtitle}</p>
-            <div className="mt-6">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link to="/#contatto">
-                <Button
-                  className="text-white hover:scale-[1.04] active:scale-[0.97]"
-                  style={{
-                    background: accent,
-                    boxShadow: `0 0 28px ${accentGlow}`,
-                  }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.background = accentLight)
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.background = accent)
-                  }
-                >
+                <Button>
                   {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
+              <p className="text-sm text-[var(--text-soft)]">
+                {language === "it"
+                  ? "Call iniziale di 20 minuti, senza impegno."
+                  : "Initial 20-minute call, no commitment."}
+              </p>
             </div>
-            <div className="mt-4 text-xs text-white/50">
-              {language === "it"
-                ? "Call gratuita di 20 minuti, senza impegno."
-                : "Free 20-minute call, no commitment."}
+          </motion.div>
+
+          <motion.aside
+            {...reveal}
+            className="rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
+          >
+            <div className="overflow-hidden rounded-[26px]">
+              <img
+                src={content.hero.image}
+                alt={content.hero.title}
+                className="h-[340px] w-full object-cover"
+                loading="eager"
+              />
             </div>
-            <div
-              className="pointer-events-none absolute -right-24 -bottom-24 h-56 w-56 rounded-full opacity-20 blur-2xl"
-              style={{ background: accent }}
-            />
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                  {language === "it" ? "Ambito" : "Scope"}
+                </div>
+                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                  {content.sections[0]?.heading}
+                </p>
+              </div>
+              <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                  {language === "it" ? "Use case" : "Use cases"}
+                </div>
+                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                  {content.useCases.items.length}{" "}
+                  {language === "it" ? "situazioni tipiche coperte" : "typical scenarios covered"}
+                </p>
+              </div>
+            </div>
+          </motion.aside>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
+        <div className="grid gap-10 lg:grid-cols-[0.34fr_0.66fr]">
+          <motion.aside {...reveal}>
+            <Card className="sticky top-28 bg-[var(--surface-strong)]">
+              <CardHeader>
+                <CardTitle className="text-3xl">
+                  {content.process.title}
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {content.process.steps.map((step) => (
+                    <div key={step.number} className="border-t border-[var(--border)] pt-4 first:border-t-0 first:pt-0">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                        {step.number}
+                      </div>
+                      <div className="mt-2 text-lg font-semibold text-[var(--text)]">
+                        {step.title}
+                      </div>
+                      <p className="mt-2 text-sm leading-7 text-[var(--text-muted)]">
+                        {step.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </motion.aside>
+
+          <article className="space-y-12">
+            {content.sections.map((section) => (
+              <motion.div key={section.heading} {...reveal}>
+                <p
+                  className="text-xs font-semibold uppercase tracking-[0.24em]"
+                  style={{ color: content.theme.accent }}
+                >
+                  {content.hero.eyebrow}
+                </p>
+                <h2 className="mt-4 text-3xl md:text-4xl">{section.heading}</h2>
+                <div className="mt-5 space-y-4">
+                  {section.body.split("\n\n").map((paragraph) => (
+                    <p
+                      key={paragraph}
+                      className="max-w-3xl text-base leading-8 text-[var(--text-muted)]"
+                    >
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </article>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
+        <motion.div {...reveal}>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            {content.useCases.title}
+          </p>
+          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {content.useCases.items.map((item) => (
+              <div
+                key={item.title}
+                className="rounded-[26px] border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]"
+              >
+                <h3 className="text-2xl">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
+        <motion.div {...reveal} className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              FAQ
+            </p>
+            <h2 className="mt-4 text-4xl md:text-5xl">{content.faq.title}</h2>
+            <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
+              {content.faq.subtitle}
+            </p>
+          </div>
+          <Accordion items={content.faq.items} accentColor={content.theme.accent} />
+        </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-24">
+        <motion.div {...reveal}>
+          <Card className="bg-[var(--surface-strong)]">
+            <div className="grid gap-8 p-7 md:grid-cols-[0.9fr_1.1fr] md:p-10">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+                  {language === "it" ? "Prossimo passo" : "Next step"}
+                </p>
+                <h2 className="mt-4 text-4xl md:text-5xl">{content.cta.title}</h2>
+              </div>
+              <div>
+                <p className="text-base leading-8 text-[var(--text-muted)]">
+                  {content.cta.subtitle}
+                </p>
+                <div className="mt-6">
+                  <Link to="/#contatto">
+                    <Button>
+                      {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
           </Card>
         </motion.div>
       </section>

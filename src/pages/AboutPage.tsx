@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
 
 type TeamMember = {
@@ -168,54 +169,88 @@ export default function AboutPage() {
     ],
   });
 
+  const capabilities = isIt
+    ? [
+        "Architettura software e direzione tecnica",
+        "Cybersecurity applicativa e infrastrutturale",
+        "Sviluppo web, integrazioni e manutenzione evolutiva",
+      ]
+    : [
+        "Software architecture and technical direction",
+        "Application and infrastructure cybersecurity",
+        "Web development, integrations, and long-term maintenance",
+      ];
+
   return (
     <>
-      <section className="mx-auto max-w-6xl px-4 pb-20 pt-10">
+      <section className="mx-auto max-w-7xl px-4 pb-24 pt-10 md:pt-16">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="max-w-3xl"
+          className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]"
         >
-          <p className="text-sm uppercase tracking-[0.16em] text-white/60">
-            {isIt ? "Chi siamo" : "About us"}
-          </p>
-          <h1 className="mt-3 text-3xl font-semibold tracking-tight md:text-5xl">
-            {isIt
-              ? "Le persone dietro Arras Industries"
-              : "The people behind Arras Industries"}
-          </h1>
-          <p className="mt-4 text-white/70">
-            {isIt
-              ? "Arras Industries progetta e sviluppa software con un approccio operativo: gestionali, siti web e integrazioni web3 quando richieste dal contesto."
-              : "Arras Industries designs and develops software with an operational approach: management systems, websites, and web3 integrations when the context requires them."}
-          </p>
+          <div className="max-w-3xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              {isIt ? "Chi siamo" : "About us"}
+            </p>
+            <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
+              {isIt
+                ? "Un team tecnico con impostazione operativa."
+                : "A technical team with an operational mindset."}
+            </h1>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--text-muted)]">
+              {isIt
+                ? "Arras Industries progetta e sviluppa software per aziende che vogliono processi più chiari, strumenti più affidabili e scelte tecniche motivate dal contesto. Lavoriamo su gestionali, siti web e integrazioni web3 quando servono davvero."
+                : "Arras Industries designs and builds software for companies that want clearer processes, more reliable tools, and technical decisions grounded in context. We work on management software, websites, and web3 integrations when they genuinely help."}
+            </p>
+          </div>
+
+          <Card className="bg-[var(--surface-strong)]">
+            <CardHeader>
+              <CardTitle className="text-3xl">
+                {isIt ? "Competenze chiave" : "Core capabilities"}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                {capabilities.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-[20px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-sm leading-6 text-[var(--text-muted)]"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </motion.div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
           {team.map((member, index) => (
             <motion.article
               key={member.name}
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.08 * index }}
-              className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur"
+              className="overflow-hidden rounded-[30px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]"
             >
               <img
                 src={member.image}
                 alt={member.name}
-                className="h-72 w-full object-cover"
+                className="h-80 w-full object-cover"
                 style={{ objectPosition: member.imagePosition }}
                 loading="lazy"
               />
-              <div className="space-y-3 p-5">
+              <div className="space-y-4 p-6">
                 <div>
-                  <h2 className="text-xl font-semibold text-white">
+                  <h2 className="text-2xl font-semibold text-[var(--text)]">
                     {member.name}
                   </h2>
-                  <p className="text-sm text-[#93C5FD]">{member.role}</p>
+                  <p className="mt-2 text-sm text-[var(--text-soft)]">{member.role}</p>
                 </div>
-                <p className="text-sm leading-relaxed text-white/75">
+                <p className="text-sm leading-7 text-[var(--text-muted)]">
                   {member.description}
                 </p>
               </div>

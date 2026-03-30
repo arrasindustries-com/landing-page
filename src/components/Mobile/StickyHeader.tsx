@@ -35,9 +35,7 @@ export function StickyHeader({
   };
 
   const navLinkClass =
-    theme === "dark"
-      ? "relative hover:text-white transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#3B82F6] after:transition-all after:duration-300 hover:after:w-full"
-      : "relative hover:text-[#0F0F11] transition-colors duration-200 after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-[#2563EB] after:transition-all after:duration-300 hover:after:w-full";
+    "relative text-sm text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]";
 
   const navLinks = [
     { href: "#storia", label: t.nav.path },
@@ -53,31 +51,31 @@ export function StickyHeader({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl ${
-        theme === "dark"
-          ? "border-b border-white/[0.06] bg-[#0F0F11]/90"
-          : "border-b border-black/10 bg-[#F5F7FA]/90"
-      }`}
+      className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] backdrop-blur-xl"
+      style={{
+        backgroundColor:
+          theme === "dark" ? "rgba(20, 17, 15, 0.82)" : "rgba(243, 238, 228, 0.82)",
+      }}
     >
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
-        {/* Logo */}
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
         <Link to="/" className="flex items-center gap-3">
-          <img
-            src={
-              theme === "dark"
-                ? "/p4-underline-cyan.png"
-                : "/p4-underline-black.png"
-            }
-            alt="Arras Industries"
-            className="h-9 w-auto"
-          />
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--text)]">
+            AI
+          </div>
+          <div>
+            <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              Arras Industries
+            </div>
+            <div className="text-sm text-[var(--text-muted)]">
+              {language === "it"
+                ? "Software per operazioni reali"
+                : "Software for real operations"}
+            </div>
+          </div>
         </Link>
 
-        {/* Desktop nav */}
         <nav
-          className={`hidden items-center gap-7 text-sm md:flex ${
-            theme === "dark" ? "text-white/60" : "text-[#0F0F11]/70"
-          }`}
+          className="hidden items-center gap-7 md:flex"
         >
           {navLinks.map((link) => (
             <a
@@ -97,16 +95,10 @@ export function StickyHeader({
           </Link>
         </nav>
 
-        {/* Actions */}
         <div className="flex items-center gap-2">
-          {/* Theme toggle */}
           <button
             onClick={toggleTheme}
-            className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-medium backdrop-blur transition-all duration-300 ${
-              theme === "dark"
-                ? "border border-white/15 bg-white/5 text-white/80 hover:border-white/25 hover:bg-white/10 hover:text-white"
-                : "border border-black/15 bg-black/[0.04] text-[#0F0F11]/80 hover:border-black/25 hover:bg-black/[0.08] hover:text-[#0F0F11]"
-            }`}
+            className="group relative flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm font-medium text-[var(--text-muted)] transition-all duration-300 hover:border-[var(--border-strong)] hover:text-[var(--text)]"
             title={theme === "dark" ? toLightThemeLabel : toDarkThemeLabel}
             aria-label={theme === "dark" ? toLightThemeLabel : toDarkThemeLabel}
           >
@@ -117,14 +109,9 @@ export function StickyHeader({
             )}
           </button>
 
-          {/* Language toggle */}
           <button
             onClick={toggleLanguage}
-            className={`group relative flex items-center gap-1.5 rounded-full px-2.5 py-1.5 text-sm font-medium backdrop-blur transition-all duration-300 ${
-              theme === "dark"
-                ? "border border-white/15 bg-white/5 text-white/80 hover:border-white/25 hover:bg-white/10 hover:text-white"
-                : "border border-black/15 bg-black/[0.04] text-[#0F0F11]/80 hover:border-black/25 hover:bg-black/[0.08] hover:text-[#0F0F11]"
-            }`}
+            className="group relative flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm font-medium text-[var(--text-muted)] transition-all duration-300 hover:border-[var(--border-strong)] hover:text-[var(--text)]"
             title={
               language === "it" ? "Switch to English" : "Passa all'italiano"
             }
@@ -144,22 +131,16 @@ export function StickyHeader({
             </span>
           </button>
 
-          {/* CTA desktop */}
           <Button
             onClick={() => handleNavClick("#contatto")}
-            className="hidden bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97] sm:inline-flex"
+            className="hidden sm:inline-flex"
           >
             {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
           </Button>
 
-          {/* Hamburger - mobile only */}
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className={`inline-flex h-9 w-9 items-center justify-center rounded-lg md:hidden ${
-              theme === "dark"
-                ? "border border-white/15 bg-white/5 text-white/80"
-                : "border border-black/15 bg-black/[0.04] text-[#0F0F11]/80"
-            }`}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] md:hidden"
             aria-label="Menu"
           >
             {mobileOpen ? (
@@ -171,7 +152,6 @@ export function StickyHeader({
         </div>
       </div>
 
-      {/* Mobile menu */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.nav
@@ -179,13 +159,9 @@ export function StickyHeader({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className={`overflow-hidden md:hidden ${
-              theme === "dark"
-                ? "border-t border-white/[0.06]"
-                : "border-t border-black/10"
-            }`}
+            className="overflow-hidden border-t border-[var(--border)] md:hidden"
           >
-            <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3">
+            <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => (
                 <a
                   key={link.href}
@@ -195,11 +171,7 @@ export function StickyHeader({
                     setMobileOpen(false);
                     requestAnimationFrame(() => handleNavClick(link.href));
                   }}
-                  className={`rounded-lg px-3 py-2.5 text-sm transition-colors ${
-                    theme === "dark"
-                      ? "text-white/70 hover:bg-white/5 hover:text-white"
-                      : "text-[#0F0F11]/70 hover:bg-black/[0.05] hover:text-[#0F0F11]"
-                  }`}
+                  className="rounded-[18px] px-4 py-3 text-sm text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
                 >
                   {link.label}
                 </a>
@@ -207,11 +179,7 @@ export function StickyHeader({
               <Link
                 to="/about"
                 onClick={() => setMobileOpen(false)}
-                className={`rounded-lg px-3 py-2.5 text-sm transition-colors ${
-                  theme === "dark"
-                    ? "text-white/70 hover:bg-white/5 hover:text-white"
-                    : "text-[#0F0F11]/70 hover:bg-black/[0.05] hover:text-[#0F0F11]"
-                }`}
+                className="rounded-[18px] px-4 py-3 text-sm text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
               >
                 {t.nav.about}
               </Link>
@@ -221,7 +189,7 @@ export function StickyHeader({
                     setMobileOpen(false);
                     requestAnimationFrame(() => handleNavClick("#contatto"));
                   }}
-                  className="flex-1 bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)]"
+                  className="flex-1"
                 >
                   {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
                 </Button>

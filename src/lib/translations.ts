@@ -6,9 +6,9 @@ export const translations = {
     nav: {
       services: "Servizi",
       about: "Chi siamo",
-      path: "Percorso",
+      path: "Metodo",
       process: "Processo",
-      innovation: "Innovazione",
+      innovation: "Web3",
       faq: "FAQ",
       letsTalk: "Parliamone",
     },
@@ -346,9 +346,9 @@ export const translations = {
     nav: {
       services: "Services",
       about: "About us",
-      path: "Path",
+      path: "Approach",
       process: "Process",
-      innovation: "Innovation",
+      innovation: "Web3",
       faq: "FAQ",
       letsTalk: "Let's talk",
     },

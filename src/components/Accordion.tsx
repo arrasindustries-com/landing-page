@@ -21,18 +21,18 @@ export function Accordion({
         return (
           <div
             key={idx}
-            className="rounded-[12px] border border-white/10 bg-white/5 backdrop-blur transition-colors duration-200"
+            className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] transition-colors duration-200"
             style={
               isOpen && accentColor
-                ? { borderColor: `${accentColor}40` }
+                ? { borderColor: `${accentColor}55` }
                 : undefined
             }
           >
             <button
-              className="flex w-full items-center justify-between gap-4 p-5 text-left text-white"
+              className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-[var(--text)] md:px-7"
               onClick={() => setOpen(isOpen ? null : idx)}
             >
-              <span className="font-medium">{it.title}</span>
+              <span className="font-medium leading-6">{it.title}</span>
               <ChevronDown
                 className={cn(
                   "h-4 w-4 shrink-0 transition-transform",
@@ -44,7 +44,7 @@ export function Accordion({
               />
             </button>
             {isOpen && (
-              <div className="px-5 pb-5 text-sm text-white/70">
+              <div className="px-6 pb-6 text-sm leading-6 text-[var(--text-muted)] md:px-7">
                 {it.content}
               </div>
             )}
