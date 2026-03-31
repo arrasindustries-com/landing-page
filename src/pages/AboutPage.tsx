@@ -183,7 +183,7 @@ export default function AboutPage() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-24 pt-10 md:pt-16">
+      <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 md:pt-16">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}

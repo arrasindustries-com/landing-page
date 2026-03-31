@@ -4,9 +4,15 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Accordion } from "@/components/Accordion";
 import { Button } from "@/components/Button/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
 import { InputLike } from "@/components/Input/InputLike";
+import { SupportSection } from "@/components/SupportUs";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { openWhatsApp, scrollToId } from "@/lib/utils";
@@ -126,10 +132,8 @@ export default function HomePage() {
   const heroCopy = isItalian
     ? {
         eyebrow: "Software per PMI che vogliono ordine, velocità e controllo",
-        title:
-          "Costruiamo strumenti digitali che semplificano i processi e fanno lavorare meglio il team.",
-        body:
-          "Gestionale, sito o layer web3: partiamo da obiettivi operativi chiari, definiamo cosa deve cambiare davvero e consegniamo una soluzione che resta leggibile, usabile e misurabile.",
+        title: "Costruiamo strumenti digitali che semplificano i processi.",
+        body: "Gestionale, sito o layer web3: partiamo da obiettivi operativi chiari, definiamo cosa deve cambiare davvero e consegniamo una soluzione che resta leggibile, usabile e misurabile.",
         primary: "Prenota una call",
         secondary: "Esplora i servizi",
         note: "Discovery breve, scope chiaro, rilascio misurabile.",
@@ -142,10 +146,8 @@ export default function HomePage() {
       }
     : {
         eyebrow: "Software for SMBs that need order, speed, and control",
-        title:
-          "We build digital tools that simplify operations and help teams work with more clarity.",
-        body:
-          "Management software, websites, or web3 layers: we start from operational goals, define what actually needs to change, and deliver something that stays readable, usable, and measurable.",
+        title: "We build digital tools that simplify operations.",
+        body: "Management software, websites, or web3 layers: we start from operational goals, define what actually needs to change, and deliver something that stays readable, usable, and measurable.",
         primary: "Book a call",
         secondary: "Explore services",
         note: "Short discovery, clear scope, measurable release.",
@@ -209,7 +211,7 @@ export default function HomePage() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-24 pt-10 md:pb-28 md:pt-16">
+      <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 md:pb-28 md:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -236,7 +238,9 @@ export default function HomePage() {
               </Button>
             </div>
 
-            <p className="mt-5 text-sm text-[var(--text-soft)]">{heroCopy.note}</p>
+            <p className="mt-5 text-sm text-[var(--text-soft)]">
+              {heroCopy.note}
+            </p>
 
             <div className="mt-10 grid overflow-hidden rounded-[20px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)] sm:grid-cols-3">
               {credibility.map((item) => (
@@ -258,7 +262,11 @@ export default function HomePage() {
           <motion.aside
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: 0.65,
+              delay: 0.08,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
           >
             <div className="overflow-hidden rounded-[18px]">
@@ -283,7 +291,9 @@ export default function HomePage() {
                     <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
                       0{index + 1}
                     </div>
-                    <p className="text-sm leading-6 text-[var(--text-muted)]">{point}</p>
+                    <p className="text-sm leading-6 text-[var(--text-muted)]">
+                      {point}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -293,7 +303,10 @@ export default function HomePage() {
       </section>
 
       <section id="storia" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div {...reveal} className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]">
+        <motion.div
+          {...reveal}
+          className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]"
+        >
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
               {isItalian ? "Metodo" : "Approach"}
@@ -317,7 +330,9 @@ export default function HomePage() {
                   <CardTitle className="text-2xl">{item.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm leading-7 text-[var(--text-muted)]">{item.desc}</p>
+                  <p className="text-sm leading-7 text-[var(--text-muted)]">
+                    {item.desc}
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -326,14 +341,19 @@ export default function HomePage() {
       </section>
 
       <section id="servizi" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div {...reveal}>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-            {t.nav.services}
-          </p>
-          <h2 className="mt-4 max-w-3xl text-4xl md:text-5xl">
-            {t.services.title}
-          </h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-[var(--text-muted)]">
+        <motion.div
+          {...reveal}
+          className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end"
+        >
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              {t.nav.services}
+            </p>
+            <h2 className="mt-4 max-w-3xl text-4xl md:text-5xl">
+              {t.services.title}
+            </h2>
+          </div>
+          <p className="max-w-2xl text-base leading-8 text-[var(--text-muted)] lg:justify-self-end">
             {t.services.subtitle}
           </p>
         </motion.div>
@@ -346,7 +366,9 @@ export default function HomePage() {
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                     0{index + 1}
                   </p>
-                  <CardTitle className="mt-3 text-3xl">{service.title}</CardTitle>
+                  <CardTitle className="mt-3 text-3xl">
+                    {service.title}
+                  </CardTitle>
                   <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
                     {service.subtitle}
                   </p>
@@ -356,7 +378,9 @@ export default function HomePage() {
                     {service.points.map((point) => (
                       <div key={point} className="flex items-start gap-3">
                         <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--text)]" />
-                        <p className="text-sm leading-6 text-[var(--text-muted)]">{point}</p>
+                        <p className="text-sm leading-6 text-[var(--text-muted)]">
+                          {point}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -367,7 +391,10 @@ export default function HomePage() {
                     </p>
                     <div className="mt-3 space-y-2">
                       {service.outcomes.map((outcome) => (
-                        <p key={outcome} className="text-sm leading-6 text-[var(--text)]">
+                        <p
+                          key={outcome}
+                          className="text-sm leading-6 text-[var(--text)]"
+                        >
                           {outcome}
                         </p>
                       ))}
@@ -391,7 +418,10 @@ export default function HomePage() {
       </section>
 
       <section id="processo" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div {...reveal} className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+        <motion.div
+          {...reveal}
+          className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start"
+        >
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
               {t.nav.process}
@@ -402,28 +432,50 @@ export default function HomePage() {
             <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
               {t.process.subtitle}
             </p>
+            <div className="mt-8 rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                {isItalian ? "Governance" : "Governance"}
+              </p>
+              <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                {isItalian
+                  ? "Ogni fase ha un output chiaro e una decisione condivisa. Questo riduce revisioni inutili e rende il progetto leggibile anche per chi non è tecnico."
+                  : "Each phase has a clear output and a shared decision gate. That reduces unnecessary revisions and keeps the project readable even for non-technical stakeholders."}
+              </p>
+            </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-2">
-            {t.process.phaseSteps.map((step) => (
-              <Card key={step.title}>
-                <CardHeader>
-                  <CardTitle className="text-2xl">{step.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-7 text-[var(--text-muted)]">{step.desc}</p>
-                  <p className="mt-4 text-sm font-semibold text-[var(--text)]">
-                    {step.metric}
+          <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
+            {t.process.phaseSteps.map((step, index) => (
+              <div
+                key={step.title}
+                className="grid gap-4 border-t border-[var(--border)] px-6 py-6 first:border-t-0 md:grid-cols-[72px_minmax(0,1fr)_minmax(0,0.88fr)] md:gap-6"
+              >
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
+                  0{index + 1}
+                </div>
+                <div>
+                  <h3 className="text-2xl">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                    {step.desc}
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+                <div className="text-sm leading-7 text-[var(--text)] md:border-l md:border-[var(--border)] md:pl-6">
+                  {step.metric}
+                </div>
+              </div>
             ))}
           </div>
         </motion.div>
       </section>
 
-      <section id="innovazione" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div {...reveal} className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
+      <section
+        id="innovazione"
+        className="mx-auto max-w-7xl px-4 pb-24 md:pb-28"
+      >
+        <motion.div
+          {...reveal}
+          className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
+        >
           <Card className="bg-[var(--surface-strong)]">
             <CardHeader>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
@@ -455,7 +507,7 @@ export default function HomePage() {
             </CardContent>
           </Card>
 
-          <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
+          <div className="self-start overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
             {impactHighlights.map((item) => (
               <div
                 key={item.title}
@@ -477,7 +529,10 @@ export default function HomePage() {
       </section>
 
       <section id="faq" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div {...reveal} className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
+        <motion.div
+          {...reveal}
+          className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]"
+        >
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
               FAQ
@@ -491,35 +546,40 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      <section id="contatto" className="mx-auto max-w-7xl px-4 pb-24">
+      <SupportSection />
+
+      <section id="contatto" className="mx-auto max-w-7xl px-4 pb-8 md:pb-10">
         <motion.div {...reveal}>
           <Card className="overflow-hidden">
-            <div className="grid gap-10 p-7 md:grid-cols-[0.85fr_1.15fr] md:p-10">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-                  {isItalian ? "Contatto" : "Contact"}
-                </p>
-                <h2 className="mt-4 max-w-lg text-4xl md:text-5xl">
-                  {t.contact.title}
-                </h2>
-                <p className="mt-4 max-w-md text-base leading-8 text-[var(--text-muted)]">
-                  {t.contact.subtitle}
-                </p>
-                <div className="mt-8 space-y-4">
+            <div className="p-7 md:p-10">
+              <div className="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-end">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+                    {isItalian ? "Contatto" : "Contact"}
+                  </p>
+                  <h2 className="mt-4 max-w-lg text-4xl md:text-5xl">
+                    {t.contact.title}
+                  </h2>
+                </div>
+
+                <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
+                  <p className="max-w-2xl text-base leading-8 text-[var(--text-muted)]">
+                    {t.contact.subtitle}
+                  </p>
                   <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                     <p className="text-sm leading-7 text-[var(--text-muted)]">
                       {isItalian
                         ? "Se il progetto non è ancora definito, va bene lo stesso: ci basta capire il problema operativo, il contesto e i vincoli."
                         : "If the project is not fully defined yet, that is fine: we only need to understand the operational problem, context, and constraints."}
                     </p>
+                    <p className="mt-3 text-sm text-[var(--text-soft)]">
+                      {t.contact.responseTime}
+                    </p>
                   </div>
-                  <p className="text-sm text-[var(--text-soft)]">
-                    {t.contact.responseTime}
-                  </p>
                 </div>
               </div>
 
-              <div>
+              <div className="mt-8 border-t border-[var(--border)] pt-8">
                 <div className="grid gap-3 md:grid-cols-2">
                   <InputLike
                     label={t.contact.formLabels.name}
@@ -533,15 +593,13 @@ export default function HomePage() {
                     value={contactForm.activity}
                     onChange={(value) => setContactField("activity", value)}
                   />
-                  <div className="md:col-span-2">
-                    <InputLike
-                      label={t.contact.formLabels.contact}
-                      placeholder={t.contact.formPlaceholders.contact}
-                      value={contactForm.contact}
-                      onChange={(value) => setContactField("contact", value)}
-                    />
-                  </div>
-                  <div className="md:col-span-2">
+                  <InputLike
+                    label={t.contact.formLabels.contact}
+                    placeholder={t.contact.formPlaceholders.contact}
+                    value={contactForm.contact}
+                    onChange={(value) => setContactField("contact", value)}
+                  />
+                  <div className="md:row-span-2">
                     <InputLike
                       label={t.contact.formLabels.objective}
                       placeholder={t.contact.formPlaceholders.objective}
@@ -552,19 +610,29 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <Button onClick={() => openWhatsApp(contactForm, language)}>
-                    {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" onClick={() => scrollToId("servizi")}>
-                    {t.nav.services}
-                  </Button>
+                <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                  <p className="max-w-xl text-sm leading-7 text-[var(--text-muted)]">
+                    {isItalian
+                      ? "Più il contesto è concreto, più velocemente possiamo dirti se esiste allineamento tra obiettivo, budget e tempi."
+                      : "The more concrete the context, the faster we can tell you whether there is alignment between objective, budget, and timing."}
+                  </p>
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Button onClick={() => openWhatsApp(contactForm, language)}>
+                      {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => scrollToId("servizi")}
+                    >
+                      {t.nav.services}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           </Card>
 
-          <div className="mt-10">
+          <div className="mt-8">
             <Footer />
           </div>
         </motion.div>

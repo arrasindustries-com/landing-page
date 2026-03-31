@@ -87,7 +87,7 @@ export default function ServicePageLayout({
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-20 pt-10 md:pb-24 md:pt-16">
+      <section className="mx-auto max-w-7xl px-4 pb-20 pt-14 md:pb-24 md:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
           <motion.div {...reveal} className="max-w-3xl">
             <p

@@ -34,6 +34,20 @@ export function StickyHeader({
     }
   };
 
+  const handleMobileNavClick = (hash: string) => {
+    const id = hash.replace("#", "");
+    setMobileOpen(false);
+
+    if (isHome) {
+      window.setTimeout(() => {
+        scrollToId(id);
+      }, 260);
+      return;
+    }
+
+    navigate("/" + hash);
+  };
+
   const navLinkClass =
     "relative text-sm text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]";
 
@@ -168,8 +182,7 @@ export function StickyHeader({
                   href={link.href}
                   onClick={(e) => {
                     e.preventDefault();
-                    setMobileOpen(false);
-                    requestAnimationFrame(() => handleNavClick(link.href));
+                    handleMobileNavClick(link.href);
                   }}
                   className="rounded-[18px] px-4 py-3 text-sm text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
                 >
@@ -186,8 +199,7 @@ export function StickyHeader({
               <div className="mt-2 flex gap-2">
                 <Button
                   onClick={() => {
-                    setMobileOpen(false);
-                    requestAnimationFrame(() => handleNavClick("#contatto"));
+                    handleMobileNavClick("#contatto");
                   }}
                   className="flex-1"
                 >
