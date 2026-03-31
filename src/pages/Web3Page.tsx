@@ -75,6 +75,7 @@ export default function Web3Page() {
         ? "Blockchain e web3 vengono adottati solo con requisiti chiari: verificabilità dei dati, tracciabilità condivisa o automazioni con regole non modificabili."
         : "Blockchain and web3 are used only when requirements are explicit: data verifiability, shared traceability, or automations with non-editable rules.",
       image: "/images/usecase.jpg",
+      visual: "verification",
     },
     sections: isIt
       ? [

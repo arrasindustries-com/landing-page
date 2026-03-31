@@ -75,6 +75,7 @@ export default function SitiWebPage() {
         ? "Progettiamo siti orientati a obiettivi operativi: richieste contatto, prenotazioni, lead qualificati e tracciamento dei risultati."
         : "We build websites with operational goals: contact requests, bookings, qualified leads, and measurable tracking.",
       image: "/images/process.jpg",
+      visual: "web",
     },
     sections: isIt
       ? [

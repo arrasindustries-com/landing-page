@@ -301,7 +301,7 @@ export function SupportSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55 }}
-        className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-start"
+        className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center"
       >
         <div className="lg:pr-8">
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
@@ -344,7 +344,7 @@ export function SupportSection() {
           </div>
         </div>
 
-        <div className="self-start rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6">
+        <div className="self-center rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6">
           <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">

@@ -17,6 +17,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { openWhatsApp, scrollToId } from "@/lib/utils";
 import type { ContactRequest } from "@/types/types";
+import { ServiceVisual } from "@/components/Visual/ServiceVisual";
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -269,15 +270,10 @@ export default function HomePage() {
             }}
             className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
           >
-            <div className="overflow-hidden rounded-[18px]">
-              <img
-                src="/images/hero.jpg"
-                alt={t.hero.imageAlt}
-                className="h-[320px] w-full object-cover"
-                loading="eager"
-                fetchPriority="high"
-              />
-            </div>
+            <ServiceVisual
+              variant="overview"
+              className="h-[320px] md:h-[360px]"
+            />
             <div className="mt-6">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
                 {heroCopy.panelTitle}
@@ -474,7 +470,7 @@ export default function HomePage() {
       >
         <motion.div
           {...reveal}
-          className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start"
+          className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
         >
           <Card className="bg-[var(--surface-strong)]">
             <CardHeader>
@@ -507,7 +503,7 @@ export default function HomePage() {
             </CardContent>
           </Card>
 
-          <div className="self-start overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
+          <div className="self-center overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
             {impactHighlights.map((item) => (
               <div
                 key={item.title}
@@ -551,35 +547,55 @@ export default function HomePage() {
       <section id="contatto" className="mx-auto max-w-7xl px-4 pb-8 md:pb-10">
         <motion.div {...reveal}>
           <Card className="overflow-hidden">
-            <div className="p-7 md:p-10">
-              <div className="grid gap-8 lg:grid-cols-[0.76fr_1.24fr] lg:items-end">
+            <div className="grid gap-8 p-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-10 md:p-10">
+              <div className="flex h-full flex-col">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
                     {isItalian ? "Contatto" : "Contact"}
                   </p>
-                  <h2 className="mt-4 max-w-lg text-4xl md:text-5xl">
+                  <h2 className="mt-4 max-w-md text-4xl md:text-5xl">
                     {t.contact.title}
                   </h2>
-                </div>
-
-                <div className="grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-                  <p className="max-w-2xl text-base leading-8 text-[var(--text-muted)]">
+                  <p className="mt-5 max-w-md text-base leading-8 text-[var(--text-muted)]">
                     {t.contact.subtitle}
                   </p>
-                  <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-                    <p className="text-sm leading-7 text-[var(--text-muted)]">
+                </div>
+
+                <div className="mt-8 grid gap-3">
+                  <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                    <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                      {isItalian ? "Input utile" : "Helpful input"}
+                    </div>
+                    <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
                       {isItalian
-                        ? "Se il progetto non è ancora definito, va bene lo stesso: ci basta capire il problema operativo, il contesto e i vincoli."
-                        : "If the project is not fully defined yet, that is fine: we only need to understand the operational problem, context, and constraints."}
+                        ? "Descrivi il problema operativo, i vincoli e ciò che oggi rallenta il team. Non serve avere già la soluzione."
+                        : "Describe the operational problem, the constraints, and what is slowing the team down today. You do not need to have the solution already."}
                     </p>
-                    <p className="mt-3 text-sm text-[var(--text-soft)]">
-                      {t.contact.responseTime}
-                    </p>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                        {isItalian ? "Tempi" : "Timing"}
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                        {t.contact.responseTime}
+                      </p>
+                    </div>
+                    <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                        {isItalian ? "Formato" : "Format"}
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                        {isItalian
+                          ? "Messaggio breve e diretto. Poi, se serve, approfondiamo in call."
+                          : "A short and direct message. If needed, we go deeper in the call."}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 border-t border-[var(--border)] pt-8">
+              <div className="self-center rounded-[20px] border border-[var(--border)] bg-[var(--surface-strong)] p-5 md:p-6">
                 <div className="grid gap-3 md:grid-cols-2">
                   <InputLike
                     label={t.contact.formLabels.name}
@@ -588,18 +604,20 @@ export default function HomePage() {
                     onChange={(value) => setContactField("name", value)}
                   />
                   <InputLike
-                    label={t.contact.formLabels.activity}
-                    placeholder={t.contact.formPlaceholders.activity}
-                    value={contactForm.activity}
-                    onChange={(value) => setContactField("activity", value)}
-                  />
-                  <InputLike
                     label={t.contact.formLabels.contact}
                     placeholder={t.contact.formPlaceholders.contact}
                     value={contactForm.contact}
                     onChange={(value) => setContactField("contact", value)}
                   />
-                  <div className="md:row-span-2">
+                  <div className="md:col-span-2">
+                    <InputLike
+                      label={t.contact.formLabels.activity}
+                      placeholder={t.contact.formPlaceholders.activity}
+                      value={contactForm.activity}
+                      onChange={(value) => setContactField("activity", value)}
+                    />
+                  </div>
+                  <div className="md:col-span-2">
                     <InputLike
                       label={t.contact.formLabels.objective}
                       placeholder={t.contact.formPlaceholders.objective}
@@ -610,22 +628,24 @@ export default function HomePage() {
                   </div>
                 </div>
 
-                <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                  <p className="max-w-xl text-sm leading-7 text-[var(--text-muted)]">
-                    {isItalian
-                      ? "Più il contesto è concreto, più velocemente possiamo dirti se esiste allineamento tra obiettivo, budget e tempi."
-                      : "The more concrete the context, the faster we can tell you whether there is alignment between objective, budget, and timing."}
-                  </p>
-                  <div className="flex flex-col gap-3 sm:flex-row">
-                    <Button onClick={() => openWhatsApp(contactForm, language)}>
-                      {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={() => scrollToId("servizi")}
-                    >
-                      {t.nav.services}
-                    </Button>
+                <div className="mt-6 border-t border-[var(--border)] pt-6">
+                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+                    <p className="max-w-xl text-sm leading-7 text-[var(--text-muted)]">
+                      {isItalian
+                        ? "Più il contesto è concreto, più velocemente possiamo dirti se esiste allineamento tra obiettivo, budget e tempi."
+                        : "The more concrete the context, the faster we can tell you whether there is alignment between objective, budget, and timing."}
+                    </p>
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <Button onClick={() => openWhatsApp(contactForm, language)}>
+                        {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => scrollToId("servizi")}
+                      >
+                        {t.nav.services}
+                      </Button>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -7,6 +7,10 @@ import { Button } from "@/components/Button/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
 import { usePageSeo, type PageSeoConfig } from "@/hooks/usePageSeo";
+import {
+  ServiceVisual,
+  type ServiceVisualVariant,
+} from "@/components/Visual/ServiceVisual";
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -30,6 +34,7 @@ export interface ServicePageContent {
     title: string;
     subtitle: string;
     image: string;
+    visual: ServiceVisualVariant;
   };
   sections: Array<{ heading: string; body: string }>;
   useCases: {
@@ -121,14 +126,10 @@ export default function ServicePageLayout({
             {...reveal}
             className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
           >
-            <div className="overflow-hidden rounded-[18px]">
-              <img
-                src={content.hero.image}
-                alt={content.hero.title}
-                className="h-[340px] w-full object-cover"
-                loading="eager"
-              />
-            </div>
+            <ServiceVisual
+              variant={content.hero.visual}
+              className="h-[340px] md:h-[380px]"
+            />
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
