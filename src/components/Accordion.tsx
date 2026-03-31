@@ -21,7 +21,7 @@ export function Accordion({
         return (
           <div
             key={idx}
-            className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] transition-colors duration-200"
+            className="rounded-[20px] border border-[var(--border)] bg-[var(--surface)] transition-colors duration-200"
             style={
               isOpen && accentColor
                 ? { borderColor: `${accentColor}55` }

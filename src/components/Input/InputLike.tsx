@@ -30,14 +30,14 @@ export function InputLike({
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-28 w-full resize-none rounded-[20px] px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
+          className={`h-28 w-full resize-none rounded-[16px] px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
         />
       ) : (
         <input
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-12 w-full rounded-[20px] px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
+          className={`h-12 w-full rounded-[16px] px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
         />
       )}
     </label>

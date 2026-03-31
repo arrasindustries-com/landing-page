@@ -1,12 +1,5 @@
 import { motion } from "framer-motion";
-import {
-  ArrowRight,
-  Check,
-  CircleDollarSign,
-  ShieldCheck,
-  Sparkles,
-  Workflow,
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Accordion } from "@/components/Accordion";
@@ -208,23 +201,11 @@ export default function HomePage() {
 
   const serviceLinks = ["/gestionali", "/siti-web", "/web3"];
 
-  const impactHighlights = [
-    {
-      icon: <Workflow className="h-5 w-5" />,
-      title: t.threeAreas.features[0].title,
-      desc: t.threeAreas.features[0].desc,
-    },
-    {
-      icon: <CircleDollarSign className="h-5 w-5" />,
-      title: t.threeAreas.features[1].title,
-      desc: t.threeAreas.features[1].desc,
-    },
-    {
-      icon: <ShieldCheck className="h-5 w-5" />,
-      title: t.threeAreas.features[2].title,
-      desc: t.threeAreas.features[2].desc,
-    },
-  ];
+  const impactHighlights = t.threeAreas.features.map((feature, index) => ({
+    step: `0${index + 1}`,
+    title: feature.title,
+    desc: feature.desc,
+  }));
 
   return (
     <>
@@ -257,11 +238,11 @@ export default function HomePage() {
 
             <p className="mt-5 text-sm text-[var(--text-soft)]">{heroCopy.note}</p>
 
-            <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            <div className="mt-10 grid overflow-hidden rounded-[20px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)] sm:grid-cols-3">
               {credibility.map((item) => (
                 <div
                   key={item.label}
-                  className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] px-5 py-4 shadow-[var(--shadow)]"
+                  className="border-t border-[var(--border)] px-5 py-4 first:border-t-0 sm:border-t-0 sm:border-l first:sm:border-l-0"
                 >
                   <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
                     {item.label}
@@ -278,9 +259,9 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-            className="rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
+            className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
           >
-            <div className="overflow-hidden rounded-[26px]">
+            <div className="overflow-hidden rounded-[18px]">
               <img
                 src="/images/hero.jpg"
                 alt={t.hero.imageAlt}
@@ -293,14 +274,14 @@ export default function HomePage() {
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
                 {heroCopy.panelTitle}
               </p>
-              <div className="mt-4 space-y-3">
-                {heroCopy.panelPoints.map((point) => (
+              <div className="mt-5 space-y-4">
+                {heroCopy.panelPoints.map((point, index) => (
                   <div
                     key={point}
-                    className="flex items-start gap-3 rounded-[22px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4"
+                    className="flex items-start gap-4 border-t border-[var(--border)] pt-4 first:border-t-0 first:pt-0"
                   >
-                    <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--surface-muted)] text-[var(--text)]">
-                      <Check className="h-4 w-4" />
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
+                      0{index + 1}
                     </div>
                     <p className="text-sm leading-6 text-[var(--text-muted)]">{point}</p>
                   </div>
@@ -357,7 +338,7 @@ export default function HomePage() {
           </p>
         </motion.div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {t.services.services.map((service, index) => (
             <motion.article key={service.title} {...reveal}>
               <Card className="flex h-full flex-col">
@@ -374,7 +355,7 @@ export default function HomePage() {
                   <div className="space-y-3">
                     {service.points.map((point) => (
                       <div key={point} className="flex items-start gap-3">
-                        <div className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-[var(--text)]" />
+                        <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--text)]" />
                         <p className="text-sm leading-6 text-[var(--text-muted)]">{point}</p>
                       </div>
                     ))}
@@ -442,15 +423,12 @@ export default function HomePage() {
       </section>
 
       <section id="innovazione" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div {...reveal} className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
+        <motion.div {...reveal} className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr]">
           <Card className="bg-[var(--surface-strong)]">
             <CardHeader>
-              <div className="flex items-center gap-3 text-[var(--text-soft)]">
-                <Sparkles className="h-5 w-5" />
-                <span className="text-xs font-semibold uppercase tracking-[0.24em]">
-                  Web3
-                </span>
-              </div>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
+                Web3
+              </p>
               <CardTitle className="mt-4 text-4xl">
                 {t.innovation.title}
               </CardTitle>
@@ -459,16 +437,16 @@ export default function HomePage() {
               <p className="max-w-xl text-sm leading-8 text-[var(--text-muted)]">
                 {t.innovation.subtitle}
               </p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="mt-8 space-y-4 border-t border-[var(--border)] pt-6">
                 {t.innovation.features.map((feature) => (
                   <div
                     key={feature.title}
-                    className="rounded-[22px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4"
+                    className="grid gap-2 border-b border-[var(--border)] pb-4 last:border-b-0 last:pb-0 md:grid-cols-[0.8fr_1.2fr]"
                   >
                     <div className="text-base font-semibold text-[var(--text)]">
                       {feature.title}
                     </div>
-                    <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
+                    <p className="text-sm leading-6 text-[var(--text-muted)]">
                       {feature.desc}
                     </p>
                   </div>
@@ -477,21 +455,21 @@ export default function HomePage() {
             </CardContent>
           </Card>
 
-          <div className="grid gap-4">
+          <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
             {impactHighlights.map((item) => (
               <div
                 key={item.title}
-                className="rounded-[28px] border border-[var(--border)] bg-[var(--surface)] px-6 py-6 shadow-[var(--shadow)]"
+                className="grid gap-4 border-t border-[var(--border)] px-6 py-6 first:border-t-0 md:grid-cols-[72px_1fr]"
               >
-                <div className="flex items-center gap-3 text-[var(--text)]">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--surface-muted)]">
-                    {item.icon}
-                  </div>
-                  <h3 className="text-2xl">{item.title}</h3>
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
+                  {item.step}
                 </div>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--text-muted)]">
-                  {item.desc}
-                </p>
+                <div>
+                  <h3 className="text-2xl">{item.title}</h3>
+                  <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--text-muted)]">
+                    {item.desc}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -528,7 +506,7 @@ export default function HomePage() {
                   {t.contact.subtitle}
                 </p>
                 <div className="mt-8 space-y-4">
-                  <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                  <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                     <p className="text-sm leading-7 text-[var(--text-muted)]">
                       {isItalian
                         ? "Se il progetto non è ancora definito, va bene lo stesso: ci basta capire il problema operativo, il contesto e i vincoli."

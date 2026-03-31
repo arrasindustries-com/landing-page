@@ -90,17 +90,12 @@ export default function ServicePageLayout({
       <section className="mx-auto max-w-7xl px-4 pb-20 pt-10 md:pb-24 md:pt-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
           <motion.div {...reveal} className="max-w-3xl">
-            <div
-              className="inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em]"
-              style={{
-                borderColor: `${content.theme.accent}33`,
-                color: content.theme.accent,
-                backgroundColor: `${content.theme.accent}12`,
-              }}
+            <p
+              className="text-xs font-semibold uppercase tracking-[0.28em]"
+              style={{ color: content.theme.accent }}
             >
-              {content.hero.icon}
               {content.hero.eyebrow}
-            </div>
+            </p>
             <h1 className="mt-5 text-5xl leading-[0.96] md:text-7xl">
               {content.hero.title}
             </h1>
@@ -124,9 +119,9 @@ export default function ServicePageLayout({
 
           <motion.aside
             {...reveal}
-            className="rounded-[32px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
+            className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
           >
-            <div className="overflow-hidden rounded-[26px]">
+            <div className="overflow-hidden rounded-[18px]">
               <img
                 src={content.hero.image}
                 alt={content.hero.title}
@@ -135,7 +130,7 @@ export default function ServicePageLayout({
               />
             </div>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+              <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                   {language === "it" ? "Ambito" : "Scope"}
                 </div>
@@ -143,7 +138,7 @@ export default function ServicePageLayout({
                   {content.sections[0]?.heading}
                 </p>
               </div>
-              <div className="rounded-[22px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+              <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                   {language === "it" ? "Use case" : "Use cases"}
                 </div>
@@ -221,7 +216,7 @@ export default function ServicePageLayout({
             {content.useCases.items.map((item) => (
               <div
                 key={item.title}
-                className="rounded-[26px] border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]"
+                className="rounded-[20px] border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]"
               >
                 <h3 className="text-2xl">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
