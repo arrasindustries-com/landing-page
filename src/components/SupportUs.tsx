@@ -301,226 +301,228 @@ export function SupportSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55 }}
-        className="grid gap-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center"
+        className="overflow-hidden rounded-[30px] border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--shadow)]"
       >
-        <div className="lg:pr-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-            {language === "it" ? "Supporto" : "Support"}
-          </p>
-          <h2 className="mt-4 text-4xl md:text-5xl">{t.support.title}</h2>
-          <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
-            {t.support.subtitle}
-          </p>
+        <div className="grid gap-8 p-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-center md:p-10">
+          <div className="lg:pr-8">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+              {language === "it" ? "Supporto" : "Support"}
+            </p>
+            <h2 className="mt-4 text-4xl md:text-5xl">{t.support.title}</h2>
+            <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
+              {t.support.subtitle}
+            </p>
 
-          <div className="mt-8 space-y-3">
-            <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
-                {language === "it" ? "Perché esiste" : "Why it exists"}
+            <div className="mt-8 space-y-3">
+              <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                  {language === "it" ? "Utilizzo" : "Use of funds"}
+                </div>
+                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                  {language === "it"
+                    ? "Il supporto contribuisce a prototipi, test tecnici, integrazioni sperimentali e sviluppo di strumenti che poi possono diventare parte del nostro lavoro applicato."
+                    : "Support helps fund prototypes, technical testing, experimental integrations, and tool development that can later become part of our applied work."}
+                </p>
               </div>
-              <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-                {language === "it"
-                  ? "La sezione resta volutamente secondaria: è pensata per chi vuole sostenere lo sviluppo di strumenti più aperti e sperimentazione reale, senza interrompere il percorso commerciale principale."
-                  : "This section stays intentionally secondary: it is for people who want to support the development of more open tools and real experimentation without interrupting the main commercial journey."}
-              </p>
-            </div>
-            <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
-              <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
-                {t.support.transparency}
+              <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                  {t.support.transparency}
+                </div>
+                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                  {t.support.transparencyDesc}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setShowTransparencyCard(true)}
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
+                >
+                  <Info className="h-4 w-4" />
+                  {language === "it" ? "Vedi indirizzi" : "View addresses"}
+                </button>
               </div>
-              <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-                {t.support.transparencyDesc}
-              </p>
-              <button
-                type="button"
-                onClick={() => setShowTransparencyCard(true)}
-                className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
-              >
-                <Info className="h-4 w-4" />
-                {language === "it"
-                  ? "Vedi wallet e indirizzi"
-                  : "View wallets and addresses"}
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="self-center rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6">
-          <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-5 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
-                {t.support.method}
-              </p>
-              <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
-                {language === "it"
-                  ? "Wallet o PayPal, con lo stesso flusso chiaro e leggibile su desktop e mobile."
-                  : "Wallet or PayPal, with the same clear flow on desktop and mobile."}
-              </p>
-            </div>
-
-            <div className="inline-flex rounded-[14px] border border-[var(--border)] bg-[var(--surface-strong)] p-1">
-              <button
-                type="button"
-                onClick={() => {
-                  setDonationMethod("metamask");
-                  setStatus(null);
-                }}
-                className={[
-                  "rounded-[10px] px-3 py-2 text-xs font-semibold transition",
-                  donationMethod === "metamask"
-                    ? "bg-[var(--button-bg)] text-[var(--button-text)]"
-                    : "text-[var(--text-muted)] hover:text-[var(--text)]",
-                ].join(" ")}
-              >
-                {t.support.metaMaskMode}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setDonationMethod("paypal");
-                  setStatus(null);
-                }}
-                className={[
-                  "rounded-[10px] px-3 py-2 text-xs font-semibold transition",
-                  donationMethod === "paypal"
-                    ? "bg-[var(--button-bg)] text-[var(--button-text)]"
-                    : "text-[var(--text-muted)] hover:text-[var(--text)]",
-                ].join(" ")}
-              >
-                {t.support.payPalMode}
-              </button>
             </div>
           </div>
 
-          <AnimatePresence mode="wait" initial={false}>
-            {donationMethod === "metamask" ? (
-              <motion.div
-                key="metamask-panel"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="pt-6"
-              >
-                <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-                    <div>
-                      <div className="text-base font-semibold text-[var(--text)]">
-                        {t.support.metaMaskMode}
+          <div className="self-center rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6">
+            <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
+                  {t.support.method}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
+                  {language === "it"
+                    ? "Wallet EVM o PayPal, con un flusso lineare e leggibile su desktop e mobile."
+                    : "EVM wallet or PayPal, with a clear and readable flow on desktop and mobile."}
+                </p>
+              </div>
+
+              <div className="inline-flex rounded-[14px] border border-[var(--border)] bg-[var(--surface-strong)] p-1">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDonationMethod("metamask");
+                    setStatus(null);
+                  }}
+                  className={[
+                    "rounded-[10px] px-3 py-2 text-xs font-semibold transition",
+                    donationMethod === "metamask"
+                      ? "bg-[var(--button-bg)] text-[var(--button-text)]"
+                      : "text-[var(--text-muted)] hover:text-[var(--text)]",
+                  ].join(" ")}
+                >
+                  {t.support.metaMaskMode}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setDonationMethod("paypal");
+                    setStatus(null);
+                  }}
+                  className={[
+                    "rounded-[10px] px-3 py-2 text-xs font-semibold transition",
+                    donationMethod === "paypal"
+                      ? "bg-[var(--button-bg)] text-[var(--button-text)]"
+                      : "text-[var(--text-muted)] hover:text-[var(--text)]",
+                  ].join(" ")}
+                >
+                  {t.support.payPalMode}
+                </button>
+              </div>
+            </div>
+
+            <AnimatePresence mode="wait" initial={false}>
+              {donationMethod === "metamask" ? (
+                <motion.div
+                  key="metamask-panel"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="pt-6"
+                >
+                  <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                      <div>
+                        <div className="text-base font-semibold text-[var(--text)]">
+                          {language === "it" ? "Wallet EVM" : "EVM wallet"}
+                        </div>
+                        <div className="mt-1 text-sm leading-6 text-[var(--text-muted)]">
+                          {language === "it"
+                            ? "Compatibile con MetaMask."
+                            : "Compatible with MetaMask."}
+                        </div>
                       </div>
-                      <div className="mt-1 text-sm leading-6 text-[var(--text-muted)]">
-                        {t.support.supportedWallets}: MetaMask
-                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowTransparencyCard(true)}
+                        className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
+                      >
+                        <Info className="h-4 w-4" />
+                        {t.support.transparency}
+                      </button>
                     </div>
+                  </div>
+
+                  <div className="mt-5 grid gap-3 md:grid-cols-3">
+                    <label className="block">
+                      <div className="mb-1 text-xs font-medium text-[var(--text-soft)]">
+                        {t.support.amount}
+                      </div>
+                      <input
+                        value={amount}
+                        onChange={(event) => setAmount(event.target.value)}
+                        placeholder="0.05"
+                        className="h-12 w-full rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
+                      />
+                    </label>
+
+                    <SelectField
+                      label={t.support.network}
+                      value={network}
+                      options={networks}
+                      onChange={setNetwork}
+                    />
+
+                    <SelectField
+                      label={t.support.token}
+                      value={token}
+                      options={tokens}
+                      onChange={setToken}
+                    />
+                  </div>
+
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="text-sm leading-6 text-[var(--text-muted)]">
+                      {t.support.selectedNetwork}: {selectedNetwork.label}
+                    </div>
+                    <Button onClick={handleMetaMask} disabled={busy}>
+                      {busy
+                        ? language === "it"
+                          ? "Invio..."
+                          : "Sending..."
+                        : t.support.sendMetaMask}
+                    </Button>
+                  </div>
+
+                  {status ? (
+                    <div className="mt-4 rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
+                      {status}
+                    </div>
+                  ) : null}
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="paypal-panel"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.2 }}
+                  className="pt-6"
+                >
+                  <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                    <div className="text-base font-semibold text-[var(--text)]">
+                      PayPal
+                    </div>
+                    <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
+                      {t.support.paypalDesc}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
+                    <label className="block">
+                      <div className="mb-1 text-xs font-medium text-[var(--text-soft)]">
+                        {t.support.amount}
+                      </div>
+                      <input
+                        value={amount}
+                        onChange={(event) => setAmount(event.target.value)}
+                        placeholder="10.00"
+                        className="h-12 w-full rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
+                      />
+                    </label>
                     <button
                       type="button"
-                      onClick={() => setShowTransparencyCard(true)}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
+                      onClick={handlePayPal}
+                      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-5 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--border-strong)] hover:bg-[var(--surface)]"
                     >
-                      <Info className="h-4 w-4" />
-                      {t.support.transparency}
+                      <CircleDollarSign className="h-4 w-4" />
+                      {t.support.sendPayPal}
                     </button>
                   </div>
-                </div>
 
-                <div className="mt-5 grid gap-3 md:grid-cols-3">
-                  <label className="block">
-                    <div className="mb-1 text-xs font-medium text-[var(--text-soft)]">
-                      {t.support.amount}
+                  <div className="mt-4 text-sm text-[var(--text-soft)]">
+                    {t.support.paypalCurrency}
+                  </div>
+
+                  {status ? (
+                    <div className="mt-4 rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
+                      {status}
                     </div>
-                    <input
-                      value={amount}
-                      onChange={(event) => setAmount(event.target.value)}
-                      placeholder="0.05"
-                      className="h-12 w-full rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
-                    />
-                  </label>
-
-                  <SelectField
-                    label={t.support.network}
-                    value={network}
-                    options={networks}
-                    onChange={setNetwork}
-                  />
-
-                  <SelectField
-                    label={t.support.token}
-                    value={token}
-                    options={tokens}
-                    onChange={setToken}
-                  />
-                </div>
-
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="text-sm leading-6 text-[var(--text-muted)]">
-                    {t.support.selectedNetwork}: {selectedNetwork.label}
-                  </div>
-                  <Button onClick={handleMetaMask} disabled={busy}>
-                    {busy
-                      ? language === "it"
-                        ? "Invio..."
-                        : "Sending..."
-                      : t.support.sendMetaMask}
-                  </Button>
-                </div>
-
-                {status ? (
-                  <div className="mt-4 rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
-                    {status}
-                  </div>
-                ) : null}
-              </motion.div>
-            ) : (
-              <motion.div
-                key="paypal-panel"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.2 }}
-                className="pt-6"
-              >
-                <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-                  <div className="text-base font-semibold text-[var(--text)]">
-                    PayPal
-                  </div>
-                  <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
-                    {t.support.paypalDesc}
-                  </p>
-                </div>
-
-                <div className="mt-5 grid gap-3 sm:grid-cols-[1fr_auto] sm:items-end">
-                  <label className="block">
-                    <div className="mb-1 text-xs font-medium text-[var(--text-soft)]">
-                      {t.support.amount}
-                    </div>
-                    <input
-                      value={amount}
-                      onChange={(event) => setAmount(event.target.value)}
-                      placeholder="10.00"
-                      className="h-12 w-full rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
-                    />
-                  </label>
-                  <button
-                    type="button"
-                    onClick={handlePayPal}
-                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-5 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--border-strong)] hover:bg-[var(--surface)]"
-                  >
-                    <CircleDollarSign className="h-4 w-4" />
-                    {t.support.sendPayPal}
-                  </button>
-                </div>
-
-                <div className="mt-4 text-sm text-[var(--text-soft)]">
-                  {t.support.paypalCurrency}
-                </div>
-
-                {status ? (
-                  <div className="mt-4 rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
-                    {status}
-                  </div>
-                ) : null}
-              </motion.div>
-            )}
-          </AnimatePresence>
+                  ) : null}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </motion.div>
 

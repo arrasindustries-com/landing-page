@@ -1,7 +1,7 @@
 import type { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToId } from "@/lib/utils";
 import { useState } from "react";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link, NavLink } from "react-router-dom";
 import { FlagGB, FlagIT } from "../Flag";
 import { Button } from "../Button/Button";
 import { ArrowRight, Menu, Moon, Sun, X } from "lucide-react";
@@ -25,43 +25,44 @@ export function StickyHeader({
   const location = useLocation();
   const isHome = location.pathname === "/";
 
-  const handleNavClick = (hash: string) => {
-    const id = hash.replace("#", "");
-    if (isHome) {
-      scrollToId(id);
-    } else {
-      navigate("/" + hash);
+  const handleContactClick = (fromMobile = false) => {
+    if (fromMobile) {
+      setMobileOpen(false);
     }
-  };
-
-  const handleMobileNavClick = (hash: string) => {
-    const id = hash.replace("#", "");
-    setMobileOpen(false);
 
     if (isHome) {
-      window.setTimeout(() => {
-        scrollToId(id);
-      }, 260);
+      if (fromMobile) {
+        window.setTimeout(() => {
+          scrollToId("contatto");
+        }, 260);
+        return;
+      }
+
+      scrollToId("contatto");
       return;
     }
 
-    navigate("/" + hash);
+    navigate("/#contatto");
   };
 
-  const navLinkClass =
-    "relative text-sm text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]";
-
   const navLinks = [
-    { href: "#storia", label: t.nav.path },
-    { href: "#servizi", label: t.nav.services },
-    { href: "#processo", label: t.nav.process },
-    { href: "#innovazione", label: t.nav.innovation },
-    { href: "#faq", label: t.nav.faq },
+    { to: "/gestionali", label: t.nav.management },
+    { to: "/siti-web", label: t.nav.websites },
+    { to: "/web3", label: t.nav.innovation },
+    { to: "/metodo", label: t.nav.path },
+    { to: "/about", label: t.nav.about },
   ];
   const toLightThemeLabel =
     language === "it" ? "Passa al tema chiaro" : "Switch to light theme";
   const toDarkThemeLabel =
     language === "it" ? "Passa al tema scuro" : "Switch to dark theme";
+  const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+    [
+      "relative text-sm transition-colors duration-200",
+      isActive
+        ? "text-[var(--text)]"
+        : "text-[var(--text-muted)] hover:text-[var(--text)]",
+    ].join(" ");
 
   return (
     <header
@@ -88,25 +89,16 @@ export function StickyHeader({
           </div>
         </Link>
 
-        <nav
-          className="hidden items-center gap-7 md:flex"
-        >
+        <nav className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
-            <a
-              key={link.href}
+            <NavLink
+              key={link.to}
               className={navLinkClass}
-              href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavClick(link.href);
-              }}
+              to={link.to}
             >
               {link.label}
-            </a>
+            </NavLink>
           ))}
-          <Link to="/about" className={navLinkClass}>
-            {t.nav.about}
-          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
@@ -146,7 +138,7 @@ export function StickyHeader({
           </button>
 
           <Button
-            onClick={() => handleNavClick("#contatto")}
+            onClick={() => handleContactClick()}
             className="hidden sm:inline-flex"
           >
             {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
@@ -177,29 +169,19 @@ export function StickyHeader({
           >
             <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleMobileNavClick(link.href);
-                  }}
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileOpen(false)}
                   className="rounded-[18px] px-4 py-3 text-sm text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
                 >
                   {link.label}
-                </a>
+                </NavLink>
               ))}
-              <Link
-                to="/about"
-                onClick={() => setMobileOpen(false)}
-                className="rounded-[18px] px-4 py-3 text-sm text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
-              >
-                {t.nav.about}
-              </Link>
               <div className="mt-2 flex gap-2">
                 <Button
                   onClick={() => {
-                    handleMobileNavClick("#contatto");
+                    handleContactClick(true);
                   }}
                   className="flex-1"
                 >

@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Accordion } from "@/components/Accordion";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/Button/Button";
 import {
   Card,
@@ -13,11 +12,11 @@ import {
 import { Footer } from "@/components/Footer";
 import { InputLike } from "@/components/Input/InputLike";
 import { SupportSection } from "@/components/SupportUs";
+import { ServiceVisual } from "@/components/Visual/ServiceVisual";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { openWhatsApp, scrollToId } from "@/lib/utils";
 import type { ContactRequest } from "@/types/types";
-import { ServiceVisual } from "@/components/Visual/ServiceVisual";
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -28,6 +27,7 @@ const reveal = {
 
 export default function HomePage() {
   const { t, language } = useLanguage();
+  const navigate = useNavigate();
   const [contactForm, setContactForm] = useState<ContactRequest>({
     name: "",
     activity: "",
@@ -115,18 +115,6 @@ export default function HomePage() {
             ],
         areaServed: "IT",
       },
-      {
-        "@type": "FAQPage",
-        "@id": `${canonicalUrl}#faq`,
-        mainEntity: t.faq.items.map((faq) => ({
-          "@type": "Question",
-          name: faq.title,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faq.content,
-          },
-        })),
-      },
     ],
   });
 
@@ -134,30 +122,20 @@ export default function HomePage() {
     ? {
         eyebrow: "Software per PMI che vogliono ordine, velocità e controllo",
         title: "Costruiamo strumenti digitali che semplificano i processi.",
-        body: "Gestionale, sito o layer web3: partiamo da obiettivi operativi chiari, definiamo cosa deve cambiare davvero e consegniamo una soluzione che resta leggibile, usabile e misurabile.",
+        body: "Gestionale, sito o layer web3: partiamo da obiettivi operativi chiari, definiamo cosa deve cambiare davvero e consegniamo una soluzione leggibile, usabile e misurabile.",
         primary: "Prenota una call",
-        secondary: "Esplora i servizi",
+        secondary: "Scopri il metodo",
         note: "Discovery breve, scope chiaro, rilascio misurabile.",
         panelTitle: "Dove interveniamo di solito",
-        panelPoints: [
-          "Processi manuali che rallentano il team.",
-          "Siti che spiegano molto ma convertono poco.",
-          "Requisiti di tracciabilità o audit che richiedono evidenze tecniche.",
-        ],
       }
     : {
         eyebrow: "Software for SMBs that need order, speed, and control",
         title: "We build digital tools that simplify operations.",
-        body: "Management software, websites, or web3 layers: we start from operational goals, define what actually needs to change, and deliver something that stays readable, usable, and measurable.",
+        body: "Management software, websites, or web3 layers: we start from operational goals, define what actually needs to change, and deliver something readable, usable, and measurable.",
         primary: "Book a call",
-        secondary: "Explore services",
+        secondary: "See the approach",
         note: "Short discovery, clear scope, measurable release.",
         panelTitle: "Where we usually intervene",
-        panelPoints: [
-          "Manual processes that slow teams down.",
-          "Websites that explain a lot but convert little.",
-          "Traceability or audit requirements that need technical evidence.",
-        ],
       };
 
   const credibility = isItalian
@@ -172,48 +150,32 @@ export default function HomePage() {
         { label: "Focus", value: "Operational ROI" },
       ];
 
-  const operatingPrinciples = isItalian
-    ? [
-        {
-          title: "Partiamo da ciò che blocca il lavoro",
-          desc: "Ogni progetto nasce da colli di bottiglia, perdita di tempo o opportunità perse. Non da trend grafici o feature decorative.",
-        },
-        {
-          title: "Riduciamo complessità prima di aggiungere stack",
-          desc: "Meno livelli inutili, meno tool scollegati, meno manutenzione opaca. La soluzione deve restare chiara anche dopo il rilascio.",
-        },
-        {
-          title: "Misuriamo l’impatto con indicatori semplici",
-          desc: "Ore risparmiate, lead qualificati, errori ridotti, tempi di risposta più bassi. Le metriche vengono concordate prima.",
-        },
-      ]
-    : [
-        {
-          title: "We start from what is blocking the work",
-          desc: "Every project starts from bottlenecks, wasted time, or missed commercial opportunities. Not from visual trends or decorative features.",
-        },
-        {
-          title: "We reduce complexity before adding stack",
-          desc: "Fewer unnecessary layers, fewer disconnected tools, less opaque maintenance. The solution should still feel clear after release.",
-        },
-        {
-          title: "We measure impact with simple indicators",
-          desc: "Hours saved, qualified leads, fewer errors, lower response times. Metrics are agreed upfront.",
-        },
-      ];
+  const approachTeaser = isItalian
+    ? {
+        title: "Metodo operativo, decisioni chiare, rilascio misurabile.",
+        body: "Allineiamo obiettivi, vincoli, scope iniziale e criteri di successo prima di sviluppare. Questo rende il progetto più leggibile, più governabile e più veloce da valutare.",
+        link: "Scopri come lavoriamo",
+      }
+    : {
+        title: "Operational method, clear decisions, measurable delivery.",
+        body: "We align on goals, constraints, initial scope, and success criteria before development starts. That makes the project easier to govern, evaluate, and move forward.",
+        link: "See how we work",
+      };
 
   const serviceLinks = ["/gestionali", "/siti-web", "/web3"];
-
-  const impactHighlights = t.threeAreas.features.map((feature, index) => ({
-    step: `0${index + 1}`,
-    title: feature.title,
-    desc: feature.desc,
+  const serviceCards = t.services.services.map((service, index) => ({
+    href: serviceLinks[index],
+    number: `0${index + 1}`,
+    title: service.title,
+    subtitle: service.subtitle,
+    points: service.points.slice(0, 2),
+    outcome: service.outcomes[0],
   }));
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 md:pb-28 md:pt-16">
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <section className="mx-auto max-w-7xl px-4 pb-20 pt-14 md:pb-24 md:pt-16">
+        <div className="grid gap-10 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -234,7 +196,7 @@ export default function HomePage() {
               <Button onClick={() => scrollToId("contatto")}>
                 {heroCopy.primary} <ArrowRight className="h-4 w-4" />
               </Button>
-              <Button variant="outline" onClick={() => scrollToId("servizi")}>
+              <Button variant="outline" onClick={() => navigate("/metodo")}>
                 {heroCopy.secondary}
               </Button>
             </div>
@@ -247,7 +209,7 @@ export default function HomePage() {
               {credibility.map((item) => (
                 <div
                   key={item.label}
-                  className="border-t border-[var(--border)] px-5 py-4 first:border-t-0 sm:border-t-0 sm:border-l first:sm:border-l-0"
+                  className="border-t border-[var(--border)] px-5 py-4 first:border-t-0 sm:border-l sm:border-t-0 first:sm:border-l-0"
                 >
                   <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
                     {item.label}
@@ -279,17 +241,22 @@ export default function HomePage() {
                 {heroCopy.panelTitle}
               </p>
               <div className="mt-5 space-y-4">
-                {heroCopy.panelPoints.map((point, index) => (
+                {t.threeAreas.features.map((feature, index) => (
                   <div
-                    key={point}
+                    key={feature.title}
                     className="flex items-start gap-4 border-t border-[var(--border)] pt-4 first:border-t-0 first:pt-0"
                   >
                     <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
                       0{index + 1}
                     </div>
-                    <p className="text-sm leading-6 text-[var(--text-muted)]">
-                      {point}
-                    </p>
+                    <div>
+                      <div className="text-base font-semibold text-[var(--text)]">
+                        {feature.title}
+                      </div>
+                      <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
+                        {feature.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -298,69 +265,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="storia" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
+      <section id="servizi" className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
         <motion.div
           {...reveal}
-          className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr]"
+          className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end"
         >
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-              {isItalian ? "Metodo" : "Approach"}
-            </p>
-            <h2 className="mt-4 max-w-xl text-4xl leading-tight md:text-5xl">
-              {isItalian
-                ? "Un’impostazione più vicina a uno studio tecnico che a una vetrina piena di effetti."
-                : "A delivery model that feels closer to a technical studio than to a flashy showcase."}
-            </h2>
-            <p className="mt-5 max-w-xl text-base leading-8 text-[var(--text-muted)]">
-              {isItalian
-                ? "Lavoriamo bene quando il problema è concreto: dati sparsi, procedure lente, sito che non sostiene il commerciale, requisito di verifica esterna. L’obiettivo è togliere attrito, non aggiungere interfacce rumorose."
-                : "We do our best work when the problem is concrete: scattered data, slow procedures, a website that does not support sales, or the need for external verification. The goal is to remove friction, not add noisy interfaces."}
-            </p>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-3">
-            {operatingPrinciples.map((item) => (
-              <Card key={item.title} className="h-full">
-                <CardHeader>
-                  <CardTitle className="text-2xl">{item.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm leading-7 text-[var(--text-muted)]">
-                    {item.desc}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      <section id="servizi" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div
-          {...reveal}
-          className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-end"
-        >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-              {t.nav.services}
+              {t.sectionBridge.fromStrategy.eyebrow}
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl md:text-5xl">
-              {t.services.title}
+              {isItalian
+                ? "Tre aree di lavoro, tre modi concreti per creare valore."
+                : "Three areas of work, three concrete ways to create value."}
             </h2>
           </div>
           <p className="max-w-2xl text-base leading-8 text-[var(--text-muted)] lg:justify-self-end">
-            {t.services.subtitle}
+            {isItalian
+              ? "Interveniamo dove il digitale può ridurre attrito operativo, migliorare l'acquisizione o introdurre requisiti di verifica e tracciabilità."
+              : "We intervene where digital tools can reduce operational friction, improve acquisition, or add verification and traceability where they are required."}
           </p>
         </motion.div>
 
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
-          {t.services.services.map((service, index) => (
+          {serviceCards.map((service) => (
             <motion.article key={service.title} {...reveal}>
               <Card className="flex h-full flex-col">
                 <CardHeader>
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
-                    0{index + 1}
+                    {service.number}
                   </p>
                   <CardTitle className="mt-3 text-3xl">
                     {service.title}
@@ -385,24 +318,19 @@ export default function HomePage() {
                     <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                       {t.services.result}
                     </p>
-                    <div className="mt-3 space-y-2">
-                      {service.outcomes.map((outcome) => (
-                        <p
-                          key={outcome}
-                          className="text-sm leading-6 text-[var(--text)]"
-                        >
-                          {outcome}
-                        </p>
-                      ))}
-                    </div>
+                    <p className="mt-3 text-sm leading-7 text-[var(--text)]">
+                      {service.outcome}
+                    </p>
                   </div>
 
                   <div className="mt-8">
                     <Link
-                      to={serviceLinks[index]}
+                      to={service.href}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
                     >
-                      {isItalian ? "Vai al dettaglio" : "View service detail"}
+                      {isItalian
+                        ? "Approfondisci il servizio"
+                        : "See service detail"}
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
@@ -413,132 +341,51 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="processo" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div
-          {...reveal}
-          className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start"
-        >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-              {t.nav.process}
-            </p>
-            <h2 className="mt-4 max-w-xl text-4xl md:text-5xl">
-              {t.process.title}
-            </h2>
-            <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
-              {t.process.subtitle}
-            </p>
-            <div className="mt-8 rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
-                {isItalian ? "Governance" : "Governance"}
-              </p>
-              <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-                {isItalian
-                  ? "Ogni fase ha un output chiaro e una decisione condivisa. Questo riduce revisioni inutili e rende il progetto leggibile anche per chi non è tecnico."
-                  : "Each phase has a clear output and a shared decision gate. That reduces unnecessary revisions and keeps the project readable even for non-technical stakeholders."}
-              </p>
-            </div>
-          </div>
-
-          <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
-            {t.process.phaseSteps.map((step, index) => (
-              <div
-                key={step.title}
-                className="grid gap-4 border-t border-[var(--border)] px-6 py-6 first:border-t-0 md:grid-cols-[72px_minmax(0,1fr)_minmax(0,0.88fr)] md:gap-6"
-              >
-                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
-                  0{index + 1}
-                </div>
-                <div>
-                  <h3 className="text-2xl">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-                    {step.desc}
-                  </p>
-                </div>
-                <div className="text-sm leading-7 text-[var(--text)] md:border-l md:border-[var(--border)] md:pl-6">
-                  {step.metric}
+      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
+        <motion.div {...reveal}>
+          <Card className="bg-[var(--surface-strong)]">
+            <div className="grid gap-8 p-7 lg:grid-cols-[0.82fr_1.18fr] md:p-10">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+                  {t.nav.path}
+                </p>
+                <h2 className="mt-4 max-w-xl text-4xl md:text-5xl">
+                  {approachTeaser.title}
+                </h2>
+                <p className="mt-5 max-w-xl text-base leading-8 text-[var(--text-muted)]">
+                  {approachTeaser.body}
+                </p>
+                <div className="mt-8">
+                  <Link
+                    to="/metodo"
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
+                  >
+                    {approachTeaser.link}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
               </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
 
-      <section
-        id="innovazione"
-        className="mx-auto max-w-7xl px-4 pb-24 md:pb-28"
-      >
-        <motion.div
-          {...reveal}
-          className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-center"
-        >
-          <Card className="bg-[var(--surface-strong)]">
-            <CardHeader>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
-                Web3
-              </p>
-              <CardTitle className="mt-4 text-4xl">
-                {t.innovation.title}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="max-w-xl text-sm leading-8 text-[var(--text-muted)]">
-                {t.innovation.subtitle}
-              </p>
-              <div className="mt-8 space-y-4 border-t border-[var(--border)] pt-6">
-                {t.innovation.features.map((feature) => (
+              <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
+                {t.process.steps.map((step) => (
                   <div
-                    key={feature.title}
-                    className="grid gap-2 border-b border-[var(--border)] pb-4 last:border-b-0 last:pb-0 md:grid-cols-[0.8fr_1.2fr]"
+                    key={step.number}
+                    className="grid gap-4 border-t border-[var(--border)] px-6 py-6 first:border-t-0 md:grid-cols-[72px_1fr]"
                   >
-                    <div className="text-base font-semibold text-[var(--text)]">
-                      {feature.title}
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
+                      {step.number}
                     </div>
-                    <p className="text-sm leading-6 text-[var(--text-muted)]">
-                      {feature.desc}
-                    </p>
+                    <div>
+                      <h3 className="text-2xl">{step.title}</h3>
+                      <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                        {step.desc}
+                      </p>
+                    </div>
                   </div>
                 ))}
               </div>
-            </CardContent>
+            </div>
           </Card>
-
-          <div className="self-center overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
-            {impactHighlights.map((item) => (
-              <div
-                key={item.title}
-                className="grid gap-4 border-t border-[var(--border)] px-6 py-6 first:border-t-0 md:grid-cols-[72px_1fr]"
-              >
-                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
-                  {item.step}
-                </div>
-                <div>
-                  <h3 className="text-2xl">{item.title}</h3>
-                  <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--text-muted)]">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
-
-      <section id="faq" className="mx-auto max-w-7xl px-4 pb-24 md:pb-28">
-        <motion.div
-          {...reveal}
-          className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]"
-        >
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-              FAQ
-            </p>
-            <h2 className="mt-4 text-4xl md:text-5xl">{t.faq.title}</h2>
-            <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
-              {t.faq.subtitle}
-            </p>
-          </div>
-          <Accordion items={t.faq.items} />
         </motion.div>
       </section>
 

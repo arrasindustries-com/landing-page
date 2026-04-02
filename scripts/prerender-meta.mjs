@@ -27,10 +27,12 @@ const ROBOTS_CONTENT = IS_PREVIEW
   : "index,follow,max-image-preview:large";
 const SITE_NAVIGATION = [
   { name: "Home", url: `${SITE}/` },
+  { name: "Metodo", url: `${SITE}/metodo` },
   { name: "Gestionali", url: `${SITE}/gestionali` },
   { name: "Siti web", url: `${SITE}/siti-web` },
   { name: "Web3", url: `${SITE}/web3` },
   { name: "Chi siamo", url: `${SITE}/about` },
+  { name: "Supporto", url: `${SITE}/support` },
 ];
 
 const base = readFileSync(join(DIST, "index.html"), "utf-8");
@@ -61,6 +63,17 @@ const pages = [
     keywords:
       "team arras industries, silvio meneguzzo, silvio meneguzzo blockchain dlt, società sviluppo software Italia, software architect italy, team cybersecurity e sviluppo web, sviluppo gestionali e siti web",
     ogImage: `${SITE}/images/silvio.jpeg`,
+  },
+  {
+    path: "/metodo",
+    lang: "it",
+    title: "Metodo | Arras Industries",
+    h1: "Metodo operativo per progetti software",
+    description:
+      "Scopri il metodo operativo di Arras Industries: discovery breve, MVP usabile, governance semplice e decisioni motivate per gestionali, siti web e web3.",
+    keywords:
+      "metodo sviluppo software, discovery software PMI, roadmap MVP software, governance progetto digitale, processo sviluppo gestionali e siti web",
+    ogImage: `${SITE}/images/hero.jpg`,
   },
   {
     path: "/gestionali",
@@ -94,6 +107,17 @@ const pages = [
     keywords:
       "soluzioni blockchain per aziende, integrazioni web3 per imprese, tracciabilità blockchain, notarizzazione documentale blockchain, identità digitale decentralizzata, smart contract per processi aziendali, integrazione wallet aziendale",
     ogImage: `${SITE}/images/usecase.jpg`,
+  },
+  {
+    path: "/support",
+    lang: "it",
+    title: "Supporto | Arras Industries",
+    h1: "Supporta l'innovazione",
+    description:
+      "Una pagina dedicata a chi vuole supportare la sperimentazione e lo sviluppo di strumenti più aperti, veloci e verificabili.",
+    keywords:
+      "supporto arras industries, donazioni sviluppo software, supporta innovazione web3",
+    ogImage: `${SITE}/images/hero.jpg`,
   },
 ];
 

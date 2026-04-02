@@ -5,10 +5,13 @@ export const translations = {
     // Navigation and Header
     nav: {
       services: "Servizi",
+      management: "Gestionali",
+      websites: "Siti web",
       about: "Chi siamo",
       path: "Metodo",
       process: "Processo",
       innovation: "Web3",
+      support: "Supporto",
       faq: "FAQ",
       letsTalk: "Parliamone",
     },
@@ -306,15 +309,15 @@ export const translations = {
     support: {
       title: "Supporta l'innovazione",
       subtitle:
-        "Sostieni il progetto e aiutaci a costruire strumenti più aperti, veloci e decentralizzati.",
+        "Per chi vuole sostenere ricerca applicata, prototipi e strumenti digitali più aperti.",
       amount: "Importo",
       network: "Rete",
       token: "Token",
       method: "Metodo di donazione",
-      metaMaskMode: "MetaMask",
+      metaMaskMode: "Wallet",
       payPalMode: "PayPal",
-      supportedWallets: "Wallet supportati",
-      sendMetaMask: "Invia con MetaMask",
+      supportedWallets: "Compatibilità",
+      sendMetaMask: "Invia con wallet",
       sendPayPal: "Dona con PayPal",
       selectedNetwork: "Rete selezionata",
       paypalCurrency: "PayPal in EUR",
@@ -323,9 +326,10 @@ export const translations = {
       transparency: "Trasparenza totale",
       transparencyDesc:
         "Tutte le donazioni sono pubbliche e tracciabili on‑chain.",
-      destinationWallet: "MetaMask Arras",
+      destinationWallet: "Indirizzi on-chain",
       errors: {
-        noMetaMask: "MetaMask non trovato. Installa l'estensione e riprova.",
+        noMetaMask:
+          "Wallet non rilevato. Se usi MetaMask, installa l'estensione e riprova.",
         ethOnly: "Demo: solo ETH. I token ERC20 verranno aggiunti in seguito.",
         invalidAmount: "Inserisci un importo valido.",
         txSent: "Transazione inviata. Grazie per il supporto.",
@@ -345,10 +349,13 @@ export const translations = {
     // Navigation and Header
     nav: {
       services: "Services",
+      management: "Management",
+      websites: "Websites",
       about: "About us",
       path: "Approach",
       process: "Process",
       innovation: "Web3",
+      support: "Support",
       faq: "FAQ",
       letsTalk: "Let's talk",
     },
@@ -645,15 +652,15 @@ export const translations = {
     support: {
       title: "Support innovation",
       subtitle:
-        "Support the project and help us build more open, fast, and decentralized tools.",
+        "For those who want to support applied research, prototypes, and more open digital tools.",
       amount: "Amount",
       network: "Network",
       token: "Token",
       method: "Donation method",
-      metaMaskMode: "MetaMask",
+      metaMaskMode: "Wallet",
       payPalMode: "PayPal",
-      supportedWallets: "Supported wallets",
-      sendMetaMask: "Send with MetaMask",
+      supportedWallets: "Compatibility",
+      sendMetaMask: "Send with wallet",
       sendPayPal: "Donate with PayPal",
       selectedNetwork: "Selected network",
       paypalCurrency: "PayPal in EUR",
@@ -661,9 +668,10 @@ export const translations = {
         "Donate quickly with PayPal. The entered amount is sent in EUR.",
       transparency: "Total transparency",
       transparencyDesc: "All donations are public and traceable on-chain.",
-      destinationWallet: "MetaMask Arras",
+      destinationWallet: "On-chain addresses",
       errors: {
-        noMetaMask: "MetaMask not found. Install the extension and try again.",
+        noMetaMask:
+          "No wallet detected. If you use MetaMask, install the extension and try again.",
         ethOnly: "Demo: ETH only. ERC20 tokens will be added later.",
         invalidAmount: "Enter a valid amount.",
         txSent: "Transaction sent. Thank you for your support.",
