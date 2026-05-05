@@ -23,21 +23,21 @@ export function InputLike({
 
   return (
     <label className="block">
-      <div className={`mb-1 text-xs font-medium ${labelClass}`}>{label}</div>
+      <div className={`mb-1 text-xs font-medium uppercase tracking-[0.12em] ${labelClass}`}>{label}</div>
 
       {tall ? (
         <textarea
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-28 w-full resize-none rounded-[16px] px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
+          className={`h-28 w-full resize-none px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
         />
       ) : (
         <input
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-12 w-full rounded-[16px] px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
+          className={`h-12 w-full px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
         />
       )}
     </label>

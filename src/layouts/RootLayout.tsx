@@ -39,22 +39,20 @@ export function RootLayout() {
 function BackgroundFX({ theme }: { theme: "dark" | "light" }) {
   return (
     <div className="pointer-events-none fixed inset-0 -z-10">
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.1),transparent_25%,transparent_70%,rgba(0,0,0,0.04))]" />
-      <div className="absolute left-[-8rem] top-[-10rem] h-[28rem] w-[28rem] rounded-full bg-[var(--ambient-one)] blur-[120px]" />
-      <div className="absolute right-[-10rem] top-[6rem] h-[26rem] w-[26rem] rounded-full bg-[var(--ambient-two)] blur-[120px]" />
-      <div className="absolute bottom-[-12rem] left-[18%] h-[24rem] w-[24rem] rounded-full bg-[var(--ambient-two)] blur-[140px]" />
       <div
-        className="absolute inset-0 opacity-60"
+        className="absolute inset-0"
         style={{
           backgroundImage:
             theme === "dark"
-              ? "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)"
-              : "linear-gradient(rgba(24,19,17,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(24,19,17,0.03) 1px, transparent 1px)",
-          backgroundSize: "72px 72px",
+              ? "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)"
+              : "radial-gradient(circle, rgba(15,17,19,0.07) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
           maskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1) 40%, transparent 100%)",
+            "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.15) 50%, transparent 100%)",
         }}
       />
+      <div className="absolute left-[-8rem] top-[-10rem] h-[28rem] w-[28rem] rounded-full bg-[var(--ambient-one)] blur-[140px]" />
+      <div className="absolute right-[-10rem] top-[6rem] h-[26rem] w-[26rem] rounded-full bg-[var(--ambient-two)] blur-[140px]" />
     </div>
   );
 }

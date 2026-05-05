@@ -70,14 +70,16 @@ export default function MetodoPage() {
   const heroCopy = isItalian
     ? {
         eyebrow: "Metodo",
-        title: "Prima allineiamo obiettivi, vincoli e priorità. Poi costruiamo.",
+        title:
+          "Prima allineiamo obiettivi, vincoli e priorità. Poi costruiamo.",
         body: "Il nostro metodo serve a rendere ogni progetto più leggibile e meno dispersivo: chiarire il problema, definire scope e vincoli, rilasciare presto e misurare l'impatto con criteri condivisi.",
         cardTitle: "Cosa allineiamo prima di partire",
         cta: "Parliamone",
       }
     : {
         eyebrow: "Approach",
-        title: "First we align on goals, constraints, and priorities. Then we build.",
+        title:
+          "First we align on goals, constraints, and priorities. Then we build.",
         body: "Our method is designed to make each project clearer and less wasteful: define the problem, frame scope and constraints, release early, and measure impact against shared criteria.",
         cardTitle: "What we align before kickoff",
         cta: "Let's talk",
@@ -164,10 +166,10 @@ export default function MetodoPage() {
       <section className="mx-auto max-w-7xl px-4 pb-20 pt-14 md:pb-24 md:pt-16">
         <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
           <motion.div {...reveal} className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {heroCopy.eyebrow}
             </p>
-            <h1 className="mt-5 text-5xl leading-[0.95] md:text-7xl">
+            <h1 className="mt-5 text-[2.4rem] leading-[0.95] sm:text-5xl md:text-7xl">
               {heroCopy.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-muted)]">
@@ -180,18 +182,13 @@ export default function MetodoPage() {
                   {heroCopy.cta} <ArrowRight className="h-4 w-4" />
                 </Button>
               </Link>
-              <p className="text-sm text-[var(--text-soft)]">
-                {isItalian
-                  ? "Pagina utile per capire se il nostro modo di lavorare è compatibile con il tuo contesto."
-                  : "Useful if you want to assess whether our delivery model fits your context."}
-              </p>
             </div>
           </motion.div>
 
           <motion.aside {...reveal}>
             <Card className="bg-[var(--surface)]">
               <CardHeader>
-                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">
                   {heroCopy.cardTitle}
                 </p>
               </CardHeader>
@@ -216,9 +213,12 @@ export default function MetodoPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
-        <motion.div {...reveal} className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <motion.div
+          {...reveal}
+          className="grid gap-6 lg:grid-cols-[0.8fr_1.2fr]"
+        >
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {isItalian ? "Principi" : "Principles"}
             </p>
             <h2 className="mt-4 max-w-xl text-4xl md:text-5xl">
@@ -227,11 +227,6 @@ export default function MetodoPage() {
                 : "A setup designed to reduce noise and ambiguity."}
             </h2>
           </div>
-          <p className="max-w-2xl text-base leading-8 text-[var(--text-muted)] lg:justify-self-end">
-            {isItalian
-              ? "Quando un progetto è impostato bene, il team capisce cosa stiamo facendo, perché lo stiamo facendo e quali decisioni restano davvero aperte."
-              : "When a project is framed well, the team understands what we are doing, why we are doing it, and which decisions are still truly open."}
-          </p>
         </motion.div>
 
         <div className="mt-10 grid gap-4 md:grid-cols-3">
@@ -258,7 +253,7 @@ export default function MetodoPage() {
           className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start"
         >
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {t.nav.process}
             </p>
             <h2 className="mt-4 max-w-xl text-4xl md:text-5xl">
@@ -267,8 +262,8 @@ export default function MetodoPage() {
             <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
               {t.process.subtitle}
             </p>
-            <div className="mt-8 rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+            <div className="mt-8 border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]">
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                 {isItalian ? "Governance" : "Governance"}
               </p>
               <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
@@ -279,7 +274,7 @@ export default function MetodoPage() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
+          <div className="overflow-hidden border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
             {t.process.phaseSteps.map((step, index) => (
               <div
                 key={step.title}
@@ -304,9 +299,12 @@ export default function MetodoPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
-        <motion.div {...reveal} className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
+        <motion.div
+          {...reveal}
+          className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end"
+        >
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {isItalian ? "Scelta dell’area" : "Choosing the right area"}
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl md:text-5xl">
@@ -327,7 +325,7 @@ export default function MetodoPage() {
             <motion.article key={area.title} {...reveal}>
               <Card className="flex h-full flex-col">
                 <CardHeader>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                     {area.number}
                   </p>
                   <CardTitle className="mt-3 text-3xl">{area.title}</CardTitle>
@@ -337,7 +335,7 @@ export default function MetodoPage() {
                     {area.subtitle}
                   </p>
                   <div className="mt-6 border-t border-[var(--border)] pt-6">
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                       {t.services.result}
                     </p>
                     <p className="mt-3 text-sm leading-7 text-[var(--text)]">
@@ -368,7 +366,7 @@ export default function MetodoPage() {
           className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]"
         >
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               FAQ
             </p>
             <h2 className="mt-4 text-4xl md:text-5xl">{t.faq.title}</h2>
@@ -383,31 +381,29 @@ export default function MetodoPage() {
       <section className="mx-auto max-w-7xl px-4 pb-24">
         <motion.div {...reveal}>
           <Card className="bg-[var(--surface-strong)]">
-            <div className="grid gap-8 p-7 md:grid-cols-[0.9fr_1.1fr] md:p-10">
+            <div className="grid gap-6 p-6 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:p-10">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
                   {isItalian ? "Prossimo passo" : "Next step"}
                 </p>
-                <h2 className="mt-4 text-4xl md:text-5xl">
+                <h2 className="mt-4 text-[2rem] sm:text-4xl md:text-5xl">
                   {isItalian
                     ? "Se il contesto è concreto, capiamo in fretta se c’è allineamento."
                     : "If the context is concrete, we can assess fit quickly."}
                 </h2>
               </div>
-              <div>
+              <div className="flex flex-col gap-5">
                 <p className="text-base leading-8 text-[var(--text-muted)]">
                   {isItalian
                     ? "Bastano un obiettivo, qualche vincolo reale e il livello di urgenza. Da lì possiamo dirti se ha senso procedere, con quale formato e con quale priorità."
                     : "A goal, a few real constraints, and the urgency level are enough. From there we can tell you whether it makes sense to proceed, in which format, and with what priority."}
                 </p>
-                <div className="mt-6">
-                  <Link to="/#contatto">
-                    <Button>
-                      {isItalian ? "Prenota una call" : "Book a call"}{" "}
-                      <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
+                <Link to="/#contatto" className="w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto">
+                    {isItalian ? "Prenota una call" : "Book a call"}{" "}
+                    <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </Card>

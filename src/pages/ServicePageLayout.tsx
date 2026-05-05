@@ -7,10 +7,7 @@ import { Button } from "@/components/Button/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
 import { usePageSeo, type PageSeoConfig } from "@/hooks/usePageSeo";
-import {
-  ServiceVisual,
-  type ServiceVisualVariant,
-} from "@/components/Visual/ServiceVisual";
+import type { ServiceVisualVariant } from "@/components/Visual/ServiceVisual";
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -101,7 +98,7 @@ export default function ServicePageLayout({
             >
               {content.hero.eyebrow}
             </p>
-            <h1 className="mt-5 text-5xl leading-[0.96] md:text-7xl">
+            <h1 className="mt-5 text-[2.4rem] leading-[0.96] sm:text-5xl md:text-7xl">
               {content.hero.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-muted)]">
@@ -124,23 +121,29 @@ export default function ServicePageLayout({
 
           <motion.aside
             {...reveal}
-            className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
+            className="overflow-hidden border border-[var(--border)] shadow-[var(--shadow)]"
           >
-            <ServiceVisual
-              variant={content.hero.visual}
-              className="h-[340px] md:h-[380px]"
-            />
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+            <div className="relative h-[300px] overflow-hidden md:h-[380px]">
+              <img
+                src={content.hero.image}
+                alt={content.hero.title}
+                loading="lazy"
+                decoding="async"
+                className="h-full w-full object-cover grayscale contrast-[1.15]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--page-bg)] via-transparent to-transparent opacity-60" />
+            </div>
+            <div className="grid gap-4 bg-[var(--surface)] p-5 sm:grid-cols-2 md:p-6">
+              <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                   {language === "it" ? "Ambito" : "Scope"}
                 </div>
                 <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
                   {content.sections[0]?.heading}
                 </p>
               </div>
-              <div className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+              <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                   {language === "it" ? "Use case" : "Use cases"}
                 </div>
                 <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
@@ -166,7 +169,7 @@ export default function ServicePageLayout({
                 <div className="space-y-4">
                   {content.process.steps.map((step) => (
                     <div key={step.number} className="border-t border-[var(--border)] pt-4 first:border-t-0 first:pt-0">
-                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                         {step.number}
                       </div>
                       <div className="mt-2 text-lg font-semibold text-[var(--text)]">
@@ -210,14 +213,14 @@ export default function ServicePageLayout({
 
       <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
         <motion.div {...reveal}>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
             {content.useCases.title}
           </p>
           <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {content.useCases.items.map((item) => (
               <div
                 key={item.title}
-                className="rounded-[20px] border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]"
+                className="border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]"
               >
                 <h3 className="text-2xl">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
@@ -232,7 +235,7 @@ export default function ServicePageLayout({
       <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
         <motion.div {...reveal} className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               FAQ
             </p>
             <h2 className="mt-4 text-4xl md:text-5xl">{content.faq.title}</h2>
@@ -247,24 +250,22 @@ export default function ServicePageLayout({
       <section className="mx-auto max-w-7xl px-4 pb-24">
         <motion.div {...reveal}>
           <Card className="bg-[var(--surface-strong)]">
-            <div className="grid gap-8 p-7 md:grid-cols-[0.9fr_1.1fr] md:p-10">
+            <div className="grid gap-6 p-6 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:p-10">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
                   {language === "it" ? "Prossimo passo" : "Next step"}
                 </p>
-                <h2 className="mt-4 text-4xl md:text-5xl">{content.cta.title}</h2>
+                <h2 className="mt-4 text-[2rem] sm:text-4xl md:text-5xl">{content.cta.title}</h2>
               </div>
-              <div>
+              <div className="flex flex-col gap-5">
                 <p className="text-base leading-8 text-[var(--text-muted)]">
                   {content.cta.subtitle}
                 </p>
-                <div className="mt-6">
-                  <Link to="/#contatto">
-                    <Button>
-                      {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
+                <Link to="/#contatto" className="w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto">
+                    {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </Card>

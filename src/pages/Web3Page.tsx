@@ -74,7 +74,7 @@ export default function Web3Page() {
       subtitle: isIt
         ? "Blockchain e web3 vengono adottati solo con requisiti chiari: verificabilità dei dati, tracciabilità condivisa o automazioni con regole non modificabili."
         : "Blockchain and web3 are used only when requirements are explicit: data verifiability, shared traceability, or automations with non-editable rules.",
-      image: "/images/usecase.jpg",
+      image: "https://images.unsplash.com/photo-1639762681057-408e52192e55?auto=format&fit=crop&w=1400&q=80",
       visual: "verification",
     },
     sections: isIt

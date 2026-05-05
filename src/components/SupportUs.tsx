@@ -31,7 +31,7 @@ function SelectField({
         {label}
       </div>
       <select
-        className="support-select h-12 w-full rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
+        className="support-select h-12 w-full border border-[var(--border)] bg-[var(--surface-strong)] px-4 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
         value={value}
         onChange={(event) => onChange(event.target.value)}
       >
@@ -295,17 +295,17 @@ export function SupportSection() {
   };
 
   return (
-    <section id="supporto" className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
+    <section id="supporto" className="mx-auto max-w-7xl px-4 py-20 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55 }}
-        className="overflow-hidden rounded-[30px] border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--shadow)]"
+        className="overflow-hidden border border-[var(--border)] bg-[var(--surface-strong)] shadow-[var(--shadow)]"
       >
         <div className="grid gap-8 p-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-center md:p-10">
           <div className="lg:pr-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {language === "it" ? "Supporto" : "Support"}
             </p>
             <h2 className="mt-4 text-4xl md:text-5xl">{t.support.title}</h2>
@@ -314,7 +314,7 @@ export function SupportSection() {
             </p>
 
             <div className="mt-8 space-y-3">
-              <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
+              <div className="border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                   {language === "it" ? "Utilizzo" : "Use of funds"}
                 </div>
@@ -324,7 +324,7 @@ export function SupportSection() {
                     : "Support helps fund prototypes, technical testing, experimental integrations, and tool development that can later become part of our applied work."}
                 </p>
               </div>
-              <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
+              <div className="border border-[var(--border)] bg-[var(--surface)] px-4 py-4">
                 <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                   {t.support.transparency}
                 </div>
@@ -343,7 +343,7 @@ export function SupportSection() {
             </div>
           </div>
 
-          <div className="self-center rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6">
+          <div className="self-center border border-[var(--border)] bg-[var(--surface)] p-5 md:p-6">
             <div className="flex flex-col gap-4 border-b border-[var(--border)] pb-5 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
@@ -356,7 +356,7 @@ export function SupportSection() {
                 </p>
               </div>
 
-              <div className="inline-flex rounded-[14px] border border-[var(--border)] bg-[var(--surface-strong)] p-1">
+              <div className="inline-flex border border-[var(--border)] bg-[var(--surface-strong)] p-1">
                 <button
                   type="button"
                   onClick={() => {
@@ -364,7 +364,7 @@ export function SupportSection() {
                     setStatus(null);
                   }}
                   className={[
-                    "rounded-[10px] px-3 py-2 text-xs font-semibold transition",
+                    "px-3 py-2 text-xs font-semibold transition",
                     donationMethod === "metamask"
                       ? "bg-[var(--button-bg)] text-[var(--button-text)]"
                       : "text-[var(--text-muted)] hover:text-[var(--text)]",
@@ -379,7 +379,7 @@ export function SupportSection() {
                     setStatus(null);
                   }}
                   className={[
-                    "rounded-[10px] px-3 py-2 text-xs font-semibold transition",
+                    "px-3 py-2 text-xs font-semibold transition",
                     donationMethod === "paypal"
                       ? "bg-[var(--button-bg)] text-[var(--button-text)]"
                       : "text-[var(--text-muted)] hover:text-[var(--text)]",
@@ -400,7 +400,7 @@ export function SupportSection() {
                   transition={{ duration: 0.2 }}
                   className="pt-6"
                 >
-                  <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                  <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                     <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                       <div>
                         <div className="text-base font-semibold text-[var(--text)]">
@@ -432,7 +432,7 @@ export function SupportSection() {
                         value={amount}
                         onChange={(event) => setAmount(event.target.value)}
                         placeholder="0.05"
-                        className="h-12 w-full rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
+                        className="h-12 w-full border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
                       />
                     </label>
 
@@ -465,7 +465,7 @@ export function SupportSection() {
                   </div>
 
                   {status ? (
-                    <div className="mt-4 rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
+                    <div className="mt-4 border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
                       {status}
                     </div>
                   ) : null}
@@ -479,7 +479,7 @@ export function SupportSection() {
                   transition={{ duration: 0.2 }}
                   className="pt-6"
                 >
-                  <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                  <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                     <div className="text-base font-semibold text-[var(--text)]">
                       PayPal
                     </div>
@@ -497,13 +497,13 @@ export function SupportSection() {
                         value={amount}
                         onChange={(event) => setAmount(event.target.value)}
                         placeholder="10.00"
-                        className="h-12 w-full rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
+                        className="h-12 w-full border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
                       />
                     </label>
                     <button
                       type="button"
                       onClick={handlePayPal}
-                      className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[var(--border)] bg-[var(--surface-strong)] px-5 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--border-strong)] hover:bg-[var(--surface)]"
+                      className="inline-flex h-12 items-center justify-center gap-2 border border-[var(--border)] bg-[var(--surface-strong)] px-5 text-sm font-semibold text-[var(--text)] transition hover:border-[var(--border-strong)] hover:bg-[var(--surface)]"
                     >
                       <CircleDollarSign className="h-4 w-4" />
                       {t.support.sendPayPal}
@@ -515,7 +515,7 @@ export function SupportSection() {
                   </div>
 
                   {status ? (
-                    <div className="mt-4 rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
+                    <div className="mt-4 border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-3 text-sm leading-6 text-[var(--text-muted)]">
                       {status}
                     </div>
                   ) : null}
@@ -541,7 +541,7 @@ export function SupportSection() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 8, scale: 0.98 }}
                 transition={{ duration: 0.2 }}
-                className="relative w-full max-w-2xl rounded-[22px] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--shadow)] md:p-7"
+                className="relative w-full max-w-2xl border border-[var(--border)] bg-[var(--surface)] p-6 shadow-[var(--shadow)] md:p-7"
                 onClick={(event) => event.stopPropagation()}
               >
                 <button
@@ -567,7 +567,7 @@ export function SupportSection() {
                   {onchainAddresses.map((entry) => (
                     <div
                       key={`${entry.label}-${entry.address}`}
-                      className="rounded-[16px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4"
+                      className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4"
                     >
                       <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--text-soft)]">
                         {entry.label}

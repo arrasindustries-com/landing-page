@@ -14,17 +14,20 @@ export function Footer() {
   ];
 
   return (
-    <footer className="mx-auto max-w-7xl px-4 pb-6 pt-6 md:pb-8">
-      <div className="rounded-[32px] border border-[var(--border)] bg-[var(--surface)] px-6 py-8 shadow-[var(--shadow)] md:px-8">
-        <div className="grid gap-8 md:grid-cols-[1.3fr_0.9fr_0.9fr]">
-          <div className="space-y-3">
-            <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-              {t.footer.company}
+    <footer className="bg-[#0f1113] w-full border-t border-white/10 py-12">
+      <div className="mx-auto max-w-7xl px-4 md:px-8">
+        <div className="grid gap-10 md:grid-cols-[1.3fr_0.9fr_0.9fr]">
+          <div className="space-y-4">
+            <div
+              className="text-lg font-bold uppercase tracking-widest text-white/90"
+              style={{ fontFamily: "'Noto Serif', Georgia, serif" }}
+            >
+              Arras Industries
             </div>
-            <p className="max-w-md text-sm leading-6 text-[var(--text-muted)]">
+            <p className="max-w-md text-sm leading-6 text-white/50">
               {t.footer.description}
             </p>
-            <div className="text-xs text-[var(--text-soft)]">
+            <div className="text-xs text-white/30">
               {t.footer.copyright.replace(
                 "{year}",
                 String(new Date().getFullYear()),
@@ -33,15 +36,15 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/40">
               {t.footer.sections}
             </div>
-            <div className="grid grid-cols-1 gap-2 text-sm text-[var(--text-muted)]">
+            <div className="grid grid-cols-1 gap-2 text-sm text-white/55">
               {sections.map((section) => (
                 <Link
                   key={section.to}
                   to={section.to}
-                  className="transition-colors hover:text-[var(--text)]"
+                  className="transition-colors hover:text-white/90"
                 >
                   {section.label}
                 </Link>
@@ -50,10 +53,10 @@ export function Footer() {
           </div>
 
           <div>
-            <div className="mb-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <div className="mb-4 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/40">
               {t.footer.contacts}
             </div>
-            <div className="flex flex-col gap-2 text-sm text-[var(--text-muted)]">
+            <div className="flex flex-col gap-2 text-sm text-white/55">
               <span className="break-words [overflow-wrap:anywhere]">{t.footer.email}</span>
               <span>{t.footer.phone}</span>
               <span>{t.footer.location}</span>

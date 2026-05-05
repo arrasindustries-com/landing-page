@@ -58,9 +58,9 @@ export function StickyHeader({
     language === "it" ? "Passa al tema scuro" : "Switch to dark theme";
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     [
-      "relative text-sm transition-colors duration-200",
+      "relative text-[13px] uppercase tracking-[0.12em] transition-colors duration-200",
       isActive
-        ? "text-[var(--text)]"
+        ? "text-[var(--text)] border-b border-[var(--accent)]"
         : "text-[var(--text-muted)] hover:text-[var(--text)]",
     ].join(" ");
 
@@ -69,27 +69,20 @@ export function StickyHeader({
       className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] backdrop-blur-xl"
       style={{
         backgroundColor:
-          theme === "dark" ? "rgba(20, 17, 15, 0.82)" : "rgba(243, 238, 228, 0.82)",
+          theme === "dark" ? "rgba(20, 17, 15, 0.88)" : "rgba(251, 249, 244, 0.88)",
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
-        <Link to="/" className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[11px] font-bold uppercase tracking-[0.24em] text-[var(--text)]">
-            AI
-          </div>
-          <div>
-            <div className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
-              Arras Industries
-            </div>
-            <div className="text-sm text-[var(--text-muted)]">
-              {language === "it"
-                ? "Software per operazioni reali"
-                : "Software for real operations"}
-            </div>
+        <Link to="/" className="flex items-center">
+          <div
+            className="text-base font-bold uppercase tracking-wider text-[var(--text)] sm:text-lg sm:tracking-widest"
+            style={{ fontFamily: "'Noto Serif', Georgia, serif" }}
+          >
+            Arras Industries
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-7 md:flex">
+        <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
@@ -137,6 +130,7 @@ export function StickyHeader({
             </span>
           </button>
 
+          <div className="hidden sm:block h-5 w-px bg-[var(--border)] mx-1" />
           <Button
             onClick={() => handleContactClick()}
             className="hidden sm:inline-flex"
@@ -173,7 +167,7 @@ export function StickyHeader({
                   key={link.to}
                   to={link.to}
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-[18px] px-4 py-3 text-sm text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
+                  className="px-4 py-3 text-sm uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
                 >
                   {link.label}
                 </NavLink>

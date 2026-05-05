@@ -45,7 +45,7 @@ export default function SupportPage() {
           className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]"
         >
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {isItalian ? "Supporto" : "Support"}
             </p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
@@ -60,7 +60,7 @@ export default function SupportPage() {
             </p>
           </div>
 
-          <div className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] px-6 py-6 shadow-[var(--shadow)] md:px-7">
+          <div className="border border-[var(--border)] bg-[var(--surface)] px-6 py-6 shadow-[var(--shadow)] md:px-7">
             <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
               {isItalian ? "Nota" : "Note"}
             </p>

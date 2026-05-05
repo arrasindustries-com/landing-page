@@ -73,7 +73,7 @@ export default function GestionaliPage() {
       subtitle: isIt
         ? "Progettiamo gestionali sui processi operativi reali: ordini, turni, scorte, ruoli e report. Prima definiamo scope, integrazioni e metriche; poi sviluppiamo."
         : "We build management software around actual operations: orders, shifts, inventory, roles, and reporting. Scope, integrations, and metrics are defined before development.",
-      image: "/images/hero.jpg",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
       visual: "operations",
     },
     sections: isIt

@@ -12,7 +12,6 @@ import {
 import { Footer } from "@/components/Footer";
 import { InputLike } from "@/components/Input/InputLike";
 import { SupportSection } from "@/components/SupportUs";
-import { ServiceVisual } from "@/components/Visual/ServiceVisual";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { openWhatsApp, scrollToId } from "@/lib/utils";
@@ -174,18 +173,19 @@ export default function HomePage() {
 
   return (
     <>
+      {/* HERO */}
       <section className="mx-auto max-w-7xl px-4 pb-20 pt-14 md:pb-24 md:pt-16">
-        <div className="grid gap-10 lg:grid-cols-[1.06fr_0.94fr] lg:items-center">
+        <div className="grid gap-10 lg:grid-cols-[1.06fr_0.94fr] lg:items-center overflow-hidden">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-4xl"
           >
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {heroCopy.eyebrow}
             </p>
-            <h1 className="mt-5 max-w-4xl text-5xl leading-[0.95] md:text-7xl">
+            <h1 className="mt-5 max-w-4xl text-[2.4rem] leading-[0.95] sm:text-5xl md:text-7xl">
               {heroCopy.title}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-muted)]">
@@ -205,7 +205,7 @@ export default function HomePage() {
               {heroCopy.note}
             </p>
 
-            <div className="mt-10 grid overflow-hidden rounded-[20px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)] sm:grid-cols-3">
+            <div className="mt-10 grid overflow-hidden border border-[var(--border)] bg-[var(--surface)] sm:grid-cols-3">
               {credibility.map((item) => (
                 <div
                   key={item.label}
@@ -230,13 +230,20 @@ export default function HomePage() {
               delay: 0.08,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="rounded-[24px] border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6"
+            className="overflow-hidden border border-[var(--border)] shadow-[var(--shadow)]"
           >
-            <ServiceVisual
-              variant="overview"
-              className="h-[320px] md:h-[360px]"
-            />
-            <div className="mt-6">
+            <div className="relative h-[300px] overflow-hidden md:h-[340px]">
+              <img
+                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+                alt="Digital engineering workspace"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                className="h-full w-full object-cover grayscale contrast-[1.15]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[var(--page-bg)] via-transparent to-transparent opacity-60" />
+            </div>
+            <div className="bg-[var(--surface)] p-5 md:p-6">
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
                 {heroCopy.panelTitle}
               </p>
@@ -246,7 +253,7 @@ export default function HomePage() {
                     key={feature.title}
                     className="flex items-start gap-4 border-t border-[var(--border)] pt-4 first:border-t-0 first:pt-0"
                   >
-                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
                       0{index + 1}
                     </div>
                     <div>
@@ -265,13 +272,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* SERVICES */}
       <section id="servizi" className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
         <motion.div
           {...reveal}
           className="grid gap-6 lg:grid-cols-[0.78fr_1.22fr] lg:items-end"
         >
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {t.sectionBridge.fromStrategy.eyebrow}
             </p>
             <h2 className="mt-4 max-w-3xl text-4xl md:text-5xl">
@@ -292,7 +300,7 @@ export default function HomePage() {
             <motion.article key={service.title} {...reveal}>
               <Card className="flex h-full flex-col">
                 <CardHeader>
-                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
                     {service.number}
                   </p>
                   <CardTitle className="mt-3 text-3xl">
@@ -306,7 +314,7 @@ export default function HomePage() {
                   <div className="space-y-3">
                     {service.points.map((point) => (
                       <div key={point} className="flex items-start gap-3">
-                        <div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--text)]" />
+                        <div className="mt-2 h-1.5 w-1.5 shrink-0 bg-[var(--text)]" />
                         <p className="text-sm leading-6 text-[var(--text-muted)]">
                           {point}
                         </p>
@@ -326,7 +334,7 @@ export default function HomePage() {
                   <div className="mt-8">
                     <Link
                       to={service.href}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
+                      className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em] text-[var(--text)] transition-opacity hover:opacity-70"
                     >
                       {isItalian
                         ? "Approfondisci il servizio"
@@ -341,24 +349,33 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
-        <motion.div {...reveal}>
-          <Card className="bg-[var(--surface-strong)]">
-            <div className="grid gap-8 p-7 lg:grid-cols-[0.82fr_1.18fr] md:p-10">
+      {/* METHOD / PROCESS — dark section */}
+      <section className="relative overflow-hidden bg-[#0f1113] py-20 md:py-24">
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
+          }}
+        />
+        <div className="mx-auto max-w-7xl px-4 relative z-10">
+          <motion.div {...reveal}>
+            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#e1c28e]">
                   {t.nav.path}
                 </p>
-                <h2 className="mt-4 max-w-xl text-4xl md:text-5xl">
+                <h2 className="mt-4 max-w-xl text-4xl text-white md:text-5xl">
                   {approachTeaser.title}
                 </h2>
-                <p className="mt-5 max-w-xl text-base leading-8 text-[var(--text-muted)]">
+                <p className="mt-5 max-w-xl text-base leading-8 text-white/70">
                   {approachTeaser.body}
                 </p>
                 <div className="mt-8">
                   <Link
                     to="/metodo"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-[var(--text)] transition-opacity hover:opacity-70"
+                    className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em] text-[#ffdea7] underline-offset-4 hover:underline transition-all"
                   >
                     {approachTeaser.link}
                     <ArrowRight className="h-4 w-4" />
@@ -366,18 +383,18 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]">
+              <div className="border border-white/10">
                 {t.process.steps.map((step) => (
                   <div
                     key={step.number}
-                    className="grid gap-4 border-t border-[var(--border)] px-6 py-6 first:border-t-0 md:grid-cols-[72px_1fr]"
+                    className="grid gap-4 border-t border-white/10 px-6 py-6 first:border-t-0 md:grid-cols-[72px_1fr] hover:bg-white/[0.03] transition-colors"
                   >
-                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--text-soft)]">
+                    <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#e1c28e]/60">
                       {step.number}
                     </div>
                     <div>
-                      <h3 className="text-2xl">{step.title}</h3>
-                      <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                      <h3 className="text-2xl text-white">{step.title}</h3>
+                      <p className="mt-3 text-sm leading-7 text-white/65">
                         {step.desc}
                       </p>
                     </div>
@@ -385,31 +402,32 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
-          </Card>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       <SupportSection />
 
-      <section id="contatto" className="mx-auto max-w-7xl px-4 pb-8 md:pb-10">
+      {/* CONTACT */}
+      <section id="contatto" className="mx-auto max-w-7xl px-4 pb-10 md:pb-16">
         <motion.div {...reveal}>
-          <Card className="overflow-hidden">
-            <div className="grid gap-8 p-7 lg:grid-cols-[0.82fr_1.18fr] lg:items-center lg:gap-10 md:p-10">
-              <div className="flex h-full flex-col">
+          <Card>
+            <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-12">
+              <div className="min-w-0 flex flex-col gap-6">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
                     {isItalian ? "Contatto" : "Contact"}
                   </p>
-                  <h2 className="mt-4 max-w-md text-4xl md:text-5xl">
+                  <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl break-words">
                     {t.contact.title}
                   </h2>
-                  <p className="mt-5 max-w-md text-base leading-8 text-[var(--text-muted)]">
+                  <p className="mt-4 text-base leading-8 text-[var(--text-muted)]">
                     {t.contact.subtitle}
                   </p>
                 </div>
 
-                <div className="mt-8 grid gap-3">
-                  <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                <div className="grid gap-3">
+                  <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                     <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                       {isItalian ? "Input utile" : "Helpful input"}
                     </div>
@@ -420,7 +438,7 @@ export default function HomePage() {
                     </p>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                    <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                       <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                         {isItalian ? "Tempi" : "Timing"}
                       </div>
@@ -428,7 +446,7 @@ export default function HomePage() {
                         {t.contact.responseTime}
                       </p>
                     </div>
-                    <div className="rounded-[18px] border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                    <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
                       <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--text-soft)]">
                         {isItalian ? "Formato" : "Format"}
                       </div>
@@ -442,7 +460,7 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div className="self-center rounded-[20px] border border-[var(--border)] bg-[var(--surface-strong)] p-5 md:p-6">
+              <div className="min-w-0 border border-[var(--border)] bg-[var(--surface-strong)] p-5 md:p-6">
                 <div className="grid gap-3 md:grid-cols-2">
                   <InputLike
                     label={t.contact.formLabels.name}
@@ -476,18 +494,22 @@ export default function HomePage() {
                 </div>
 
                 <div className="mt-6 border-t border-[var(--border)] pt-6">
-                  <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-                    <p className="max-w-xl text-sm leading-7 text-[var(--text-muted)]">
+                  <div className="flex flex-col gap-4">
+                    <p className="text-sm leading-7 text-[var(--text-muted)]">
                       {isItalian
                         ? "Più il contesto è concreto, più velocemente possiamo dirti se esiste allineamento tra obiettivo, budget e tempi."
                         : "The more concrete the context, the faster we can tell you whether there is alignment between objective, budget, and timing."}
                     </p>
-                    <div className="flex flex-col gap-3 sm:flex-row">
-                      <Button onClick={() => openWhatsApp(contactForm, language)}>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                      <Button
+                        className="w-full sm:w-auto"
+                        onClick={() => openWhatsApp(contactForm, language)}
+                      >
                         {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="outline"
+                        className="w-full sm:w-auto"
                         onClick={() => scrollToId("servizi")}
                       >
                         {t.nav.services}
@@ -498,12 +520,10 @@ export default function HomePage() {
               </div>
             </div>
           </Card>
-
-          <div className="mt-8">
-            <Footer />
-          </div>
         </motion.div>
       </section>
+
+      <Footer />
     </>
   );
 }

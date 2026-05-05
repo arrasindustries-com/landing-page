@@ -191,10 +191,10 @@ export default function AboutPage() {
           className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]"
         >
           <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-soft)]">
+            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
               {isIt ? "Chi siamo" : "About us"}
             </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
+            <h1 className="mt-4 text-[2rem] font-semibold tracking-tight sm:text-4xl md:text-6xl">
               {isIt
                 ? "Un team tecnico con impostazione operativa."
                 : "A technical team with an operational mindset."}
@@ -217,7 +217,7 @@ export default function AboutPage() {
                 {capabilities.map((item) => (
                   <div
                     key={item}
-                    className="rounded-[20px] border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-sm leading-6 text-[var(--text-muted)]"
+                    className="border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-sm leading-6 text-[var(--text-muted)]"
                   >
                     {item}
                   </div>
@@ -234,7 +234,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.08 * index }}
-              className="overflow-hidden rounded-[30px] border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]"
+              className="overflow-hidden border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]"
             >
               <img
                 src={member.image}
