@@ -7,12 +7,14 @@ export function StopMotion({
   className,
   fps = 220,
   float = true,
+  objectPosition = "center",
 }: {
   frames: string[];
   alt: string;
   className?: string;
   fps?: number;
   float?: boolean;
+  objectPosition?: string;
 }) {
   const [frameIndex, setFrameIndex] = useState(0);
   const [ready, setReady] = useState(frames.length < 2);
@@ -24,7 +26,10 @@ export function StopMotion({
     let loaded = 0;
     const imgs = frames.map((src) => {
       const img = new Image();
-      const onDone = () => { loaded += 1; if (!cancelled && loaded === frames.length) setReady(true); };
+      const onDone = () => {
+        loaded += 1;
+        if (!cancelled && loaded === frames.length) setReady(true);
+      };
       img.onload = onDone;
       img.onerror = onDone;
       img.src = src;
@@ -35,11 +40,17 @@ export function StopMotion({
 
   useEffect(() => {
     if (!ready || frames.length < 2) return;
-    const id = window.setInterval(() => setFrameIndex((i) => (i + 1) % frames.length), fps);
+    const id = window.setInterval(
+      () => setFrameIndex((i) => (i + 1) % frames.length),
+      fps,
+    );
     return () => window.clearInterval(id);
   }, [ready, frames, fps]);
 
-  const frames_ui = ready
+  const imgClass = "absolute inset-0 h-full w-full object-cover transition-none";
+  const imgStyle = { objectPosition };
+
+  const framesUI = ready
     ? frames.map((src, i) => (
         <img
           key={src}
@@ -48,10 +59,8 @@ export function StopMotion({
           aria-hidden={i !== frameIndex}
           loading={i === 0 ? "eager" : "lazy"}
           decoding="async"
-          className={[
-            "absolute inset-0 h-full w-full object-cover transition-none",
-            i === frameIndex ? "opacity-100" : "opacity-0",
-          ].join(" ")}
+          style={imgStyle}
+          className={`${imgClass} ${i === frameIndex ? "opacity-100" : "opacity-0"}`}
         />
       ))
     : (
@@ -60,7 +69,8 @@ export function StopMotion({
           alt={alt}
           loading="eager"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover"
+          style={imgStyle}
+          className={`${imgClass} opacity-100`}
         />
       );
 
@@ -73,10 +83,10 @@ export function StopMotion({
         animate={{ y: [0, -4, 0] }}
         transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
       >
-        {frames_ui}
+        {framesUI}
       </motion.div>
     );
   }
 
-  return <div className={containerClass}>{frames_ui}</div>;
+  return <div className={containerClass}>{framesUI}</div>;
 }

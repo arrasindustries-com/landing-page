@@ -208,6 +208,8 @@ export default function HomePage() {
                 frames={HOME_FRAMES}
                 alt={isItalian ? "Animazione interfaccia digitale" : "Digital interface animation"}
                 className="h-full w-full"
+                float={false}
+                objectPosition="top"
               />
             </div>
           </motion.aside>
