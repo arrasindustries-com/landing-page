@@ -350,7 +350,7 @@ export default function HomePage() {
       </section>
 
       {/* METHOD / PROCESS — dark section */}
-      <section className="relative overflow-hidden bg-[#0f1113] py-20 md:py-24">
+      <section className="isolate relative overflow-hidden bg-[#0f1113] py-20 md:py-24" style={{ backgroundColor: '#0f1113' }}>
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -375,7 +375,8 @@ export default function HomePage() {
                 <div className="mt-8">
                   <Link
                     to="/metodo"
-                    className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.08em] text-[#ffdea7] underline-offset-4 hover:underline transition-all"
+                    className="inline-flex items-center gap-2 border border-[#e1c28e] bg-[#e1c28e] px-5 py-2.5 text-xs font-semibold uppercase tracking-[0.08em] text-[#0f1113] transition-all hover:border-[#f0d7aa] hover:bg-[#f0d7aa] sm:text-sm"
+                    style={{ color: "#0b0d0f", WebkitTextFillColor: "#0b0d0f" }}
                   >
                     {approachTeaser.link}
                     <ArrowRight className="h-4 w-4" />
