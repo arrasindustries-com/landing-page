@@ -7,6 +7,7 @@ import { Button } from "@/components/Button/Button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
 import { usePageSeo, type PageSeoConfig } from "@/hooks/usePageSeo";
+import { StopMotion } from "@/components/Visual/StopMotion";
 import type { ServiceVisualVariant } from "@/components/Visual/ServiceVisual";
 
 const reveal = {
@@ -32,6 +33,7 @@ export interface ServicePageContent {
     subtitle: string;
     image: string;
     visual: ServiceVisualVariant;
+    animationFrames?: string[];
   };
   sections: Array<{ heading: string; body: string }>;
   useCases: {
@@ -53,6 +55,7 @@ export interface ServicePageContent {
     buttonText: string;
   };
 }
+
 
 export default function ServicePageLayout({
   content,
@@ -124,12 +127,10 @@ export default function ServicePageLayout({
             className="overflow-hidden border border-[var(--border)] shadow-[var(--shadow)]"
           >
             <div className="relative h-[300px] overflow-hidden md:h-[380px]">
-              <img
-                src={content.hero.image}
+              <StopMotion
+                frames={content.hero.animationFrames?.length ? content.hero.animationFrames : [content.hero.image]}
                 alt={content.hero.title}
-                loading="lazy"
-                decoding="async"
-                className="h-full w-full object-cover grayscale contrast-[1.15]"
+                className="h-full w-full"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[var(--page-bg)] via-transparent to-transparent opacity-60" />
             </div>

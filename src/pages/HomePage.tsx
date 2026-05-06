@@ -7,10 +7,22 @@ import { Card } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
 import { InputLike } from "@/components/Input/InputLike";
 import { SupportSection } from "@/components/SupportUs";
+import { StopMotion } from "@/components/Visual/StopMotion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { openWhatsApp, scrollToId } from "@/lib/utils";
 import type { ContactRequest } from "@/types/types";
+
+const HOME_FRAMES = [
+  "/assets/home/Home_1.png",
+  "/assets/home/Home_2.png",
+  "/assets/home/Home_3.png",
+  "/assets/home/Home_4.png",
+  "/assets/home/Home_5.png",
+  "/assets/home/Home_6.png",
+  "/assets/home/Home_7.png",
+  "/assets/home/Home_8.png",
+];
 
 const reveal = {
   initial: { opacity: 0, y: 24 },
@@ -188,21 +200,16 @@ export default function HomePage() {
           <motion.aside
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.65,
-              delay: 0.08,
-              ease: [0.22, 1, 0.36, 1],
-            }}
+            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden border border-[var(--border)] bg-[var(--surface-strong)]"
           >
-            <img
-              src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80"
-              alt={isItalian ? "Laptop con dashboard gestionale" : "Laptop with management dashboard"}
-              loading="eager"
-              fetchPriority="high"
-              decoding="async"
-              className="h-full min-h-[320px] w-full object-cover grayscale contrast-[1.05]"
-            />
+            <div className="relative h-[320px] overflow-hidden md:h-[420px]">
+              <StopMotion
+                frames={HOME_FRAMES}
+                alt={isItalian ? "Animazione interfaccia digitale" : "Digital interface animation"}
+                className="h-full w-full"
+              />
+            </div>
           </motion.aside>
         </div>
 
