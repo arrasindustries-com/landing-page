@@ -4,6 +4,17 @@ import ServicePageLayout, {
   type ServicePageContent,
 } from "./ServicePageLayout";
 
+const gestionaliFrames = [
+  "/assets/gestionali/Gestionali_1.png",
+  "/assets/gestionali/Gestionali_2.png",
+  "/assets/gestionali/Gestionali_3.png",
+  "/assets/gestionali/Gestionali_4.png",
+  "/assets/gestionali/Gestionali_5.png",
+  "/assets/gestionali/Gestionali_6.png",
+  "/assets/gestionali/Gestionali_7.png",
+  "/assets/gestionali/Gestionali_8.png",
+];
+
 export default function GestionaliPage() {
   const { language } = useLanguage();
   const isIt = language === "it";
@@ -73,7 +84,8 @@ export default function GestionaliPage() {
       subtitle: isIt
         ? "Progettiamo gestionali sui processi operativi reali: ordini, turni, scorte, ruoli e report. Prima definiamo scope, integrazioni e metriche; poi sviluppiamo."
         : "We build management software around actual operations: orders, shifts, inventory, roles, and reporting. Scope, integrations, and metrics are defined before development.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1400&q=80",
+      image: gestionaliFrames[0],
+      animationFrames: gestionaliFrames,
       visual: "operations",
     },
     sections: isIt

@@ -20,7 +20,10 @@ export function StopMotion({
   const [ready, setReady] = useState(frames.length < 2);
 
   useEffect(() => {
-    if (frames.length < 2) { setReady(true); return; }
+    if (frames.length < 2) {
+      setReady(true);
+      return;
+    }
     setReady(false);
     let cancelled = false;
     let loaded = 0;
@@ -35,7 +38,10 @@ export function StopMotion({
       img.src = src;
       return img;
     });
-    return () => { cancelled = true; imgs.length = 0; };
+    return () => {
+      cancelled = true;
+      imgs.length = 0;
+    };
   }, [frames]);
 
   useEffect(() => {
@@ -47,32 +53,33 @@ export function StopMotion({
     return () => window.clearInterval(id);
   }, [ready, frames, fps]);
 
-  const imgClass = "absolute inset-0 h-full w-full object-cover transition-none";
+  const imgClass =
+    "absolute inset-0 h-full w-full object-cover transition-none";
   const imgStyle = { objectPosition };
 
-  const framesUI = ready
-    ? frames.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt={i === frameIndex ? alt : ""}
-          aria-hidden={i !== frameIndex}
-          loading={i === 0 ? "eager" : "lazy"}
-          decoding="async"
-          style={imgStyle}
-          className={`${imgClass} ${i === frameIndex ? "opacity-100" : "opacity-0"}`}
-        />
-      ))
-    : (
-        <img
-          src={frames[0]}
-          alt={alt}
-          loading="eager"
-          decoding="async"
-          style={imgStyle}
-          className={`${imgClass} opacity-100`}
-        />
-      );
+  const framesUI = ready ? (
+    frames.map((src, i) => (
+      <img
+        key={src}
+        src={src}
+        alt={i === frameIndex ? alt : ""}
+        aria-hidden={i !== frameIndex}
+        loading={i === 0 ? "eager" : "lazy"}
+        decoding="async"
+        style={imgStyle}
+        className={`${imgClass} ${i === frameIndex ? "opacity-100" : "opacity-0"}`}
+      />
+    ))
+  ) : (
+    <img
+      src={frames[0]}
+      alt={alt}
+      loading="eager"
+      decoding="async"
+      style={imgStyle}
+      className={`${imgClass} opacity-100`}
+    />
+  );
 
   const containerClass = `relative ${className ?? ""}`;
 
@@ -81,7 +88,11 @@ export function StopMotion({
       <motion.div
         className={containerClass}
         animate={{ y: [0, -4, 0] }}
-        transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }}
+        transition={{
+          duration: 6,
+          repeat: Number.POSITIVE_INFINITY,
+          ease: "easeInOut",
+        }}
       >
         {framesUI}
       </motion.div>

@@ -4,6 +4,14 @@ import ServicePageLayout, {
   type ServicePageContent,
 } from "./ServicePageLayout";
 
+const websitesFrames = [
+  "/assets/websites/Websites_1.png",
+  "/assets/websites/Websites_2.png",
+  "/assets/websites/Websites_3.png",
+  "/assets/websites/Websites_4.png",
+  "/assets/websites/Websites_5.png",
+];
+
 export default function SitiWebPage() {
   const { language } = useLanguage();
   const isIt = language === "it";
@@ -70,8 +78,8 @@ export default function SitiWebPage() {
       subtitle: isIt
         ? "Progettiamo siti orientati a obiettivi operativi: richieste contatto, prenotazioni, lead qualificati e tracciamento dei risultati."
         : "We build websites with operational goals: contact requests, bookings, qualified leads, and measurable tracking.",
-      image:
-        "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1400&q=80",
+      image: websitesFrames[0],
+      animationFrames: websitesFrames,
       visual: "web",
     },
     sections: isIt
