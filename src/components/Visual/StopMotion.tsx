@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export function StopMotion({
   frames,
   alt,
   className,
-  fps = 220,
+  fps = 1800,
   float = true,
   objectPosition = "center",
 }: {
@@ -17,21 +17,26 @@ export function StopMotion({
   objectPosition?: string;
 }) {
   const [frameIndex, setFrameIndex] = useState(0);
-  const [ready, setReady] = useState(frames.length < 2);
+  const frameKey = frames.join("\n");
+  const hasMultipleFrames = frames.length > 1;
+  const [loadedFrameKey, setLoadedFrameKey] = useState(
+    hasMultipleFrames ? "" : frameKey,
+  );
+  const shouldReduceMotion = useReducedMotion();
+  const ready = !hasMultipleFrames || loadedFrameKey === frameKey;
 
   useEffect(() => {
-    if (frames.length < 2) {
-      setReady(true);
-      return;
-    }
-    setReady(false);
+    if (!hasMultipleFrames) return;
+
     let cancelled = false;
     let loaded = 0;
     const imgs = frames.map((src) => {
       const img = new Image();
       const onDone = () => {
         loaded += 1;
-        if (!cancelled && loaded === frames.length) setReady(true);
+        if (!cancelled && loaded === frames.length) {
+          setLoadedFrameKey(frameKey);
+        }
       };
       img.onload = onDone;
       img.onerror = onDone;
@@ -42,32 +47,45 @@ export function StopMotion({
       cancelled = true;
       imgs.length = 0;
     };
-  }, [frames]);
+  }, [frames, frameKey, hasMultipleFrames]);
 
   useEffect(() => {
-    if (!ready || frames.length < 2) return;
+    if (!ready || !hasMultipleFrames || shouldReduceMotion) return;
+    const frameDuration = Math.max(fps, 900);
     const id = window.setInterval(
       () => setFrameIndex((i) => (i + 1) % frames.length),
-      fps,
+      frameDuration,
     );
     return () => window.clearInterval(id);
-  }, [ready, frames, fps]);
+  }, [ready, hasMultipleFrames, frames, fps, shouldReduceMotion]);
 
   const imgClass =
-    "absolute inset-0 h-full w-full object-cover transition-none";
+    "absolute inset-0 h-full w-full object-cover will-change-[opacity]";
   const imgStyle = { objectPosition };
+  const activeFrameIndex = shouldReduceMotion
+    ? 0
+    : Math.min(frameIndex, frames.length - 1);
+  const fadeDuration = Math.min(Math.max(fps * 0.45, 520), 920) / 1000;
 
   const framesUI = ready ? (
     frames.map((src, i) => (
-      <img
+      <motion.img
         key={src}
         src={src}
-        alt={i === frameIndex ? alt : ""}
-        aria-hidden={i !== frameIndex}
+        alt={i === activeFrameIndex ? alt : ""}
+        aria-hidden={i !== activeFrameIndex}
         loading={i === 0 ? "eager" : "lazy"}
         decoding="async"
         style={imgStyle}
-        className={`${imgClass} ${i === frameIndex ? "opacity-100" : "opacity-0"}`}
+        className={imgClass}
+        initial={false}
+        animate={{ opacity: i === activeFrameIndex ? 1 : 0 }}
+        transition={{
+          opacity: {
+            duration: shouldReduceMotion ? 0 : fadeDuration,
+            ease: [0.22, 1, 0.36, 1],
+          },
+        }}
       />
     ))
   ) : (

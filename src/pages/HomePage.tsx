@@ -20,8 +20,6 @@ const HOME_FRAMES = [
   "/assets/home/Home_4.png",
   "/assets/home/Home_5.png",
   "/assets/home/Home_6.png",
-  "/assets/home/Home_7.png",
-  "/assets/home/Home_8.png",
 ];
 
 const reveal = {
