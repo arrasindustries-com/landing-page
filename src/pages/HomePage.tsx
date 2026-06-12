@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/Button/Button";
 import { Card } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
@@ -31,7 +31,6 @@ const reveal = {
 
 export default function HomePage() {
   const { t, language } = useLanguage();
-  const navigate = useNavigate();
   const [contactForm, setContactForm] = useState<ContactRequest>({
     name: "",
     activity: "",
@@ -128,26 +127,22 @@ export default function HomePage() {
         title: "Costruiamo strumenti digitali che semplificano i processi.",
         body: "Gestionali, siti o layer web3: partiamo da obiettivi operativi chiari, definiamo cosa deve cambiare davvero e consegniamo una soluzione leggibile, usabile e misurabile.",
         primary: "Prenota una call",
-        secondary: "Scopri il metodo",
       }
     : {
         eyebrow: "Software for SMBs that need order, speed, and control",
         title: "We build digital tools that simplify operations.",
         body: "Management software, websites, or web3 layers: we start from operational goals, define what actually needs to change, and deliver a solution that is readable, usable, and measurable.",
         primary: "Book a call",
-        secondary: "See the approach",
       };
 
   const approachTeaser = isItalian
     ? {
         title: "Metodo operativo, decisioni chiare, rilascio misurabile.",
         body: "Allineiamo obiettivi, vincoli, scope iniziale e criteri di successo prima di sviluppare. Questo rende il progetto più leggibile, più governabile e più veloce da valutare.",
-        link: "Scopri come lavoriamo",
       }
     : {
         title: "Operational method, clear decisions, measurable delivery.",
         body: "We align goals, constraints, initial scope, and success criteria before development starts. That makes the project easier to govern, easier to evaluate, and faster to move forward.",
-        link: "See how we work",
       };
 
   const heroAreas = t.threeAreas.features.map((feature, index) => ({
@@ -188,9 +183,6 @@ export default function HomePage() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button onClick={() => scrollToId("contatto")}>
                 {heroCopy.primary}
-              </Button>
-              <Button variant="outline" onClick={() => navigate("/metodo")}>
-                {heroCopy.secondary}
               </Button>
             </div>
           </motion.div>
@@ -296,14 +288,6 @@ export default function HomePage() {
             <p className="mt-6 max-w-xl text-base leading-8 text-[#d2c6b7]">
               {approachTeaser.body}
             </p>
-            <div className="mt-8">
-              <Link
-                to="/metodo"
-                className="inline-flex items-center gap-2 border border-[#f0eadf] bg-[#f0eadf] px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-[#11110f] transition-colors hover:bg-white"
-              >
-                {approachTeaser.link}
-              </Link>
-            </div>
           </motion.div>
 
           <motion.div {...reveal} className="relative z-10">

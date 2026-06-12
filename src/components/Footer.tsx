@@ -4,7 +4,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export function Footer() {
   const { t } = useLanguage();
   const sections = [
-    { to: "/metodo", label: t.nav.path },
     { to: "/gestionali", label: t.nav.management },
     { to: "/siti-web", label: t.nav.websites },
     { to: "/web3", label: t.nav.innovation },

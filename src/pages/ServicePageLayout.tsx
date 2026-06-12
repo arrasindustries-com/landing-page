@@ -189,13 +189,7 @@ export default function ServicePageLayout({
           <article className="space-y-12">
             {content.sections.map((section) => (
               <motion.div key={section.heading} {...reveal}>
-                <p
-                  className="text-xs font-semibold uppercase tracking-[0.24em]"
-                  style={{ color: content.theme.accent }}
-                >
-                  {content.hero.eyebrow}
-                </p>
-                <h2 className="mt-4 text-3xl md:text-4xl">{section.heading}</h2>
+                <h2 className="text-3xl md:text-4xl">{section.heading}</h2>
                 <div className="mt-5 space-y-4">
                   {section.body.split("\n\n").map((paragraph) => (
                     <p
