@@ -1,41 +1,36 @@
-import { motion, useScroll } from "framer-motion";
-import { ArrowRight, CircleDollarSign, Shield, Timer } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/Button/Button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/Card/Card";
-import { Accordion } from "@/components/Accordion";
-import { useRef, useState } from "react";
-import { useLanguage } from "@/contexts/LanguageContext";
-import { grid, fadeUp, type ContactRequest } from "@/types/types";
-import { scrollToId, openWhatsApp } from "@/lib/utils";
-import { Hero } from "@/components/Hero/Hero";
-import { ValuesSection } from "@/components/Section/ValuesSection";
-import { SectionBridge } from "@/components/Section/SectionBridge";
-import { ScrollyStory } from "@/components/Card/ScrollyStory";
-import { TimelineSection } from "@/components/Timeline/TimelineSection";
-import { TimelineFeature } from "@/components/Timeline/TimelineFeature";
-import { ServiceHero } from "@/components/Hero/ServiceHero";
-import { ProcessShowcase } from "@/components/Process/ProcessShowcase";
-import { InnovationSection } from "@/components/Section/InnovationSection";
-import { SupportSection } from "@/components/SupportUs";
-import { InputLike } from "@/components/Input/InputLike";
-import { usePageSeo } from "@/hooks/usePageSeo";
-import { useTheme } from "@/contexts/useTheme";
+import { Card } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
+import { InputLike } from "@/components/Input/InputLike";
+import { SupportSection } from "@/components/SupportUs";
+import { StopMotion } from "@/components/Visual/StopMotion";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { usePageSeo } from "@/hooks/usePageSeo";
+import { openWhatsApp, scrollToId } from "@/lib/utils";
+import type { ContactRequest } from "@/types/types";
+
+const HOME_FRAMES = [
+  "/assets/home/Home_1.png",
+  "/assets/home/Home_2.png",
+  "/assets/home/Home_3.png",
+  "/assets/home/Home_4.png",
+  "/assets/home/Home_5.png",
+  "/assets/home/Home_6.png",
+];
+
+const reveal = {
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, amount: 0.18 },
+  transition: { duration: 0.55 },
+};
 
 export default function HomePage() {
   const { t, language } = useLanguage();
-  const { theme } = useTheme();
-  const threeAreasRef = useRef<HTMLDivElement | null>(null);
-  const { scrollYProgress: threeAreasProgress } = useScroll({
-    target: threeAreasRef,
-    offset: ["start 0.8", "end 0.2"],
-  });
   const [contactForm, setContactForm] = useState<ContactRequest>({
     name: "",
     activity: "",
@@ -97,7 +92,6 @@ export default function HomePage() {
         logo: `${siteOrigin}/favicon-1-arc-reactor-512px.png`,
         email: "arras.industries.info@gmail.com",
         telephone: "+39 334 116 8370",
-        // sameAs: ["https://linkedin.com/company/..."],
       },
       {
         "@type": "WebSite",
@@ -124,229 +118,321 @@ export default function HomePage() {
             ],
         areaServed: "IT",
       },
-      {
-        "@type": "FAQPage",
-        "@id": `${canonicalUrl}#faq`,
-        mainEntity: t.faq.items.map((faq) => ({
-          "@type": "Question",
-          name: faq.title,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faq.content,
-          },
-        })),
-      },
     ],
   });
 
+  const heroCopy = isItalian
+    ? {
+        eyebrow: "Software per PMI che vogliono ordine, velocità e controllo",
+        title: "Costruiamo strumenti digitali che semplificano i processi.",
+        body: "Gestionali, siti o layer web3: partiamo da obiettivi operativi chiari, definiamo cosa deve cambiare davvero e consegniamo una soluzione leggibile, usabile e misurabile.",
+        primary: "Prenota una call",
+      }
+    : {
+        eyebrow: "Software for SMBs that need order, speed, and control",
+        title: "We build digital tools that simplify operations.",
+        body: "Management software, websites, or web3 layers: we start from operational goals, define what actually needs to change, and deliver a solution that is readable, usable, and measurable.",
+        primary: "Book a call",
+      };
+
+  const approachTeaser = isItalian
+    ? {
+        title: "Metodo operativo, decisioni chiare, rilascio misurabile.",
+        body: "Allineiamo obiettivi, vincoli, scope iniziale e criteri di successo prima di sviluppare. Questo rende il progetto più leggibile, più governabile e più veloce da valutare.",
+      }
+    : {
+        title: "Operational method, clear decisions, measurable delivery.",
+        body: "We align goals, constraints, initial scope, and success criteria before development starts. That makes the project easier to govern, easier to evaluate, and faster to move forward.",
+      };
+
+  const heroAreas = t.threeAreas.features.map((feature, index) => ({
+    number: `0${index + 1}`,
+    title: feature.title,
+    desc: feature.desc,
+  }));
+
+  const serviceLinks = ["/gestionali", "/siti-web", "/web3"];
+  const serviceCards = t.services.services.map((service, index) => ({
+    href: serviceLinks[index],
+    title: service.title,
+    subtitle: service.subtitle,
+    points: service.points.slice(0, 3),
+    number: `0${index + 1}`,
+  }));
+
   return (
     <>
-      <Hero />
-      <ValuesSection />
-      <SectionBridge
-        eyebrow={t.sectionBridge.pillars.eyebrow}
-        title={t.sectionBridge.pillars.title}
-        subtitle={t.sectionBridge.pillars.subtitle}
-      />
-      <ScrollyStory />
-      <SectionBridge
-        eyebrow={t.sectionBridge.fromStrategy.eyebrow}
-        title={t.sectionBridge.fromStrategy.title}
-        subtitle={t.sectionBridge.fromStrategy.subtitle}
-      />
-
-      <section className="relative mx-auto max-w-6xl px-4 py-16">
-        <div ref={threeAreasRef}>
-          <motion.div {...fadeUp} className="flex flex-col gap-3">
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-              {t.threeAreas.title}
-            </h2>
-            <p className="max-w-2xl text-white/70">
-              {t.threeAreas.description}
+      <section className="mx-auto max-w-7xl px-4 pb-20 pt-18 md:px-6 md:pb-24 md:pt-24">
+        <div className="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="max-w-3xl"
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
+              {heroCopy.eyebrow}
             </p>
+            <h1 className="mt-6 text-5xl leading-[0.94] md:text-[4.55rem]">
+              {heroCopy.title}
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-muted)]">
+              {heroCopy.body}
+            </p>
+
+            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+              <Button onClick={() => scrollToId("contatto")}>
+                {heroCopy.primary}
+              </Button>
+            </div>
           </motion.div>
 
-          <TimelineSection progress={threeAreasProgress}>
-            <TimelineFeature
-              side="left"
-              icon={<Timer className="h-5 w-5" />}
-              title={t.threeAreas.features[0].title}
-              desc={t.threeAreas.features[0].desc}
-              imageSrc="/images/hero.jpg"
-            />
+          <motion.aside
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden border border-[var(--border)] bg-[var(--surface-strong)]"
+          >
+            <div className="relative h-[320px] overflow-hidden md:h-[420px]">
+              <StopMotion
+                frames={HOME_FRAMES}
+                alt={isItalian ? "Animazione interfaccia digitale" : "Digital interface animation"}
+                className="h-full w-full"
+                float={false}
+                objectPosition="top"
+              />
+            </div>
+          </motion.aside>
+        </div>
 
-            <TimelineFeature
-              side="right"
-              icon={<CircleDollarSign className="h-5 w-5" />}
-              title={t.threeAreas.features[1].title}
-              desc={t.threeAreas.features[1].desc}
-              imageSrc="/images/process.jpg"
-            />
-
-            <TimelineFeature
-              side="left"
-              icon={<Shield className="h-5 w-5" />}
-              title={t.threeAreas.features[2].title}
-              desc={t.threeAreas.features[2].desc}
-              imageSrc="/images/notarization.jpg"
-            />
-          </TimelineSection>
+        <div className="mt-12 grid gap-4 md:grid-cols-3">
+          {heroAreas.map((item) => (
+            <motion.div key={item.number} {...reveal}>
+              <Card className="h-full bg-[var(--surface-strong)]">
+                <div className="p-6">
+                  <div className="text-4xl leading-none text-[var(--accent)]/70">
+                    {item.number}
+                  </div>
+                  <h2 className="mt-5 text-[2rem] leading-tight md:text-[2.1rem]">
+                    {item.title}
+                  </h2>
+                  <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                    {item.desc}
+                  </p>
+                </div>
+              </Card>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      <section id="servizi" className="mx-auto max-w-6xl px-4 pb-20">
-        <motion.div {...fadeUp} className="max-w-3xl">
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-            {t.services.title}
+      <section id="servizi" className="mx-auto max-w-7xl px-4 pb-24 md:px-6">
+        <motion.div {...reveal} className="mx-auto max-w-4xl text-center">
+          <h2 className="text-4xl leading-tight md:text-6xl">
+            {isItalian
+              ? "Tre aree di lavoro, tre modi concreti per creare valore."
+              : "Three areas of work, three concrete ways to create value."}
           </h2>
-          <p className="mt-2 text-white/70">{t.services.subtitle}</p>
         </motion.div>
 
         <motion.div
-          className="mt-10 space-y-6"
-          variants={grid}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          {...reveal}
+          className="mt-12 border-t border-[var(--border)] md:grid md:grid-cols-3"
         >
-          <ServiceHero
-            align="left"
-            image="/images/hero.jpg"
-            title={t.services.services[0].title}
-            subtitle={t.services.services[0].subtitle}
-            points={t.services.services[0].points}
-            outcomes={t.services.services[0].outcomes}
-            detailLink="/gestionali"
-          />
+          {serviceCards.map((service, index) => (
+            <article
+              key={service.title}
+              className={[
+                "px-0 py-6 md:px-8 md:py-8",
+                index > 0 ? "border-t border-[var(--border)] md:border-l md:border-t-0" : "",
+              ].join(" ")}
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
+                {service.number}
+              </p>
+              <h3 className="mt-3 text-[2rem] leading-tight">{service.title}</h3>
+              <p className="mt-4 text-sm leading-7 text-[var(--text-muted)]">
+                {service.subtitle}
+              </p>
 
-          <ServiceHero
-            align="right"
-            image="/images/process.jpg"
-            title={t.services.services[1].title}
-            subtitle={t.services.services[1].subtitle}
-            points={t.services.services[1].points}
-            outcomes={t.services.services[1].outcomes}
-            detailLink="/siti-web"
-            blurImageToRight
-          />
+              <div className="mt-5 space-y-3">
+                {service.points.map((point) => (
+                  <div key={point} className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 bg-[var(--text)]" />
+                    <p className="text-sm leading-6 text-[var(--text-muted)]">
+                      {point}
+                    </p>
+                  </div>
+                ))}
+              </div>
 
-          <ServiceHero
-            align="left"
-            image="/images/usecase.jpg"
-            title={t.services.services[2].title}
-            subtitle={t.services.services[2].subtitle}
-            points={t.services.services[2].points}
-            outcomes={t.services.services[2].outcomes}
-            detailLink="/web3"
-          />
+              <Link
+                to={service.href}
+                className="mt-8 inline-flex items-center gap-2 border-b border-[var(--border-strong)] pb-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--text)] transition-colors hover:text-[var(--accent-strong)]"
+              >
+                {isItalian ? "Approfondisci il servizio" : "Explore the service"}
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+            </article>
+          ))}
         </motion.div>
       </section>
 
-      <section id="processo" className="mx-auto max-w-6xl px-4 pb-20">
-        <ProcessShowcase />
-      </section>
-
-      <InnovationSection />
-
-      <section id="faq" className="mx-auto max-w-6xl px-4 pb-16">
-        <motion.div {...fadeUp} className="grid gap-10 md:grid-cols-2">
-          <div>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-              {t.faq.title}
+      <section className="relative overflow-hidden bg-[#11110f] py-22 md:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.04),transparent_42%)]" />
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 md:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <motion.div {...reveal} className="relative z-10">
+            <h2 className="max-w-xl text-4xl leading-tight text-[#f5f0e6] md:text-6xl">
+              {approachTeaser.title}
             </h2>
-            <p className="mt-2 text-white/70">{t.faq.subtitle}</p>
-          </div>
-          <Accordion items={t.faq.items} />{" "}
-        </motion.div>
+            <p className="mt-6 max-w-xl text-base leading-8 text-[#d2c6b7]">
+              {approachTeaser.body}
+            </p>
+          </motion.div>
+
+          <motion.div {...reveal} className="relative z-10">
+            {t.process.steps.map((step, index) => (
+              <div
+                key={step.number}
+                className={[
+                  "grid gap-4 border-[#3b3832] py-5 md:grid-cols-[84px_1fr] md:gap-6",
+                  index > 0 ? "border-t" : "",
+                ].join(" ")}
+              >
+                <div className="text-5xl leading-none text-[#c2a777]">
+                  {step.number}
+                </div>
+                <div>
+                  <h3 className="text-[2rem] leading-tight text-[#f5f0e6]">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-[#c8bcaf]">
+                    {step.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </section>
 
       <SupportSection />
 
-      <section id="contatto" className="mx-auto max-w-6xl px-4 pb-24">
-        <motion.div {...fadeUp}>
-          <Card
-            className={`relative overflow-hidden backdrop-blur ${
-              theme === "dark"
-                ? "border-white/10 bg-white/5"
-                : "border-[#b8ceef] bg-gradient-to-br from-[#e7f1ff] via-[#f5f9ff] to-[#e4efff] shadow-[0_28px_70px_-36px_rgba(59,130,246,0.45)]"
-            }`}
-          >
-            {theme === "light" ? (
-              <>
-                <div className="pointer-events-none absolute -top-20 -right-12 h-56 w-56 rounded-full bg-[#3B82F6]/22 blur-3xl" />
-                <div className="pointer-events-none absolute -bottom-16 left-12 h-48 w-48 rounded-full bg-[#7C3AED]/16 blur-3xl" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_15%,rgba(96,165,250,0.24),transparent_50%),radial-gradient(circle_at_82%_80%,rgba(124,58,237,0.2),transparent_45%)]" />
-              </>
-            ) : null}
-            <CardHeader>
-              <CardTitle className="mt-3 text-2xl md:text-3xl">
-                {t.contact.title}
-              </CardTitle>
-              <CardDescription className="mt-2 text-white/70">
-                {t.contact.subtitle}
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid gap-3 md:grid-cols-3">
-                <InputLike
-                  label={t.contact.formLabels.name}
-                  placeholder={t.contact.formPlaceholders.name}
-                  value={contactForm.name}
-                  onChange={(value) => setContactField("name", value)}
-                />
-                <InputLike
-                  label={t.contact.formLabels.activity}
-                  placeholder={t.contact.formPlaceholders.activity}
-                  value={contactForm.activity}
-                  onChange={(value) => setContactField("activity", value)}
-                />
-                <InputLike
-                  label={t.contact.formLabels.contact}
-                  placeholder={t.contact.formPlaceholders.contact}
-                  value={contactForm.contact}
-                  onChange={(value) => setContactField("contact", value)}
-                />
-                <div className="md:col-span-3">
+      <section id="contatto" className="mx-auto max-w-7xl px-4 pb-10 pt-20 md:px-6 md:pb-14">
+        <motion.div {...reveal}>
+          <Card className="bg-[var(--surface)]">
+            <div className="grid gap-8 p-6 md:p-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:gap-12">
+              <div className="min-w-0 flex flex-col gap-6">
+                <div>
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
+                    {isItalian ? "Contatto" : "Contact"}
+                  </p>
+                  <h2 className="mt-4 text-4xl leading-tight md:text-5xl">
+                    {t.contact.title}
+                  </h2>
+                  <p className="mt-4 text-base leading-8 text-[var(--text-muted)]">
+                    {t.contact.subtitle}
+                  </p>
+                </div>
+
+                <div className="grid gap-3">
+                  <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                    <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+                      {isItalian ? "Input utile" : "Helpful input"}
+                    </div>
+                    <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                      {isItalian
+                        ? "Descrivi il problema operativo, i vincoli e ciò che oggi rallenta il team. Non serve avere già la soluzione."
+                        : "Describe the operational problem, the constraints, and what is slowing the team down today. You do not need to have the solution already."}
+                    </p>
+                  </div>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+                        {isItalian ? "Tempi" : "Timing"}
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                        {t.contact.responseTime}
+                      </p>
+                    </div>
+                    <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
+                      <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+                        {isItalian ? "Formato" : "Format"}
+                      </div>
+                      <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+                        {isItalian
+                          ? "Messaggio breve e diretto. Poi, se serve, approfondiamo in call."
+                          : "A short and direct message. If needed, we go deeper in the call."}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="min-w-0 border border-[var(--border)] bg-[var(--surface-strong)] p-5 md:p-6">
+                <div className="grid gap-3 md:grid-cols-2">
                   <InputLike
-                    label={t.contact.formLabels.objective}
-                    placeholder={t.contact.formPlaceholders.objective}
-                    value={contactForm.objective}
-                    onChange={(value) => setContactField("objective", value)}
-                    tall
+                    label={t.contact.formLabels.name}
+                    placeholder={t.contact.formPlaceholders.name}
+                    value={contactForm.name}
+                    onChange={(value) => setContactField("name", value)}
                   />
+                  <InputLike
+                    label={t.contact.formLabels.contact}
+                    placeholder={t.contact.formPlaceholders.contact}
+                    value={contactForm.contact}
+                    onChange={(value) => setContactField("contact", value)}
+                  />
+                  <div className="md:col-span-2">
+                    <InputLike
+                      label={t.contact.formLabels.activity}
+                      placeholder={t.contact.formPlaceholders.activity}
+                      value={contactForm.activity}
+                      onChange={(value) => setContactField("activity", value)}
+                    />
+                  </div>
+                  <div className="md:col-span-2">
+                    <InputLike
+                      label={t.contact.formLabels.objective}
+                      placeholder={t.contact.formPlaceholders.objective}
+                      value={contactForm.objective}
+                      onChange={(value) => setContactField("objective", value)}
+                      tall
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-6 border-t border-[var(--border)] pt-6">
+                  <div className="flex flex-col gap-4">
+                    <p className="text-sm leading-7 text-[var(--text-muted)]">
+                      {isItalian
+                        ? "Più il contesto è concreto, più velocemente possiamo dirti se esiste allineamento tra obiettivo, budget e tempi."
+                        : "The more concrete the context, the faster we can tell you whether there is alignment between objective, budget, and timing."}
+                    </p>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                      <Button
+                        className="w-full sm:w-auto"
+                        onClick={() => openWhatsApp(contactForm, language)}
+                      >
+                        {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full sm:w-auto"
+                        onClick={() => scrollToId("servizi")}
+                      >
+                        {t.nav.services}
+                      </Button>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <div className="text-xs text-white/60">
-                  {t.contact.responseTime}
-                </div>
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    onClick={() => scrollToId("servizi")}
-                    className="border-white/20 bg-white/5 text-white hover:-translate-y-[1px] hover:border-white/35 hover:bg-white/15 hover:shadow-[0_12px_28px_-20px_rgba(59,130,246,0.45)] active:translate-y-0 active:scale-[0.98]"
-                  >
-                    {t.nav.services}
-                  </Button>
-                  <Button
-                    onClick={() => openWhatsApp(contactForm, language)}
-                    className="bg-[#3B82F6] text-white shadow-[0_0_28px_rgba(59,130,246,0.35)] hover:scale-[1.04] hover:bg-[#60A5FA] active:scale-[0.97]"
-                  >
-                    {t.contact.evaluate} <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-
-            <div className="pointer-events-none absolute -left-24 -bottom-24 h-56 w-56 rounded-full bg-[#3B82F6]/20 blur-2xl" />
+            </div>
           </Card>
-
-          <div className="mt-10">
-            <Footer />
-          </div>
         </motion.div>
       </section>
+
+      <Footer />
     </>
   );
 }

@@ -31,6 +31,7 @@ const SITE_NAVIGATION = [
   { name: "Siti web", url: `${SITE}/siti-web` },
   { name: "Web3", url: `${SITE}/web3` },
   { name: "Chi siamo", url: `${SITE}/about` },
+  { name: "Supporto", url: `${SITE}/support` },
 ];
 
 const base = readFileSync(join(DIST, "index.html"), "utf-8");
@@ -94,6 +95,17 @@ const pages = [
     keywords:
       "soluzioni blockchain per aziende, integrazioni web3 per imprese, tracciabilità blockchain, notarizzazione documentale blockchain, identità digitale decentralizzata, smart contract per processi aziendali, integrazione wallet aziendale",
     ogImage: `${SITE}/images/usecase.jpg`,
+  },
+  {
+    path: "/support",
+    lang: "it",
+    title: "Supporto | Arras Industries",
+    h1: "Supporta l'innovazione",
+    description:
+      "Una pagina dedicata a chi vuole supportare la sperimentazione e lo sviluppo di strumenti più aperti, veloci e verificabili.",
+    keywords:
+      "supporto arras industries, donazioni sviluppo software, supporta innovazione web3",
+    ogImage: `${SITE}/images/hero.jpg`,
   },
 ];
 

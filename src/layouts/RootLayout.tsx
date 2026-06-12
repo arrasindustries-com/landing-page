@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/useTheme";
-import { Mascot } from "@/components/Mascot";
 import { StickyHeader } from "@/components/Mobile/StickyHeader";
 import { scrollToId } from "@/lib/utils";
 
@@ -21,15 +20,8 @@ export function RootLayout() {
   }, [location.pathname, location.hash]);
 
   return (
-    <div
-      className={`min-h-screen pt-[60px] ${
-        theme === "dark"
-          ? "bg-[#0F0F11] text-[#F5F7FA]"
-          : "bg-[#F5F7FA] text-[#0F0F11]"
-      }`}
-    >
-      {theme === "dark" ? <BackgroundFX /> : null}
-      <Mascot pose="point" />
+    <div className="min-h-screen bg-[var(--page-bg)] text-[var(--text)]">
+      <BackgroundFX theme={theme} />
       <StickyHeader
         t={t}
         language={language}
@@ -37,20 +29,30 @@ export function RootLayout() {
         theme={theme}
         toggleTheme={toggleTheme}
       />
-      <main>
+      <main className="relative z-10 pt-8 md:pt-10">
         <Outlet />
       </main>
     </div>
   );
 }
 
-function BackgroundFX() {
+function BackgroundFX({ theme }: { theme: "dark" | "light" }) {
   return (
     <div className="pointer-events-none fixed inset-0 -z-10">
-      <div className="absolute left-[-120px] top-[-180px] h-[420px] w-[420px] rounded-full bg-[#1D2B64] blur-[120px] opacity-50" />
-      <div className="absolute right-[-160px] top-[120px] h-[460px] w-[460px] rounded-full bg-[#3B82F6] blur-[140px] opacity-35" />
-      <div className="absolute bottom-[-200px] left-[10%] h-[520px] w-[520px] rounded-full bg-[#7C3AED] blur-[160px] opacity-30" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.04),transparent_45%),radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.08),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(124,58,237,0.08),transparent_50%)]" />
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage:
+            theme === "dark"
+              ? "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)"
+              : "radial-gradient(circle, rgba(15,17,19,0.07) 1px, transparent 1px)",
+          backgroundSize: "24px 24px",
+          maskImage:
+            "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.15) 50%, transparent 100%)",
+        }}
+      />
+      <div className="absolute left-[-8rem] top-[-10rem] h-[28rem] w-[28rem] rounded-full bg-[var(--ambient-one)] blur-[140px]" />
+      <div className="absolute right-[-10rem] top-[6rem] h-[26rem] w-[26rem] rounded-full bg-[var(--ambient-two)] blur-[140px]" />
     </div>
   );
 }

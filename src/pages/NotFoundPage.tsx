@@ -8,18 +8,13 @@ export default function NotFoundPage() {
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-28 text-center">
-      <img
-        src="/mascot/think.png"
-        alt={isIt ? "Mascotte pensierosa" : "Thoughtful mascot"}
-        className="mx-auto mb-6 h-28 w-28 object-contain drop-shadow-[0_14px_28px_rgba(0,0,0,0.35)] md:h-36 md:w-36"
-        loading="eager"
-        decoding="async"
-      />
-      <div className="text-6xl font-semibold tracking-tight">404</div>
-      <h1 className="mt-4 text-3xl font-semibold tracking-tight md:text-4xl">
+      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-sm font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
+        404
+      </div>
+      <h1 className="mt-8 text-4xl font-semibold tracking-tight md:text-5xl">
         {isIt ? "Pagina non trovata" : "Page not found"}
       </h1>
-      <p className="mx-auto mt-3 max-w-2xl text-white/70">
+      <p className="mx-auto mt-4 max-w-2xl text-[var(--text-muted)]">
         {isIt
           ? "L'URL richiesto non esiste oppure è stato spostato."
           : "The requested URL does not exist or has been moved."}

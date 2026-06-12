@@ -15,29 +15,29 @@ export function InputLike({
 }) {
   const { theme } = useTheme();
   const labelClass =
-    theme === "dark" ? "text-white/60" : "text-[#314a6e]/78";
+    theme === "dark" ? "text-[var(--text-soft)]" : "text-[var(--text-soft)]";
   const fieldClass =
     theme === "dark"
-      ? "border border-white/10 bg-white/5 text-white placeholder:text-white/45"
-      : "border border-[#b7cdef] bg-gradient-to-b from-[#ffffff] to-[#eef4ff] text-[#0F0F11] placeholder:text-[#5b7398] shadow-[0_8px_18px_-14px_rgba(59,130,246,0.4)] ring-1 ring-[#dce9ff]/70";
+      ? "border border-[var(--border)] bg-[var(--surface-strong)] text-[var(--text)] placeholder:text-[var(--text-soft)]"
+      : "border border-[var(--border)] bg-[var(--surface-strong)] text-[var(--text)] placeholder:text-[var(--text-soft)]";
 
   return (
     <label className="block">
-      <div className={`mb-1 text-xs font-medium ${labelClass}`}>{label}</div>
+      <div className={`mb-1 text-xs font-medium uppercase tracking-[0.12em] ${labelClass}`}>{label}</div>
 
       {tall ? (
         <textarea
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-24 w-full resize-none rounded-[12px] px-4 py-3 text-sm outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20 ${fieldClass}`}
+          className={`h-28 w-full resize-none px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
         />
       ) : (
         <input
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-11 w-full rounded-[12px] px-4 py-3 text-sm outline-none transition focus:border-[#3B82F6]/60 focus:ring-2 focus:ring-[#3B82F6]/20 ${fieldClass}`}
+          className={`h-12 w-full px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
         />
       )}
     </label>

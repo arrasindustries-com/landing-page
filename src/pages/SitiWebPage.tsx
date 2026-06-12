@@ -4,16 +4,22 @@ import ServicePageLayout, {
   type ServicePageContent,
 } from "./ServicePageLayout";
 
+const websitesFrames = [
+  "/assets/websites/Websites_1.png",
+  "/assets/websites/Websites_2.png",
+  "/assets/websites/Websites_3.png",
+  "/assets/websites/Websites_4.png",
+  "/assets/websites/Websites_5.png",
+];
+
 export default function SitiWebPage() {
   const { language } = useLanguage();
   const isIt = language === "it";
 
   const content: ServicePageContent = {
     seo: {
-      titleIt:
-        "Creazione Siti Web per Aziende e PMI | Arras Industries",
-      titleEn:
-        "Business Website Design & Development | Arras Industries",
+      titleIt: "Creazione Siti Web per Aziende e PMI | Arras Industries",
+      titleEn: "Business Website Design & Development | Arras Industries",
       descriptionIt:
         "Creiamo siti web professionali per aziende e PMI italiane: SEO, lead generation, analytics e performance ottimizzate. Siti che portano contatti reali.",
       descriptionEn:
@@ -52,9 +58,7 @@ export default function SitiWebPage() {
             "@type": "Organization",
             "@id": "https://arrasindustries.com/#organization",
           },
-          serviceType: isIt
-            ? "Sviluppo siti web"
-            : "Website development",
+          serviceType: isIt ? "Sviluppo siti web" : "Website development",
           areaServed: "IT",
           url: "https://arrasindustries.com/siti-web",
         },
@@ -74,7 +78,9 @@ export default function SitiWebPage() {
       subtitle: isIt
         ? "Progettiamo siti orientati a obiettivi operativi: richieste contatto, prenotazioni, lead qualificati e tracciamento dei risultati."
         : "We build websites with operational goals: contact requests, bookings, qualified leads, and measurable tracking.",
-      image: "/images/process.jpg",
+      image: websitesFrames[0],
+      animationFrames: websitesFrames,
+      visual: "web",
     },
     sections: isIt
       ? [
@@ -222,9 +228,7 @@ export default function SitiWebPage() {
           ],
     },
     faq: {
-      title: isIt
-        ? "Domande frequenti sui siti web"
-        : "Website FAQ",
+      title: isIt ? "Domande frequenti sui siti web" : "Website FAQ",
       subtitle: isIt
         ? "Le risposte alle domande più comuni."
         : "Answers to the most common questions.",
@@ -285,9 +289,7 @@ export default function SitiWebPage() {
           ],
     },
     cta: {
-      title: isIt
-        ? "Definiamo il piano del sito"
-        : "Define your website plan",
+      title: isIt ? "Definiamo il piano del sito" : "Define your website plan",
       subtitle: isIt
         ? "Call breve per allineare obiettivi, struttura pagine, contenuti prioritari e tempi di rilascio."
         : "Short call to align goals, page structure, priority content, and release timing.",
