@@ -49,6 +49,7 @@ export function StickyHeader({
     { to: "/gestionali", label: t.nav.management },
     { to: "/siti-web", label: t.nav.websites },
     { to: "/web3", label: t.nav.innovation },
+    { to: "/portfolio", label: t.nav.portfolio },
     { to: "/about", label: t.nav.about },
   ];
   const toLightThemeLabel =

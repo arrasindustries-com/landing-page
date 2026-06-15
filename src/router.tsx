@@ -8,6 +8,7 @@ const GestionaliPage = lazy(() => import("./pages/GestionaliPage"));
 const SitiWebPage = lazy(() => import("./pages/SitiWebPage"));
 const SupportPage = lazy(() => import("./pages/SupportPage"));
 const Web3Page = lazy(() => import("./pages/Web3Page"));
+const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 export function AppRouter() {
@@ -21,6 +22,7 @@ export function AppRouter() {
           <Route path="/siti-web" element={<SitiWebPage />} />
           <Route path="/support" element={<SupportPage />} />
           <Route path="/web3" element={<Web3Page />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

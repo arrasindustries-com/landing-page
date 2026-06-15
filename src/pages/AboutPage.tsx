@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
 import { Footer } from "@/components/Footer";
 
 type TeamMember = {
@@ -169,18 +168,6 @@ export default function AboutPage() {
     ],
   });
 
-  const capabilities = isIt
-    ? [
-        "Architettura software e direzione tecnica",
-        "Cybersecurity applicativa e infrastrutturale",
-        "Sviluppo web, integrazioni e manutenzione evolutiva",
-      ]
-    : [
-        "Software architecture and technical direction",
-        "Application and infrastructure cybersecurity",
-        "Web development, integrations, and long-term maintenance",
-      ];
-
   return (
     <>
       <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 md:pt-16">
@@ -188,43 +175,20 @@ export default function AboutPage() {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.45 }}
-          className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr]"
         >
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-              {isIt ? "Chi siamo" : "About us"}
-            </p>
-            <h1 className="mt-4 text-[2rem] font-semibold tracking-tight sm:text-4xl md:text-6xl">
-              {isIt
-                ? "Un team tecnico con impostazione operativa."
-                : "A technical team with an operational mindset."}
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--text-muted)]">
-              {isIt
-                ? "Arras Industries progetta e sviluppa software per aziende che vogliono processi più chiari, strumenti più affidabili e scelte tecniche motivate dal contesto. Lavoriamo su gestionali, siti web e integrazioni web3 quando servono davvero."
-                : "Arras Industries designs and builds software for companies that want clearer processes, more reliable tools, and technical decisions grounded in context. We work on management software, websites, and web3 integrations when they genuinely help."}
-            </p>
-          </div>
-
-          <Card className="bg-[var(--surface-strong)]">
-            <CardHeader>
-              <CardTitle className="text-3xl">
-                {isIt ? "Competenze chiave" : "Core capabilities"}
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                {capabilities.map((item) => (
-                  <div
-                    key={item}
-                    className="border border-[var(--border)] bg-[var(--surface)] px-4 py-4 text-sm leading-6 text-[var(--text-muted)]"
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
+            {isIt ? "Chi siamo" : "About us"}
+          </p>
+          <h1 className="mt-4 text-[2rem] font-semibold tracking-tight sm:text-4xl md:text-6xl">
+            {isIt
+              ? "Un team tecnico con impostazione operativa."
+              : "A technical team with an operational mindset."}
+          </h1>
+          <p className="mt-5 max-w-4xl text-base leading-8 text-[var(--text-muted)]">
+            {isIt
+              ? "Arras Industries progetta e sviluppa software per aziende che vogliono processi più chiari, strumenti più affidabili e scelte tecniche motivate dal contesto. Lavoriamo su gestionali, siti web e integrazioni web3 quando servono davvero."
+              : "Arras Industries designs and builds software for companies that want clearer processes, more reliable tools, and technical decisions grounded in context. We work on management software, websites, and web3 integrations when they genuinely help."}
+          </p>
         </motion.div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-3">
