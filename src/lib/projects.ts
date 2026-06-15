@@ -37,4 +37,14 @@ export const projects: Project[] = [
     repo: "https://github.com/smeneguz/portus",
     demo: "https://portus-five.vercel.app/",
   },
+  {
+    name: "DAO Portal",
+    image: "/images/projects/dao-portal.png",
+    description: {
+      it: "Piattaforma di analytics per le DAO: traccia e visualizza i KPI di governance on-chain, con dashboard per singola DAO, confronti multi-DAO e analisi della decentralizzazione.",
+      en: "Analytics platform for DAOs: tracks and visualizes on-chain governance KPIs, with single-DAO dashboards, multi-DAO comparisons, and decentralization analysis.",
+    },
+    url: "http://130.192.84.45:8080/",
+    repo: "https://github.com/smeneguz/dao-portal",
+  },
 ];
