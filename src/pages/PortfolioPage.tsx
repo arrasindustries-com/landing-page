@@ -9,14 +9,22 @@ import {
   publications,
   publicationTypeLabels,
   publicationTypeOrder,
+  type PublicationType,
 } from "@/lib/publications";
 
 type Tab = "projects" | "publications";
+type PubCategory = PublicationType | "all";
 
 export default function PortfolioPage() {
   const { language } = useLanguage();
   const isIt = language === "it";
   const [tab, setTab] = useState<Tab>("projects");
+  const [pubCategory, setPubCategory] = useState<PubCategory>("all");
+
+  // Type groups that actually have publications, in display order.
+  const availableTypes = publicationTypeOrder.filter((type) =>
+    publications.some((p) => p.type === type),
+  );
   const siteOrigin = (
     (import.meta.env.VITE_SITE_URL as string | undefined)?.trim() ||
     "https://arrasindustries.com"
@@ -64,7 +72,7 @@ export default function PortfolioPage() {
             isPartOf: pub.venue,
             datePublished: String(pub.year),
             ...(pub.doi ? { sameAs: `https://doi.org/${pub.doi}` } : {}),
-            url: pub.url,
+            ...(pub.url ? { url: pub.url } : {}),
           })),
         ],
       },
@@ -197,13 +205,41 @@ export default function PortfolioPage() {
         )}
 
         {tab === "publications" && (
-          <div className="mt-12 space-y-12">
-            {publicationTypeOrder
+          <>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {(["all", ...availableTypes] as PubCategory[]).map((cat) => {
+                const label =
+                  cat === "all"
+                    ? isIt
+                      ? "Tutte"
+                      : "All"
+                    : isIt
+                      ? publicationTypeLabels[cat].it
+                      : publicationTypeLabels[cat].en;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setPubCategory(cat)}
+                    className={[
+                      "border px-3 py-2 text-xs font-medium uppercase tracking-[0.12em] transition-colors",
+                      pubCategory === cat
+                        ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-contrast,#14110f)]"
+                        : "border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--border-strong)] hover:text-[var(--text)]",
+                    ].join(" ")}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-10 space-y-12">
+            {availableTypes
+              .filter((type) => pubCategory === "all" || pubCategory === type)
               .map((type) => ({
                 type,
                 items: publications.filter((p) => p.type === type),
               }))
-              .filter((group) => group.items.length > 0)
               .map((group) => (
                 <div key={group.type}>
                   <h2 className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
@@ -212,40 +248,59 @@ export default function PortfolioPage() {
                       : publicationTypeLabels[group.type].en}
                   </h2>
                   <div className="mt-5 space-y-4">
-                    {group.items.map((pub, index) => (
-                      <motion.a
-                        key={pub.title}
-                        href={pub.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        initial={{ opacity: 0, y: 14 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35, delay: 0.06 * index }}
-                        className="group flex items-start justify-between gap-4 border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] transition-colors hover:border-[var(--border-strong)] md:p-6"
-                      >
-                        <div>
-                          <h3 className="text-base font-semibold leading-6 tracking-tight text-[var(--text)] md:text-lg">
-                            {pub.title}
-                          </h3>
-                          <p className="mt-2 text-sm text-[var(--text-muted)]">
-                            {pub.authors.join(", ")}
-                          </p>
-                          <p className="mt-1 text-sm italic text-[var(--text-soft)]">
-                            {pub.venue}, {pub.year}
-                          </p>
-                          {pub.doi && (
-                            <p className="mt-2 text-xs uppercase tracking-[0.1em] text-[var(--text-soft)]">
-                              DOI: {pub.doi}
+                    {group.items.map((pub, index) => {
+                      const inner = (
+                        <>
+                          <div>
+                            <h3 className="text-base font-semibold leading-6 tracking-tight text-[var(--text)] md:text-lg">
+                              {pub.title}
+                            </h3>
+                            <p className="mt-2 text-sm text-[var(--text-muted)]">
+                              {pub.authors.join(", ")}
                             </p>
+                            <p className="mt-1 text-sm italic text-[var(--text-soft)]">
+                              {pub.venue}, {pub.year}
+                            </p>
+                            {pub.doi && (
+                              <p className="mt-2 text-xs uppercase tracking-[0.1em] text-[var(--text-soft)]">
+                                DOI: {pub.doi}
+                              </p>
+                            )}
+                          </div>
+                          {pub.url && (
+                            <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-[var(--text-muted)] transition-colors group-hover:text-[var(--text)]" />
                           )}
-                        </div>
-                        <ExternalLink className="mt-1 h-4 w-4 flex-shrink-0 text-[var(--text-muted)] transition-colors group-hover:text-[var(--text)]" />
-                      </motion.a>
-                    ))}
+                        </>
+                      );
+                      const cardClass =
+                        "group flex items-start justify-between gap-4 border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6";
+                      const anim = {
+                        initial: { opacity: 0, y: 14 },
+                        animate: { opacity: 1, y: 0 },
+                        transition: { duration: 0.35, delay: 0.06 * index },
+                      };
+                      return pub.url ? (
+                        <motion.a
+                          key={pub.title}
+                          href={pub.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          {...anim}
+                          className={`${cardClass} transition-colors hover:border-[var(--border-strong)]`}
+                        >
+                          {inner}
+                        </motion.a>
+                      ) : (
+                        <motion.div key={pub.title} {...anim} className={cardClass}>
+                          {inner}
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
               ))}
-          </div>
+            </div>
+          </>
         )}
       </section>
       <Footer />
