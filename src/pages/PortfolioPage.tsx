@@ -162,17 +162,33 @@ export default function PortfolioPage() {
                     </p>
                   </div>
 
-                  {project.repo && (
-                    <a
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="mt-auto inline-flex w-fit items-center gap-2 border border-[var(--border)] px-3 py-2 text-xs font-medium uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
-                    >
-                      <Github className="h-4 w-4" />
-                      {isIt ? "Repository" : "Repository"}
-                    </a>
+                  {(project.repo || project.demo) && (
+                    <div className="mt-auto flex flex-wrap gap-2">
+                      {project.repo && (
+                        <a
+                          href={project.repo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex w-fit items-center gap-2 border border-[var(--border)] px-3 py-2 text-xs font-medium uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
+                        >
+                          <Github className="h-4 w-4" />
+                          {isIt ? "Repository" : "Repository"}
+                        </a>
+                      )}
+                      {project.demo && (
+                        <a
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="inline-flex w-fit items-center gap-2 border border-[var(--border)] px-3 py-2 text-xs font-medium uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          {isIt ? "Demo" : "Demo"}
+                        </a>
+                      )}
+                    </div>
                   )}
                 </div>
               </motion.a>

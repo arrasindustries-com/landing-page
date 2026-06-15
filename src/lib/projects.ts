@@ -9,6 +9,8 @@ export type Project = {
   url: string;
   /** GitHub repository, optional. */
   repo?: string;
+  /** Live demo / app URL, optional. */
+  demo?: string;
 };
 
 // Add new projects here. Only `name`, `description`, and `url` are required.
@@ -23,5 +25,16 @@ export const projects: Project[] = [
     },
     url: "https://devpost.com/software/pq-liquid-wallet",
     repo: "https://github.com/smeneguz/pq-liquid-wallet",
+  },
+  {
+    name: "Knaut",
+    image: "/images/projects/knaut-icon.png",
+    description: {
+      it: "Controllo e notarizzazione interoperabili per le Electronic Bills of Lading (eBL): trasferimento sicuro dei documenti tra piattaforme e verifica anti-frode su un layer di settlement neutrale (IOTA Move).",
+      en: "Interoperable control and notarization for electronic Bills of Lading (eBL): secure cross-platform document transfer and anti-fraud verification on a neutral settlement layer (IOTA Move).",
+    },
+    url: "https://knaut.org/",
+    repo: "https://github.com/smeneguz/portus",
+    demo: "https://portus-five.vercel.app/",
   },
 ];
