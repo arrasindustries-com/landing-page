@@ -89,7 +89,7 @@ export default function HomePage() {
         "@id": `${canonicalUrl}#organization`,
         name: "Arras Industries",
         url: canonicalUrl,
-        logo: `${siteOrigin}/favicon-1-arc-reactor-512px.png`,
+        logo: `${siteOrigin}/favicon-512.png`,
         email: "arras.industries.info@gmail.com",
         telephone: "+39 334 116 8370",
       },
