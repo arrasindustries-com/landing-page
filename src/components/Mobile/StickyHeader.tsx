@@ -69,26 +69,27 @@ export function StickyHeader({
       className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] backdrop-blur-xl"
       style={{
         backgroundColor:
-          theme === "dark" ? "rgba(20, 17, 15, 0.88)" : "rgba(251, 249, 244, 0.88)",
+          theme === "dark"
+            ? "rgba(20, 17, 15, 0.88)"
+            : "rgba(251, 249, 244, 0.88)",
       }}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
         <Link to="/" className="flex items-center">
-          <div
-            className="text-base font-bold uppercase tracking-wider text-[var(--text)] sm:text-lg sm:tracking-widest"
-            style={{ fontFamily: "'Noto Serif', Georgia, serif" }}
-          >
-            Arras Industries
-          </div>
+          <img
+            src={
+              theme === "dark"
+                ? "/images/arras_loghi/arras-logo-dark.svg"
+                : "/images/arras_loghi/arras-logo-light.svg"
+            }
+            alt="Arras Industries"
+            className="h-10 w-auto origin-left scale-150 sm:h-14 sm:scale-100"
+          />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <NavLink
-              key={link.to}
-              className={navLinkClass}
-              to={link.to}
-            >
+            <NavLink key={link.to} className={navLinkClass} to={link.to}>
               {link.label}
             </NavLink>
           ))}
