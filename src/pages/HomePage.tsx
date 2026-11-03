@@ -1,13 +1,12 @@
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useState } from "react";
-import Marquee from "react-fast-marquee";
 import { Link } from "react-router-dom";
 import { Button, buttonVariants } from "@/components/Button/Button";
 import { Footer } from "@/components/Footer";
 import { InputLike } from "@/components/Input/InputLike";
 import { SupportSection } from "@/components/SupportUs";
-import { Eyebrow, Index, PageHero, SectionHeading, reveal } from "@/components/Ui";
+import { Eyebrow, Index, Marquee, PageHero, SectionHeading, reveal } from "@/components/Ui";
 import { StopMotion } from "@/components/Visual/StopMotion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
@@ -27,7 +26,6 @@ const HOME_FRAMES = [
 
 export default function HomePage() {
   const { t, language } = useLanguage();
-  const reduceMotion = useReducedMotion();
   const [contactForm, setContactForm] = useState<ContactRequest>({
     name: "",
     activity: "",
@@ -295,7 +293,7 @@ export default function HomePage() {
 
       {/* ───────────────────────── Capabilities marquee ───────────────────────── */}
       <div className="mt-6 border-y border-[var(--border)] bg-[var(--surface)] py-5">
-        <Marquee speed={32} pauseOnHover autoFill play={!reduceMotion}>
+        <Marquee>
           {capabilities.map((item) => (
             <span
               key={item}

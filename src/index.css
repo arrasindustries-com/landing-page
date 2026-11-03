@@ -188,6 +188,35 @@ textarea:focus-visible {
   background-size: 64px 64px;
 }
 
+/* Capabilities ticker (home). Two identical tracks slide by their own width. */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  min-width: 100%;
+  justify-content: space-around;
+  animation: marquee-scroll 45s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
 .support-select {
   appearance: none;
   background-image: linear-gradient(45deg, transparent 50%, var(--text-soft) 50%),
@@ -210,5 +239,9 @@ textarea:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .marquee-track {
+    animation: none;
   }
 }

@@ -33,6 +33,22 @@ export function Eyebrow({
   );
 }
 
+/**
+ * Infinite horizontal ticker in pure CSS (see `.marquee` in index.css).
+ * Content is rendered twice so the loop is seamless. No runtime-injected
+ * <style> tags: the production CSP blocks those.
+ */
+export function Marquee({ children }: { children: ReactNode }) {
+  return (
+    <div className="marquee">
+      <div className="marquee-track">{children}</div>
+      <div className="marquee-track" aria-hidden>
+        {children}
+      </div>
+    </div>
+  );
+}
+
 /** Small mono index ("01"), used in lists instead of decorative numerals. */
 export function Index({
   n,
