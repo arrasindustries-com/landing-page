@@ -4,6 +4,7 @@ import { ArrowUpRight, ExternalLink, Github } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { Footer } from "@/components/Footer";
+import { PageHero } from "@/components/Ui";
 import { projects } from "@/lib/projects";
 import {
   publications,
@@ -81,125 +82,130 @@ export default function PortfolioPage() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 md:pt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-          className="max-w-3xl"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-            {isIt ? "Portfolio" : "Portfolio"}
-          </p>
-          <h1 className="mt-4 text-[2rem] font-semibold tracking-tight sm:text-4xl md:text-6xl">
-            {isIt ? "I progetti che costruiamo." : "The projects we build."}
-          </h1>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--text-muted)]">
-            {isIt
-              ? "Una selezione del nostro lavoro: applicazioni, soluzioni web3, strumenti software e pubblicazioni."
-              : "A selection of our work: applications, web3 solutions, software tools and publications."}
-          </p>
-        </motion.div>
+      <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 md:px-6 md:pb-32 md:pt-20">
+        <PageHero
+          eyebrow="Portfolio"
+          title={
+            isIt ? (
+              <>
+                Progetti <span className="hl">e ricerca.</span>
+              </>
+            ) : (
+              <>
+                Projects <span className="hl">and research.</span>
+              </>
+            )
+          }
+          description={
+            isIt
+              ? "Software che abbiamo costruito e articoli che abbiamo pubblicato. Il codice dei progetti è pubblico su GitHub."
+              : "Software we have built and papers we have published. The code for our projects is public on GitHub."
+          }
+        />
 
-        <div className="mt-10 flex gap-2 border-b border-[var(--border)]">
+        <div className="mt-16 flex gap-6 border-b border-[var(--border)] md:mt-20">
           {(
             [
-              { id: "projects", label: isIt ? "Progetti" : "Projects" },
+              { id: "projects", label: isIt ? "Progetti" : "Projects", count: projects.length },
               {
                 id: "publications",
                 label: isIt ? "Pubblicazioni" : "Publications",
+                count: publications.length,
               },
-            ] as { id: Tab; label: string }[]
+            ] as { id: Tab; label: string; count: number }[]
           ).map((item) => (
             <button
               key={item.id}
               onClick={() => setTab(item.id)}
               className={[
-                "relative -mb-px px-4 py-3 text-sm font-medium uppercase tracking-[0.12em] transition-colors",
+                "relative -mb-px inline-flex items-baseline gap-2 border-b-2 py-4 font-display text-lg font-medium tracking-[-0.02em] transition-colors",
                 tab === item.id
-                  ? "border-b-2 border-[var(--accent)] text-[var(--text)]"
-                  : "border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text)]",
+                  ? "border-[var(--accent-bright)] text-[var(--text)]"
+                  : "border-transparent text-[var(--text-soft)] hover:text-[var(--text)]",
               ].join(" ")}
             >
               {item.label}
+              <span className="font-mono text-[11px] tracking-normal text-[var(--text-soft)]">
+                {String(item.count).padStart(2, "0")}
+              </span>
             </button>
           ))}
         </div>
 
         {tab === "projects" && (
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-x-5 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
             {projects.map((project, index) => (
-              <motion.a
+              <motion.article
                 key={project.name}
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.08 * index }}
-                className="group flex flex-col overflow-hidden border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)] transition-colors hover:border-[var(--border-strong)]"
+                transition={{ duration: 0.5, delay: 0.08 * index, ease: [0.22, 1, 0.36, 1] }}
+                className="group relative flex flex-col"
               >
-                <div className="relative flex h-44 items-center justify-center overflow-hidden border-b border-[var(--border)] bg-[var(--surface-strong)]">
+                <div className="relative flex aspect-[16/10] items-center justify-center overflow-hidden border border-[var(--border)] bg-white transition-colors duration-300 group-hover:border-[var(--border-strong)]">
                   {project.image ? (
                     <img
                       src={project.image}
-                      alt={project.name}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      alt=""
+                      className="h-full w-full object-contain transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                       loading="lazy"
                     />
                   ) : (
-                    <span
-                      className="text-5xl font-semibold text-[var(--text-soft)]"
-                      style={{ fontFamily: "'Noto Serif', Georgia, serif" }}
-                    >
+                    <span className="font-display text-6xl font-semibold text-[var(--text-soft)]">
                       {project.name.charAt(0)}
                     </span>
                   )}
-                  <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] opacity-0 transition-opacity group-hover:opacity-100">
+                  <span className="absolute right-3 top-3 inline-flex h-9 w-9 items-center justify-center bg-[var(--surface-strong)] text-[var(--text)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                     <ArrowUpRight className="h-4 w-4" />
                   </span>
                 </div>
 
-                <div className="flex flex-1 flex-col gap-4 p-6">
-                  <div>
-                    <h2 className="text-xl font-semibold tracking-tight text-[var(--text)]">
+                <div className="mt-5 flex items-baseline justify-between gap-4">
+                  <h2 className="text-2xl">
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="after:absolute after:inset-0 after:content-['']"
+                    >
                       {project.name}
-                    </h2>
-                    <p className="mt-2 text-sm leading-7 text-[var(--text-muted)]">
-                      {isIt ? project.description.it : project.description.en}
-                    </p>
-                  </div>
-
-                  {(project.repo || project.demo) && (
-                    <div className="mt-auto flex flex-wrap gap-2">
-                      {project.repo && (
-                        <a
-                          href={project.repo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex w-fit items-center gap-2 border border-[var(--border)] px-3 py-2 text-xs font-medium uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
-                        >
-                          <Github className="h-4 w-4" />
-                          {isIt ? "Repository" : "Repository"}
-                        </a>
-                      )}
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="inline-flex w-fit items-center gap-2 border border-[var(--border)] px-3 py-2 text-xs font-medium uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text)]"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          {isIt ? "Demo" : "Demo"}
-                        </a>
-                      )}
-                    </div>
-                  )}
+                    </a>
+                  </h2>
+                  <span className="font-mono text-[11px] text-[var(--text-soft)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
-              </motion.a>
+                <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
+                  {isIt ? project.description.it : project.description.en}
+                </p>
+
+                {(project.repo || project.demo) && (
+                  <div className="relative z-10 mt-5 flex flex-wrap gap-2">
+                    {project.repo && (
+                      <a
+                        href={project.repo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 border border-[var(--border)] px-3 py-2 text-[13px] font-medium text-[var(--text-muted)] transition-colors hover:border-[var(--text)] hover:text-[var(--text)]"
+                      >
+                        <Github className="h-4 w-4" />
+                        Repository
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 border border-[var(--border)] px-3 py-2 text-[13px] font-medium text-[var(--text-muted)] transition-colors hover:border-[var(--text)] hover:text-[var(--text)]"
+                      >
+                        <ExternalLink className="h-4 w-4" />
+                        Demo
+                      </a>
+                    )}
+                  </div>
+                )}
+              </motion.article>
             ))}
           </div>
         )}
@@ -221,9 +227,9 @@ export default function PortfolioPage() {
                     key={cat}
                     onClick={() => setPubCategory(cat)}
                     className={[
-                      "border px-3 py-2 text-xs font-medium uppercase tracking-[0.12em] transition-colors",
+                      "border px-3 py-2 text-[13px] font-medium transition-colors",
                       pubCategory === cat
-                        ? "border-[var(--accent)] bg-[var(--accent)] text-[var(--accent-contrast,#14110f)]"
+                        ? "border-[var(--text)] bg-[var(--text)] text-[var(--page-bg)]"
                         : "border-[var(--border)] text-[var(--text-muted)] hover:border-[var(--border-strong)] hover:text-[var(--text)]",
                     ].join(" ")}
                   >
@@ -242,27 +248,27 @@ export default function PortfolioPage() {
               }))
               .map((group) => (
                 <div key={group.type}>
-                  <h2 className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
+                  <h2 className="eyebrow">
                     {isIt
                       ? publicationTypeLabels[group.type].it
                       : publicationTypeLabels[group.type].en}
                   </h2>
-                  <div className="mt-5 space-y-4">
+                  <div className="mt-5 border-t border-[var(--border)]">
                     {group.items.map((pub, index) => {
                       const inner = (
                         <>
                           <div>
-                            <h3 className="text-base font-semibold leading-6 tracking-tight text-[var(--text)] md:text-lg">
+                            <h3 className="font-display text-lg font-medium leading-7 tracking-[-0.02em] text-[var(--text)] transition-colors group-hover:text-[var(--accent)] md:text-xl">
                               {pub.title}
                             </h3>
                             <p className="mt-2 text-sm text-[var(--text-muted)]">
                               {pub.authors.join(", ")}
                             </p>
-                            <p className="mt-1 text-sm italic text-[var(--text-soft)]">
+                            <p className="mt-1 text-sm text-[var(--text-soft)]">
                               {pub.venue}, {pub.year}
                             </p>
                             {pub.doi && (
-                              <p className="mt-2 text-xs uppercase tracking-[0.1em] text-[var(--text-soft)]">
+                              <p className="mt-2 font-mono text-[11px] tracking-[0.04em] text-[var(--text-soft)]">
                                 DOI: {pub.doi}
                               </p>
                             )}
@@ -273,7 +279,7 @@ export default function PortfolioPage() {
                         </>
                       );
                       const cardClass =
-                        "group flex items-start justify-between gap-4 border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow)] md:p-6";
+                        "group flex items-start justify-between gap-6 border-b border-[var(--border)] py-6 md:py-7";
                       const anim = {
                         initial: { opacity: 0, y: 14 },
                         animate: { opacity: 1, y: 0 },
@@ -286,7 +292,7 @@ export default function PortfolioPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           {...anim}
-                          className={`${cardClass} transition-colors hover:border-[var(--border-strong)]`}
+                          className={cardClass}
                         >
                           {inner}
                         </motion.a>

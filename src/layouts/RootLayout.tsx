@@ -21,7 +21,7 @@ export function RootLayout() {
 
   return (
     <div className="min-h-screen bg-[var(--page-bg)] text-[var(--text)]">
-      <BackgroundFX theme={theme} />
+      <BackgroundFX />
       <StickyHeader
         t={t}
         language={language}
@@ -29,30 +29,26 @@ export function RootLayout() {
         theme={theme}
         toggleTheme={toggleTheme}
       />
-      <main className="relative z-10 pt-8 md:pt-10">
+      <main className="relative z-10 pt-[76px]">
         <Outlet />
       </main>
     </div>
   );
 }
 
-function BackgroundFX({ theme }: { theme: "dark" | "light" }) {
+function BackgroundFX() {
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10">
+    <div className="pointer-events-none fixed inset-0 -z-10" aria-hidden>
       <div
-        className="absolute inset-0"
+        className="bg-grid absolute inset-x-0 top-0 h-[900px]"
         style={{
-          backgroundImage:
-            theme === "dark"
-              ? "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)"
-              : "radial-gradient(circle, rgba(15,17,19,0.07) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
           maskImage:
-            "linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.15) 50%, transparent 100%)",
+            "radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 75%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 70% at 50% 0%, black 30%, transparent 75%)",
         }}
       />
-      <div className="absolute left-[-8rem] top-[-10rem] h-[28rem] w-[28rem] rounded-full bg-[var(--ambient-one)] blur-[140px]" />
-      <div className="absolute right-[-10rem] top-[6rem] h-[26rem] w-[26rem] rounded-full bg-[var(--ambient-two)] blur-[140px]" />
+      <div className="absolute right-[-12rem] top-[-14rem] h-[34rem] w-[34rem] rounded-full bg-[var(--accent-soft)] blur-[160px]" />
     </div>
   );
 }

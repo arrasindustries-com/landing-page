@@ -89,11 +89,11 @@ export const translations = {
       services: [
         {
           title: "Gestionale & automazioni",
-          subtitle: "Per PMI con processi ripetitivi e dati sparsi.",
+          subtitle: "Per chi lavora ancora tra fogli Excel, email e doppi inserimenti.",
           points: [
-            "Backoffice, ordini, scorte, dashboard operative.",
-            "Integrazioni con strumenti esistenti (POS, export, email).",
-            "Ruoli, log, backup e audit di base.",
+            "Ordini, magazzino, turni e clienti in un unico pannello.",
+            "Si collega a ciò che usate già: POS, fatturazione, email.",
+            "Ruoli, permessi, log e backup inclusi.",
           ],
           outcomes: [
             "Fino al 60% in meno di lavoro manuale",
@@ -104,11 +104,11 @@ export const translations = {
         {
           title: "Siti web & presenza digitale",
           subtitle:
-            "Per aziende che vogliono una pipeline commerciale digitale e misurabile.",
+            "Per aziende che vogliono un sito che porti richieste, non solo visite.",
           points: [
-            "Sito vetrina o piattaforma avanzata con CMS e sezioni gestibili.",
-            "Form, tracciamento eventi, analytics e attribution di base.",
-            "SEO tecnica, performance e UX orientata alla conversione.",
+            "Siti veloci, curati e semplici da aggiornare.",
+            "SEO tecnica e struttura pensata per farsi trovare.",
+            "Form, analytics e tracciamento già configurati.",
           ],
           outcomes: [
             "Più lead qualificati e costo acquisizione più sostenibile",
@@ -119,11 +119,11 @@ export const translations = {
         {
           title: "Blockchain / Web3",
           subtitle:
-            "Per organizzazioni che richiedono verificabilità o settlement digitale.",
+            "Quando serve una prova che nessuno può alterare.",
           points: [
-            "Tracciabilità eventi e notarizzazione di evidenze critiche.",
-            "Identità digitale, auditabilità processi e accessi firmati.",
-            "Formazione e integrazione con sistemi esistenti.",
+            "Notarizzazione di documenti ed eventi.",
+            "Tracciabilità di filiera e di processo.",
+            "Smart contract e wallet integrati nei vostri sistemi.",
           ],
           outcomes: [
             "Maggiore trasparenza verso partner e stakeholder",
@@ -141,23 +141,27 @@ export const translations = {
       steps: [
         {
           number: "01",
-          title: "Discovery breve",
-          desc: "Obiettivi, KPI, scope e vincoli. Decisioni veloci in 1-2 settimane.",
+          title: "Analisi",
+          desc: "Capiamo come lavorate oggi, cosa non funziona e cosa serve davvero. Ne esce un piano con priorità e costi chiari.",
+          duration: "1–2 settimane",
         },
         {
           number: "02",
-          title: "MVP",
-          desc: "Prima release usabile sui flussi core. 2-6 settimane.",
+          title: "Prima versione",
+          desc: "Una versione funzionante sui flussi principali, che il team può iniziare a usare subito.",
+          duration: "2–6 settimane",
         },
         {
           number: "03",
-          title: "Stabilizzazione",
-          desc: "Hardening, ruoli, backup, documentazione e handover.",
+          title: "Messa in sicurezza",
+          desc: "Ruoli e permessi, backup, documentazione e formazione per chi lo userà.",
+          duration: "Prima del go-live",
         },
         {
           number: "04",
-          title: "Iterazioni",
-          desc: "Roadmap basata su dati, non su ipotesi.",
+          title: "Evoluzione",
+          desc: "Miglioriamo il software in base a come viene usato davvero, non a ipotesi fatte all'inizio.",
+          duration: "Continuativa",
         },
       ],
       phaseSteps: [
@@ -276,21 +280,21 @@ export const translations = {
     },
     // Contact Section
     contact: {
-      title: "Valutiamo allineamento, impatto e priorità in una call.",
+      title: "Raccontaci il progetto.",
       subtitle:
-        "20 minuti gratuiti: capiamo obiettivi, vincoli e ROI atteso. Se non c'è allineamento, lo diciamo subito.",
-      responseTime: "Rispondiamo entro 24–48h lavorative.",
+        "Una call di 20 minuti, gratuita. Ci spieghi di cosa hai bisogno e ti diciamo con franchezza se e come possiamo aiutarti.",
+      responseTime: "Rispondiamo entro 1–2 giorni lavorativi.",
       formLabels: {
         name: "Nome",
-        activity: "Attività / settore",
-        contact: "Contatto",
-        objective: "Obiettivo + vincoli",
+        activity: "Azienda o settore",
+        contact: "Email o telefono",
+        objective: "Di cosa hai bisogno?",
       },
       formPlaceholders: {
         name: "Mario Rossi",
-        activity: "Ristorante / Studio / Retail / Altro",
-        contact: "Email o telefono",
-        objective: "Es: ridurre no-show, budget, tempi, integrazioni...",
+        activity: "Es. studio tecnico, ristorante, e-commerce…",
+        contact: "nome@azienda.it",
+        objective: "Es. oggi gestiamo ordini e magazzino su Excel e vorremmo un gestionale collegato al sito…",
       },
       evaluate: "Prenota una call gratuita",
     },
@@ -298,19 +302,19 @@ export const translations = {
     footer: {
       company: "Arras Industries",
       description:
-        "Costruiamo gestionali, siti web e soluzioni web3 con impatto misurabile su efficienza, acquisizione e controllo operativo.",
+        "Studio di ingegneria software. Progettiamo e sviluppiamo gestionali, siti web e integrazioni blockchain per aziende.",
       copyright: "© {year} Arras Industries",
       sections: "Sezioni",
       contacts: "Contatti",
       email: "arras.industries.info@gmail.com",
       phone: "+39 334 116 8370",
-      location: "Sede: Italia (remoto)",
+      location: "Italia · lavoriamo da remoto",
     },
     // Support Section
     support: {
-      title: "Supporta l'innovazione",
+      title: "Sostieni la nostra ricerca",
       subtitle:
-        "Per chi vuole sostenere ricerca applicata, prototipi e strumenti digitali più aperti.",
+        "Una parte del nostro tempo va in prototipi e progetti open source. Se il nostro lavoro ti è utile, puoi contribuire.",
       amount: "Importo",
       network: "Rete",
       token: "Token",
@@ -324,7 +328,7 @@ export const translations = {
       paypalCurrency: "PayPal in EUR",
       paypalDesc:
         "Dona in modo rapido con PayPal. L'importo viene inviato in EUR.",
-      transparency: "Trasparenza totale",
+      transparency: "Trasparenza",
       transparencyDesc:
         "Tutte le donazioni sono pubbliche e tracciabili on‑chain.",
       destinationWallet: "Indirizzi on-chain",
@@ -434,11 +438,11 @@ export const translations = {
       services: [
         {
           title: "Management & automations",
-          subtitle: "For SMBs with repetitive processes and scattered data.",
+          subtitle: "For teams still juggling spreadsheets, email and double data entry.",
           points: [
-            "Backoffice, orders, inventory, operational dashboards.",
-            "Integrations with existing tools (POS, export, email).",
-            "Roles, logs, basic backups, and audit.",
+            "Orders, inventory, shifts and clients in one place.",
+            "Connects to what you already use: POS, invoicing, email.",
+            "Roles, permissions, logs and backups included.",
           ],
           outcomes: [
             "Up to 60% less manual work",
@@ -449,11 +453,11 @@ export const translations = {
         {
           title: "Websites & digital presence",
           subtitle:
-            "For companies that need a measurable digital sales pipeline.",
+            "For companies that want a website that brings enquiries, not just visits.",
           points: [
-            "Showcase website or advanced platform with manageable sections.",
-            "Forms, event tracking, analytics, and basic attribution.",
-            "Technical SEO, performance, and conversion-oriented UX.",
+            "Fast, well-crafted sites that are easy to update.",
+            "Technical SEO and a structure built to be found.",
+            "Forms, analytics and tracking set up from day one.",
           ],
           outcomes: [
             "More qualified inbound leads and healthier acquisition costs",
@@ -464,11 +468,11 @@ export const translations = {
         {
           title: "Blockchain / Web3",
           subtitle:
-            "For organizations that require verifiability or digital settlement.",
+            "When you need proof that nobody can tamper with.",
           points: [
-            "Event traceability and notarization of critical evidence.",
-            "Digital identity, process auditability, and signed access flows.",
-            "Training and integration with existing systems.",
+            "Notarization of documents and events.",
+            "Supply-chain and process traceability.",
+            "Smart contracts and wallets wired into your systems.",
           ],
           outcomes: [
             "Greater transparency for partners and stakeholders",
@@ -486,23 +490,27 @@ export const translations = {
       steps: [
         {
           number: "01",
-          title: "Short discovery",
-          desc: "Objectives, KPIs, scope, and constraints. Fast decisions in 1-2 weeks.",
+          title: "Analysis",
+          desc: "We learn how you work today, what is broken and what you actually need. You get a plan with clear priorities and costs.",
+          duration: "1–2 weeks",
         },
         {
           number: "02",
-          title: "MVP",
-          desc: "First usable release on core flows. 2-6 weeks.",
+          title: "First version",
+          desc: "A working version of the core workflows that your team can start using right away.",
+          duration: "2–6 weeks",
         },
         {
           number: "03",
-          title: "Stabilization",
-          desc: "Hardening, roles, backup, documentation, and handover.",
+          title: "Hardening",
+          desc: "Roles and permissions, backups, documentation and training for the people who will use it.",
+          duration: "Before go-live",
         },
         {
           number: "04",
-          title: "Iterations",
-          desc: "Roadmap based on data, not assumptions.",
+          title: "Evolution",
+          desc: "We improve the software based on how it is really used, not on assumptions made at the start.",
+          duration: "Ongoing",
         },
       ],
       phaseSteps: [
@@ -620,21 +628,21 @@ export const translations = {
     },
     // Contact Section
     contact: {
-      title: "Let's evaluate fit, impact, and priorities in one call.",
+      title: "Tell us about your project.",
       subtitle:
-        "Free 20-minute call: we align on goals, constraints, and expected ROI. If there is no fit, we say it clearly.",
-      responseTime: "We respond within 24–48 business hours.",
+        "A free 20-minute call. You tell us what you need, and we tell you honestly whether and how we can help.",
+      responseTime: "We reply within 1–2 business days.",
       formLabels: {
         name: "Name",
-        activity: "Activity / sector",
-        contact: "Contact",
-        objective: "Objective + constraints",
+        activity: "Company or industry",
+        contact: "Email or phone",
+        objective: "What do you need?",
       },
       formPlaceholders: {
         name: "John Smith",
-        activity: "Restaurant / Studio / Retail / Other",
-        contact: "Email or phone",
-        objective: "E.g., reduce no-shows, budget, timeline, integrations...",
+        activity: "E.g. engineering firm, restaurant, e-commerce…",
+        contact: "name@company.com",
+        objective: "E.g. we track orders and stock in spreadsheets and want software connected to our website…",
       },
       evaluate: "Book a free call",
     },
@@ -642,19 +650,19 @@ export const translations = {
     footer: {
       company: "Arras Industries",
       description:
-        "We build management systems, websites, and web3 solutions with measurable impact on efficiency, acquisition, and operational control.",
+        "Software engineering studio. We design and build management software, websites and blockchain integrations for companies.",
       copyright: "© {year} Arras Industries",
       sections: "Sections",
       contacts: "Contacts",
       email: "arras.industries.info@gmail.com",
       phone: "+39 334 116 8370",
-      location: "Office: Italy (remote)",
+      location: "Italy · working remotely",
     },
     // Support Section
     support: {
-      title: "Support innovation",
+      title: "Support our research",
       subtitle:
-        "For those who want to support applied research, prototypes, and more open digital tools.",
+        "Part of our time goes into prototypes and open-source projects. If our work is useful to you, you can contribute.",
       amount: "Amount",
       network: "Network",
       token: "Token",
@@ -668,7 +676,7 @@ export const translations = {
       paypalCurrency: "PayPal in EUR",
       paypalDesc:
         "Donate quickly with PayPal. The entered amount is sent in EUR.",
-      transparency: "Total transparency",
+      transparency: "Transparency",
       transparencyDesc: "All donations are public and traceable on-chain.",
       destinationWallet: "On-chain addresses",
       errors: {

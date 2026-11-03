@@ -77,13 +77,13 @@ export default function GestionaliPage() {
     },
     hero: {
       icon: <Laptop className="h-4 w-4" />,
-      eyebrow: isIt ? "Software gestionale" : "Management software",
+      eyebrow: isIt ? "Gestionali" : "Management software",
       title: isIt
-        ? "Il gestionale costruito sui tuoi flussi reali"
-        : "Management software built around your real workflows",
+        ? "Un gestionale costruito su come lavorate voi."
+        : "Management software built around how you actually work.",
       subtitle: isIt
-        ? "Progettiamo gestionali sui processi operativi reali: ordini, turni, scorte, ruoli e report. Prima definiamo scope, integrazioni e metriche; poi sviluppiamo."
-        : "We build management software around actual operations: orders, shifts, inventory, roles, and reporting. Scope, integrations, and metrics are defined before development.",
+        ? "Ordini, magazzino, turni, clienti e report in un unico strumento. Partiamo dai vostri processi, non da un software preconfezionato da adattare a forza."
+        : "Orders, inventory, shifts, clients and reports in a single tool. We start from your processes, not from off-the-shelf software you have to bend to fit.",
       image: gestionaliFrames[0],
       animationFrames: gestionaliFrames,
       visual: "operations",
@@ -91,30 +91,30 @@ export default function GestionaliPage() {
     sections: isIt
       ? [
           {
-            heading: "Quando serve un gestionale su misura",
-            body: "Un gestionale su misura ha senso quando il team lavora con fogli separati, doppio inserimento dati o procedure manuali non standardizzate. In questi casi il costo non è solo tecnico: aumenta il tempo operativo e cala la qualità del dato.\n\nLa fase iniziale è di analisi: mappa dei flussi attuali, ruoli coinvolti, eccezioni operative e sistemi già presenti. Il risultato è uno scope chiaro, con priorità e dipendenze.\n\nL'obiettivo non è aggiungere funzioni, ma ridurre passaggi inutili. Ogni modulo viene introdotto solo se migliora un processo misurabile.",
+            heading: "Quando conviene un gestionale su misura",
+            body: "Se il team passa ore a copiare dati da un foglio all'altro, se le informazioni vivono in tre posti diversi o se ogni persona segue una procedura sua, il problema non è la buona volontà. Mancano gli strumenti giusti.\n\nPrima di scrivere codice ci sediamo con chi fa il lavoro ogni giorno. Guardiamo come gira oggi un ordine, un turno o una consegna, dove si inceppa e quali eccezioni capitano davvero.\n\nNe esce un piano con poche priorità chiare. Ogni modulo entra nel progetto solo se toglie lavoro a qualcuno.",
           },
           {
-            heading: "Cosa viene implementato",
-            body: "Il nucleo tipico include backoffice ordini, magazzino, turni e report operativi. Le integrazioni coprono strumenti esistenti come POS, canali email, export e calendari.\n\nSono inclusi ruoli e permessi, log eventi e backup. La consegna prevede ambiente di produzione, documentazione essenziale e passaggio operativo al team.\n\nIl rilascio è incrementale: prima versione utilizzabile, poi iterazioni su dati reali di utilizzo. Questo riduce il rischio di sviluppare funzionalità non usate.",
+            heading: "Cosa costruiamo",
+            body: "Di solito si parte da ordini, magazzino, turni e report. Il gestionale si collega agli strumenti che usate già: POS, fatturazione, email, calendari, export verso il commercialista.\n\nRuoli e permessi, registro delle operazioni e backup automatici sono inclusi fin dall'inizio, non venduti a parte. Alla consegna trovate il software in produzione, la documentazione e una formazione per chi lo userà.\n\nRilasciamo per gradi: prima una versione che si può usare, poi miglioramenti basati su come il team la usa davvero.",
           },
           {
-            heading: "Come si misura il risultato",
-            body: "Le metriche principali sono ore manuali risparmiate, errori di inserimento ridotti, tempi medi di gestione e puntualità operativa. Questi indicatori vengono definiti prima del rilascio.\n\nDopo l'avvio, il monitoraggio mostra quali flussi migliorano e quali richiedono correzioni. In questo modo ogni iterazione è legata a un obiettivo operativo, non a una preferenza estetica.",
+            heading: "Come capiamo se funziona",
+            body: "Prima del rilascio scegliamo insieme pochi numeri da tenere d'occhio: ore spese in attività manuali, errori di inserimento, tempo medio per evadere un ordine.\n\nDopo l'avvio li confrontiamo con la situazione di partenza. Così le modifiche successive si decidono guardando i dati, non a sensazione.",
           },
         ]
       : [
           {
-            heading: "When custom software is needed",
-            body: "Custom software is useful when teams work with disconnected files, duplicate data entry, or manual procedures that are hard to standardize. In that setup, costs grow in operations and data quality.\n\nThe first step is process mapping: current workflows, responsible roles, edge cases, and existing systems. Output is a scoped plan with priorities and dependencies.\n\nThe goal is not adding features by default. A module is implemented only when it improves a measurable operational step.",
+            heading: "When custom software makes sense",
+            body: "If your team spends hours copying data between spreadsheets, if information lives in three different places, or if everyone follows their own procedure, the problem is not effort. The right tools are missing.\n\nBefore writing any code we sit down with the people doing the work every day. We look at how an order, a shift or a delivery flows today, where it gets stuck and which exceptions really happen.\n\nThe result is a plan with a few clear priorities. A module makes it into the project only if it takes work off someone's plate.",
           },
           {
-            heading: "What gets implemented",
-            body: "Typical scope includes order backoffice, inventory, shifts, and operational reporting. Integrations cover existing tools such as POS, email channels, exports, and calendars.\n\nDelivery includes roles and permissions, event logs, and backup policies. Handover includes production deployment, essential documentation, and team onboarding.\n\nRelease is incremental: first usable version, then iterations based on usage data. This reduces the risk of building unused features.",
+            heading: "What we build",
+            body: "We usually start with orders, inventory, shifts and reports. The software connects to the tools you already use: POS, invoicing, email, calendars, exports for your accountant.\n\nRoles and permissions, an activity log and automatic backups are included from the start, not sold as extras. At handover you get the software in production, documentation and training for the people who will use it.\n\nWe release in stages: first a version you can use, then improvements based on how your team actually uses it.",
           },
           {
-            heading: "How outcomes are measured",
-            body: "Primary metrics are manual hours reduced, data-entry errors reduced, average handling time, and operational punctuality. These KPIs are defined before release.\n\nAfter go-live, tracking shows which flows improve and which still need correction. Each iteration is linked to an operational target, not to generic redesign.",
+            heading: "How we know it works",
+            body: "Before release we agree on a few numbers to watch: hours spent on manual tasks, data-entry errors, average time to process an order.\n\nAfter go-live we compare them with the starting point. Later changes are decided by looking at the data, not by gut feeling.",
           },
         ],
     useCases: {
@@ -238,8 +238,8 @@ export default function GestionaliPage() {
         ? "Domande frequenti sui gestionali"
         : "Management software FAQ",
       subtitle: isIt
-        ? "Le risposte alle domande più comuni."
-        : "Answers to the most common questions.",
+        ? "Quello che ci chiedono più spesso prima di iniziare."
+        : "What people ask us most before getting started.",
       items: isIt
         ? [
             {
@@ -298,11 +298,11 @@ export default function GestionaliPage() {
     },
     cta: {
       title: isIt
-        ? "Valutiamo il tuo caso operativo"
-        : "Assess your operational case",
+        ? "Parliamo del tuo gestionale."
+        : "Let's talk about your software.",
       subtitle: isIt
-        ? "Call di 20 minuti per analizzare flussi, vincoli tecnici, integrazioni e priorità di rilascio."
-        : "A 20-minute call to review workflows, technical constraints, integrations, and release priorities.",
+        ? "In 20 minuti capiamo come lavorate oggi, quali strumenti usate e da dove conviene partire."
+        : "In 20 minutes we learn how you work today, which tools you use and where it makes sense to start.",
       buttonText: isIt ? "Prenota una call gratuita" : "Book a free call",
     },
   };

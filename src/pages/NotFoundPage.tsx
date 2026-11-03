@@ -1,27 +1,35 @@
 import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Button } from "@/components/Button/Button";
+import { buttonVariants } from "@/components/Button/Button";
+import { Eyebrow } from "@/components/Ui";
 
 export default function NotFoundPage() {
   const { language } = useLanguage();
   const isIt = language === "it";
 
   return (
-    <section className="mx-auto max-w-4xl px-4 py-28 text-center">
-      <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-sm font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
-        404
-      </div>
-      <h1 className="mt-8 text-4xl font-semibold tracking-tight md:text-5xl">
-        {isIt ? "Pagina non trovata" : "Page not found"}
+    <section className="mx-auto flex min-h-[70vh] max-w-7xl flex-col justify-center px-4 py-24 md:px-6">
+      <Eyebrow>{isIt ? "Errore 404" : "Error 404"}</Eyebrow>
+      <h1 className="mt-7 max-w-[14ch] text-[2.75rem] leading-[1] tracking-[-0.045em] sm:text-6xl lg:text-[5rem]">
+        {isIt ? (
+          <>
+            Questa pagina <span className="hl">non esiste.</span>
+          </>
+        ) : (
+          <>
+            This page <span className="hl">doesn't exist.</span>
+          </>
+        )}
       </h1>
-      <p className="mx-auto mt-4 max-w-2xl text-[var(--text-muted)]">
+      <p className="mt-6 max-w-lg text-lg leading-8 text-[var(--text-muted)]">
         {isIt
-          ? "L'URL richiesto non esiste oppure è stato spostato."
-          : "The requested URL does not exist or has been moved."}
+          ? "L'indirizzo potrebbe essere sbagliato, oppure la pagina è stata spostata."
+          : "The address may be wrong, or the page has been moved."}
       </p>
-      <div className="mt-7">
-        <Link to="/">
-          <Button>{isIt ? "Torna alla home" : "Back to home"}</Button>
+      <div className="mt-9">
+        <Link to="/" className={buttonVariants({ size: "lg" })}>
+          {isIt ? "Torna alla home" : "Back to home"} <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
     </section>

@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { Footer } from "@/components/Footer";
+import { Eyebrow, Index, PageHero, reveal } from "@/components/Ui";
+import { publications } from "@/lib/publications";
+import { projects } from "@/lib/projects";
 
 type TeamMember = {
   name: string;
@@ -168,58 +171,140 @@ export default function AboutPage() {
     ],
   });
 
+  const principles = isIt
+    ? [
+        {
+          title: "Prima capire, poi scrivere codice",
+          desc: "Passiamo il tempo necessario a capire come lavorate. Un software giusto per il problema sbagliato non serve a nessuno.",
+        },
+        {
+          title: "Scelte tecniche spiegate",
+          desc: "Ogni scelta di architettura o tecnologia ha un motivo, e ve lo spieghiamo in parole semplici.",
+        },
+        {
+          title: "Software che resta vostro",
+          desc: "Codice documentato, accessi vostri, nessun vincolo artificiale. Se un giorno volete cambiare fornitore, potete farlo.",
+        },
+      ]
+    : [
+        {
+          title: "Understand first, code second",
+          desc: "We take the time to understand how you work. The right software for the wrong problem helps nobody.",
+        },
+        {
+          title: "Technical choices, explained",
+          desc: "Every architecture or technology decision has a reason, and we explain it in plain words.",
+        },
+        {
+          title: "Software that stays yours",
+          desc: "Documented code, your own credentials, no artificial lock-in. If you ever want to switch provider, you can.",
+        },
+      ];
+
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-24 pt-14 md:pt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45 }}
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-            {isIt ? "Chi siamo" : "About us"}
-          </p>
-          <h1 className="mt-4 text-[2rem] font-semibold tracking-tight sm:text-4xl md:text-6xl">
-            {isIt
-              ? "Un team tecnico con impostazione operativa."
-              : "A technical team with an operational mindset."}
-          </h1>
-          <p className="mt-5 max-w-4xl text-base leading-8 text-[var(--text-muted)]">
-            {isIt
-              ? "Arras Industries progetta e sviluppa software per aziende che vogliono processi più chiari, strumenti più affidabili e scelte tecniche motivate dal contesto. Lavoriamo su gestionali, siti web e integrazioni web3 quando servono davvero."
-              : "Arras Industries designs and builds software for companies that want clearer processes, more reliable tools, and technical decisions grounded in context. We work on management software, websites, and web3 integrations when they genuinely help."}
-          </p>
-        </motion.div>
+      <section className="mx-auto max-w-7xl px-4 pt-14 md:px-6 md:pt-20">
+        <PageHero
+          eyebrow={isIt ? "Chi siamo" : "About us"}
+          title={
+            isIt ? (
+              <>
+                Tre ingegneri, <span className="hl">un solo standard</span> di qualità.
+              </>
+            ) : (
+              <>
+                Three engineers, <span className="hl">one standard</span> of quality.
+              </>
+            )
+          }
+          description={
+            isIt
+              ? "Arras Industries unisce architettura software, blockchain e cybersecurity. Lavoriamo con aziende che vogliono software fatto bene, spiegato bene e mantenuto nel tempo."
+              : "Arras Industries brings together software architecture, blockchain and cybersecurity. We work with companies that want software that is well built, well explained and maintained over time."
+          }
+        />
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-16 grid gap-5 md:mt-20 md:grid-cols-3">
           {team.map((member, index) => (
             <motion.article
               key={member.name}
-              initial={{ opacity: 0, y: 22 }}
+              initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.08 * index }}
-              className="overflow-hidden border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow)]"
+              transition={{ duration: 0.7, delay: 0.15 + 0.08 * index, ease: [0.22, 1, 0.36, 1] }}
+              className="group flex flex-col border border-[var(--border)] bg-[var(--surface-strong)]"
             >
-              <img
-                src={member.image}
-                alt={member.name}
-                className="h-80 w-full object-cover"
-                style={{ objectPosition: member.imagePosition }}
-                loading="lazy"
-              />
-              <div className="space-y-4 p-6">
-                <div>
-                  <h2 className="text-2xl font-semibold text-[var(--text)]">
-                    {member.name}
-                  </h2>
-                  <p className="mt-2 text-sm text-[var(--text-soft)]">{member.role}</p>
-                </div>
-                <p className="text-sm leading-7 text-[var(--text-muted)]">
+              <div className="relative aspect-[4/5] overflow-hidden border-b border-[var(--border)] bg-[var(--surface)]">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="h-full w-full object-cover grayscale-[0.35] transition-all duration-700 ease-out group-hover:scale-[1.03] group-hover:grayscale-0"
+                  style={{ objectPosition: member.imagePosition }}
+                  loading="lazy"
+                />
+                <span className="absolute left-4 top-4 bg-[var(--surface-strong)] px-2 py-1 font-mono text-[11px] tracking-[0.1em] text-[var(--text)]">
+                  0{index + 1}
+                </span>
+              </div>
+              <div className="flex flex-1 flex-col p-6 md:p-7">
+                <h2 className="text-2xl">{member.name}</h2>
+                <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent)]">
+                  {member.role}
+                </p>
+                <p className="mt-5 border-t border-[var(--border)] pt-5 text-sm leading-6 text-[var(--text-muted)]">
                   {member.description}
                 </p>
               </div>
             </motion.article>
           ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-32">
+        <div className="grid gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+          <motion.div {...reveal} className="lg:sticky lg:top-28 lg:self-start">
+            <Eyebrow>{isIt ? "Come lavoriamo" : "How we work"}</Eyebrow>
+            <h2 className="mt-5 text-[2.25rem] leading-[1.02] md:text-[3.2rem]">
+              {isIt ? (
+                <>
+                  Pochi principi, <span className="hl">rispettati sempre.</span>
+                </>
+              ) : (
+                <>
+                  A few principles, <span className="hl">always kept.</span>
+                </>
+              )}
+            </h2>
+            <dl className="mt-10 grid grid-cols-2 border-t border-[var(--border)]">
+              <div className="py-6 pr-4">
+                <dd className="font-display text-4xl font-semibold tracking-[-0.04em]">{publications.length}</dd>
+                <dt className="mt-1 text-sm text-[var(--text-muted)]">
+                  {isIt ? "pubblicazioni scientifiche" : "scientific publications"}
+                </dt>
+              </div>
+              <div className="border-l border-[var(--border)] py-6 pl-6">
+                <dd className="font-display text-4xl font-semibold tracking-[-0.04em]">{projects.length}</dd>
+                <dt className="mt-1 text-sm text-[var(--text-muted)]">
+                  {isIt ? "progetti open source" : "open-source projects"}
+                </dt>
+              </div>
+            </dl>
+          </motion.div>
+
+          <div className="border-t border-[var(--border)]">
+            {principles.map((item, index) => (
+              <motion.div
+                key={item.title}
+                {...reveal}
+                className="grid gap-5 border-b border-[var(--border)] py-9 md:grid-cols-[64px_1fr] md:py-11"
+              >
+                <Index n={index + 1} className="mt-1" />
+                <div>
+                  <h3 className="text-2xl md:text-[1.75rem]">{item.title}</h3>
+                  <p className="mt-3 max-w-lg text-[15px] leading-7 text-[var(--text-muted)]">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
       <Footer />
