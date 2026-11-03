@@ -1,14 +1,8 @@
-import { motion } from "framer-motion";
 import { Footer } from "@/components/Footer";
 import { SupportSection } from "@/components/SupportUs";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PageHero } from "@/components/Ui";
 import { usePageSeo } from "@/hooks/usePageSeo";
-
-const reveal = {
-  initial: { opacity: 0, y: 24 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.55 },
-};
 
 export default function SupportPage() {
   const { language } = useLanguage();
@@ -37,40 +31,35 @@ export default function SupportPage() {
 
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-10 pt-14 md:pb-12 md:pt-16">
-        <motion.div
-          initial={reveal.initial}
-          animate={reveal.animate}
-          transition={reveal.transition}
-          className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]"
-        >
-          <div className="max-w-3xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-              {isItalian ? "Supporto" : "Support"}
-            </p>
-            <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-6xl">
-              {isItalian
-                ? "Per chi vuole sostenere ricerca applicata e sperimentazione."
-                : "For those who want to support applied research and experimentation."}
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-[var(--text-muted)]">
-              {isItalian
-                ? "Qui trovi un canale facoltativo per sostenere prototipi, test tecnici e sviluppo di strumenti che alimentano il nostro lavoro più sperimentale."
-                : "An optional channel is available here to support prototypes, technical testing, and tool development that feeds our more experimental work."}
-            </p>
-          </div>
-
-          <div className="border border-[var(--border)] bg-[var(--surface)] px-6 py-6 shadow-[var(--shadow)] md:px-7">
-            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--text-soft)]">
-              {isItalian ? "Nota" : "Note"}
-            </p>
-            <p className="mt-4 text-sm leading-7 text-[var(--text-muted)]">
-              {isItalian
-                ? "Le donazioni non sostituiscono i progetti cliente: servono a finanziare sperimentazione, validazione tecnica e sviluppo di asset riutilizzabili nel tempo."
-                : "Donations do not replace client work: they help fund experimentation, technical validation, and the development of reusable assets over time."}
-            </p>
-          </div>
-        </motion.div>
+      <section className="mx-auto max-w-7xl px-4 pt-14 md:px-6 md:pt-20">
+        <div className="border-b border-[var(--border)] pb-16 md:pb-20">
+          <PageHero
+            eyebrow={isItalian ? "Supporto" : "Support"}
+            title={
+              isItalian ? (
+                <>
+                  Sostieni la ricerca <span className="hl">che facciamo.</span>
+                </>
+              ) : (
+                <>
+                  Support the research <span className="hl">we do.</span>
+                </>
+              )
+            }
+            description={
+              <>
+                {isItalian
+                  ? "Pubblichiamo codice e articoli, e costruiamo prototipi che non sempre hanno un cliente dietro. Se ti è utile ciò che facciamo, puoi darci una mano."
+                  : "We publish code and papers, and build prototypes that do not always have a client behind them. If our work is useful to you, you can lend a hand."}
+                <span className="mt-4 block text-sm leading-6 text-[var(--text-soft)]">
+                  {isItalian
+                    ? "Le donazioni sono facoltative e non sostituiscono i progetti per i clienti."
+                    : "Donations are optional and do not replace client work."}
+                </span>
+              </>
+            }
+          />
+        </div>
       </section>
 
       <SupportSection />

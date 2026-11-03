@@ -79,11 +79,11 @@ export default function Web3Page() {
       icon: <Sparkles className="h-4 w-4" />,
       eyebrow: isIt ? "Blockchain & Web3" : "Blockchain & Web3",
       title: isIt
-        ? "Blockchain quando serve, non per moda"
-        : "Blockchain when it matters, not for trends",
+        ? "Blockchain dove serve una prova, e solo lì."
+        : "Blockchain where you need proof, and only there.",
       subtitle: isIt
-        ? "Blockchain e web3 vengono adottati solo con requisiti chiari: verificabilità dei dati, tracciabilità condivisa o automazioni con regole non modificabili."
-        : "Blockchain and web3 are used only when requirements are explicit: data verifiability, shared traceability, or automations with non-editable rules.",
+        ? "Notarizzazione, tracciabilità, smart contract. Il nostro tech lead ha un dottorato su blockchain e DLT: ti diciamo anche quando non conviene usarla."
+        : "Notarization, traceability, smart contracts. Our tech lead holds a PhD in blockchain and DLT, so we will also tell you when it is not worth using.",
       image: blockchainFrames[0],
       animationFrames: blockchainFrames,
       visual: "verification",
@@ -91,30 +91,30 @@ export default function Web3Page() {
     sections: isIt
       ? [
           {
-            heading: "Quando la blockchain ha senso per la tua azienda",
-            body: "La blockchain non sostituisce ogni sistema dati. È utile quando serve una prova verificabile da terzi e non alterabile nel tempo.\n\nI casi tipici sono: tracciabilità di filiera, notarizzazione documentale con timestamp, audit trail per conformità, regole automatiche eseguite via smart contract.\n\nSe i requisiti non richiedono queste proprietà, la soluzione resta su architettura tradizionale. La scelta tecnica viene fatta su vincoli reali, non su trend.",
+            heading: "Quando la blockchain ha senso",
+            body: "La blockchain non è un database migliore. Serve quando più parti devono fidarsi degli stessi dati senza fidarsi l'una dell'altra, o quando bisogna dimostrare che un documento non è stato modificato.\n\nI casi più comuni: tracciabilità di filiera, notarizzazione di documenti con data certa, registri di audit per la conformità, regole eseguite automaticamente da uno smart contract.\n\nSe il vostro caso non ha queste esigenze, ve lo diciamo e proponiamo una soluzione tradizionale, più semplice ed economica.",
           },
           {
-            heading: "I nostri servizi blockchain e web3",
-            body: "I servizi coprono tracciabilità eventi, notarizzazione, identità digitale e controllo accessi, oltre a integrazioni wallet quando richieste da un caso operativo.\n\nOgni implementazione include modello dati, scelta rete, costi transazionali attesi, politiche di sicurezza e integrazione con sistemi esistenti.\n\nLa parte formativa è orientata al team interno: cosa viene registrato, cosa resta off-chain, come leggere evidenze e come gestire eccezioni operative.",
+            heading: "Cosa facciamo",
+            body: "Notarizzazione, tracciabilità di eventi, identità digitale e controllo degli accessi. Integriamo wallet e pagamenti in crypto quando c'è un motivo concreto.\n\nPer ogni progetto definiamo cosa va registrato on-chain e cosa resta fuori, quale rete usare, quanto costerà ogni transazione e come si collega ai sistemi che avete già.\n\nFormiamo anche il vostro team: come leggere e verificare le prove registrate, e come gestire i casi particolari.",
           },
           {
-            heading: "Criteri di valutazione e output",
-            body: "Prima dello sviluppo definiamo criteri di adozione: requisito legale o audit, numero attori coinvolti, frequenza scritture, limiti di costo per transazione, requisiti di privacy.\n\nL'output del progetto include documentazione tecnica, monitoraggio operativo e piano di gestione. In questo modo la soluzione resta mantenibile anche dopo il rilascio.",
+            heading: "Come valutiamo un progetto",
+            body: "Prima di sviluppare rispondiamo ad alcune domande: c'è un obbligo legale o di audit? Quanti soggetti sono coinvolti? Quante scritture al giorno? Qual è il costo massimo accettabile per transazione? Quali dati devono restare privati?\n\nAlla consegna trovate documentazione tecnica, monitoraggio e un piano di manutenzione, così il sistema resta gestibile anche dopo il rilascio.",
           },
         ]
       : [
           {
-            heading: "When blockchain makes sense for your business",
-            body: "Blockchain does not replace every data system. It is useful when records must be verifiable by third parties and resistant to later edits.\n\nCommon cases are supply-chain traceability, document notarization with timestamp, compliance audit trails, and rule-based execution through smart contracts.\n\nIf those requirements are absent, traditional architecture is usually the correct choice. Technical decisions are based on constraints, not trend pressure.",
+            heading: "When blockchain makes sense",
+            body: "Blockchain is not a better database. It is useful when several parties need to trust the same data without trusting each other, or when you must prove a document has not been altered.\n\nThe most common cases: supply-chain traceability, document notarization with a reliable timestamp, audit trails for compliance, and rules executed automatically by a smart contract.\n\nIf your case does not need any of this, we will tell you and propose a traditional solution that is simpler and cheaper.",
           },
           {
-            heading: "Our blockchain and web3 services",
-            body: "Scope includes event traceability, notarization, digital identity, access control, and wallet integrations when there is an operational need.\n\nEach implementation defines data model, network selection, expected transaction costs, security policies, and integration points with existing systems.\n\nTraining is practical: what is stored on-chain, what remains off-chain, how to verify evidence, and how to handle operational exceptions.",
+            heading: "What we do",
+            body: "Notarization, event traceability, digital identity and access control. We integrate wallets and crypto payments when there is a concrete reason.\n\nFor each project we define what goes on-chain and what stays off it, which network to use, what each transaction will cost and how it connects to the systems you already have.\n\nWe also train your team: how to read and verify the recorded proofs, and how to handle edge cases.",
           },
           {
-            heading: "Evaluation criteria and deliverables",
-            body: "Before development we define adoption criteria: legal or audit requirement, number of involved actors, write frequency, transaction cost limits, and privacy constraints.\n\nProject output includes technical documentation, operational monitoring, and a maintenance plan so the system remains manageable after release.",
+            heading: "How we assess a project",
+            body: "Before building we answer a few questions: is there a legal or audit requirement? How many parties are involved? How many writes per day? What is the maximum acceptable cost per transaction? Which data must stay private?\n\nAt handover you get technical documentation, monitoring and a maintenance plan, so the system stays manageable after release.",
           },
         ],
     useCases: {
@@ -298,11 +298,11 @@ export default function Web3Page() {
     },
     cta: {
       title: isIt
-        ? "Verifica preliminare del caso d'uso"
-        : "Preliminary use-case assessment",
+        ? "Valutiamo insieme il tuo caso."
+        : "Let's look at your use case.",
       subtitle: isIt
-        ? "Call di 20 minuti per valutare requisiti, vincoli normativi, costi operativi e fattibilità."
-        : "20-minute call to review requirements, compliance constraints, operational costs, and feasibility.",
+        ? "In 20 minuti capiamo se la blockchain risolve davvero il tuo problema, o se esiste una strada più semplice."
+        : "In 20 minutes we work out whether blockchain really solves your problem, or whether there is a simpler route.",
       buttonText: isIt ? "Prenota una call gratuita" : "Book a free call",
     },
   };

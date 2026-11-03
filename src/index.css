@@ -1,90 +1,125 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/*
+ * Palette derived from the Arras logo (graphite slate + brass) and the
+ * stone / brass product renders used across the site.
+ */
 :root {
   color-scheme: light;
-  --page-bg: #fbf9f4;
-  --page-bg-rgb: 251 249 244;
-  --surface: #f5f3ee;
+  --page-bg: #f6f4ef;
+  --page-bg-rgb: 246 244 239;
+  --surface: #efece5;
   --surface-strong: #ffffff;
-  --surface-muted: #e4e2dd;
-  --border: #c5c6ca;
-  --border-strong: #75777a;
-  --text: #1b1c19;
-  --text-muted: #44474a;
-  --text-soft: #75777a;
-  --button-bg: #0f1113;
-  --button-hover: #242628;
+  --surface-muted: #e6e2d9;
+  --border: #dedad0;
+  --border-strong: #aaa396;
+  --text: #121417;
+  --text-muted: #4a4f57;
+  --text-soft: #7a7f88;
+  --button-bg: #121417;
+  --button-hover: #2b3038;
   --button-text: #ffffff;
-  --shadow: 0 1px 3px rgba(15, 17, 19, 0.08), 0 1px 2px rgba(15, 17, 19, 0.04);
-  --accent-ring: rgba(114, 91, 47, 0.3);
-  --accent: #725b2f;
-  --ambient-one: rgba(225, 194, 142, 0.18);
-  --ambient-two: rgba(188, 203, 181, 0.12);
+  --shadow: 0 1px 2px rgba(18, 20, 23, 0.04), 0 8px 24px -12px rgba(18, 20, 23, 0.12);
+  --shadow-lg: 0 30px 80px -40px rgba(18, 20, 23, 0.35);
+  --accent: #96600f;
+  --accent-bright: #b7791f;
+  --accent-soft: rgba(183, 121, 31, 0.1);
+  --accent-ring: rgba(183, 121, 31, 0.35);
+  --accent-strong: #7a4e0c;
+  --ink: #111317;
+  --ink-2: #191c21;
+  --ink-border: rgba(255, 255, 255, 0.1);
+  --ink-text: #f2efe8;
+  --ink-muted: rgba(242, 239, 232, 0.62);
+  --grid-line: rgba(18, 20, 23, 0.06);
 }
 
 html[data-theme="dark"] {
   color-scheme: dark;
-  --page-bg: #14110f;
-  --page-bg-rgb: 20 17 15;
-  --surface: #1b1714;
-  --surface-strong: #231d19;
-  --surface-muted: #2a221d;
-  --border: #3b3129;
-  --border-strong: #57473a;
-  --text: #f3eadc;
-  --text-muted: #c7baa9;
-  --text-soft: #9f907f;
-  --button-bg: #f0e4d2;
-  --button-hover: #f7ecdc;
-  --button-text: #1a1410;
-  --shadow: 0 26px 80px -44px rgba(0, 0, 0, 0.6);
-  --accent-ring: rgba(240, 228, 210, 0.22);
-  --accent: #e1c28e;
-  --ambient-one: rgba(150, 109, 65, 0.18);
-  --ambient-two: rgba(94, 73, 53, 0.18);
+  --page-bg: #0d0f12;
+  --page-bg-rgb: 13 15 18;
+  --surface: #14171b;
+  --surface-strong: #191c21;
+  --surface-muted: #21252b;
+  --border: #262a31;
+  --border-strong: #3d434c;
+  --text: #eeede9;
+  --text-muted: #a9adb4;
+  --text-soft: #7d828b;
+  --button-bg: #f2efe8;
+  --button-hover: #ffffff;
+  --button-text: #111317;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 30px 80px -40px rgba(0, 0, 0, 0.8);
+  --accent: #dba84f;
+  --accent-bright: #e2b462;
+  --accent-soft: rgba(219, 168, 79, 0.12);
+  --accent-ring: rgba(219, 168, 79, 0.35);
+  --accent-strong: #f0c77d;
+  --ink: #08090b;
+  --ink-2: #111317;
+  --ink-border: rgba(255, 255, 255, 0.08);
+  --ink-text: #f2efe8;
+  --ink-muted: rgba(242, 239, 232, 0.6);
+  --grid-line: rgba(255, 255, 255, 0.045);
 }
 
-html,
-body,
-#root {
-  min-height: 100%;
-}
+/* Element defaults live in the base layer so Tailwind utilities can override them. */
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 100px;
-  overflow-x: hidden;
-  background: var(--page-bg);
-}
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+    overflow-x: hidden;
+    background: var(--page-bg);
+  }
 
-body {
-  margin: 0;
-  overflow-x: hidden;
-  background: var(--page-bg);
-  color: var(--text);
-  font-family: "Work Sans", system-ui, sans-serif;
-  letter-spacing: -0.01em;
-}
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--page-bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    letter-spacing: -0.006em;
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Noto Serif", Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.03em;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  p {
+    text-wrap: pretty;
+  }
 
-* {
-  box-sizing: border-box;
-  -webkit-font-smoothing: antialiased;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+  }
 }
 
 [data-lang-transition] {
@@ -101,8 +136,66 @@ textarea:focus-visible {
 }
 
 ::selection {
-  background: rgba(114, 91, 47, 0.15);
+  background: var(--accent-soft);
   color: var(--text);
+}
+
+/* Highlighted words inside display headings: same face, brass colour. */
+.hl {
+  color: var(--accent);
+}
+
+.hl-ink {
+  color: var(--accent-bright);
+}
+
+/* Small technical label: mono, uppercase, brass tick in front. */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  background: var(--accent-bright);
+}
+
+.eyebrow-on-ink {
+  color: var(--ink-muted);
+}
+
+/* Faint engineering grid, used behind dark sections and the hero. */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.bg-grid-ink {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+.support-select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, var(--text-soft) 50%),
+    linear-gradient(135deg, var(--text-soft) 50%, transparent 50%);
+  background-position: calc(100% - 18px) 50%, calc(100% - 13px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2.25rem;
 }
 
 .seo-fallback {
@@ -112,4 +205,10 @@ textarea:focus-visible {
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

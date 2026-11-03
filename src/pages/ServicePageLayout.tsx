@@ -3,19 +3,12 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Accordion } from "@/components/Accordion";
-import { Button } from "@/components/Button/Button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/Card/Card";
+import { buttonVariants } from "@/components/Button/Button";
 import { Footer } from "@/components/Footer";
 import { usePageSeo, type PageSeoConfig } from "@/hooks/usePageSeo";
 import { StopMotion } from "@/components/Visual/StopMotion";
+import { Eyebrow, Index, PageHero, reveal } from "@/components/Ui";
 import type { ServiceVisualVariant } from "@/components/Visual/ServiceVisual";
-
-const reveal = {
-  initial: { opacity: 0, y: 24 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.55 },
-};
 
 export interface ServiceTheme {
   accent: string;
@@ -90,184 +83,160 @@ export default function ServicePageLayout({
 
   usePageSeo(seoWithFaq);
 
+  const isIt = language === "it";
+
   return (
     <>
-      <section className="mx-auto max-w-7xl px-4 pb-20 pt-14 md:pb-24 md:pt-16">
-        <div className="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
-          <motion.div {...reveal} className="max-w-3xl">
-            <p
-              className="text-xs font-semibold uppercase tracking-[0.28em]"
-              style={{ color: content.theme.accent }}
-            >
-              {content.hero.eyebrow}
-            </p>
-            <h1 className="mt-5 text-[2.4rem] leading-[0.96] sm:text-5xl md:text-7xl">
-              {content.hero.title}
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg leading-8 text-[var(--text-muted)]">
-              {content.hero.subtitle}
-            </p>
+      {/* Hero */}
+      <section className="mx-auto max-w-7xl px-4 pt-14 md:px-6 md:pt-20">
+        <PageHero
+          eyebrow={
+            <Link to="/#servizi" className="transition-colors hover:text-[var(--text)]">
+              {isIt ? "Servizi" : "Services"} / {content.hero.eyebrow}
+            </Link>
+          }
+          title={content.hero.title}
+          description={content.hero.subtitle}
+          actions={
+            <Link to="/#contatto" className={buttonVariants({ size: "lg" })}>
+              {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
+            </Link>
+          }
+        />
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <Link to="/#contatto">
-                <Button>
-                  {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <p className="text-sm text-[var(--text-soft)]">
-                {language === "it"
-                  ? "Call iniziale di 20 minuti, senza impegno."
-                  : "Initial 20-minute call, no commitment."}
-              </p>
-            </div>
-          </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 32 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="relative mt-16 md:mt-20"
+        >
+          <div className="relative aspect-[4/3] overflow-hidden border border-[var(--border)] bg-[var(--surface)] shadow-[var(--shadow-lg)] sm:aspect-[16/9] lg:aspect-[21/8]">
+            <StopMotion
+              frames={content.hero.animationFrames?.length ? content.hero.animationFrames : [content.hero.image]}
+              alt={content.hero.title}
+              className="h-full w-full"
+              float={false}
+            />
+          </div>
+        </motion.div>
 
-          <motion.aside
-            {...reveal}
-            className="overflow-hidden border border-[var(--border)] shadow-[var(--shadow)]"
-          >
-            <div className="relative h-[300px] overflow-hidden md:h-[380px]">
-              <StopMotion
-                frames={content.hero.animationFrames?.length ? content.hero.animationFrames : [content.hero.image]}
-                alt={content.hero.title}
-                className="h-full w-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--page-bg)] via-transparent to-transparent opacity-60" />
-            </div>
-            <div className="grid gap-4 bg-[var(--surface)] p-5 sm:grid-cols-2 md:p-6">
-              <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-                  {language === "it" ? "Ambito" : "Scope"}
+        {/* Process strip */}
+        <motion.div {...reveal} className="mt-14 border-t border-[var(--border)]">
+          <div className="flex items-center justify-between py-5">
+            <Eyebrow>{content.process.title}</Eyebrow>
+          </div>
+          <div className="grid gap-px border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-4">
+            {content.process.steps.map((step) => (
+              <div key={step.number} className="bg-[var(--page-bg)] p-6">
+                <div className="font-mono text-[11px] tracking-[0.12em] text-[var(--accent)]">
+                  {step.number}
                 </div>
-                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-                  {content.sections[0]?.heading}
-                </p>
-              </div>
-              <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-                <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-                  {language === "it" ? "Use case" : "Use cases"}
+                <div className="mt-6 font-display text-xl font-semibold tracking-[-0.03em]">
+                  {step.title}
                 </div>
-                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-                  {content.useCases.items.length}{" "}
-                  {language === "it" ? "situazioni tipiche coperte" : "typical scenarios covered"}
-                </p>
-              </div>
-            </div>
-          </motion.aside>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
-        <div className="grid gap-10 lg:grid-cols-[0.34fr_0.66fr]">
-          <motion.aside {...reveal}>
-            <Card className="sticky top-28 bg-[var(--surface-strong)]">
-              <CardHeader>
-                <CardTitle className="text-3xl">
-                  {content.process.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {content.process.steps.map((step) => (
-                    <div key={step.number} className="border-t border-[var(--border)] pt-4 first:border-t-0 first:pt-0">
-                      <div className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-                        {step.number}
-                      </div>
-                      <div className="mt-2 text-lg font-semibold text-[var(--text)]">
-                        {step.title}
-                      </div>
-                      <p className="mt-2 text-sm leading-7 text-[var(--text-muted)]">
-                        {step.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.aside>
-
-          <article className="space-y-12">
-            {content.sections.map((section) => (
-              <motion.div key={section.heading} {...reveal}>
-                <h2 className="text-3xl md:text-4xl">{section.heading}</h2>
-                <div className="mt-5 space-y-4">
-                  {section.body.split("\n\n").map((paragraph) => (
-                    <p
-                      key={paragraph}
-                      className="max-w-3xl text-base leading-8 text-[var(--text-muted)]"
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </article>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
-        <motion.div {...reveal}>
-          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-            {content.useCases.title}
-          </p>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {content.useCases.items.map((item) => (
-              <div
-                key={item.title}
-                className="border border-[var(--border)] bg-[var(--surface)] px-5 py-5 shadow-[var(--shadow)]"
-              >
-                <h3 className="text-2xl">{item.title}</h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
-                  {item.description}
-                </p>
+                <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">{step.desc}</p>
               </div>
             ))}
           </div>
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-20 md:pb-24">
-        <motion.div {...reveal} className="grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-              FAQ
-            </p>
-            <h2 className="mt-4 text-4xl md:text-5xl">{content.faq.title}</h2>
-            <p className="mt-4 max-w-xl text-base leading-8 text-[var(--text-muted)]">
+      {/* Long-form sections */}
+      <section className="mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-32">
+        <div className="space-y-20 md:space-y-24">
+          {content.sections.map((section, index) => (
+            <motion.article
+              key={section.heading}
+              {...reveal}
+              className="grid gap-6 border-t border-[var(--border)] pt-10 lg:grid-cols-[0.42fr_0.58fr] lg:gap-16"
+            >
+              <div>
+                <Index n={index + 1} />
+                <h2 className="mt-6 text-[1.9rem] leading-[1.08] md:text-[2.4rem]">
+                  {section.heading}
+                </h2>
+              </div>
+              <div className="space-y-5">
+                {section.body.split("\n\n").map((paragraph, pIndex) => (
+                  <p
+                    key={paragraph}
+                    className={
+                      pIndex === 0
+                        ? "text-lg leading-8 text-[var(--text)]"
+                        : "text-[15px] leading-7 text-[var(--text-muted)]"
+                    }
+                  >
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      {/* Use cases */}
+      <section className="border-y border-[var(--border)] bg-[var(--surface)]">
+        <div className="mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-28">
+          <motion.div {...reveal}>
+            <Eyebrow>{content.useCases.title}</Eyebrow>
+            <h2 className="mt-5 max-w-2xl text-[2.25rem] leading-[1.02] md:text-[3.2rem]">
+              {isIt ? (
+                <>
+                  Settori in cui <span className="hl">lo applichiamo.</span>
+                </>
+              ) : (
+                <>
+                  Where we <span className="hl">apply it.</span>
+                </>
+              )}
+            </h2>
+          </motion.div>
+          <div className="mt-14 grid gap-px border border-[var(--border)] bg-[var(--border)] md:grid-cols-2 xl:grid-cols-3">
+            {content.useCases.items.map((item, index) => (
+              <motion.div
+                key={item.title}
+                {...reveal}
+                transition={{ ...reveal.transition, delay: (index % 3) * 0.06 }}
+                className="group bg-[var(--surface-strong)] p-7 transition-colors duration-300 hover:bg-[var(--page-bg)] md:p-8"
+              >
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-[11px] tracking-[0.12em] text-[var(--text-soft)]">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <span className="h-1.5 w-1.5 rotate-45 bg-[var(--border-strong)] transition-colors duration-300 group-hover:bg-[var(--accent-bright)]" />
+                </div>
+                <h3 className="mt-10 text-[1.4rem] leading-tight">{item.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-[var(--text-muted)]">
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-32">
+        <motion.div {...reveal} className="grid gap-12 lg:grid-cols-[0.75fr_1.25fr] lg:gap-20">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <Eyebrow>FAQ</Eyebrow>
+            <h2 className="mt-5 text-[2.25rem] leading-[1.02] md:text-[3rem]">{content.faq.title}</h2>
+            <p className="mt-5 max-w-sm text-[15px] leading-7 text-[var(--text-muted)]">
               {content.faq.subtitle}
             </p>
           </div>
-          <Accordion items={content.faq.items} accentColor={content.theme.accent} />
+          <Accordion items={content.faq.items} />
         </motion.div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-24">
-        <motion.div {...reveal}>
-          <Card className="bg-[var(--surface-strong)]">
-            <div className="grid gap-6 p-6 md:grid-cols-[0.9fr_1.1fr] md:gap-10 md:p-10">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-                  {language === "it" ? "Prossimo passo" : "Next step"}
-                </p>
-                <h2 className="mt-4 text-[2rem] sm:text-4xl md:text-5xl">{content.cta.title}</h2>
-              </div>
-              <div className="flex flex-col gap-5">
-                <p className="text-base leading-8 text-[var(--text-muted)]">
-                  {content.cta.subtitle}
-                </p>
-                <Link to="/#contatto" className="w-full sm:w-auto">
-                  <Button className="w-full sm:w-auto">
-                    {content.cta.buttonText} <ArrowRight className="h-4 w-4" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </Card>
-        </motion.div>
-      </section>
-
-      <Footer />
+      <Footer
+        cta={{
+          title: content.cta.title,
+          subtitle: content.cta.subtitle,
+          buttonText: content.cta.buttonText,
+        }}
+      />
     </>
   );
 }

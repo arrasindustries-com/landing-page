@@ -1,8 +1,7 @@
 import type { useLanguage } from "@/contexts/LanguageContext";
 import { scrollToId } from "@/lib/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation, Link, NavLink } from "react-router-dom";
-import { FlagGB, FlagIT } from "../Flag";
 import { Button } from "../Button/Button";
 import { ArrowRight, Menu, Moon, Sun, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -21,9 +20,17 @@ export function StickyHeader({
   toggleTheme: () => void;
 }) {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const isHome = location.pathname === "/";
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleContactClick = (fromMobile = false) => {
     if (fromMobile) {
@@ -58,24 +65,28 @@ export function StickyHeader({
     language === "it" ? "Passa al tema scuro" : "Switch to dark theme";
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     [
-      "relative text-[13px] uppercase tracking-[0.12em] transition-colors duration-200",
+      "relative px-3 py-2 text-[14px] font-medium tracking-[-0.01em] transition-colors duration-200",
       isActive
-        ? "text-[var(--text)] border-b border-[var(--accent)]"
+        ? "text-[var(--text)] after:absolute after:inset-x-3 after:-bottom-[1px] after:h-px after:bg-[var(--accent-bright)]"
         : "text-[var(--text-muted)] hover:text-[var(--text)]",
     ].join(" ");
 
+  const iconBtn =
+    "inline-flex h-9 items-center justify-center gap-1.5 border border-[var(--border)] px-2.5 text-[var(--text-muted)] transition-colors duration-200 hover:border-[var(--border-strong)] hover:text-[var(--text)]";
+
+  const solid = scrolled || mobileOpen;
+
   return (
     <header
-      className="fixed left-0 right-0 top-0 z-50 border-b border-[var(--border)] backdrop-blur-xl"
-      style={{
-        backgroundColor:
-          theme === "dark"
-            ? "rgba(20, 17, 15, 0.88)"
-            : "rgba(251, 249, 244, 0.88)",
-      }}
+      className={[
+        "fixed left-0 right-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-300",
+        solid
+          ? "border-[var(--border)] bg-[rgb(var(--page-bg-rgb)/0.82)] backdrop-blur-xl"
+          : "border-transparent bg-transparent",
+      ].join(" ")}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4">
-        <Link to="/" className="flex items-center">
+      <div className="mx-auto flex h-[76px] max-w-7xl items-center justify-between gap-4 px-4 md:px-6">
+        <Link to="/" className="flex items-center" aria-label="Arras Industries — home">
           <img
             src={
               theme === "dark"
@@ -83,11 +94,11 @@ export function StickyHeader({
                 : "/images/arras_loghi/arras-logo-light.svg"
             }
             alt="Arras Industries"
-            className="h-10 w-auto origin-left scale-150 sm:h-14 sm:scale-100"
+            className="h-11 w-auto sm:h-12"
           />
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
             <NavLink key={link.to} className={navLinkClass} to={link.to}>
               {link.label}
@@ -98,57 +109,45 @@ export function StickyHeader({
         <div className="flex items-center gap-2">
           <button
             onClick={toggleTheme}
-            className="group relative flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm font-medium text-[var(--text-muted)] transition-all duration-300 hover:border-[var(--border-strong)] hover:text-[var(--text)]"
+            className={`${iconBtn} w-9 px-0`}
             title={theme === "dark" ? toLightThemeLabel : toDarkThemeLabel}
             aria-label={theme === "dark" ? toLightThemeLabel : toDarkThemeLabel}
           >
             {theme === "dark" ? (
-              <Sun className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
+              <Sun className="h-4 w-4" />
             ) : (
-              <Moon className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-12" />
+              <Moon className="h-4 w-4" />
             )}
           </button>
 
           <button
             onClick={toggleLanguage}
-            className="group relative flex items-center gap-1.5 rounded-full border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-sm font-medium text-[var(--text-muted)] transition-all duration-300 hover:border-[var(--border-strong)] hover:text-[var(--text)]"
-            title={
-              language === "it" ? "Switch to English" : "Passa all'italiano"
-            }
+            className={`${iconBtn} font-mono text-[11px] tracking-[0.08em]`}
+            title={language === "it" ? "Switch to English" : "Passa all'italiano"}
             aria-label={
               language === "it" ? "Switch to English" : "Passa all'italiano"
             }
           >
-            <span className="inline-block h-4 w-5 overflow-hidden rounded-[2px] transition-transform duration-300 group-hover:scale-110">
-              {language === "it" ? (
-                <FlagIT className="theme-keep-original h-full w-full" />
-              ) : (
-                <FlagGB className="theme-keep-original h-full w-full" />
-              )}
-            </span>
-            <span className="text-xs font-semibold tracking-wide">
-              {language === "it" ? "IT" : "EN"}
-            </span>
+            <span className={language === "it" ? "text-[var(--text)]" : ""}>IT</span>
+            <span className="text-[var(--border-strong)]">/</span>
+            <span className={language === "en" ? "text-[var(--text)]" : ""}>EN</span>
           </button>
 
-          <div className="hidden sm:block h-5 w-px bg-[var(--border)] mx-1" />
           <Button
             onClick={() => handleContactClick()}
-            className="hidden sm:inline-flex"
+            size="sm"
+            className="ml-1 hidden sm:inline-flex"
           >
             {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
           </Button>
 
           <button
             onClick={() => setMobileOpen((v) => !v)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--surface)] text-[var(--text-muted)] md:hidden"
+            className={`${iconBtn} w-9 px-0 lg:hidden`}
             aria-label="Menu"
+            aria-expanded={mobileOpen}
           >
-            {mobileOpen ? (
-              <X className="h-5 w-5" />
-            ) : (
-              <Menu className="h-5 w-5" />
-            )}
+            {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
       </div>
@@ -160,29 +159,35 @@ export function StickyHeader({
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-[var(--border)] md:hidden"
+            className="overflow-hidden border-t border-[var(--border)] lg:hidden"
           >
-            <div className="mx-auto flex max-w-7xl flex-col gap-1 px-4 py-4">
-              {navLinks.map((link) => (
+            <div className="mx-auto flex max-w-7xl flex-col px-4 py-4 md:px-6">
+              {navLinks.map((link, i) => (
                 <NavLink
                   key={link.to}
                   to={link.to}
                   onClick={() => setMobileOpen(false)}
-                  className="px-4 py-3 text-sm uppercase tracking-[0.1em] text-[var(--text-muted)] transition-colors hover:bg-[var(--surface)] hover:text-[var(--text)]"
+                  className={({ isActive }) =>
+                    [
+                      "flex items-baseline gap-4 border-b border-[var(--border)] py-4 font-display text-2xl tracking-[-0.03em] transition-colors",
+                      isActive ? "text-[var(--text)]" : "text-[var(--text-muted)] hover:text-[var(--text)]",
+                    ].join(" ")
+                  }
                 >
+                  <span className="font-mono text-[11px] tracking-normal text-[var(--text-soft)]">
+                    0{i + 1}
+                  </span>
                   {link.label}
                 </NavLink>
               ))}
-              <div className="mt-2 flex gap-2">
-                <Button
-                  onClick={() => {
-                    handleContactClick(true);
-                  }}
-                  className="flex-1"
-                >
-                  {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
-                </Button>
-              </div>
+              <Button
+                onClick={() => {
+                  handleContactClick(true);
+                }}
+                className="mt-5 w-full"
+              >
+                {t.nav.letsTalk} <ArrowRight className="h-4 w-4" />
+              </Button>
             </div>
           </motion.nav>
         )}

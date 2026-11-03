@@ -1,5 +1,3 @@
-import { useTheme } from "@/contexts/useTheme";
-
 export function InputLike({
   label,
   placeholder,
@@ -13,31 +11,28 @@ export function InputLike({
   onChange: (value: string) => void;
   tall?: boolean;
 }) {
-  const { theme } = useTheme();
-  const labelClass =
-    theme === "dark" ? "text-[var(--text-soft)]" : "text-[var(--text-soft)]";
   const fieldClass =
-    theme === "dark"
-      ? "border border-[var(--border)] bg-[var(--surface-strong)] text-[var(--text)] placeholder:text-[var(--text-soft)]"
-      : "border border-[var(--border)] bg-[var(--surface-strong)] text-[var(--text)] placeholder:text-[var(--text-soft)]";
+    "w-full border border-[var(--border)] bg-[var(--page-bg)] px-4 text-[15px] text-[var(--text)] outline-none transition placeholder:text-[var(--text-soft)] hover:border-[var(--border-strong)] focus:border-[var(--accent-bright)] focus:bg-[var(--surface-strong)] focus:ring-4 focus:ring-[var(--accent-soft)]";
 
   return (
     <label className="block">
-      <div className={`mb-1 text-xs font-medium uppercase tracking-[0.12em] ${labelClass}`}>{label}</div>
+      <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-soft)]">
+        {label}
+      </div>
 
       {tall ? (
         <textarea
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-28 w-full resize-none px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
+          className={`h-32 resize-none py-3 leading-6 ${fieldClass}`}
         />
       ) : (
         <input
           placeholder={placeholder}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-12 w-full px-4 py-3 text-sm outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)] ${fieldClass}`}
+          className={`h-12 py-3 ${fieldClass}`}
         />
       )}
     </label>

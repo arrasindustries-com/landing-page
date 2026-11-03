@@ -4,6 +4,7 @@ import { CircleDollarSign, Info, X } from "lucide-react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { Button } from "@/components/Button/Button";
+import { Eyebrow } from "@/components/Ui";
 
 type Eip1193Provider = {
   request: (args: { method: string; params?: unknown[] }) => Promise<unknown>;
@@ -27,7 +28,7 @@ function SelectField({
 }) {
   return (
     <label className="block">
-      <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)]">
+      <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-soft)]">
         {label}
       </div>
       <select
@@ -295,47 +296,45 @@ export function SupportSection() {
   };
 
   return (
-    <section id="supporto" className="mx-auto max-w-7xl px-4 pb-20 pt-20 md:px-6 md:pb-24">
+    <section id="supporto" className="mx-auto max-w-7xl px-4 py-24 md:px-6 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.55 }}
-        className="grid gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:items-center"
+        className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-20"
       >
         <div className="lg:pr-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-[var(--accent)]">
-            {language === "it" ? "Supporto" : "Support"}
-          </p>
-          <h2 className="mt-5 max-w-xl text-4xl leading-tight md:text-6xl">
+          <Eyebrow>{language === "it" ? "Ricerca e open source" : "Research & open source"}</Eyebrow>
+          <h2 className="mt-5 max-w-xl text-[2rem] leading-[1.05] md:text-[2.75rem]">
             {t.support.title}
           </h2>
-          <p className="mt-5 max-w-xl text-base leading-8 text-[var(--text-muted)]">
+          <p className="mt-5 max-w-md text-[15px] leading-7 text-[var(--text-muted)]">
             {t.support.subtitle}
           </p>
 
-          <div className="mt-8 space-y-3">
-            <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-                {language === "it" ? "Utilizzo" : "Use of funds"}
+          <div className="mt-8 border-t border-[var(--border)]">
+            <div className="border-b border-[var(--border)] py-5">
+              <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-soft)]">
+                {language === "it" ? "Dove vanno i fondi" : "Where funds go"}
               </div>
-              <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
                 {language === "it"
-                  ? "Il supporto contribuisce a prototipi, test tecnici, integrazioni sperimentali e sviluppo di strumenti che poi possono diventare parte del nostro lavoro applicato."
-                  : "Support helps fund prototypes, technical testing, experimental integrations, and tool development that can later become part of our applied work."}
+                  ? "Prototipi, test e strumenti open source. Molto di quello che sperimentiamo finisce poi nei progetti per i clienti."
+                  : "Prototypes, testing and open-source tools. Much of what we experiment with ends up in client projects."}
               </p>
             </div>
-            <div className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4">
-              <div className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
+            <div className="border-b border-[var(--border)] py-5">
+              <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-soft)]">
                 {t.support.transparency}
               </div>
-              <p className="mt-3 text-sm leading-7 text-[var(--text-muted)]">
+              <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">
                 {t.support.transparencyDesc}
               </p>
               <button
                 type="button"
                 onClick={() => setShowTransparencyCard(true)}
-                className="mt-4 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--text)] transition-colors hover:text-[var(--accent-strong)]"
+                className="mt-3 inline-flex items-center gap-2 text-sm font-medium text-[var(--text)] underline decoration-[var(--border-strong)] underline-offset-4 transition-colors hover:decoration-[var(--accent-bright)]"
               >
                 <Info className="h-4 w-4" />
                 {language === "it" ? "Vedi indirizzi" : "View addresses"}
@@ -344,7 +343,7 @@ export function SupportSection() {
           </div>
         </div>
 
-        <div className="border border-[var(--border)] bg-[var(--surface-strong)] p-5 shadow-[var(--shadow)] md:p-6">
+        <div className="border border-[var(--border)] bg-[var(--surface-strong)] p-5 shadow-[var(--shadow)] md:p-8">
           <div className="grid gap-3 sm:grid-cols-2">
             <button
               type="button"
@@ -356,8 +355,8 @@ export function SupportSection() {
               className={[
                 "flex items-center gap-3 border px-4 py-3 text-left transition-colors",
                 donationMethod === "paypal"
-                  ? "border-[var(--border-strong)] bg-[var(--surface)]"
-                  : "border-[var(--border)] bg-transparent hover:bg-[var(--surface)]",
+                  ? "border-[var(--accent-bright)] bg-[var(--accent-soft)]"
+                  : "border-[var(--border)] bg-transparent hover:border-[var(--border-strong)]",
               ].join(" ")}
             >
               <img
@@ -366,7 +365,7 @@ export function SupportSection() {
                 className="h-5 w-auto shrink-0 object-contain"
               />
               <div className="min-w-0">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--text)]">
+                <div className="text-sm font-medium text-[var(--text)]">
                   PayPal
                 </div>
                 <div className="mt-1 text-xs text-[var(--text-soft)]">
@@ -385,8 +384,8 @@ export function SupportSection() {
               className={[
                 "flex items-center gap-3 border px-4 py-3 text-left transition-colors",
                 donationMethod === "metamask"
-                  ? "border-[var(--border-strong)] bg-[var(--surface)]"
-                  : "border-[var(--border)] bg-transparent hover:bg-[var(--surface)]",
+                  ? "border-[var(--accent-bright)] bg-[var(--accent-soft)]"
+                  : "border-[var(--border)] bg-transparent hover:border-[var(--border-strong)]",
               ].join(" ")}
             >
               <img
@@ -395,7 +394,7 @@ export function SupportSection() {
                 className="h-5 w-auto shrink-0 object-contain"
               />
               <div className="min-w-0">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--text)]">
+                <div className="text-sm font-medium text-[var(--text)]">
                   MetaMask
                 </div>
                 <div className="mt-1 text-xs text-[var(--text-soft)]">
@@ -417,20 +416,20 @@ export function SupportSection() {
               >
                 <div className="grid gap-4 sm:grid-cols-[1fr_auto] sm:items-end">
                   <label className="block">
-                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)]">
+                    <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-soft)]">
                       {t.support.amount}
                     </div>
                     <input
                       value={amount}
                       onChange={(event) => setAmount(event.target.value)}
                       placeholder="10.00"
-                      className="h-11 w-full border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
+                      className="h-11 w-full border border-[var(--border)] bg-[var(--page-bg)] px-3 text-[15px] text-[var(--text)] outline-none transition focus:border-[var(--accent-bright)] focus:ring-4 focus:ring-[var(--accent-soft)]"
                     />
                   </label>
                   <button
                     type="button"
                     onClick={handlePayPal}
-                    className="inline-flex h-11 items-center justify-center gap-2 border border-[var(--button-bg)] bg-[var(--button-bg)] px-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--button-text)] transition hover:bg-[var(--button-hover)]"
+                    className="inline-flex h-11 items-center justify-center gap-2 bg-[var(--button-bg)] px-5 text-[15px] font-medium text-[var(--button-text)] transition hover:bg-[var(--button-hover)]"
                   >
                     <CircleDollarSign className="h-4 w-4" />
                     {t.support.sendPayPal}
@@ -458,14 +457,14 @@ export function SupportSection() {
               >
                 <div className="grid gap-4 md:grid-cols-3">
                   <label className="block">
-                    <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--text-soft)]">
+                    <div className="mb-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-soft)]">
                       {t.support.amount}
                     </div>
                     <input
                       value={amount}
                       onChange={(event) => setAmount(event.target.value)}
                       placeholder="0.05"
-                      className="h-11 w-full border border-[var(--border)] bg-[var(--surface)] px-3 text-sm text-[var(--text)] outline-none transition focus:border-[var(--border-strong)] focus:ring-2 focus:ring-[var(--accent-ring)]"
+                      className="h-11 w-full border border-[var(--border)] bg-[var(--page-bg)] px-3 text-[15px] text-[var(--text)] outline-none transition focus:border-[var(--accent-bright)] focus:ring-4 focus:ring-[var(--accent-soft)]"
                     />
                   </label>
 
@@ -506,7 +505,7 @@ export function SupportSection() {
             )}
           </AnimatePresence>
 
-          <div className="mt-5 border-t border-[var(--border)] pt-4 text-[11px] font-medium uppercase tracking-[0.12em] text-[var(--text-soft)]">
+          <div className="mt-6 border-t border-[var(--border)] pt-4 font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--text-soft)]">
             {language === "it"
               ? "Supporto trasparente e verificabile"
               : "Transparent and verifiable support"}
@@ -541,7 +540,7 @@ export function SupportSection() {
                   <X className="h-4 w-4" />
                 </button>
 
-                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">
+                <p className="eyebrow">
                   {t.support.transparency}
                 </p>
                 <h3 className="mt-4 text-3xl text-[var(--text)]">
@@ -557,7 +556,7 @@ export function SupportSection() {
                       key={`${entry.label}-${entry.address}`}
                       className="border border-[var(--border)] bg-[var(--surface-strong)] px-4 py-4"
                     >
-                      <div className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--accent)]">
+                      <div className="font-mono text-[11px] uppercase tracking-[0.12em] text-[var(--accent)]">
                         {entry.label}
                       </div>
                       <div className="mt-2 break-all font-mono text-[13px] leading-6 text-[var(--text)]">

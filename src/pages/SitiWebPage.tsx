@@ -73,11 +73,11 @@ export default function SitiWebPage() {
       icon: <MessageSquare className="h-4 w-4" />,
       eyebrow: isIt ? "Siti web" : "Websites",
       title: isIt
-        ? "Siti web che portano contatti, non solo visite"
-        : "Websites that bring contacts, not just visits",
+        ? "Un sito che porta richieste, non solo visite."
+        : "A website that brings enquiries, not just visits.",
       subtitle: isIt
-        ? "Progettiamo siti orientati a obiettivi operativi: richieste contatto, prenotazioni, lead qualificati e tracciamento dei risultati."
-        : "We build websites with operational goals: contact requests, bookings, qualified leads, and measurable tracking.",
+        ? "Siti veloci, curati e facili da trovare su Google. Pensati per far capire subito cosa fate e far contattare chi è interessato."
+        : "Fast, well-crafted websites that are easy to find on Google. Built to explain what you do at a glance and get the right people to reach out.",
       image: websitesFrames[0],
       animationFrames: websitesFrames,
       visual: "web",
@@ -85,30 +85,30 @@ export default function SitiWebPage() {
     sections: isIt
       ? [
           {
-            heading: "Obiettivo del sito",
-            body: "Un sito aziendale efficace deve rispondere a una funzione chiara: generare richiesta, supportare vendita, ridurre tempi di contatto o qualificare lead.\n\nPer questo la struttura non parte dal layout ma dal percorso utente: ingresso, pagina servizio, prova sociale, conversione. Ogni sezione viene progettata in base al passaggio successivo.\n\nPrima dello sviluppo definiamo target, intent di ricerca e contenuti necessari. Questo evita pagine piene ma poco utili per utenti e motori di ricerca.",
+            heading: "A cosa serve il sito",
+            body: "Un sito aziendale deve fare un lavoro preciso: portare richieste di preventivo, prenotazioni o contatti qualificati. Se non sappiamo qual è, nessuna grafica lo salverà.\n\nPer questo partiamo dal percorso di chi visita: da dove arriva, cosa cerca, cosa lo convince a scriverti. Ogni pagina accompagna al passo successivo.\n\nPrima di sviluppare definiamo a chi vi rivolgete, cosa cercano su Google e quali contenuti servono davvero. Meno pagine, ma utili.",
           },
           {
-            heading: "Cosa viene consegnato",
-            body: "Consegniamo pagine responsive per mobile e desktop, struttura tecnica SEO di base, meta tag, sitemap e monitoraggio analytics.\n\nSono inclusi moduli contatto, CTA coerenti con il funnel e pagine di servizio ottimizzate per keyword specifiche. Se richiesto, includiamo landing page dedicate per campagne.\n\nLe prestazioni vengono verificate su tempi di caricamento e metriche core prima del rilascio.",
+            heading: "Cosa ricevi",
+            body: "Un sito veloce e curato su telefono e computer, con la struttura tecnica che serve a Google: meta tag, sitemap, dati strutturati e pagine servizio pensate per le ricerche giuste.\n\nModuli di contatto, analytics e tracciamento delle conversioni sono configurati dal primo giorno. Se fate campagne, aggiungiamo landing page dedicate.\n\nPrima della pubblicazione verifichiamo tempi di caricamento e Core Web Vitals.",
           },
           {
-            heading: "Come misuriamo il risultato",
-            body: "Le metriche principali sono traffico organico utile, tasso di conversione, volume di richieste e qualità dei lead.\n\nIl confronto viene fatto tra situazione pre-rilascio e post-rilascio, con finestre temporali comparabili. In questo modo la valutazione non è basata su impressioni ma su dati tracciati.",
+            heading: "Come capiamo se funziona",
+            body: "Guardiamo pochi numeri: visite da Google sulle ricerche che contano, richieste ricevute e qualità dei contatti.\n\nConfrontiamo il prima e il dopo su periodi simili. Così si capisce cosa ha funzionato e dove intervenire.",
           },
         ]
       : [
           {
-            heading: "Website objective",
-            body: "A business website needs a defined function: generate inquiries, support sales, reduce contact time, or qualify leads.\n\nStructure should follow user flow rather than visual preference: entry page, service detail, proof elements, conversion step. Each section is designed around the next action.\n\nBefore development we define audience, search intent, and required content. This avoids pages that are long but not useful for users or search engines.",
+            heading: "What the website is for",
+            body: "A business website has a specific job: bring in quote requests, bookings or qualified enquiries. If we do not know which one, no design will save it.\n\nThat is why we start from the visitor's path: where they come from, what they are looking for, what convinces them to get in touch. Every page leads to the next step.\n\nBefore building we define who you are talking to, what they search for on Google and which content is really needed. Fewer pages, but useful ones.",
           },
           {
-            heading: "What is delivered",
-            body: "Delivery includes responsive pages, baseline technical SEO structure, metadata, sitemap, and analytics tracking.\n\nIt includes contact forms, CTA alignment with funnel stages, and service pages optimized for specific keyword clusters. Campaign landing pages can be added when needed.\n\nPerformance is checked against loading speed and core metrics before release.",
+            heading: "What you get",
+            body: "A fast, well-crafted site on phone and desktop, with the technical structure Google needs: metadata, sitemap, structured data and service pages built around the right searches.\n\nContact forms, analytics and conversion tracking are set up from day one. If you run campaigns, we add dedicated landing pages.\n\nBefore launch we check loading times and Core Web Vitals.",
           },
           {
-            heading: "How outcomes are measured",
-            body: "Primary metrics are qualified organic traffic, conversion rate, inquiry volume, and lead quality.\n\nComparison is done between pre-launch and post-launch periods with similar windows. This keeps evaluation data-driven rather than subjective.",
+            heading: "How we know it works",
+            body: "We watch a few numbers: Google traffic on the searches that matter, enquiries received and lead quality.\n\nWe compare before and after over similar periods, so it is clear what worked and where to improve.",
           },
         ],
     useCases: {
@@ -230,8 +230,8 @@ export default function SitiWebPage() {
     faq: {
       title: isIt ? "Domande frequenti sui siti web" : "Website FAQ",
       subtitle: isIt
-        ? "Le risposte alle domande più comuni."
-        : "Answers to the most common questions.",
+        ? "Quello che ci chiedono più spesso prima di iniziare."
+        : "What people ask us most before getting started.",
       items: isIt
         ? [
             {
@@ -289,10 +289,10 @@ export default function SitiWebPage() {
           ],
     },
     cta: {
-      title: isIt ? "Definiamo il piano del sito" : "Define your website plan",
+      title: isIt ? "Progettiamo il tuo sito." : "Let's plan your website.",
       subtitle: isIt
-        ? "Call breve per allineare obiettivi, struttura pagine, contenuti prioritari e tempi di rilascio."
-        : "Short call to align goals, page structure, priority content, and release timing.",
+        ? "Una call breve per capire a chi vi rivolgete, cosa deve fare il sito e in che tempi."
+        : "A short call to understand who you are talking to, what the site needs to do and by when.",
       buttonText: isIt ? "Prenota una call gratuita" : "Book a free call",
     },
   };
