@@ -281,16 +281,18 @@ export const publications: Publication[] = [
       "Blockchain or Not? An Auditable Decision Framework for Organisations",
     authors: [
       "Silvio Meneguzzo",
-      "Alfredo Favenza",
-      "Stefan Leto",
+      "Stefano Leto",
+      "Noemi Romani",
       "Valentina Gatteschi",
+      "Alfredo Favenza",
       "Claudio Schifanella",
     ],
-    venue: "SSRN",
-    year: 2025,
-    type: "preprint",
-    url: "https://dx.doi.org/10.2139/ssrn.5668520",
-    doi: "10.2139/ssrn.5668520",
+    venue:
+      "Proceedings of the 2026 International Conference on Information Technology for Social Good (GoodIT '26)",
+    year: 2026,
+    type: "conference",
+    url: "https://doi.org/10.1145/3794786.3830760",
+    doi: "10.1145/3794786.3830760",
   },
   {
     title:

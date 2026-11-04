@@ -455,18 +455,18 @@ export default function HomePage() {
               title={
                 isItalian ? (
                   <>
-                    Si parte piccoli, <span className="hl-ink">si rilascia presto.</span>
+                    Come lavoriamo, <span className="hl-ink">passo per passo.</span>
                   </>
                 ) : (
                   <>
-                    Start small, <span className="hl-ink">ship early.</span>
+                    How we work, <span className="hl-ink">step by step.</span>
                   </>
                 )
               }
               aside={
                 isItalian
-                  ? "Niente progetti da un anno con consegna finale a sorpresa. Il team usa il software dopo poche settimane, e lo miglioriamo insieme."
-                  : "No year-long projects with a surprise at the end. Your team uses the software within weeks, and we improve it together."
+                  ? "Ogni fase si chiude con qualcosa che potete vedere e provare. Passiamo alla successiva quando siete d'accordo."
+                  : "Each phase ends with something you can see and try. We move on to the next one when you are happy with it."
               }
             />
           </motion.div>
@@ -479,12 +479,19 @@ export default function HomePage() {
                 transition={{ ...reveal.transition, delay: index * 0.08 }}
                 className="flex flex-col bg-[var(--ink)] p-7 md:p-8"
               >
-                <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em]">
-                  <span className="text-[var(--accent-bright)]">{step.number}</span>
-                  <span className="text-[var(--ink-muted)]">{step.duration}</span>
-                </div>
-                <h3 className="mt-12 text-2xl text-[var(--ink-text)]">{step.title}</h3>
+                <span className="font-mono text-[11px] tracking-[0.14em] text-[var(--accent-bright)]">
+                  {step.number}
+                </span>
+                <h3 className="mt-10 text-2xl text-[var(--ink-text)]">{step.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-[var(--ink-muted)]">{step.desc}</p>
+                <div className="mt-auto pt-8">
+                  <div className="border-t border-[var(--ink-border)] pt-4">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--ink-muted)]">
+                      {isItalian ? "Cosa ricevete" : "What you get"}
+                    </div>
+                    <div className="mt-1.5 text-sm text-[var(--ink-text)]">{step.deliverable}</div>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
