@@ -35,7 +35,7 @@ export interface ServicePageContent {
   };
   process: {
     title: string;
-    steps: Array<{ number: string; title: string; desc: string }>;
+    steps: Array<{ number: string; title: string; desc: string; deliverable: string }>;
   };
   faq: {
     title: string;
@@ -127,14 +127,22 @@ export default function ServicePageLayout({
           </div>
           <div className="grid gap-px border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-4">
             {content.process.steps.map((step) => (
-              <div key={step.number} className="bg-[var(--page-bg)] p-6">
+              <div key={step.number} className="flex flex-col bg-[var(--page-bg)] p-6 md:p-7">
                 <div className="font-mono text-[11px] tracking-[0.12em] text-[var(--accent)]">
                   {step.number}
                 </div>
-                <div className="mt-6 font-display text-xl font-semibold tracking-[var(--tk-display)]">
+                <div className="mt-8 font-display text-xl font-semibold tracking-[var(--tk-display)]">
                   {step.title}
                 </div>
                 <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">{step.desc}</p>
+                <div className="mt-auto pt-7">
+                  <div className="border-t border-[var(--border)] pt-4">
+                    <div className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-soft)]">
+                      {isIt ? "Cosa ricevete" : "What you get"}
+                    </div>
+                    <div className="mt-1.5 text-sm text-[var(--text)]">{step.deliverable}</div>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
