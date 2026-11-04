@@ -30,7 +30,7 @@ export function Accordion({
                 <span className="mt-1 font-mono text-xs text-[var(--text-soft)]">
                   {String(idx + 1).padStart(2, "0")}
                 </span>
-                <span className="font-display text-lg font-medium leading-7 tracking-[-0.02em] md:text-xl">
+                <span className="font-display text-lg font-medium leading-7 tracking-[var(--tk-title)] md:text-xl">
                   {it.title}
                 </span>
               </span>

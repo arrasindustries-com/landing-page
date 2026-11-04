@@ -131,7 +131,7 @@ export default function ServicePageLayout({
                 <div className="font-mono text-[11px] tracking-[0.12em] text-[var(--accent)]">
                   {step.number}
                 </div>
-                <div className="mt-6 font-display text-xl font-semibold tracking-[-0.03em]">
+                <div className="mt-6 font-display text-xl font-semibold tracking-[var(--tk-display)]">
                   {step.title}
                 </div>
                 <p className="mt-2 text-sm leading-6 text-[var(--text-muted)]">{step.desc}</p>

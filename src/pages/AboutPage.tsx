@@ -276,13 +276,13 @@ export default function AboutPage() {
             </h2>
             <dl className="mt-10 grid grid-cols-2 border-t border-[var(--border)]">
               <div className="py-6 pr-4">
-                <dd className="font-display text-4xl font-semibold tracking-[-0.04em]">{publications.length}</dd>
+                <dd className="font-display text-4xl font-semibold tracking-[var(--tk-display)]">{publications.length}</dd>
                 <dt className="mt-1 text-sm text-[var(--text-muted)]">
                   {isIt ? "pubblicazioni scientifiche" : "scientific publications"}
                 </dt>
               </div>
               <div className="border-l border-[var(--border)] py-6 pl-6">
-                <dd className="font-display text-4xl font-semibold tracking-[-0.04em]">{projects.length}</dd>
+                <dd className="font-display text-4xl font-semibold tracking-[var(--tk-display)]">{projects.length}</dd>
                 <dt className="mt-1 text-sm text-[var(--text-muted)]">
                   {isIt ? "progetti open source" : "open-source projects"}
                 </dt>

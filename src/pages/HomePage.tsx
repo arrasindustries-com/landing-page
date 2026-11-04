@@ -282,7 +282,7 @@ export default function HomePage() {
               ].join(" ")}
             >
               <dt className="sr-only">{item.label}</dt>
-              <dd className="font-display text-4xl font-semibold tracking-[-0.04em] md:text-5xl">
+              <dd className="font-display text-4xl font-semibold tracking-[var(--tk-display)] md:text-5xl">
                 {item.value}
               </dd>
               <dd className="mt-2 text-sm text-[var(--text-muted)]">{item.label}</dd>
@@ -297,7 +297,7 @@ export default function HomePage() {
           {capabilities.map((item) => (
             <span
               key={item}
-              className="mx-7 inline-flex items-center gap-7 font-display text-lg font-medium tracking-[-0.02em] text-[var(--text-muted)] md:text-xl"
+              className="mx-7 inline-flex items-center gap-7 font-display text-lg font-medium tracking-[var(--tk-title)] text-[var(--text-muted)] md:text-xl"
             >
               {item}
               <span className="h-1.5 w-1.5 rotate-45 bg-[var(--accent-bright)]" />

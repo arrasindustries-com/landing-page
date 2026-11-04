@@ -93,7 +93,7 @@ export function PageHero({
         <Eyebrow>{eyebrow}</Eyebrow>
         <h1
           className={cn(
-            "mt-8 tracking-[-0.045em]",
+            "mt-8 tracking-[var(--tk-hero)]",
             size === "xl"
               ? "max-w-[19ch] text-[2.6rem] leading-[1.02] sm:text-6xl sm:leading-[1] lg:text-[5.4rem] lg:leading-[0.96]"
               : "max-w-[20ch] text-[2.5rem] leading-[1.02] sm:text-6xl sm:leading-[1] lg:text-[4.6rem] lg:leading-[1]",

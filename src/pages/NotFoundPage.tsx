@@ -11,7 +11,7 @@ export default function NotFoundPage() {
   return (
     <section className="mx-auto flex min-h-[70vh] max-w-7xl flex-col justify-center px-4 py-24 md:px-6">
       <Eyebrow>{isIt ? "Errore 404" : "Error 404"}</Eyebrow>
-      <h1 className="mt-7 max-w-[14ch] text-[2.75rem] leading-[1] tracking-[-0.045em] sm:text-6xl lg:text-[5rem]">
+      <h1 className="mt-7 max-w-[14ch] text-[2.75rem] leading-[1] tracking-[var(--tk-hero)] sm:text-6xl lg:text-[5rem]">
         {isIt ? (
           <>
             Questa pagina <span className="hl">non esiste.</span>

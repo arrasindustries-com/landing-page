@@ -1,9 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-display: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-sans: "Red Hat Text", system-ui, -apple-system, sans-serif;
+  --font-display: "Red Hat Display", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+/* Display typography knobs. Each typeface needs its own tracking, so
+   headings read these instead of hard-coded letter-spacing values. */
+:root {
+  --display-weight: 600;
+  --display-stretch: normal;
+  --tk-hero: -0.035em;
+  --tk-display: -0.025em;
+  --tk-title: -0.01em;
 }
 
 /*
@@ -102,8 +112,9 @@ html[data-theme="dark"] {
   h5,
   h6 {
     font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.035em;
+    font-weight: var(--display-weight);
+    font-stretch: var(--display-stretch);
+    letter-spacing: var(--tk-display);
     text-wrap: balance;
   }
 
@@ -138,6 +149,10 @@ textarea:focus-visible {
 ::selection {
   background: var(--accent-soft);
   color: var(--text);
+}
+
+.font-display {
+  font-stretch: var(--display-stretch);
 }
 
 /* Highlighted words inside display headings: same face, brass colour. */

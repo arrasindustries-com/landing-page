@@ -48,3 +48,27 @@ export const projects: Project[] = [
     repo: "https://github.com/smeneguz/dao-portal",
   },
 ];
+
+export type Website = {
+  /** Client or project name. */
+  name: string;
+  /** Screenshot of the live site (16:10 works best). */
+  image: string;
+  /** What the site is for, bilingual. */
+  description: { it: string; en: string };
+  /** Live URL. */
+  url: string;
+};
+
+// Showcase websites ("siti vetrina") built by Arras Industries.
+export const websites: Website[] = [
+  {
+    name: "Molinazzo",
+    image: "/images/projects/molinazzo.jpg",
+    description: {
+      it: "Sito per il progetto di recupero di un vecchio mulino nella Valle del Curone, vicino a Milano. Galleria fotografica, visione del progetto, FAQ e donazioni via PayPal ed Ethereum, in italiano e inglese.",
+      en: "Website for the restoration project of an old water mill in the Valle del Curone, near Milan. Photo gallery, project vision, FAQ and donations via PayPal and Ethereum, in Italian and English.",
+    },
+    url: "https://molinazzo.org/",
+  },
+];

@@ -5,7 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { Footer } from "@/components/Footer";
 import { PageHero } from "@/components/Ui";
-import { projects } from "@/lib/projects";
+import { projects, websites } from "@/lib/projects";
 import {
   publications,
   publicationTypeLabels,
@@ -13,7 +13,7 @@ import {
   type PublicationType,
 } from "@/lib/publications";
 
-type Tab = "projects" | "publications";
+type Tab = "projects" | "websites" | "publications";
 type PubCategory = PublicationType | "all";
 
 export default function PortfolioPage() {
@@ -66,6 +66,12 @@ export default function PortfolioPage() {
             ...(p.repo ? { codeRepository: p.repo } : {}),
             url: p.url,
           })),
+          ...websites.map((site) => ({
+            "@type": "WebSite",
+            name: site.name,
+            description: isIt ? site.description.it : site.description.en,
+            url: site.url,
+          })),
           ...publications.map((pub) => ({
             "@type": "ScholarlyArticle",
             headline: pub.title,
@@ -98,15 +104,20 @@ export default function PortfolioPage() {
           }
           description={
             isIt
-              ? "Software che abbiamo costruito e articoli che abbiamo pubblicato. Il codice dei progetti è pubblico su GitHub."
-              : "Software we have built and papers we have published. The code for our projects is public on GitHub."
+              ? "Software che abbiamo costruito, siti che abbiamo realizzato e articoli che abbiamo pubblicato. Il codice dei progetti è pubblico su GitHub."
+              : "Software we have built, websites we have made and papers we have published. The code for our projects is public on GitHub."
           }
         />
 
-        <div className="mt-16 flex gap-6 border-b border-[var(--border)] md:mt-20">
+        <div className="mt-16 flex gap-6 overflow-x-auto border-b border-[var(--border)] md:mt-20 md:gap-8">
           {(
             [
               { id: "projects", label: isIt ? "Progetti" : "Projects", count: projects.length },
+              {
+                id: "websites",
+                label: isIt ? "Siti vetrina" : "Websites",
+                count: websites.length,
+              },
               {
                 id: "publications",
                 label: isIt ? "Pubblicazioni" : "Publications",
@@ -118,7 +129,7 @@ export default function PortfolioPage() {
               key={item.id}
               onClick={() => setTab(item.id)}
               className={[
-                "relative -mb-px inline-flex items-baseline gap-2 border-b-2 py-4 font-display text-lg font-medium tracking-[-0.02em] transition-colors",
+                "relative -mb-px inline-flex shrink-0 items-baseline gap-2 border-b-2 py-4 font-display text-lg font-medium tracking-[var(--tk-title)] transition-colors",
                 tab === item.id
                   ? "border-[var(--accent-bright)] text-[var(--text)]"
                   : "border-transparent text-[var(--text-soft)] hover:text-[var(--text)]",
@@ -210,6 +221,65 @@ export default function PortfolioPage() {
           </div>
         )}
 
+        {tab === "websites" && (
+          <div className="mt-12 grid gap-x-5 gap-y-14 md:grid-cols-2">
+            {websites.map((site, index) => {
+              const host = new URL(site.url).hostname.replace(/^www\./, "");
+              return (
+                <motion.article
+                  key={site.url}
+                  initial={{ opacity: 0, y: 22 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.08 * index, ease: [0.22, 1, 0.36, 1] }}
+                  className="group relative flex flex-col"
+                >
+                  <div className="overflow-hidden border border-[var(--border)] bg-[var(--surface-strong)] transition-colors duration-300 group-hover:border-[var(--border-strong)]">
+                    <div className="flex h-9 items-center gap-3 border-b border-[var(--border)] px-3">
+                      <span className="flex gap-1.5" aria-hidden>
+                        <span className="h-2 w-2 rounded-full bg-[var(--border-strong)]" />
+                        <span className="h-2 w-2 rounded-full bg-[var(--border-strong)]" />
+                        <span className="h-2 w-2 rounded-full bg-[var(--border-strong)]" />
+                      </span>
+                      <span className="flex-1 truncate text-center font-mono text-[11px] text-[var(--text-soft)]">
+                        {host}
+                      </span>
+                      <span className="w-[30px]" aria-hidden />
+                    </div>
+                    <div className="aspect-[16/10] overflow-hidden bg-[var(--surface)]">
+                      <img
+                        src={site.image}
+                        alt={isIt ? `Anteprima del sito ${site.name}` : `${site.name} website preview`}
+                        loading="lazy"
+                        className="h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-5 flex items-baseline justify-between gap-4">
+                    <h2 className="text-2xl">
+                      <a
+                        href={site.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="after:absolute after:inset-0 after:content-['']"
+                      >
+                        {site.name}
+                      </a>
+                    </h2>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--text)]">
+                      {isIt ? "Visita il sito" : "Visit site"}
+                      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                  <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--text-muted)]">
+                    {isIt ? site.description.it : site.description.en}
+                  </p>
+                </motion.article>
+              );
+            })}
+          </div>
+        )}
+
         {tab === "publications" && (
           <>
             <div className="mt-8 flex flex-wrap gap-2">
@@ -244,7 +314,9 @@ export default function PortfolioPage() {
               .filter((type) => pubCategory === "all" || pubCategory === type)
               .map((type) => ({
                 type,
-                items: publications.filter((p) => p.type === type),
+                items: publications
+                  .filter((p) => p.type === type)
+                  .sort((a, b) => b.year - a.year),
               }))
               .map((group) => (
                 <div key={group.type}>
@@ -258,7 +330,7 @@ export default function PortfolioPage() {
                       const inner = (
                         <>
                           <div>
-                            <h3 className="font-display text-lg font-medium leading-7 tracking-[-0.02em] text-[var(--text)] transition-colors group-hover:text-[var(--accent)] md:text-xl">
+                            <h3 className="font-display text-lg font-medium leading-7 tracking-[var(--tk-title)] text-[var(--text)] transition-colors group-hover:text-[var(--accent)] md:text-xl">
                               {pub.title}
                             </h3>
                             <p className="mt-2 text-sm text-[var(--text-muted)]">

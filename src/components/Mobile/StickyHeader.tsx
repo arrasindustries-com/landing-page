@@ -169,7 +169,7 @@ export function StickyHeader({
                   onClick={() => setMobileOpen(false)}
                   className={({ isActive }) =>
                     [
-                      "flex items-baseline gap-4 border-b border-[var(--border)] py-4 font-display text-2xl tracking-[-0.03em] transition-colors",
+                      "flex items-baseline gap-4 border-b border-[var(--border)] py-4 font-display text-2xl tracking-[var(--tk-display)] transition-colors",
                       isActive ? "text-[var(--text)]" : "text-[var(--text-muted)] hover:text-[var(--text)]",
                     ].join(" ")
                   }

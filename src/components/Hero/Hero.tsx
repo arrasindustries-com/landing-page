@@ -27,7 +27,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <h1 className="mt-5 min-h-[4.6em] text-4xl font-semibold tracking-[-0.02em] md:min-h-[3.15em] md:text-7xl">
+          <h1 className="mt-5 min-h-[4.6em] text-4xl font-semibold tracking-[var(--tk-title)] md:min-h-[3.15em] md:text-7xl">
             {language === "it" ? "Software per PMI," : "Software for SMBs,"}
             <span className="relative mt-0.5 block min-h-[2.4em] align-top md:mt-0 md:ml-1 md:inline-block md:min-h-0">
               <AnimatePresence mode="wait" initial={false}>

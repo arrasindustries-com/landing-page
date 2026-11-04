@@ -172,10 +172,70 @@ export const publications: Publication[] = [
       "Giuseppe Destefanis",
     ],
     venue:
-      "Proceedings of the 3rd IEEE/ACM Workshop on Software Engineering Challenges in Financial Firms",
+      "Proceedings of the 3rd IEEE/ACM Workshop on Software Engineering Challenges in Financial Firms (FinanSE @ ICSE 2026)",
     year: 2026,
     type: "workshop",
-    url: "https://arxiv.org/abs/2601.14927",
+    url: "https://doi.org/10.1145/3786170.3788388",
+    doi: "10.1145/3786170.3788388",
+  },
+  {
+    title:
+      "From Factory Floor to Digital Product Passport: A Dual-Chain NFT Architecture for Automotive Traceability",
+    authors: ["Silvio Meneguzzo", "Alessandro Mozzato", "Alfredo Favenza"],
+    venue:
+      "2026 IEEE 50th Annual Computers, Software, and Applications Conference (COMPSAC), SESS Workshop",
+    year: 2026,
+    type: "conference",
+    url: "https://doi.org/10.1109/COMPSAC69091.2026.00308",
+    doi: "10.1109/COMPSAC69091.2026.00308",
+  },
+  {
+    title:
+      "Measuring the Cost of Trust: Blockchain Integrity Verification Overhead in Energy Digital Twin Pipelines",
+    authors: [
+      "Silvio Meneguzzo",
+      "Nicolò Bertozzi",
+      "Marco Sacchet",
+      "Alessandro Mozzato",
+      "Alfredo Favenza",
+    ],
+    venue:
+      "2026 IEEE 50th Annual Computers, Software, and Applications Conference (COMPSAC), ICT4SMARTGRID Workshop",
+    year: 2026,
+    type: "conference",
+    url: "https://doi.org/10.1109/COMPSAC69091.2026.00394",
+    doi: "10.1109/COMPSAC69091.2026.00394",
+  },
+  {
+    title:
+      "Knaut: Resource-Oriented Control of Electronic Bills of Lading on IOTA Move",
+    authors: [
+      "Silvio Meneguzzo",
+      "Stefano Leto",
+      "Lucio Rocco Inglese",
+      "Alessandro Mozzato",
+    ],
+    venue:
+      "2026 IEEE 50th Annual Computers, Software, and Applications Conference (COMPSAC), SAPSE Workshop",
+    year: 2026,
+    type: "conference",
+    url: "https://doi.org/10.1109/COMPSAC69091.2026.00411",
+    doi: "10.1109/COMPSAC69091.2026.00411",
+  },
+  {
+    title:
+      "The Illusion of Decentralised Governance: A Structural Analysis of 50 DAOs Across Eight Blockchain Networks",
+    authors: [
+      "Silvio Meneguzzo",
+      "Beatrice Sara",
+      "Claudio Schifanella",
+      "Alfredo Favenza",
+      "D. Bazzanella",
+    ],
+    venue: "DLT2026 – 8th Distributed Ledger Technology Workshop",
+    year: 2026,
+    type: "workshop",
+    url: "https://convegni.unica.it/dlt2026/",
   },
   {
     title:
